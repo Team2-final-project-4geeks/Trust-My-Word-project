@@ -17,3 +17,28 @@ class User(db.Model):
             "email": self.email,
             # do not serialize the password, its a security breach
         }
+    
+class Activities(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    title = db.Column(db.String(120), nullable=False)
+    type = db.Column(db.String(120), nullable=False)    
+    author_name = db.Column(db.String(200), nullable=False)    
+    description = db.Column(db.String(1000), nullable=False)
+    location = db.Column(db.String(250), nullable=False)
+    publishing_date = db.Column(db.String(10), nullable=False)
+    link= db.Column(db.String(500), nullable=False)
+    price_range = db.Column(db.String(200), nullable=False)
+
+    
+
+    def __repr__(self):
+        return f'<Activities {self.title}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "author_name":self.author_name,
+            "location":self.location
+            # do not serialize the password, its a security breach
+        }
