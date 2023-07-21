@@ -51,7 +51,7 @@ def create_user():
        }
         return jsonify(response_body),200
    
-   new_user= User(email = data["email"], password= data["password"])
+   new_user= User(email = data["email"], password= data["password"], username=data["username"])
    db.session.add(new_user)
    db.session.commit()
 
@@ -60,6 +60,61 @@ def create_user():
 
    return jsonify(all_users),200
 
+
+@api.route('/users',methods=['GET'])
+def get_all_users():
+    all_users = User.query.all()
+    all_users= list(map(lambda x: x.serialize(),all_users))
+    return jsonify(all_users),200
+
+@api.route('/user/<int:id>',methods=["GET"])
+def get_single_user(id):
+    user = User.query.get(id)
+    user.serialize()
+    return jsonify(user)
+
+@api.route('user/<int:id>',methods=['PUT'])
+def update_user(id):
+    data = request.get_json()
+    if "email" not in data:
+        response_body={
+            "msg":"email is not in the request"
+        }
+        return jsonify(response_body),200
+    elif "password" not in data:
+        response_body={
+            "msg":"password is not in the request"
+        }
+        return jsonify(response_body),200
+    
+    elif "username" not in data:
+        response_body={
+            "msg":"username is not in the request"
+        }
+        return jsonify(response_body),200
+    elif data is None:
+        response_body={
+            "msg":"body should be passed with request parameters"
+        }
+        return jsonify(response_body),200
+    
+    update_user= User.query.get(id)
+    update_user.email = data["email"]
+    update_user.password = data["password"]
+    update_user.username = data["username"]
+    db.session.commit()
+
+    user = User.query.get(id)
+    user= user.serialize()
+
+    return jsonify(user),200
+    
+
+@api.route('/user/<int:id>',methods=['DELETE'])
+def delete_user(id):
+    user_to_delete = User.query.get(id)
+    db.session.delete(user_to_delete)
+    db.session.commit()
 
 
 

@@ -75,7 +75,7 @@ const Login = () =>{
                                 <button type="submit" className="btn btn-success mt-4" onClick={user_login}>Login</button>
                                 <div className="d-flex flex-row mt-3">
                                     <a href="/" className="me-5 text-muted"><small>Forgot password?</small></a>
-                                    <a href="/create-acount"><small>Register now</small></a>
+                                    <a href="/create-user"><small>Register now</small></a>
                                 </div>
 
                                 <br/>
