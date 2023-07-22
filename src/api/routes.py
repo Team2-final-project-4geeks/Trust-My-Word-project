@@ -49,4 +49,17 @@ def create_product():
 
     print(all_product)
 
-    return jsonify(all_product, 200)  
+    return jsonify(all_product, 200)
+
+@api.route('/product/<int:product_id>', methods=['DELETE'])
+def delete_product(product_id):
+      
+      product =  Product.query.get(product_id)
+      db.session.delete(product)
+      db.session.commit()
+
+      response_body = {
+            "msg": "Product Deleted Successfully!"
+      }
+
+      return jsonify(response_body)

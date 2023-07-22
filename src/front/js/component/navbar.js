@@ -31,7 +31,9 @@ export const Navbar = () => {
 							<a class="nav-link" href="#">Activities</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Products</a>
+						<Link to="/products">
+					         Products        
+                		</Link>	
 						</li>				
 						<div className="btn-group mx-5">
 							<button type="button" className="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="dropdownMenuClickableInside" aria-expanded="false">
