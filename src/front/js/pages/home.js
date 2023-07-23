@@ -1,76 +1,30 @@
 import React, { useState, useEffect } from "react";
-import "../../styles/home.css";
 import ActivityCard from "../component/activitycard.jsx";
+import "../../styles/home.css";
+
 
 export const Home = () => {
-	const [tourism, setTourism] = useState([]);
-	const [products, setProducts] = useState([]);	
+
 	const [activities, setActivities] = useState([]);
 
-	useEffect(() => {
-		{/*getTourism();
-	getProducts();*/}
+	useEffect(() => {		
 		getActivities();	
 	}, []);
-
-	{/*const getTourism= () => {
-		fetch('https://lucymacko-fluffy-engine-r97765r66x9h544-3001.preview.app.github.dev/tourism', {
-			method: 'GET',
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
-		.then(resp => {
-			console.log(resp.ok);
-			console.log(resp.status);			
-		return resp.json();
-		})
-		.then(data=> {
-			console.log(data);
-			setCharacters(data.results);
-		})
-		.catch(error => {
-			console.log(error);
-			console.log('Oops something went wrong'+ error);
-		})
-	}
-
-	const getProducts = () => {
-		fetch('https://lucymacko-fluffy-engine-r97765r66x9h544-3001.preview.app.github.dev/products', {
-			method: 'GET',
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
-		.then(resp => {
-			console.log(resp.ok);
-			console.log(resp.status);			
-		return resp.json();
-		})
-		.then(data=> {
-			console.log(data);
-			setPlanets(data.results);
-		})
-		.catch(error => {
-			console.log(error);
-			console.log('Oops something went wrong'+ error);
-		});
-	} */}
+	
 	const getActivities = () => {
-		fetch('https://lucymacko-fluffy-engine-r97765r66x9h544-3001.preview.app.github.dev/activities', {
+		fetch(process.env.BACKEND_URL + '/api/activities',{
 			method: 'GET',
 			headers: {
 				"Content-Type": "application/json"
 			}
 		})
 		.then(resp => {
-			console.log(resp.ok);
-			console.log(resp.status);			
-		return resp.json();
+			console.log(resp);					
+			return resp.json();
 		})
 		.then(data=> {
 			console.log(data);
-			setVehicles(data.results);
+			setActivities(data);
 		})
 		.catch(error => {
 			console.log(error);
@@ -78,63 +32,31 @@ export const Home = () => {
 		})
 	}
 
-	{/*const showTourism = () =>{
-		return characters.map((character, index) =>{
-				return(
-					<li className="w-25" key={index}
-					>
-				 		<CharacterCard character={character} />
-					</li>
-				)				
-			})
-	}
-
-	const showProducts = () =>{
-		return planets.map((planet, index) =>{
-				return(
-					<li className="w-25" key={index}
-					>
-				 		<PlanetCard planet={planet} />
-					</li>
-				)				
-			})
-	} */}
-	const showActivities = () =>{
+	const showActivity = () =>{
 		return activities.map((activity, index) =>{
-				return(
-					<li className="w-25" key={index}
-					>
-				 		<ActivityCard />
-					</li>
-				)				
-			})
+			return(
+				<li key={index} className= "col">					
+					<div className="card h-100">
+						<img src="https://picsum.photos/id/1/200" className="card-img-top" alt="..."></img>
+						<ActivityCard activity={activity}/>
+					</div>						
+				</li>
+			)
+		})
 	}
+	
 	return (
 		<div className="container-fluid">
-			<h1> Activities</h1>
-			<div className="row row-cols-1 row-cols-md-3 g-4">
-  				<div className="col">
-					<ul>
-						{showActivities()}
-					</ul>
-				</div>	
-			</div>		
+			<h1 className="py-5">Activities</h1>
+				<div className="container-fluid">			
+					<div className="row row-cols-1 row-cols-md-5 g-4">													
+						{showActivity()}						
+					</div>	
+				</div>						
 		</div>
-		
-	)	
-	{/*<div className="container-fluid">		
-			<h1> Tourism</h1>
-			<ul className="row d-flex flex-nowrap overflow-auto mx-4">
-				{showTourism()}
-			</ul>		
-		
 
-		<div className="container-fluid">
-			<h1> Products</h1>
-			<ul className="row d-flex flex-nowrap overflow-auto mx-4">
-				{showProducts()}
-			</ul>		
-		</div>*/}
+	)	
+	
 	
 		
 };

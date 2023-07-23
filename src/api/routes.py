@@ -25,6 +25,12 @@ def get_activities():
     
     return jsonify(all_activities), 200
 
+@api.route('/activities/<int:id>', methods=['GET'])
+def get_single_activity(id):
+    activity = Activities.query.get(id)
+    activityjson = activity.serialize()
+    return activityjson, 200
+
 @api.route('/user', methods=['GET'])
 def get_users():
 

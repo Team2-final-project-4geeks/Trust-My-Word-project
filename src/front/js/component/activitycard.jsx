@@ -1,61 +1,72 @@
 import React, {useEffect, useState} from "react"
-
+import "../../styles/activitycard.css"
+import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 
 
 const ActivityCard = (props) =>{
-
-    const [activity, setActivity] = useState('');	
-	
+    const [activity, setActivity] = useState('');
+    const [rating, setRating] = useState(0);
 
     useEffect(()=>{
 		getActivity()
 	}, [])
 
     const getActivity = ()=>{
-		fetch('https://lucymacko-fluffy-engine-r97765r66x9h544-3001.preview.app.github.dev/activities/' + props.activity.id, {
+		fetch(process.env.BACKEND_URL + '/api/activities/' + props.activity.id, {
 			method: 'GET',
 			headers: {
 				"Content-Type": "application/json"
 			}
 		})
 		.then(resp=> {
-			console.log(resp.text)
+			console.log(resp)
 			return resp.json();
 		})
 		.then(data=>{			
-			console.log(data.result)
-			setActivity(data.result.properties);
+			console.log(data)
+			setActivity(data);
 		})
 		.catch(error=>{
 			console.log(error);
 		})
 	}
 
+    const handleStarClick = (index) => {
+        setRating(index + 1);
+    }
+
     return(
-        <div>
-            <div className="card h-100">
-                <img src="..." class="card-img-top" alt="..."/>
-                <div className="card-body">
-                    <h5 className="card-title">Happiness in Paradise</h5>
-                    <p className="card-text">The first equestrian center of Málaga, has modern facilities built in a privileged area located a few kilometers from the social and cultural life of the city. The Equestrian Club El Pinar is popular for its riding school. It offers classes at all levels with qualified teachers with proven experience both in teaching and in the competition.</p>
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-12">
-                            <div className="star-rating">
-                                <span className="fa fa-star-o" data-rating="1"></span>
-                                <span className="fa fa-star-o" data-rating="2"></span>
-                                <span className="fa fa-star-o" data-rating="3"></span>
-                                <span className="fa fa-star-o" data-rating="4"></span>
-                                <span className="fa fa-star-o" data-rating="5"></span>
-                                <input type="hidden" name="whatever1" className="rating-value" value="2.56"/>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="card-footer">
-                    <small className="text-muted">Published: 21/07/2023</small>
-                </div>
+        <div className="card-body d-flex flex-column p-0">
+            <h5 className="card-title">{activity.title}</h5>
+            <div className="card-text flex-grow-1"></div>
+                <span>{activity.location}</span>            
+                <span>{activity.type}</span>                
+                <span>{activity.author_name}</span>
+                <span>{activity.description}</span>
+                <span>
+                    {[...Array(5)].map((_, index) => {
+                        const starValue = index + 1;
+                        return (
+                            <span
+                            key={index}
+                            onClick={() => handleStarClick(index)}
+                            style={{ cursor: 'pointer' }}
+                            >
+                            {starValue <= rating ? (
+                                <FaStar color="#ffc107" />
+                                ) : starValue - 0.5 === rating ? (
+                                <FaStarHalfAlt color="#ffc107" />
+                                ) : (
+                                <FaRegStar color="#ffc107" />
+                                )
+                            }
+                            </span>
+                        );
+                    })}
+                </span>           				
+            <div className="card-footer py-1 px-0">
+                <small className="text-muted">{activity.publishing_date}</small>
+                
             </div>
         </div>
     )

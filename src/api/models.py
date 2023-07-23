@@ -27,18 +27,21 @@ class Activities(db.Model):
     location = db.Column(db.String(250), nullable=False)
     publishing_date = db.Column(db.String(10), nullable=False)
     link= db.Column(db.String(500), nullable=False)
-    price_range = db.Column(db.String(200), nullable=False)
-
+    price = db.Column(db.String(200), nullable=False, default="0.0")
     
 
     def __repr__(self):
-        return f'<Activities {self.title}>'
+        return f'<Activities {self.id}>'
 
     def serialize(self):
         return {
             "id": self.id,
             "title": self.title,
+            "type": self.type,
             "author_name":self.author_name,
-            "location":self.location
-            # do not serialize the password, its a security breach
+            "description": self.description,
+            "location":self.location,
+            "publishing_date": self.publishing_date,
+            "link": self.link,
+            "price": self.price           
         }

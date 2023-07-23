@@ -4,7 +4,7 @@ SHELL ["/bin/bash", "-c"]
 
 RUN sudo apt-get update \
     && sudo apt-get update \
-    && sudo apt-get install -y redis-server \
+    && sudo apt-get install -y redis-server openssh-server \
     && sudo apt-get clean \
     && sudo rm -rf /var/cache/apt/* /var/lib/apt/lists/* /tmp/*
 
