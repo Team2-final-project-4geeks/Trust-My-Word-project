@@ -66,6 +66,7 @@ const ActivityCard = (props) =>{
                 </span>           				
             <div className="card-footer py-1 px-0">
                 <small className="text-muted">{activity.publishing_date}</small>
+                <button className="btn btn-outline-primary" onClick={(() => navigate("activity/" + props.activity.id))} >I want to know more!</button>
                 
             </div>
         </div>
