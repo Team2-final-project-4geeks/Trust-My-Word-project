@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Product } from "../component/productcard.jsx";
 
-import "../../styles/home.css";
 
-export const Home = () => {
+export const Products = (props) => {
+
 	const { store, actions } = useContext(Context);
-
 
 	const [products, setProducts] = useState([])
 
@@ -39,15 +39,19 @@ export const Home = () => {
 			return (
 			<div className="spinner-border" role="status">
 				<span className="visually-hidden">Loading...</span>
+			</div>
+			);
+		}
+	}
 
 	return (
-		<div className="container-fluid">
-				<h1 className="py-5">Products</h1>
-					<div className="container-fluid" >
-							<div className="row row-cols-1 row-cols-md-4 g-4 ">
+		<div className="Container">		
+				<div className="scrollmenu" >
+						<h1 className="font-bold text-white text-center my-5">Products</h1>
+							<div className="row row-cols-1 row-cols-md-2 g-4 ">
 								{products && showProducts()}
 							</div>
-					</div>
+				</div>
 		</div>			
 	);
 };
