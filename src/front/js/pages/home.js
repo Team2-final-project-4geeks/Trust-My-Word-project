@@ -39,6 +39,10 @@ export const Home = () => {
 			return (
 			<div className="spinner-border" role="status">
 				<span className="visually-hidden">Loading...</span>
+			</div>
+			)
+			}
+	}
 
 	return (
 		<div className="container-fluid">
@@ -50,4 +54,4 @@ export const Home = () => {
 					</div>
 		</div>			
 	);
-};
+}
