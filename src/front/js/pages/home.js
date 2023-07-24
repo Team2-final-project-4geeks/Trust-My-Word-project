@@ -75,7 +75,6 @@ export const Home = () => {
 			return (
 				<li key={index} className= "col">					
 					<div className="card h-100">
-						<img src="https://picsum.photos/id/1/200" className="card-img-top" alt="..."></img>
 						<Product product={product}/>
 					</div>						
 				</li>
@@ -90,24 +89,23 @@ export const Home = () => {
 			}
 	}
 	return (
-		<div className="container-fluid">
-			<h1 className="py-5">Activities</h1>
-				<div className="container-fluid">			
-					<div className="row row-cols-1 row-cols-md-5 g-4">													
-						{showActivity()}						
-					</div>	
-				</div>						
-		</div>
-	)	
-	
-	return (
-		<div className="container-fluid">
-				<h1 className="py-5">Products</h1>
-					<div className="container-fluid" >
-							<div className="row row-cols-1 row-cols-md-4 g-4 ">
-								{products && showProducts()}
-							</div>
-					</div>
-		</div>			
+		<div className="">
+			<div className="container-fluid">
+				<h1 className="py-5">Activities</h1>
+					<div className="container-fluid">			
+						<div className="row row-cols-1 row-cols-md-5 g-4">													
+							{showActivity()}						
+						</div>	
+					</div>						
+			</div>
+			<div className="container-fluid">
+					<h1 className="py-5">Products</h1>
+						<div className="container-fluid" >
+								<div className="row row-cols-1 row-cols-md-4 g-4 ">
+									{products && showProducts()}
+								</div>
+						</div>
+			</div>	
+		</div>		
 	);
 }
