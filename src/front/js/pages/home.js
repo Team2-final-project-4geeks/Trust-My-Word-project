@@ -7,6 +7,7 @@ import "../../styles/home.css";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
+
 	const [products, setProducts] = useState([])
 
 
@@ -38,10 +39,6 @@ export const Home = () => {
 			return (
 			<div className="spinner-border" role="status">
 				<span className="visually-hidden">Loading...</span>
-			</div>
-			);
-		}
-	}
 
 	return (
 		<div className="container-fluid">
