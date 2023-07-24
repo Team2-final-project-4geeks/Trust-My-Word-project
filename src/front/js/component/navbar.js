@@ -16,9 +16,9 @@ export const Navbar = () => {
                 </Link>		
 			<div class="navbar-items">
 					<ul class="d-flex align-items-endv">
-						<li class="nav-item">
-							<a class="nav-link" href="#">Home</a>
-						</li>
+					<li class="nav-item">
+							<a class="nav-link" href="#" onClick={() => navigate("/")}>Home</a>
+						</li>	
 						<li class="nav-item">
 							<a class="nav-link" href="#">Sign in</a>
 						</li>
@@ -36,7 +36,7 @@ export const Navbar = () => {
 						</li>				
 						<div className="btn-group mx-5">
 							<button type="button" className="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="dropdownMenuClickableInside" aria-expanded="false">
-								Favourites <span className="p-1 text-secondary text-center white">{store.favourite.length}</span>
+								Favourites <span className="p-1 text-secondary text-center text-white">{store.favourite.length}</span>
 							</button>
 							<ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="dropdownMenuClickableInside">
 								{store.favourite.map((fav, index) => {

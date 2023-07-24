@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
-import { Product } from "../component/product.js";
+import { Product } from "../component/productcard.jsx";
 
 import "../../styles/home.css";
 
@@ -44,19 +44,13 @@ export const Home = () => {
 	}
 
 	return (
-		<div className="Container">
-			<div className="text-center mt-5">
-				<h1>TRUSTMYWORD!</h1>
-				<p>
-					<img src="https://sd.keepcalms.com/i/keep-calm-and-trust-my-words.png" width="350" height="350" />
-				</p>
-			</div>
-				<div className="scrollmenu" >
-						<h1 className="font-bold text-white text-center my-5">Products</h1>
-						<div className="general-products text-center">
-							{products && showProducts()}
-						</div>
-				</div>
+		<div className="container-fluid">
+				<h1 className="py-5">Products</h1>
+					<div className="container-fluid" >
+							<div className="row row-cols-1 row-cols-md-4 g-4 ">
+								{products && showProducts()}
+							</div>
+					</div>
 		</div>			
 	);
 };

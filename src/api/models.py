@@ -23,6 +23,8 @@ class Product(db.Model):
     tittle = db.Column(db.String(120), unique=True, nullable=False)
     description = db.Column(db.String(1000), unique=True, nullable=False)
     image = db.Column(db.String(120), nullable=False)
+    price = db.Column(db.Integer, nullable=False)
+
 
     def __repr__(self):
         return '<People %r>' % self.tittle

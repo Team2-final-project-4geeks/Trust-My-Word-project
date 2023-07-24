@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { Product } from "../component/product.js";
+import { Product } from "../component/productcard.jsx";
 
 
 export const Products = (props) => {
@@ -48,9 +48,9 @@ export const Products = (props) => {
 		<div className="Container">		
 				<div className="scrollmenu" >
 						<h1 className="font-bold text-white text-center my-5">Products</h1>
-						<div className="general-products text-center">
-							{products && showProducts()}
-						</div>
+							<div className="row row-cols-1 row-cols-md-2 g-4 ">
+								{products && showProducts()}
+							</div>
 				</div>
 		</div>			
 	);

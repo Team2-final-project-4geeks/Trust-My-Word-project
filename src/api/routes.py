@@ -28,6 +28,16 @@ def get_all_product():
 
      return jsonify(all_product), 200
 
+@api.route('/<int:product_id>', methods=['GET'])
+def get_one_product(product_id):
+     
+     product = Product.query.get(product_id)
+     product = product.serialize()
+
+     print(product)
+
+     return jsonify(product), 200
+
 @api.route('/create-product', methods=['POST'])
 def create_product():
 
