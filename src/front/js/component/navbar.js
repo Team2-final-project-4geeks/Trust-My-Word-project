@@ -1,19 +1,62 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useContext} from "react";
+import { Context } from "../store/appContext";
+import { Link, useNavigate } from "react-router-dom";
+
+import "../../styles/navbar.css";
 
 export const Navbar = () => {
-	return (
-		<nav className="navbar navbar-light bg-light">
-			<div className="container">
+
+	const {store, actions} = useContext(Context);
+	const navigate =  useNavigate()
+
+    return (
+        <nav className="navbar container-fluid">
 				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-				</Link>
-				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
-					</Link>
-				</div>
-			</div>
-		</nav>
-	);
-};
+					<img src="https://sd.keepcalms.com/i/keep-calm-and-trust-my-words.png" width="150" alt="star wars logo" height="80" bg="light" className="d-inline-block align-text-top"/>                  
+                </Link>		
+			<div class="navbar-items">
+					<ul class="d-flex align-items-endv">
+					<li class="nav-item">
+							<a class="nav-link" href="#" onClick={() => navigate("/")}>Home</a>
+						</li>	
+						<li class="nav-item">
+							<a class="nav-link" href="#">Sign in</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link " href="#">Login</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Tourism</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Activities</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#" onClick={() => navigate("/products")}>Products</a>
+						</li>				
+						<div className="btn-group mx-5">
+							<button type="button" className="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="dropdownMenuClickableInside" aria-expanded="false">
+								Favourites <span className="p-1 text-secondary text-center text-white">{store.favourite.length}</span>
+							</button>
+							<ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="dropdownMenuClickableInside">
+								{store.favourite.map((fav, index) => {
+									return(
+										<li key={index}>
+											<a className="dropdown-item d-flex justify-content-between ps-2 pe-2" href="#">
+												{fav}
+												<i className="fas fa-trash pt-1"
+													onClick={() => {
+														actions.deleteFavorite(fav)
+													}}
+												></i>
+											</a>
+										</li>
+									)})}
+							</ul>
+						</div>				
+					</ul>			
+				<br/>			
+			</div>			
+        </nav>
+    )
+}

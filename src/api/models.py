@@ -17,7 +17,7 @@ class User(db.Model):
             "email": self.email,
             # do not serialize the password, its a security breach
         }
-    
+      
 class Activities(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     title = db.Column(db.String(120), nullable=False)
@@ -29,12 +29,11 @@ class Activities(db.Model):
     link= db.Column(db.String(500), nullable=False)
     price = db.Column(db.String(200), nullable=False, default="0.0")
     
-
     def __repr__(self):
         return f'<Activities {self.id}>'
-
+      
     def serialize(self):
-        return {
+       return {
             "id": self.id,
             "title": self.title,
             "type": self.type,
@@ -43,5 +42,24 @@ class Activities(db.Model):
             "location":self.location,
             "publishing_date": self.publishing_date,
             "link": self.link,
-            "price": self.price           
+            "price": self.price,
+        }
+
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(120), unique=True, nullable=False)
+    description = db.Column(db.String(1000), unique=True, nullable=False)
+    image = db.Column(db.String(120), nullable=False)
+    price = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):
+        return '<People %r>' % self.title
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,            
+            "price": self.price,          
+            "image": self.image,
         }
