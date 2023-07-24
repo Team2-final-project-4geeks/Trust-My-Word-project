@@ -1,12 +1,13 @@
 import React, {useContext} from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../../styles/navbar.css";
 
 export const Navbar = () => {
 
 	const {store, actions} = useContext(Context);
+	const navigate =  useNavigate()
 
     return (
         <nav className="navbar container-fluid">
@@ -22,7 +23,7 @@ export const Navbar = () => {
 							<a class="nav-link" href="#">Sign in</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Login</a>
+							<a class="nav-link " href="#">Login</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">Tourism</a>
@@ -31,13 +32,11 @@ export const Navbar = () => {
 							<a class="nav-link" href="#">Activities</a>
 						</li>
 						<li class="nav-item">
-						<Link to="/products">
-					         Products        
-                		</Link>	
+							<a class="nav-link" href="#" onClick={() => navigate("/products")}>Products</a>
 						</li>				
 						<div className="btn-group mx-5">
 							<button type="button" className="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="dropdownMenuClickableInside" aria-expanded="false">
-								Favourites <span className="bg-light rounded p-1 text-secondary text-center">{store.favourite.length}</span>
+								Favourites <span className="p-1 text-secondary text-center white">{store.favourite.length}</span>
 							</button>
 							<ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="dropdownMenuClickableInside">
 								{store.favourite.map((fav, index) => {

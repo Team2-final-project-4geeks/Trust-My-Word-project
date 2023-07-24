@@ -45,8 +45,7 @@ export const Products = (props) => {
 	}
 
 	return (
-		<div className="Container">
-			
+		<div className="Container">		
 				<div className="scrollmenu" >
 						<h1 className="font-bold text-white text-center my-5">Products</h1>
 						<div className="general-products text-center">

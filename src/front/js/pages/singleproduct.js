@@ -34,6 +34,7 @@ export const SingleProduct = () => {
     
         return (
             <div className="card-single">
+                 <img src={oneProduct.image} width="400" height="400" className="card-img-single"></img>
                 <div className="card-body-single">
                     {oneProduct ? (
                         <div className="text-center">
@@ -43,7 +44,7 @@ export const SingleProduct = () => {
                                 <p className="card-text">
                                     <p className='mt-0 mb-0'>Price: {oneProduct.price}</p>
                                     <p className='mt-0 mb-0'>Description: {oneProduct.description}</p>
-                                    <img src={oneProduct.image} width="400" height="400" className="card-img-single"></img>
+                                                    
                                     <Link to="/">
                                         <span className="btn btn-primary btn-lg my-5 text-center" href="#" role="button">
                                             Back home

@@ -2,4 +2,9 @@ li{
     text-align: start;
     list-style: none;
     display: flex;
+    text-decoration-line: none;
+}
+.link{
+    font-style: none;
+    text-decoration: none;
 }
