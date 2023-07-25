@@ -15,7 +15,6 @@ import {Products} from "./pages/products.js";
 import {Privacy_policy} from "./pages/privacy_policy.js";
 import { Terms } from "./pages/terms&services.js";
 import SingleActivity from "./pages/singleActivity.jsx";
-
 import { Navbar } from "./component/navbar.js";
 import { Footer } from "./component/footer";
 

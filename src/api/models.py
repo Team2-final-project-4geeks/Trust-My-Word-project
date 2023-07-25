@@ -24,7 +24,7 @@ class Tourism(db.Model):
     date = db.Column(db.String(80), nullable=False)
     
             # do not serialize the password, its a security breach
-        }
+        
       
 class Activities(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)

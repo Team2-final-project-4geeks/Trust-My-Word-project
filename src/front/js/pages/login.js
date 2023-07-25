@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import "../../styles/login.css";
-import { LoginSocialFacebook} from 'reactjs-social-login'
-import { FacebookLoginButton } from "react-social-login-buttons";
 import { useNavigate } from "react-router-dom";
 
 const Login = () =>{
@@ -78,20 +76,7 @@ const Login = () =>{
                                     <a href="/create-user"><small>Register now</small></a>
                                 </div>
 
-                                <br/>
-                                <div>
-                                    <LoginSocialFacebook
-                                     appId="236664135948619"
-                                     onResolve= {(response)=>{
-                                        console.log(response);
-                                     }}
-                                     onReject = {(error)=>{console.log(error)}}
-                                    > 
-
-                                        <FacebookLoginButton/>
-                                    </LoginSocialFacebook>
-                                  
-                                </div>
+                                <br/>                                
                             </div>
                         </div>
                     </div>
