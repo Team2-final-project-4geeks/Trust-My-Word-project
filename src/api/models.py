@@ -17,3 +17,9 @@ class User(db.Model):
             "email": self.email,
             "username" : self.username
         }
+
+class Tourism(db.Model):
+    id= db.Column(db.Integer, primary_key=True)
+    price = db.Column(db.Integer, nullable = False)
+    date = db.Column(db.String(80), nullable=False)
+    
