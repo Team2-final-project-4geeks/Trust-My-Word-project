@@ -6,7 +6,10 @@ import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home.js";
 import { Single } from "./pages/single";
+import Login from "./pages/login.js";
 import injectContext from "./store/appContext";
+import CreateAcount from "./pages/create_acount.js";
+import ShowSingleTourism from "./pages/singleTourism.js";
 import { SingleProduct } from "./pages/singleproduct.js";
 import {Products} from "./pages/products.js";
 import {Privacy_policy} from "./pages/privacy_policy.js";
@@ -29,7 +32,10 @@ const Layout = () => {
                 <ScrollToTop>
                     <Navbar />
                     <Routes>
-                        <Route element={<Home />} path="/" />                        
+                        <Route element={<Home />} path="/" />
+                        <Route element={<Login />} path="/login" />
+                        <Route element={<ShowSingleTourism />} path="/tourism" />
+                        <Route element={<CreateAcount />} path="/create-user"/>                   
                         <Route element={<SingleProduct />} path="/singleproduct/:id" />
                         <Route element={<Products />} path="/products" />
                         <Route element={<Privacy_policy />} path="/privacy_policy" />
