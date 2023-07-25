@@ -1,12 +1,16 @@
+
+import React, { useContext } from "react";
+import { Context} from "../store/appContext";
 import ActivityCard from "../component/activitycard.jsx";
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Product } from "../component/productcard.jsx";
-
 import "../../styles/home.css";
-
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
+	const { store, actions } = useContext(Context);
+	const navigate= useNavigate()
 
 	const [activities, setActivities] = useState([]);
   const [products, setProducts] = useState([]);
@@ -98,6 +102,7 @@ export const Home = () => {
 						</div>	
 					</div>						
 			</div>
+		</div>
 			<div className="container-fluid">
 					<h1 className="py-5">Products</h1>
 						<div className="container-fluid" >
