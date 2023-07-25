@@ -52,7 +52,7 @@ const SingleActivity = () => {
         </div>
             
 
-    ):
+    )
 }
 
 export default SingleActivity
