@@ -2,7 +2,8 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+
+from api.models import db, User, Activities, Product
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
@@ -16,12 +17,9 @@ api = Blueprint('api', __name__)
 def handle_hello():
 
     response_body = {
-        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
+        "message": "Hello! This is 4Geeks Group 2 Final Project"
     }
-
     return jsonify(response_body), 200
-
-
 
 @api.route('/create-user', methods=['POST'])
 def create_user():
@@ -59,7 +57,6 @@ def create_user():
    all_users = list(map(lambda x: x.serialize(),all_users))
 
    return jsonify(all_users),200
-
 
 @api.route('/users',methods=['GET'])
 def get_all_users():
@@ -109,14 +106,11 @@ def update_user(id):
 
     return jsonify(user),200
     
-
 @api.route('/user/<int:id>',methods=['DELETE'])
 def delete_user(id):
     user_to_delete = User.query.get(id)
     db.session.delete(user_to_delete)
     db.session.commit()
-
-
 
 @api.route('/login', methods=['POST'])
 def user_login():
@@ -145,6 +139,79 @@ def user_login():
     access_token = create_access_token(identity=usuario.id)
     return jsonify({ "token": access_token, "user_id": usuario.id })
 
+@api.route('/activities', methods=['GET'])
+def get_activities():
 
-   
+    all_activities = Activities.query.all()
+    all_activities= list(map(lambda x: x.serialize(), all_activities))
+    
+    return jsonify(all_activities), 200
 
+@api.route('/activities/<int:id>', methods=['GET'])
+def get_single_activity(id):
+    activity = Activities.query.get(id)
+    activityjson = activity.serialize()
+    return activityjson, 200
+
+@api.route('/user', methods=['GET'])
+def get_users():
+
+    all_users = Activities.query.all()
+    all_users= list(map(lambda x: x.serialize(), all_users))
+    
+    return jsonify(all_users), 200
+
+@api.route('/product', methods=['GET'])
+def get_all_product():
+     
+     all_product = Product.query.all()
+     all_product = list(map(lambda x: x.serialize(), all_product))
+
+     print(all_product)
+
+     return jsonify(all_product), 200
+
+@api.route('/<int:product_id>', methods=['GET'])
+def get_one_product(product_id):
+     
+     product = Product.query.get(product_id)
+     product = product.serialize()
+
+     print(product)
+
+     return jsonify(product), 200
+
+@api.route('/create-product', methods=['POST'])
+def create_product():
+
+    data = request.get_json()
+
+    if data is None:
+            response_body_people = {
+                "msg": "BODY should be passed with request"
+            }
+            return jsonify(response_body_people), 400
+    
+    new_product = Product(tittle=data["tittle"], description=data["description"])
+    db.session.add(new_product)
+    db.session.commit()
+
+    all_product = Product.query.all()
+    all_product = list(map(lambda x: x.serialize(), all_product)) 
+
+    print(all_product)
+
+    return jsonify(all_product, 200)
+
+@api.route('/product/<int:product_id>', methods=['DELETE'])
+def delete_product(product_id):
+      
+      product =  Product.query.get(product_id)
+      db.session.delete(product)
+      db.session.commit()
+
+      response_body = {
+            "msg": "Product Deleted Successfully!"
+      }
+
+      return jsonify(response_body)
