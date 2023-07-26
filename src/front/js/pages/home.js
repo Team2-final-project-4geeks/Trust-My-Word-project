@@ -1,5 +1,5 @@
 
-import React, { useState,useEffect,useContext } from "react";
+import React, { useContext, useEffect, useState  } from "react";
 import { Context} from "../store/appContext";
 import ActivityCard from "../component/activitycard.jsx";
 import { Product } from "../component/productcard.jsx";
@@ -19,7 +19,7 @@ export const Home = () => {
 	}, []);
 	
 	const getActivities = () => {
-		fetch(process.env.BACKEND_URL + '/api/activities',{
+		fetch('https://lucymacko-curly-computing-machine-56vvr74rx7jc7jjr-3001.preview.app.github.dev/api/activities',{
 			method: 'GET',
       		headers: {
 				"Content-Type": "application/json"
@@ -91,6 +91,7 @@ export const Home = () => {
 			}
 	}
 	return (
+	
 		<div className="">
 			<div className="container-fluid">
 				<h1 className="py-5">Activities</h1>
@@ -100,6 +101,7 @@ export const Home = () => {
 						</div>	
 					</div>						
 			</div>
+		
 			<div className="container-fluid">
 					<h1 className="py-5">Products</h1>
 						<div className="container-fluid" >
@@ -108,6 +110,6 @@ export const Home = () => {
 								</div>
 						</div>
 			</div>	
-		</div>		
+			</div>	
 	);
 }
