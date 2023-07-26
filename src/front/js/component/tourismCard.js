@@ -27,7 +27,13 @@ const TourismCard = (props) =>{
     </div>
             </div>
             <div>
-                <h1>Mi Titulo</h1>
+                <h1>{props.title}</h1>
+                <p>{props.description}</p>
+                <p class="card-text"><small class="text-muted">{props.date}</small></p>
+                <h3>Location</h3>
+                <h4>Calculate distance</h4>
+                
+
             </div>
 
         </div>
