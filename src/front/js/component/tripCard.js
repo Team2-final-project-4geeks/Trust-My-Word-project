@@ -1,6 +1,6 @@
 import React from "react";
 
-const TourismCard = (props) =>{
+const TripCard = (props) =>{
     return(
         <div className="row">
             <div className="col-6">
@@ -40,4 +40,4 @@ const TourismCard = (props) =>{
         
     )
 }
-export default TourismCard
+export default TripCard 

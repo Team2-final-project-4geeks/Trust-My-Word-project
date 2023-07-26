@@ -1,6 +1,7 @@
 import React from "react";
-import TourismCard from "../component/tourismCard.js";
-const ShowSingleTourism = (props) =>{
+import TripCard from "../component/tripCard.js";
+
+const SingleTrip = (props) =>{
 
     return(
         <div>
@@ -13,4 +14,4 @@ const ShowSingleTourism = (props) =>{
     )
 }
 
-export default ShowSingleTourism 
+export default SingleTrip 
