@@ -19,7 +19,7 @@ export const Home = () => {
 	}, []);
 	
 	const getActivities = () => {
-		fetch(process.env.BACKEND_URL + '/api/activities',{
+		fetch('https://lucymacko-curly-computing-machine-56vvr74rx7jc7jjr-3001.preview.app.github.dev/' + '/api/activities',{
 			method: 'GET',
       		headers: {
 				"Content-Type": "application/json"

@@ -10,7 +10,7 @@ const SingleActivity = () => {
     })
 
     const fetchSingleActivity = () => {
-        fetch(process.env.BACKEND_URL + '/api/activities/' + params.id,{
+        fetch('https://lucymacko-curly-computing-machine-56vvr74rx7jc7jjr-3001.preview.app.github.dev/' + '/api/activities/' + params.id,{
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
