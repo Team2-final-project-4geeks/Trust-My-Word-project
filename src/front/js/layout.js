@@ -8,7 +8,7 @@ import { Home } from "./pages/home.js";
 import { Single } from "./pages/single";
 import Login from "./pages/login.js";
 import injectContext from "./store/appContext";
-import CreateAcount from "./pages/create_acount.js";
+import CreateUser from "./pages/createUser.js";
 import SingleTrip from "./pages/singleTrip.js";
 import { SingleProduct } from "./pages/singleproduct.js";
 import {Products} from "./pages/products.js";
@@ -34,13 +34,22 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Login />} path="/login" />
+                        <Route element={<CreateUser />} path="/create-user"/>  
+                        <Route element={<ModifyUser/>} path="/modify-user/:id" />
+                        <Route element={<Trips/>} path="/trips"/>                 
                         <Route element={<SingleTrip />} path="/trip/:id" />
-                        <Route element={<CreateAcount />} path="/create-user"/>                   
+                        <Route element={<CreateTrip />} path="/create-trip" />
+                        <Route element={<ReviewTrip/>} path="/review-trip/:id" />
                         <Route element={<SingleProduct />} path="/product/:id" />
                         <Route element={<Products/>} path="/products"/>
+                        <Route element={<CreateProduct />} path="/create-product" />
+                        <Route element={<ReviewProduct/>} path="/review-product/:id" />
+                        <Route element={<SingleActivity />} path="/activity/:id" />                        
+                        <Route element={<Activities />} path="/activities" />
+                        <Route element={<CreateActivity />} path="/create-activity" />
+                        <Route element={<ReviewActivity/>} path="/review-activity/:id" />
                         <Route element={<Privacy_policy />} path="/privacy-policy" />
                         <Route element={<TermsServices/>} path="/termsServices" />
-                        <Route element={<SingleActivity />} path="/activity/:id" />                        
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
