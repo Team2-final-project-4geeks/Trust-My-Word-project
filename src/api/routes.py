@@ -452,6 +452,11 @@ def update_trip(id):
             "msg":"location is not in the request"
         }
         return jsonify(response_body),200
+    elif "link" not in data:
+        response_body={
+            "msg":"link is not in the request"
+        }
+        return jsonify(response_body),200
     
     
     elif data is None:
@@ -467,6 +472,8 @@ def update_trip(id):
     update_trip.publishing_date = data["publishing_date"]
     update_trip.price = data["price"]
     update_trip.location = data["location"]
+    update_trip.link = data["link"]
+
 
     db.session.commit()
 
