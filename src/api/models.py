@@ -15,6 +15,10 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
+    # 1 - N with Reviews
+    reviews = db.relationship("Review", back_populates="user")
+    # 1 - N with Comments
+    comments = db.relationship("Comment", back_populates="user")
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -25,11 +29,9 @@ class User(db.Model):
             "email": self.email,
         }        
       
-class Reviews(db.Model):
-    __tablename__ = "reviews"
+class Review(db.Model):
+    __tablename__ = "review"
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    user_id = db.Column(db.Integer, ForeignKey("user.id"))
-    comments_id = db.Column(db.Integer, ForeignKey("comments.id"))
     title = db.Column(db.String(120), nullable=False)
     type = db.Column(db.String(120), nullable=True)    
     author_name = db.Column(db.String(200), nullable=False)    
@@ -38,8 +40,12 @@ class Reviews(db.Model):
     publishing_date = db.Column(db.String(10), nullable=False)
     link= db.Column(db.String(500), nullable=True)
     price = db.Column(db.String(200), nullable=False, default="0.0")
-    comments = db.Column(db.String(200), nullable=False)
     status = db.Column(Enum(myEnum))
+
+    comments = db.relationship("Comment", back_populates="review")
+
+    user_id = db.Column(db.Integer, ForeignKey('user.id'))
+    user = db.relationship("User", back_populates="reviews")
 
 
     
@@ -58,15 +64,18 @@ class Reviews(db.Model):
             "link": self.link,
             "price": self.price,
             "comments" : self.comments,
-
         }
     
-class Comments(db.Model):
-     __tablename__ = "comments"
+class Comment(db.Model):
+     __tablename__ = "comment"
      id = db.Column(db.Integer, primary_key=True, nullable=False)
      description = db.Column(db.String(1000), nullable=False)
-     user_id = db.Column(db.Integer, ForeignKey("user.id"))
-     review_id = db.Column(db.Integer, ForeignKey("reviews.id"))
+
+     review_id = db.Column(db.Integer, ForeignKey('review.id'))
+     review = db.relationship("Review", back_populates="comments")
+
+     user_id = db.Column(db.Integer, ForeignKey('user.id'))
+     user = db.relationship("User", back_populates="comments")
 
      def __repr__(self):
         return f'<Comments {self.id}>'
