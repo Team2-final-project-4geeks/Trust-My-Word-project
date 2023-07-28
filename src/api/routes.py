@@ -16,7 +16,7 @@ api = Blueprint('api', __name__)
 def handle_hello():
 
     response_body = {
-        "message": "Hello! This is 4Geeks Group 2 Final Project"
+        "message": "Helloooo! This is 4Geeks Group 2 Final Project"
     }
     return jsonify(response_body), 200
 
