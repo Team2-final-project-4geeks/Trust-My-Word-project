@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
 
-from api.models import db, User, Activities, Product,Trips
+from api.models import db, User, Reviews,Comments
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
@@ -187,77 +187,77 @@ def get_single_activity(id):
     return activityjson, 200
 
 
-@api.route('user/<int:id>',methods=['PUT'])
-def update_user(id):
-    data = request.get_json()
-    if "title" not in data:
-        response_body={
-            "msg":"title is not in the request"
-        }
-        return jsonify(response_body),200
-    elif "type" not in data:
-        response_body={
-            "msg":"type is not in the request"
-        }
-        return jsonify(response_body),200
+# @api.route('user/<int:id>',methods=['PUT'])
+# def update_activity(id):
+#     data = request.get_json()
+#     if "title" not in data:
+#         response_body={
+#             "msg":"title is not in the request"
+#         }
+#         return jsonify(response_body),200
+#     elif "type" not in data:
+#         response_body={
+#             "msg":"type is not in the request"
+#         }
+#         return jsonify(response_body),200
     
-    elif "author_name" not in data:
-        response_body={
-            "msg":"author_name is not in the request"
-        }
-        return jsonify(response_body),200
+#     elif "author_name" not in data:
+#         response_body={
+#             "msg":"author_name is not in the request"
+#         }
+#         return jsonify(response_body),200
     
-    elif "description" not in data:
-        response_body={
-            "msg":"description is not in the request"
-        }
-        return jsonify(response_body),200
+#     elif "description" not in data:
+#         response_body={
+#             "msg":"description is not in the request"
+#         }
+#         return jsonify(response_body),200
 
-    elif "location" not in data:
-        response_body={
-            "msg":"location is not in the request"
-        }
-        return jsonify(response_body),200
+#     elif "location" not in data:
+#         response_body={
+#             "msg":"location is not in the request"
+#         }
+#         return jsonify(response_body),200
         
-    elif "publishing_date" not in data:
-        response_body={
-            "msg":"publishing_date is not in the request"
-        }
-        return jsonify(response_body),200
+#     elif "publishing_date" not in data:
+#         response_body={
+#             "msg":"publishing_date is not in the request"
+#         }
+#         return jsonify(response_body),200
     
-    elif "link" not in data:
-        response_body={
-            "msg":"link is not in the request"
-        }
-        return jsonify(response_body),200
+#     elif "link" not in data:
+#         response_body={
+#             "msg":"link is not in the request"
+#         }
+#         return jsonify(response_body),200
     
-    elif "price" not in data:
-        response_body={
-            "msg":"price is not in the request"
-        }
-        return jsonify(response_body),200
+#     elif "price" not in data:
+#         response_body={
+#             "msg":"price is not in the request"
+#         }
+#         return jsonify(response_body),200
     
     
-    elif data is None:
-        response_body={
-            "msg":"body should be passed with request parameters"
-        }
-        return jsonify(response_body),200
+#     elif data is None:
+#         response_body={
+#             "msg":"body should be passed with request parameters"
+#         }
+#         return jsonify(response_body),200
     
-    update_activity= Activities.query.get(id)
-    update_activity.title = data["title"]
-    update_activity.type = data["type"]
-    update_activity.author_name = data["author_name"]
-    update_activity.description = data["description"]
-    update_activity.location = data["location"]
-    update_activity.publishing_date = data["publishing_date"]
-    update_activity.link = data["link"]
-    update_activity.price = data["price"]
-    db.session.commit()
+#     update_activity= Activities.query.get(id)
+#     update_activity.title = data["title"]
+#     update_activity.type = data["type"]
+#     update_activity.author_name = data["author_name"]
+#     update_activity.description = data["description"]
+#     update_activity.location = data["location"]
+#     update_activity.publishing_date = data["publishing_date"]
+#     update_activity.link = data["link"]
+#     update_activity.price = data["price"]
+#     db.session.commit()
 
-    activity = Activities.query.get(id)
+#     activity = Activities.query.get(id)
 
-    return jsonify(activity.serialize()),200
+#     return jsonify(activity.serialize()),200
 
 
 
