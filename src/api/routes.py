@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
 
-from api.models import db, User
+from api.models import db, User,Review,Comment
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
@@ -37,12 +37,6 @@ def create_user():
            "msg": "Email dont exist in the request"
        }
         return jsonify(response_body),200
-   
-   elif "username" not in data:
-        response_body = {
-           "msg": "Username dont exist in the request"
-       }
-        return jsonify(response_body),200
 
    elif "password" not in data:
         response_body = {
@@ -50,7 +44,7 @@ def create_user():
        }
         return jsonify(response_body),200
    
-   new_user= User(email = data["email"], password= data["password"], username=data["username"])
+   new_user= User(email = data["email"], password= data["password"])
    db.session.add(new_user)
    db.session.commit()
 
@@ -84,12 +78,7 @@ def update_user(id):
             "msg":"password is not in the request"
         }
         return jsonify(response_body),200
-    
-    elif "username" not in data:
-        response_body={
-            "msg":"username is not in the request"
-        }
-        return jsonify(response_body),200
+
     elif data is None:
         response_body={
             "msg":"body should be passed with request parameters"
@@ -99,7 +88,6 @@ def update_user(id):
     update_user= User.query.get(id)
     update_user.email = data["email"]
     update_user.password = data["password"]
-    update_user.username = data["username"]
     db.session.commit()
 
     user = User.query.get(id)
@@ -140,6 +128,131 @@ def user_login():
     
     access_token = create_access_token(identity=usuario.id)
     return jsonify({ "token": access_token, "user_id": usuario.id })
+
+
+# FOR REVIEWS 
+
+@api.route('/review', methods=['GET'])
+def get_all_reviews():
+    all_reviews = Review.query.all()
+    all_reviews = list(map(lambda x: x.serialize(), all_reviews))
+
+    return jsonify(all_reviews), 200
+
+
+@api.route('/create-review', methods=['POST'])
+def create_review():
+    data =request.get_json()
+
+    if data is None:
+        response_body= {
+            "msg" : "body should be passed with request"
+        }
+        return jsonify(response_body),400
+    
+    elif "title" not in data:
+        response_body= {
+            "msg" : "title should be passed with request"
+        }
+        return jsonify(response_body),400
+    
+    elif "author_name" not in data:
+        response_body = {
+           "msg": "Author_name dont exist in the request"
+       }
+        return jsonify(response_body),200
+   
+    elif "description" not in data:
+        response_body = {
+           "msg": "Description dont exist in the request"
+       }
+        return jsonify(response_body),200
+
+    elif "publishing_date" not in data:
+        response_body = {
+           "msg": "publishing_date dont exist in the request"
+       }
+        return jsonify(response_body),200
+    
+    elif "price" not in data:
+        response_body = {
+           "msg": "Price dont exist in the request"
+       }
+        return jsonify(response_body),200
+
+    new_review= Review(title = data["title"], author_name= data["author_name"], description=data["description"], publishing_date= data["publishing_date"], price= data["price"])
+    db.session.add(new_review)
+    db.session.commit()
+
+    all_reviews = Review.query.all()
+    all_reviews = list(map(lambda x: x.serialize(),all_reviews))
+
+    return jsonify(all_reviews), 200
+
+
+@api.route('/modify-review/<int:id>', methods=['PUT'])
+def modify_review(id):
+    data = request.get_json()
+    if data is None:
+
+        response_body= {
+            "msg" : "body should be passed with request"
+        }
+        return jsonify(response_body),400
+    
+    elif "title" not in data:
+        response_body= {
+            "msg" : "title should be passed with request"
+        }
+        return jsonify(response_body),400
+    
+    elif "author_name" not in data:
+        response_body = {
+           "msg": "Author_name dont exist in the request"
+       }
+        return jsonify(response_body),200
+   
+    elif "description" not in data:
+        response_body = {
+           "msg": "Description dont exist in the request"
+       }
+        return jsonify(response_body),200
+
+    elif "publishing_date" not in data:
+        response_body = {
+           "msg": "publishing_date dont exist in the request"
+       }
+        return jsonify(response_body),200
+    
+    elif "price" not in data:
+        response_body = {
+           "msg": "Price dont exist in the request"
+       }
+        return jsonify(response_body),200
+    
+    update_review= Review.query.get(id)
+    update_review.title = data["title"]
+    update_review.description = data["description"]
+    update_review.author_name = data["author_name"]
+    update_review.publishing_date = data["publishing_date"]
+    update_review.price = data["price"]
+
+    db.session.commit()
+
+    review = Review.query.get(id)
+
+    return jsonify(review.serialize()),200
+    
+
+@api.route('/review/<int:id>',methods=['DELETE'])
+def delete_review(id):
+    review_to_delete = Review.query.get(id)
+    db.session.delete(review_to_delete)
+    db.session.commit()
+
+
+
+
 
 
 # # FOR ACTIVITIES

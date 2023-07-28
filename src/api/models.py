@@ -63,7 +63,6 @@ class Review(db.Model):
             "publishing_date": self.publishing_date,
             "link": self.link,
             "price": self.price,
-            "comments" : self.comments,
         }
     
 class Comment(db.Model):
