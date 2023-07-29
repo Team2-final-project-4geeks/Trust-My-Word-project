@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-const CreateAcount = () =>{
+const CreateUser = () =>{
     const [email,setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [username,setUsername] = useState("") 
@@ -85,4 +85,4 @@ const CreateAcount = () =>{
     )
 }
 
-export default CreateAcount
+export default CreateUser
