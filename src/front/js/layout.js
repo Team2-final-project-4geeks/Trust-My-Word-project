@@ -5,16 +5,19 @@ import { BackendURL } from "./component/backendURL";
 
 
 import { Home } from "./pages/home.js";
-import { Single } from "./pages/single";
 import Login from "./pages/login.js";
 import injectContext from "./store/appContext";
 import CreateUser from "./pages/createUser.js";
+import CreateActivity from "./pages/createActivity";
+import CreateTrip from "./pages/createTrip";
 import SingleTrip from "./pages/singleTrip.js";
 import { SingleProduct } from "./pages/singleproduct.js";
 import {Products} from "./pages/products.js";
 import {Privacy_policy} from "./pages/privacy_policy.js";
 import { TermsServices } from "./pages/termsServices.js";
 import SingleActivity from "./pages/singleActivity.jsx";
+import ReviewActivity from "./pages/reviewActivity";
+import ReviewTrip from "./pages/reviewTrip";
 import { Navbar } from "./component/navbar.js";
 import { Footer } from "./component/footer";
 
@@ -42,8 +45,8 @@ const Layout = () => {
                         <Route element={<ReviewTrip/>} path="/review-trip/:id" />
                         <Route element={<SingleProduct />} path="/product/:id" />
                         <Route element={<Products/>} path="/products"/>
-                        <Route element={<CreateProduct />} path="/create-product" />
-                        <Route element={<ReviewProduct/>} path="/review-product/:id" />
+                        {/*<Route element={<CreateProduct />} path="/create-product" />
+                        <Route element={<ReviewProduct/>} path="/review-product/:id" />*/}
                         <Route element={<SingleActivity />} path="/activity/:id" />                        
                         <Route element={<Activities />} path="/activities" />
                         <Route element={<CreateActivity />} path="/create-activity" />

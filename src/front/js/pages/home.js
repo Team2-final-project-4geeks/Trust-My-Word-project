@@ -19,7 +19,7 @@ export const Home = () => {
 	}, []);
 	
 	const getActivities = () => {
-		fetch('https://lucymacko-curly-computing-machine-56vvr74rx7jc7jjr-3001.preview.app.github.dev/api/activities',{
+		fetch('https://lucymacko-solid-guacamole-r97765r6646hwp44-3001.preview.app.github.dev/api/activities',{
 			method: 'GET',
       		headers: {
 				"Content-Type": "application/json"
