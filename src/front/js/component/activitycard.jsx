@@ -14,7 +14,7 @@ const ActivityCard = (props) =>{
 	}, [])
 
     const getActivity = ()=>{
-		fetch('https://lucymacko-solid-guacamole-r97765r6646hwp44-3001.preview.app.github.dev/' + props.activity.id, {
+		fetch('https://lucymacko-effective-enigma-j6rr7p47445fpv5p-3001.preview.app.github.dev/api/review/' + props.activity.id, {
 			method: 'GET',
 			headers: {
 				"Content-Type": "application/json"
@@ -67,7 +67,7 @@ const ActivityCard = (props) =>{
                         );
                     })}                    
                 </span> 
-                <button className="btn btn-outline-primary" onClick={(() => navigate("activity/" + props.activity.id))} >I want to know more!</button>                         				
+                <button className="btn btn-outline-primary" onClick={(() => navigate("review/" + props.id))} >I want to know more!</button>                         				
             <div className="card-footer py-1 px-0">
                 <small className="text-muted">{activity.publishing_date}</small>                
             </div>
