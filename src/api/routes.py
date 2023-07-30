@@ -250,6 +250,10 @@ def delete_review(id):
     db.session.delete(review_to_delete)
     db.session.commit()
 
+@api.route('/review/<int:id>',methods=["GET"])
+def get_single_review(id):
+    review = Review.query.get(id)
 
+    return jsonify(review.serialize()),200
 
 
