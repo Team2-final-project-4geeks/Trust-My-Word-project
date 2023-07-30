@@ -10,7 +10,7 @@ const SingleActivity = () => {
     })
 
     const fetchSingleActivity = () => {
-        fetch('https://lucymacko-solid-guacamole-r97765r6646hwp44-3001.preview.app.github.dev/api/activities/' + params.id,{
+        fetch('https://lucymacko-effective-enigma-j6rr7p47445fpv5p-3001.preview.app.github.dev/api/review' + params.id,{
             method: "GET",
             headers: {
                 "Content-Type": "application/json"

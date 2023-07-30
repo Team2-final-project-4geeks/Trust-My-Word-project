@@ -20,6 +20,7 @@ import ReviewActivity from "./pages/reviewActivity";
 import ReviewTrip from "./pages/reviewTrip";
 import { Navbar } from "./component/navbar.js";
 import { Footer } from "./component/footer";
+import Activities from "./pages/activities";
 
 //create your first component
 const Layout = () => {
@@ -38,8 +39,8 @@ const Layout = () => {
                         <Route element={<Home />} path="/" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<CreateUser />} path="/create-user"/>  
-                        <Route element={<ModifyUser/>} path="/modify-user/:id" />
-                        <Route element={<Trips/>} path="/trips"/>                 
+                        {/*<Route element={<ModifyUser/>} path="/modify-user/:id" />*/}
+                        {/*<Route element={<Trips/>} path="/trips"/>*/}                 
                         <Route element={<SingleTrip />} path="/trip/:id" />
                         <Route element={<CreateTrip />} path="/create-trip" />
                         <Route element={<ReviewTrip/>} path="/review-trip/:id" />
@@ -48,7 +49,7 @@ const Layout = () => {
                         {/*<Route element={<CreateProduct />} path="/create-product" />
                         <Route element={<ReviewProduct/>} path="/review-product/:id" />*/}
                         <Route element={<SingleActivity />} path="/activity/:id" />                        
-                        <Route element={<Activities />} path="/activities" />
+                        <Route element={<Activities />} path="/review" />
                         <Route element={<CreateActivity />} path="/create-activity" />
                         <Route element={<ReviewActivity/>} path="/review-activity/:id" />
                         <Route element={<Privacy_policy />} path="/privacy-policy" />
