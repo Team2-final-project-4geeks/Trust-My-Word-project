@@ -19,7 +19,7 @@ export const Home = () => {
 	}, []);
 	
 	const getActivities = () => {
-		fetch('https://lucymacko-effective-enigma-j6rr7p47445fpv5p-3001.preview.app.github.dev/api/review',{
+		fetch('https://lucymacko-didactic-space-carnival-66vv5xr5v79f47rg-3001.preview.app.github.dev/api/review',{
 			method: 'GET',
       		headers: {
 				"Content-Type": "application/json"

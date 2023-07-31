@@ -10,7 +10,7 @@ const SingleActivity = () => {
     })
 
     const fetchSingleActivity = () => {
-        fetch('https://lucymacko-effective-enigma-j6rr7p47445fpv5p-3001.preview.app.github.dev/api/review' + params.id,{
+        fetch('https://lucymacko-didactic-space-carnival-66vv5xr5v79f47rg-3001.preview.app.github.dev/review/' + params.id,{
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -30,7 +30,7 @@ const SingleActivity = () => {
     return(
         <div className="container-fluid">
 			{ activity ? (
-                <div className="card mb-3" style="max-width: 540px;">
+                <div className="card mb-3">
                     <div className="row g-0">
                         <div className="col-md-4">
                         <img src="..." className="img-fluid rounded-start" alt="..."/>

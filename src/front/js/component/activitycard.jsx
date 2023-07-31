@@ -14,7 +14,7 @@ const ActivityCard = (props) =>{
 	}, [])
 
     const getActivity = ()=>{
-		fetch('https://lucymacko-effective-enigma-j6rr7p47445fpv5p-3001.preview.app.github.dev/api/review/' + props.activity.id, {
+		fetch('https://lucymacko-didactic-space-carnival-66vv5xr5v79f47rg-3001.preview.app.github.dev/api/review/' + props.activity.id, {
 			method: 'GET',
 			headers: {
 				"Content-Type": "application/json"

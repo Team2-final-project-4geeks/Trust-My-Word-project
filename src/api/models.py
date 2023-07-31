@@ -56,8 +56,7 @@ class Review(db.Model):
        return {
             "id": self.id,
             "title": self.title,
-            "type": self.type,
-            "author_name":self.author_name,
+            "type": self.type,           
             "description": self.description,
             "location":self.location,
             "publishing_date": self.publishing_date,
