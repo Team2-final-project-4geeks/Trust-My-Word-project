@@ -5,6 +5,7 @@ import ActivityCard from "../component/activitycard.jsx";
 import { Product } from "../component/productcard.jsx";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
+import TriipCard from "../component/triipcard.jsx";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -12,10 +13,12 @@ export const Home = () => {
 
 	const [activities, setActivities] = useState([]);
   	const [products, setProducts] = useState([]);
+	const [trips,setTrips] = useState([])
   
 	useEffect(() => {		
 		getActivities();
     	getProduct();
+		showTrips()
 	}, []);
 	
 	const getActivities = () => {
@@ -90,6 +93,23 @@ export const Home = () => {
 			)
 			}
 	}
+
+	const showTrips = () =>{
+		if (trips && trips.length > 0){
+			return trips.map((trips, index) => {
+				return (
+					
+						<TriipCard item={trips} trip={trips} profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg" img="https://picsum.photos/id/295/600/380" />					
+				)
+			})
+			} else {
+				return (
+				<div className="spinner-border" role="status">
+					<span className="visually-hidden">Loading...</span>
+				</div>
+				)
+				}
+	}
 	return (
 	
 		<div className="">
@@ -110,6 +130,16 @@ export const Home = () => {
 								</div>
 						</div>
 			</div>	
+
+			<div className="container-fluid">
+				<h1 className="py-5">Trips</h1>
+					<div className="container-fluid">			
+						<div className="row row-cols-1 row-cols-md-5 g-4">													
+							{showTrips()}						
+						</div>	
+					</div>						
+			</div>
+
 			</div>	
 	);
 }
