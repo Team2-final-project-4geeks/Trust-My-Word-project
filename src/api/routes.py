@@ -50,12 +50,9 @@ def create_user():
    
    new_user= User(email = data["email"], password= data["password"])
    db.session.add(new_user)
-   db.session.commit()
+   db.session.commit() 
 
-   all_users = User.query.all()
-   all_users = list(map(lambda x: x.serialize(),all_users))
-
-   return jsonify(all_users),200
+   return jsonify(new_user),200
 
 @api.route('/users',methods=['GET'])
 def get_all_users():
