@@ -5,6 +5,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 
 from api.models import db, User,Review,Comment
 from api.utils import generate_sitemap, APIException
+from api.data import populate_user, populate_reviews
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
@@ -14,6 +15,9 @@ api = Blueprint('api', __name__)
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
+
+    populate_user();
+    populate_reviews();
 
     response_body = {
         "message": "Helloooo! This is 4Geeks Group 2 Final Project"
