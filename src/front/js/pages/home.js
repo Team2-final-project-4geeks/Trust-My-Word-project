@@ -64,7 +64,7 @@ export const Home = () => {
 			return(
 				<li key={index} className= "col">					
 					<div className="card h-100">
-						<img src="https://picsum.photos/id/1/200" className="card-img-top" alt="...."></img>
+						<img src="https://picsum.photos/id/1/200" className="card-img-top" alt="..."></img>
 						<ActivityCard activity={activity}/>
 					</div>						
 				</li>
