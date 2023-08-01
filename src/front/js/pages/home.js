@@ -18,7 +18,7 @@ export const Home = () => {
 	useEffect(() => {		
 		getActivities();
     	getProduct();
-		showTrips()
+		getTrips()
 	}, []);
 	
 	const getActivities = () => {
@@ -55,6 +55,27 @@ export const Home = () => {
 		.then(data=> {
 			console.log(data);
 			setProducts(data);
+		})
+		.catch(error => {
+			console.log(error);
+			console.log('Oops something went wrong'+ error);
+		})
+	}
+
+	const getTrips = () =>{
+		fetch('https://edijavier99-upgraded-space-memory-7qgvvp774ww3w55r-3001.preview.app.github.dev/api/review', {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+		.then(resp => {
+			console.log(resp);					
+			return resp.json();
+		})
+		.then(data=> {
+			console.log(data);
+			setTrips(data);
 		})
 		.catch(error => {
 			console.log(error);

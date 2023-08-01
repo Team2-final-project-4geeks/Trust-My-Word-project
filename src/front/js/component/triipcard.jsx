@@ -24,6 +24,7 @@ const TriipCard = (props)=>{
     useEffect(()=>{
         get_single_trip()
     },[])
+
     return(
             <div className="card-body">
                 <img src={props.img} class="card-img-top" alt="..."/>
@@ -34,7 +35,6 @@ const TriipCard = (props)=>{
                     <div className="d-flex flex-row">
                         <img src={props.profile} class="profile-image" alt="..."/>
                             <div className="d-flex flex-column mx-3">
-                                {/* <h6 class="card-title mb-0">{props.trip.author_name}</h6> */}
                                 <p class="card-text"><small class="text-muted publishing-date">{props.trip.publishing_date}</small></p>
                             </div>
                         
