@@ -7,7 +7,7 @@ const SingleActivity = () => {
     const [city, setCity] = useState([]);
     const [weather,setWeather] = useState();
     const params = useParams();
-
+    const map = `https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=300x300&key=AIzaSyBqtaFqT0C2SVPJHzmYQtGMrTuxmGzG1UI`
     useEffect(() => {
         fetchSingleActivity();                
     }, [])
@@ -17,7 +17,7 @@ const SingleActivity = () => {
     }, [city])
 
     const fetchSingleActivity = () => {
-        fetch('https://friendly-memory-pv77w5gwp6x299j6-3001.preview.app.github.dev/api/review/' + params.id,{
+        fetch('https://verbose-succotash-g9xxrv5rrg63wg6x-3001.app.github.dev/api/review/' + params.id,{
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -51,9 +51,9 @@ const SingleActivity = () => {
     }
 
     return(
-        <div className="container-fluid">
+        <div className="container-fluid" >
 			{ activity ? (
-                <div className="card mb-3">
+                <div className="card mb-3" id="containerSingle">
                     <div className="row g-0 h-100">
                         <div className="col-md-4">
                             <img src="https://clubhipicoelpinar.es/wp-content/uploads/2016/05/IMG_8542-1024x683.jpg" className="img-fluid rounded-start h-100" alt="..."/>
@@ -78,6 +78,9 @@ const SingleActivity = () => {
                     <span className="visually-hidden">Loading...</span>
                 </div>
             )}
+            <div className="container-fluid">
+                <img className="rounded mx-auto d-block" src={map} id="map"/>
+            </div>
         </div>
             
 

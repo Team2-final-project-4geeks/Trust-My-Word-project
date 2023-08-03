@@ -19,7 +19,7 @@ export const Home = () => {
 	}, []);
 	
 	const getActivities = () => {
-		fetch('https://friendly-memory-pv77w5gwp6x299j6-3001.preview.app.github.dev/api/review',{
+		fetch('https://verbose-succotash-g9xxrv5rrg63wg6x-3001.app.github.dev/api/review',{
 			method: 'GET',
       		headers: {
 				"Content-Type": "application/json"
