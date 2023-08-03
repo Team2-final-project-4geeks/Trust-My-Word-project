@@ -9,7 +9,7 @@ const SingleActivity = () => {
     const params = useParams();
 
     useEffect(() => {
-        fetchSingleActivity();        
+        fetchSingleActivity();                
     }, [])
 
     useEffect(() => {
@@ -62,7 +62,7 @@ const SingleActivity = () => {
                         <div className="card-body h-100">
                             <h5 className="card-title">{activity.title}</h5>
                             <p className="card-text">{activity.id}</p>
-                            <p className="card-text">{weather}</p>
+                            <p className="card-text"> Current weather: {weather}</p>
                             <p className="card-text">{activity.type}</p>
                             <p className="card-text">{activity.location}</p>
                             <p className="card-text">{activity.description}</p>

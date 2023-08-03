@@ -20,12 +20,10 @@ const ActivityCard = (props) =>{
 				"Content-Type": "application/json"
 			}
 		})
-		.then(resp=> {
-			console.log(resp)
+		.then(resp=> {			
 			return resp.json();
 		})
 		.then(data=>{			
-			console.log(data)
 			setActivity(data);
 		})
 		.catch(error=>{
@@ -67,7 +65,7 @@ const ActivityCard = (props) =>{
                         );
                     })}                    
                 </span> 
-                <button className="btn btn-outline-primary" onClick={(() => navigate("review/" + props.id))} >I want to know more!</button>                         				
+                <button className="btn btn-outline-primary" onClick={(() => navigate("review/" + props.activity.id))} >I want to know more!</button>                         				
             <div className="card-footer py-1 px-0">
                 <small className="text-muted">{activity.publishing_date}</small>                
             </div>
