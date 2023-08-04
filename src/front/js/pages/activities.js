@@ -5,7 +5,7 @@ const Activities = () =>{
         getActivities();
     }, []);
     const getActivities = () => {
-        fetch('https://lucymacko-didactic-space-carnival-66vv5xr5v79f47rg-3001.preview.app.github.dev/api/review',{
+        fetch(process.env.BACKEND_URL + 'api/review',{
             method: 'GET',
             headers: {
                 "Content-Type": "application/json"
