@@ -14,7 +14,7 @@ const ActivityCard = (props) =>{
 	}, [])
 
     const getActivity = ()=>{
-		fetch('https://verbose-succotash-g9xxrv5rrg63wg6x-3001.app.github.dev/api/review/' + props.activity.id, {
+		fetch(process.env.BACKEND_URL + 'api/review/' + props.activity.id, {
 			method: 'GET',
 			headers: {
 				"Content-Type": "application/json"

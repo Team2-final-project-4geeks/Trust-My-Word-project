@@ -7,7 +7,8 @@ const SingleActivity = () => {
     const [city, setCity] = useState([]);
     const [weather,setWeather] = useState();
     const params = useParams();
-    const map = `https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=300x300&key=AIzaSyBqtaFqT0C2SVPJHzmYQtGMrTuxmGzG1UI`
+    const map = `https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=300x300&key=${process.env.API_KEY}`
+
     useEffect(() => {
         fetchSingleActivity();                
     }, [])
@@ -17,24 +18,21 @@ const SingleActivity = () => {
     }, [city])
 
     const fetchSingleActivity = () => {
-        fetch('https://verbose-succotash-g9xxrv5rrg63wg6x-3001.app.github.dev/api/review/' + params.id,{
+        fetch(process.env.BACKEND_URL + 'api/review/' + + params.id,{
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
             } 
         })
-        .then(resp=> {
-            console.log(resp);
+        .then(resp=> {            
             return resp.json();
         })
         .then(data=>{
             setActivity(data);
             setCity(data.location)
-            console.log(data.location)
+            
         })
-        .catch((error)=>{
-            console.log(error)
-        })
+        .catch(err => console.error(err))
     }
 
     const fetchTemp = () => {
@@ -42,10 +40,8 @@ const SingleActivity = () => {
                 method: "GET"                
             })
             .then(res => res.json())
-            .then(data => {
-                console.log(data);
+            .then(data => {                
                 setWeather(data.main.temp);
-                console.log(data.main.temp)
             })
             .catch(err => console.error(err))
     }

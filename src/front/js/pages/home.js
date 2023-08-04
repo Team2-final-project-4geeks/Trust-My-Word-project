@@ -19,7 +19,7 @@ export const Home = () => {
 	}, []);
 	
 	const getActivities = () => {
-		fetch('https://verbose-succotash-g9xxrv5rrg63wg6x-3001.app.github.dev/api/review',{
+		fetch(process.env.BACKEND_URL + 'api/review',{
 			method: 'GET',
       		headers: {
 				"Content-Type": "application/json"
