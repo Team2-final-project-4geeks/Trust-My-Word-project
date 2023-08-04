@@ -20,7 +20,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				)
 				
 			},
-			deleteFavorite: (favToDelete) => {
+			deleteFavourite: (favToDelete) => {
 				const store = getStore();
 				setStore({favourite: store.favourite.filter((fav) => fav !== favToDelete)})
 			}

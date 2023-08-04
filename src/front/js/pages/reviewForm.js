@@ -61,7 +61,7 @@ export const ReviewForm = () => {
   const sendDataToAPI = (data) => {
     console.log("comienza la funcion", data);
 
-    fetch(`https://victormagacbt-fuzzy-telegram-r9jx5q7999g2964-3001.app.github.dev/api/create-review`, { 
+    fetch(`https://upgraded-train-66jpxqv6q4jfx46w-3001.app.github.dev/api/create-review`, { 
             method: "POST", 
             headers: { 
                 "Content-Type": "application/json",
