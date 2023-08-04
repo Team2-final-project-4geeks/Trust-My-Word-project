@@ -5,16 +5,16 @@ import { cloudinary } from "cloudinary-core";
 export const ReviewForm = () => {
   const presetKey = "dumn5jgp"; // Reemplaza con tu upload_preset de Cloudinary
   const cloudName = "dbxeaqsv4"; // Reemplaza con tu cloud_name de Cloudinary
-  const [image, setImage] = useState("");
-  const [data, setData] = useState({
-    title: "",
-    type: "",
-    description: "",
-    location: "",
-    publishing_date: "",
-    link: "",
-    price: "",
-  });
+  const [imageCloud, setImageCloud] = useState("https://fastly.picsum.photos/id/163/2000/1333.jpg?hmac=htdHeSJwlYOxS8b0TTpz2s8tD_QDlmsd3JHYa_HGrg8");
+  const [title, setTitle] = useState("")
+  const [type, setType] = useState("")
+  const [description, setDescription] = useState("")
+  const [location, setLocation] = useState("")
+  const [publishing_date, setPublishing_date] = useState("")
+  const [link, setLink] = useState("")
+  const [price, setPrice] = useState("")
+  const [image, setImage] = useState("")
+
   const reviewImage = <img src="https://fastly.picsum.photos/id/163/2000/1333.jpg?hmac=htdHeSJwlYOxS8b0TTpz2s8tD_QDlmsd3JHYa_HGrg8" style={{width:'80%', height:'80%'}} class="img-fluid rounded-start" alt="..." /> 
 
   const handleFile = (e) => {
@@ -22,20 +22,26 @@ export const ReviewForm = () => {
     setImage(file);
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setData({
-      ...data,
-      [name]: value,
-    });
-  };
-
   const handleUpload = () => {
-      uploadImage(image);
-      sendDataToAPI(data);
-  
+    let regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+    const match = publishing_date.match(regex)
+    if(match) {
+        let day = parseInt(match[1], 10);
+        let month = parseInt(match[2], 10);
+        let year = parseInt(match[3], 10);
+        let validDate = !(month < 1 || month > 12 || day < 1 || day > 31 || (month === 2 && day > 28 + (year % 4 == 0 ? 1 : 0)) || ((month === 4 || month === 6 || month === 9 || month === 11) && day > 30));
+        if(validDate) {
+            uploadImage(image);
+            setTimeout(() => sendDataToAPI(), 5000)
+            console.log(imageCloud)
+        } else {
+            console.log("Fecha inválida");
+            alert("Invalid Date Format. Format should be dd/mm/yyyy")
+        }
+    } else {
+        alert("Invalid Date Format. Format should be dd/mm/yyyy");
+    }  
   };
-
 
   const uploadImage = (imageFile) => {
     const formData = new FormData();
@@ -48,25 +54,21 @@ export const ReviewForm = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        const imageUrl = data;
-        setImage(imageUrl); // Actualizamos el estado de "image" con la URL de la imagen cargada en Cloudinary
-        // Ahora, también podemos enviar los otros datos a tu API
-        sendDataToAPI({ ...formData, image: imageUrl });
+        setImageCloud(data.secure_url)
       })
       .catch((error) => {
         console.error("Error al cargar la imagen en Cloudinary:", error.message);
       });
   };
   
-  const sendDataToAPI = (data) => {
-    console.log("comienza la funcion", data);
+  const sendDataToAPI = () => {
 
-    fetch(`https://upgraded-train-66jpxqv6q4jfx46w-3001.app.github.dev/api/create-review`, { 
+    fetch(process.env.BACKEND_URL + `/api/create-review`, { 
             method: "POST", 
             headers: { 
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(data) 
+            body: JSON.stringify({title, type, description, location, publishing_date, link, price, imageCloud}) 
         })
         .then((res) => res.json())
         .then((result) => {
@@ -77,7 +79,6 @@ export const ReviewForm = () => {
         })
         }
     
-
     return (
 
             <div class="container-fluid login-card">
@@ -88,7 +89,7 @@ export const ReviewForm = () => {
                                     <div class="row g-0 d-flex justify-content-center align-items-center">
                                         <div class="col-md-4 img-board">
                                             <div>
-                                                <input type="file" name="image" onChange={handleFile} />
+                                                <input type="file" name="imageCloud" onChange={handleFile} />
                                             </div>
                                             {reviewImage}
                                             {image && typeof image === "string" && (
@@ -103,8 +104,8 @@ export const ReviewForm = () => {
                                                     className="p-1 col-12 review-input"  
                                                     placeholder="Title" 
                                                     name="title"
-                                                    value={data.title}
-                                                    onChange={handleInputChange}
+                                                    value={title}
+                                                    onChange={(e) => setTitle(e.target.value)}
                                                     />                               
                                             </div>
                                             <div className="input-board mt-3">
@@ -114,8 +115,8 @@ export const ReviewForm = () => {
                                                     className="p-1 col-12 review-input"  
                                                     name="type"
                                                     placeholder="Type"
-                                                    value={data.type}
-                                                    onChange={handleInputChange}
+                                                    value={type}
+                                                    onChange={(e) => setType(e.target.value)}
                                                     />                               
                                             </div>
                                             <div className="input-board mt-3">
@@ -125,8 +126,8 @@ export const ReviewForm = () => {
                                                     className="p-1 col-12 review-input"  
                                                     placeholder="Description" 
                                                     name="description"
-                                                    value={data.description}
-                                                    onChange={handleInputChange}
+                                                    value={description}
+                                                    onChange={(e) => setDescription(e.target.value)}
                                                     />                               
                                             </div>
                                             <div className="input-board mt-3">
@@ -136,8 +137,8 @@ export const ReviewForm = () => {
                                                     className="p-1 col-12 review-input"  
                                                     placeholder="Location" 
                                                     name="location"
-                                                    value={data.location}
-                                                    onChange={handleInputChange}
+                                                    value={location}
+                                                    onChange={(e) => setLocation(e.target.value)}
                                                     />                               
                                             </div>
                                             <div className="input-board mt-3">
@@ -145,10 +146,10 @@ export const ReviewForm = () => {
                                                     type="text" 
                                                     id="publishing_date" 
                                                     className="p-1 col-12 review-input"  
-                                                    placeholder="dd-mm-yyyy" 
+                                                    placeholder="dd/mm/yyyy" 
                                                     name="publishing_date"
-                                                    value={data.publishing_date}
-                                                    onChange={handleInputChange}
+                                                    value={publishing_date}
+                                                    onChange={(e) => setPublishing_date(e.target.value)}
                                                     />                               
                                             </div>
                                             <div className="input-board mt-3">
@@ -158,8 +159,8 @@ export const ReviewForm = () => {
                                                     className="p-1 col-12 review-input"  
                                                     placeholder="Link" 
                                                     name="link"
-                                                    value={data.link}
-                                                    onChange={handleInputChange}
+                                                    value={link}
+                                                    onChange={(e) => setLink(e.target.value)}
                                                     />                               
                                             </div>
                                             <div className="input-board mt-3">
@@ -169,8 +170,8 @@ export const ReviewForm = () => {
                                                     className="p-1 col-12 review-input"  
                                                     placeholder="Price" 
                                                     name="price"
-                                                    value={data.price}
-                                                    onChange={handleInputChange}
+                                                    value={price}
+                                                    onChange={(e) => setPrice(e.target.value)}
                                                     />                               
                                             </div>
                                             <div>

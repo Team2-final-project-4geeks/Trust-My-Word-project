@@ -12,6 +12,7 @@ import CreateActivity from "./pages/createActivity";
 import CreateTrip from "./pages/createTrip";
 import SingleTrip from "./pages/singleTrip.js";
 import { SingleProduct } from "./pages/singleproduct.js";
+import {ReviewForm} from  "./pages/reviewForm.js";
 import {Products} from "./pages/products.js";
 import {Privacy_policy} from "./pages/privacy_policy.js";
 import { TermsServices } from "./pages/termsServices.js";
@@ -46,6 +47,7 @@ const Layout = () => {
                         <Route element={<ReviewTrip/>} path="/review-trip/:id" />
                         <Route element={<SingleProduct />} path="/product/:id" />
                         <Route element={<Products/>} path="/products"/>
+                        <Route element={<ReviewForm/>} path="/create-review"/>
                         {/*<Route element={<CreateProduct />} path="/create-product" />
                         <Route element={<ReviewProduct/>} path="/review-product/:id" />*/}
                         <Route element={<SingleActivity />} path="/activity/:id" />                        

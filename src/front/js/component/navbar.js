@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -12,7 +12,7 @@ export const Navbar = () => {
 	useEffect(() => {
 		const storedFavourites = JSON.parse(localStorage.getItem("favourites"));
 		if (storedFavourites) {
-		  actions.AddFavourites(storedFavourites);
+		  actions.addFavourite(storedFavourites);
 		}
 	  }, []);
 
