@@ -155,13 +155,7 @@ def create_review():
         response_body= {
             "msg" : "title should be passed with request"
         }
-        return jsonify(response_body),400
-    
-    elif "author_name" not in data:
-        response_body = {
-           "msg": "Author_name dont exist in the request"
-       }
-        return jsonify(response_body),200
+        return jsonify(response_body),400  
    
     elif "description" not in data:
         response_body = {
@@ -180,8 +174,14 @@ def create_review():
            "msg": "Price dont exist in the request"
        }
         return jsonify(response_body),200
-
-    new_review= Review(title = data["title"], author_name= data["author_name"], description=data["description"], publishing_date= data["publishing_date"], price= data["price"])
+    
+    elif "imageCloud" not in data:
+        response_body = {
+           "msg": "Image dont exist in the request"
+       }
+        return jsonify(response_body),200
+    
+    new_review= Review(title = data["title"], description=data["description"], publishing_date= data["publishing_date"], price= data["price"], image= data["imageCloud"])
     db.session.add(new_review)
     db.session.commit()
 
