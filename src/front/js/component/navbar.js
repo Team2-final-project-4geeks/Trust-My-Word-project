@@ -22,30 +22,34 @@ export const Navbar = () => {
 	
 	
     return (
-        <nav className="navbar container-fluid">
+        <nav className="navbar">
+			<div className="container-fluid">
 				<Link to="/">
 					<img src="https://sd.keepcalms.com/i/keep-calm-and-trust-my-words.png" width="150" alt="..." height="80" bg="light" className="d-inline-block align-text-top"/>                  
                 </Link>		
-			<div class="navbar-items">
-					<ul class="d-flex align-items-endv">
-					<li class="nav-item">
-							<a class="nav-link" href="#" onClick={() => navigate("/")}>Home</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#" onClick={() => navigate("/create-user")}>Create User </a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#" onClick={() => navigate("/login")}>Login</a>
-						</li>	
-						<li class="nav-item">
-							<a class="nav-link" href="#" onClick={() => navigate("/trips")}>Trips</a>
-						</li>	
-						<li class="nav-item">
-							<a class="nav-link" href="#" onClick={() => navigate("/activities")}>Activities</a>
-						</li>	
-						<li class="nav-item">
-							<a class="nav-link" href="#" onClick={() => navigate("/products")}>Products</a>
-						</li>				
+				<div class="navbar-items">
+						<div className="navbar-links">
+							<ul class="d-flex align-items-end">
+								<li class="nav-item">
+									<a class="nav-link text-light" href="#" onClick={() => navigate("/")}>Home</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-light" href="#" onClick={() => navigate("/create-user")}>Create User </a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-light" href="#" onClick={() => navigate("/login")}>Login</a>
+								</li>	
+								<li class="nav-item">
+									<a class="nav-link text-light" href="#" onClick={() => navigate("/trips")}>Trips</a>
+								</li>	
+								<li class="nav-item">
+									<a class="nav-link text-light" href="#" onClick={() => navigate("/activities")}>Activities</a>
+								</li>	
+								<li class="nav-item">
+									<a class="nav-link  text-light" href="#" onClick={() => navigate("/products")}>Products</a>
+								</li>
+							</ul>
+						</div>				
 						<div className="btn-group mx-5">
 							<button type="button" className="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="dropdownMenuClickableInside" aria-expanded="false">
 								Favourites <span className="p-1 text-secondary text-center text-white">{store.favourite.length}</span>
@@ -65,9 +69,9 @@ export const Navbar = () => {
 										</li>
 									)})}
 							</ul>
-						</div>				
-					</ul>			
-				<br/>			
+						</div>											
+					<br/>			
+				</div>
 			</div>			
         </nav>
     )

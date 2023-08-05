@@ -19,7 +19,6 @@ export const Footer = () => {
 					<li class="nav-item p-3">
 						<a class="nav-link text-light" href="#" onClick={() => navigate("/termsServices")}>Terms & Services </a>
 					</li>
-					<li class="nav-item p-3 text-light">About Us</li>
 				</ul>
 				<div class="b-example-divider"></div>
 					<p class="text-center text-light">&copy; 2023 4Geeks Academy</p>		
