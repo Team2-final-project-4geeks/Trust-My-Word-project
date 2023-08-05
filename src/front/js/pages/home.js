@@ -22,22 +22,19 @@ export const Home = () => {
 	}, []);
 	
 	const getActivities = () => {
-		fetch('https://lucymacko-didactic-space-carnival-66vv5xr5v79f47rg-3001.preview.app.github.dev/api/review',{
+		fetch(process.env.BACKEND_URL + 'api/review',{
 			method: 'GET',
       		headers: {
 				"Content-Type": "application/json"
 			}
 		})
-     	.then(resp => {
-			console.log(resp);					
+     	.then(resp => {								
 			return resp.json();
 		})
-		.then(data=> {
-			console.log(data);
+		.then(data=> {			
 			setActivities(data);
 		})
-		.catch(error => {
-			console.log(error);
+		.catch(error => {			
 			console.log('Oops something went wrong'+ error);
 		})
 	}

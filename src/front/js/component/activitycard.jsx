@@ -14,18 +14,16 @@ const ActivityCard = (props) =>{
 	}, [])
 
     const getActivity = ()=>{
-		fetch('https://lucymacko-didactic-space-carnival-66vv5xr5v79f47rg-3001.preview.app.github.dev/api/review/' + props.activity.id, {
+		fetch(process.env.BACKEND_URL + 'api/review/' + props.activity.id, {
 			method: 'GET',
 			headers: {
 				"Content-Type": "application/json"
 			}
 		})
-		.then(resp=> {
-			console.log(resp)
+		.then(resp=> {			
 			return resp.json();
 		})
 		.then(data=>{			
-			console.log(data)
 			setActivity(data);
 		})
 		.catch(error=>{
@@ -67,7 +65,7 @@ const ActivityCard = (props) =>{
                         );
                     })}                    
                 </span> 
-                <button className="btn btn-outline-primary" onClick={(() => navigate("review/" + props.id))} >I want to know more!</button>                         				
+                <button className="btn btn-outline-primary" onClick={(() => navigate("review/" + props.activity.id))} >I want to know more!</button>                         				
             <div className="card-footer py-1 px-0">
                 <small className="text-muted">{activity.publishing_date}</small>                
             </div>
