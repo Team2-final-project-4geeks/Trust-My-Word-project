@@ -23,6 +23,7 @@ import { Navbar } from "./component/navbar.js";
 import { Footer } from "./component/footer";
 import Activities from "./pages/activities";
 import Trips from "./pages/trips.js";
+import SideBar from "./component/sidebar";
 
 //create your first component
 const Layout = () => {
@@ -37,6 +38,7 @@ const Layout = () => {
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     <Navbar />
+                    <SideBar />
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Login />} path="/login" />

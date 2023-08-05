@@ -51,10 +51,10 @@ const SingleActivity = () => {
 			{ activity ? (
                 <div className="card mb-3" id="containerSingle">
                     <div className="row g-0 h-100">
-                        <div className="col-md-4">
+                        <div className="col-md-5">
                             <img src="https://clubhipicoelpinar.es/wp-content/uploads/2016/05/IMG_8542-1024x683.jpg" className="img-fluid rounded-start h-100" alt="..."/>
                         </div>
-                        <div className="col-md-8">
+                        <div className="col-md-7">
                         <div className="card-body h-100">
                             <h5 className="card-title">{activity.title}</h5>
                             <p className="card-text">{activity.id}</p>

@@ -4,9 +4,9 @@ import enum
 from sqlalchemy import Enum,ForeignKey
 
 class myEnum(enum.Enum):
-    activity = "activity"
-    product = "product"
-    trip = "trip"
+    activity = 1
+    product = 2
+    trip = 3
 
 db = SQLAlchemy()
 
@@ -25,6 +25,7 @@ class User(db.Model):
         return f'<User {self.email}>'
 
     def serialize(self):
+        
         return {
             "id": self.id,
             "email": self.email,
