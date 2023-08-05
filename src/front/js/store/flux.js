@@ -8,7 +8,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				description: "",
 				image: "",		
 			},
-			favourite: []
+			favourite: [],
+			
 		},
 		actions: {
 			// Use getActions to call a function within a fuction

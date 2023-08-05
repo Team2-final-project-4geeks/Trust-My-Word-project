@@ -29,8 +29,8 @@ class User(db.Model):
             "id": self.id,
             "email": self.email,
             "username": self.username,
-            "reviews": self.reviews,
-            "comments": self.comments
+            "reviews": [review.serialize() for review in self.reviews],  # serialize each review
+            "comments": [comment.serialize() for comment in self.comments]  # serialize each comment
         }        
       
 class Review(db.Model):

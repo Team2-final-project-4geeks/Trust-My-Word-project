@@ -1,0 +1,10 @@
+.card{
+    height: 450px;
+}
+.img-container{
+    height: 449px;
+}
+.img{
+    height: 100%;
+    object-fit: fill;
+}

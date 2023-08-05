@@ -8,7 +8,7 @@ const TriipCard = (props)=>{
     const [trip,setTrip] = useState("")
 
     const get_single_trip = () =>{
-        fetch('https://edijavier99-upgraded-space-memory-7qgvvp774ww3w55r-3001.preview.app.github.dev/api/review/' + props.item.id, {
+        fetch('https://edijavier99-shiny-space-goggles-jjgrjrpvj43j5r7-3001.preview.app.github.dev/api/review' + props.item.id, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json"
@@ -40,20 +40,29 @@ const TriipCard = (props)=>{
                         
                     </div>
                     
-                    <h3 class="card-title text-center mt-2">{props.trip.title}</h3>
+                    <h3 class="card-title text-center mt-4">{props.trip.title}</h3>
                     <div className="text-center">
                     <i class="fas fa-star fa-sm text-warning text-center"></i>
                     <i class="fas fa-star fa-sm text-warning text-center"></i>
                     <i class="fas fa-star fa-sm text-warning text-center"></i>
                     </div>
-                    <p class="card-text"><i class="fas fa-quote-left mt-2 me-2"></i> <i> {props.trip.description}</i></p>
-                    <p class="card-text"> <i class="fas fa-euro-sign me-2"></i> <i>{props.trip.price}</i></p>
-                    
+                    <div className="card-description">
+
                    
-                    <button className="btn btn-success mt-4" 
-                    onClick={()=>{
-                            navigate("/trip/" + props.item.id)
-                    }}>Learn more</button>
+                    <p class="card-text"><i class="fas fa-quote-left mt-2 me-2"></i> <i> {props.trip.description}</i></p>
+                    <p class="card-text"><i>{props.trip.price}</i></p>
+                    </div>
+                   
+                    <div className="btn-container">
+                        <button
+                        className="btn btn-success"
+                        onClick={() => {
+                            navigate("/trip/" + props.item.id);
+                        }}
+                        >
+                        Learn more
+                        </button>
+                    </div>
                  </div>
             </div>
         </div>

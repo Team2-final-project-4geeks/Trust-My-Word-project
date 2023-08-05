@@ -63,7 +63,7 @@ export const Home = () => {
 	}
 
 	const getTrips = () =>{
-		fetch('https://edijavier99-upgraded-space-memory-7qgvvp774ww3w55r-3001.preview.app.github.dev/api/review', {
+		fetch('https://edijavier99-shiny-space-goggles-jjgrjrpvj43j5r7-3001.preview.app.github.dev/api/review', {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json"
