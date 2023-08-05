@@ -8,6 +8,7 @@
     text-overflow: ellipsis;
 }
 
-.card-body{
+#cardActivityBody{
     min-height: 300px;
+    border: none;
 }

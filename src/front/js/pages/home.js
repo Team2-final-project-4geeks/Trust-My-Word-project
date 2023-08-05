@@ -61,7 +61,7 @@ export const Home = () => {
 	}
 
 	const getTrips = () =>{
-		fetch('https://edijavier99-shiny-space-goggles-jjgrjrpvj43j5r7-3001.app.github.dev/api/review', {
+		fetch(process.env.BACKEND_URL + 'api/review', {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json"
@@ -85,7 +85,7 @@ export const Home = () => {
 		return activities.map((activity, index) =>{
 			return(
 				<li key={index} className= "col">					
-					<div className="card h-100">
+					<div className="card h-100 border-0">
 						<img src="https://cdn.pixabay.com/photo/2020/04/30/02/14/bali-5111131_1280.jpg" className="card-img-top" alt="..."></img>
 						<div className="heart-icon">
         					<FaRegHeart />
@@ -138,7 +138,7 @@ export const Home = () => {
 			<div className="container-fluid">
 				<h1 className="py-5">Activities</h1>
 					<div className="container-fluid">			
-						<div className="row row-cols-1 row-cols-md-5 g-4">													
+						<div className="row row-cols-1 row-cols-md-3 g-4">													
 							{showActivity()}						
 						</div>	
 					</div>						

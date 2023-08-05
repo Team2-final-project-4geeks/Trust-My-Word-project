@@ -36,10 +36,10 @@ const ActivityCard = (props) =>{
     }
 
     return(
-        <div className="card-body d-flex flex-column p-0">
-            <h5 className="card-title text-center">{activity.title}</h5>
+        <div className="card-body d-flex flex-column p-0 h-100" id="cardActivityBody">
+            <h5 className="card-title mt-4 mb-3">{activity.title}</h5>
             <div className="card-text d-inline"></div>
-                <div className="row justify-content-evenly">
+                <div className="row justify-content-between">
                     <div className="col">   
                         <p className="card-text">{activity.location}</p>
                     </div>
@@ -49,7 +49,7 @@ const ActivityCard = (props) =>{
                     <div className="col">
                         <p className="card-text">{activity.publishing_date}</p>
                     </div>                
-                    <p>{activity.id}</p>
+                    <p>{activity.user}</p>
                 </div>
                 <p id="cardDescription">{activity.description}</p>
                 <span>
@@ -74,7 +74,7 @@ const ActivityCard = (props) =>{
                         );
                     })}                    
                 </span> 
-                <button className="btn btn-outline-primary" onClick={(() => navigate("review/" + props.activity.id))} >I want to know more!</button>           
+                {/*<button className="btn btn-outline-primary" onClick={(() => navigate("review/" + props.activity.id))} >I want to know more!</button>*/}           
         </div>
     )
 }
