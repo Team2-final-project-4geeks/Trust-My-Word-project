@@ -8,7 +8,7 @@ const TriipCard = (props)=>{
     const [trip,setTrip] = useState("")
 
     const get_single_trip = () =>{
-        fetch('https://edijavier99-shiny-space-goggles-jjgrjrpvj43j5r7-3001.preview.app.github.dev/api/review' + props.item.id, {
+        fetch('https://edijavier99-shiny-space-goggles-jjgrjrpvj43j5r7-3001.app.github.dev/api/review' + props.item.id, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json"

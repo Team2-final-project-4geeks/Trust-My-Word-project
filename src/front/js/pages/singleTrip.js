@@ -12,7 +12,7 @@ const SingleTrip = (props) =>{
     const location = "Bilbao"
 
     const get_single_trip = () =>{
-        fetch('https://edijavier99-shiny-space-goggles-jjgrjrpvj43j5r7-3001.preview.app.github.dev/api/review/' + params.id ,{
+        fetch('https://edijavier99-shiny-space-goggles-jjgrjrpvj43j5r7-3001.app.github.dev/api/review/' + params.id ,{
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json"
@@ -57,7 +57,7 @@ const SingleTrip = (props) =>{
                 <div class="card mb-3">
                 <div class="row g-0">
                     <div class="col-md-4 img-container">
-                    <img src="" class="img-fluid img" alt="..."/>
+                    <img src=""  class="img-fluid img" alt="..."/>
                     </div>
                     <div class="col-md-8">
                     <div class="card-body">
