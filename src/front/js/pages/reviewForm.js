@@ -3,8 +3,8 @@ import "../../styles/home.css";
 import { cloudinary } from "cloudinary-core";
 
 export const ReviewForm = () => {
-  const presetKey = "dumn5jgp"; // Reemplaza con tu upload_preset de Cloudinary
-  const cloudName = "dbxeaqsv4"; // Reemplaza con tu cloud_name de Cloudinary
+  const presetKey = "dumn5jgp";
+  const cloudName = "dbxeaqsv4"; 
   const [imageCloud, setImageCloud] = useState("https://fastly.picsum.photos/id/163/2000/1333.jpg?hmac=htdHeSJwlYOxS8b0TTpz2s8tD_QDlmsd3JHYa_HGrg8");
   const [title, setTitle] = useState("")
   const [type, setType] = useState("")
@@ -21,6 +21,7 @@ export const ReviewForm = () => {
     const file = e.target.files[0];
     setImage(file);
   };
+  
 
   const handleUpload = () => {
     let regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
@@ -35,7 +36,7 @@ export const ReviewForm = () => {
             setTimeout(() => sendDataToAPI(), 5000)
             console.log(imageCloud)
         } else {
-            console.log("Fecha inválida");
+            console.log("Invalid Date");
             alert("Invalid Date Format. Format should be dd/mm/yyyy")
         }
     } else {
@@ -57,7 +58,7 @@ export const ReviewForm = () => {
         setImageCloud(data.secure_url)
       })
       .catch((error) => {
-        console.error("Error al cargar la imagen en Cloudinary:", error.message);
+        console.error(error);
       });
   };
   
@@ -72,7 +73,6 @@ export const ReviewForm = () => {
         })
         .then((res) => res.json())
         .then((result) => {
-            console.log("you create a review");
             console.log(result);
         }).catch((err) => {
             console.log(err);
@@ -97,7 +97,13 @@ export const ReviewForm = () => {
                                             )}
                                         </div>
                                         <div class="col-md-8 d-flex justify-content-center align-items-center flex-column">
-                                            <div className="input-board mt-3">
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected>Category</option>
+                                                    <option value="1">Activities</option>
+                                                    <option value="2">Products</option>
+                                                    <option value="3">Trips</option>
+                                                </select>
+                                            <div className="input-board mt-3">                                     
                                                 <input 
                                                     type="text" 
                                                     id="title" 
@@ -114,7 +120,7 @@ export const ReviewForm = () => {
                                                     id="type" 
                                                     className="p-1 col-12 review-input"  
                                                     name="type"
-                                                    placeholder="Type"
+                                                    placeholder="Family, Adveture, Relax..."
                                                     value={type}
                                                     onChange={(e) => setType(e.target.value)}
                                                     />                               
@@ -135,7 +141,7 @@ export const ReviewForm = () => {
                                                     type="text" 
                                                     id="location" 
                                                     className="p-1 col-12 review-input"  
-                                                    placeholder="Location" 
+                                                    placeholder="City" 
                                                     name="location"
                                                     value={location}
                                                     onChange={(e) => setLocation(e.target.value)}
@@ -168,7 +174,7 @@ export const ReviewForm = () => {
                                                     type="text" 
                                                     id="price" 
                                                     className="p-1 col-12 review-input"  
-                                                    placeholder="Price" 
+                                                    placeholder=" €€€" 
                                                     name="price"
                                                     value={price}
                                                     onChange={(e) => setPrice(e.target.value)}
