@@ -43,13 +43,13 @@ class Review(db.Model):
     publishing_date = db.Column(db.String(10), nullable=False)
     link= db.Column(db.String(500), nullable=True)
     price = db.Column(db.String(200), nullable=False, default="0.0")
+    image = db.Column(db.String(200), nullable=True)
     status = db.Column(Enum(myEnum))
     comments = db.relationship("Comment", back_populates="review")
     user_id = db.Column(db.Integer, ForeignKey('user.id'))
     user = db.relationship("User", back_populates="reviews")
 
 
-    
     def __repr__(self):
         return f'<Reviews {self.id}>'
       
@@ -63,6 +63,7 @@ class Review(db.Model):
             "publishing_date": self.publishing_date,
             "link": self.link,
             "price": self.price,
+            "image": self.image,
         }
     
 class Comment(db.Model):
