@@ -1,10 +1,9 @@
-.card{
-    height: 450px;
+
+img{
+    object-fit: cover;
 }
-.img-container{
-    height: 449px;
-}
-.img{
-    height: 100%;
-    object-fit: fill;
+#containerSingle{
+    margin:auto;
+    width:800px;
+    height:400px;
 }

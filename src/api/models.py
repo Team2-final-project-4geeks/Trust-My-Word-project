@@ -43,11 +43,12 @@ class Review(db.Model):
     publishing_date = db.Column(db.String(10), nullable=False)
     link= db.Column(db.String(500), nullable=True)
     price = db.Column(db.String(200), nullable=False, default="0.0")
-    image = db.Column(db.String(200), nullable=True)
-    status = db.Column(Enum(myEnum))
+    category = db.Column(Enum(myEnum))
     comments = db.relationship("Comment", back_populates="review")
     user_id = db.Column(db.Integer, ForeignKey('user.id'))
     user = db.relationship("User", back_populates="reviews")
+    image = db.Column(db.String(200), nullable=False,default="google.com")
+
 
 
     def __repr__(self):
