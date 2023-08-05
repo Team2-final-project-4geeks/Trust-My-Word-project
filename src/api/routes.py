@@ -35,18 +35,18 @@ def create_user():
        response_body = {
            "msg": "Body should be passes with request"
        }
-       return jsonify(response_body),200
+       return jsonify(response_body),400
    elif "email" not in data:
         response_body = {
            "msg": "Email dont exist in the request"
        }
-        return jsonify(response_body),200
+        return jsonify(response_body),400
 
    elif "password" not in data:
         response_body = {
            "msg": "Password dont exist in the request"
        }
-        return jsonify(response_body),200
+        return jsonify(response_body),400
    
    new_user= User(email = data["email"], password= data["password"])
    db.session.add(new_user)
@@ -73,18 +73,18 @@ def update_user(id):
         response_body={
             "msg":"email is not in the request"
         }
-        return jsonify(response_body),200
+        return jsonify(response_body),400
     elif "password" not in data:
         response_body={
             "msg":"password is not in the request"
         }
-        return jsonify(response_body),200
+        return jsonify(response_body),400
 
     elif data is None:
         response_body={
             "msg":"body should be passed with request parameters"
         }
-        return jsonify(response_body),200
+        return jsonify(response_body),400
     
     update_user= User.query.get(id)
     update_user.email = data["email"]
@@ -125,7 +125,7 @@ def user_login():
         response_body = {
             "msg": "something you type wrong"
         }
-        return jsonify(response_body),401
+        return jsonify(response_body),400
     
     access_token = create_access_token(identity=usuario.id)
     return jsonify({ "token": access_token, "user_id": usuario.id })
@@ -161,25 +161,25 @@ def create_review():
         response_body = {
            "msg": "Description dont exist in the request"
        }
-        return jsonify(response_body),200
+        return jsonify(response_body),400
 
     elif "publishing_date" not in data:
         response_body = {
            "msg": "publishing_date dont exist in the request"
        }
-        return jsonify(response_body),200
+        return jsonify(response_body),400
     
     elif "price" not in data:
         response_body = {
            "msg": "Price dont exist in the request"
        }
-        return jsonify(response_body),200
+        return jsonify(response_body),400
     
     elif "imageCloud" not in data:
         response_body = {
            "msg": "Image dont exist in the request"
        }
-        return jsonify(response_body),200
+        return jsonify(response_body),400
     
     new_review= Review(title = data["title"], description=data["description"], publishing_date= data["publishing_date"], price= data["price"], image= data["imageCloud"])
     db.session.add(new_review)
@@ -206,35 +206,28 @@ def modify_review(id):
             "msg" : "title should be passed with request"
         }
         return jsonify(response_body),400
-    
-    elif "author_name" not in data:
-        response_body = {
-           "msg": "Author_name dont exist in the request"
-       }
-        return jsonify(response_body),200
    
     elif "description" not in data:
         response_body = {
            "msg": "Description dont exist in the request"
        }
-        return jsonify(response_body),200
+        return jsonify(response_body),400
 
     elif "publishing_date" not in data:
         response_body = {
            "msg": "publishing_date dont exist in the request"
        }
-        return jsonify(response_body),200
+        return jsonify(response_body),400
     
     elif "price" not in data:
         response_body = {
            "msg": "Price dont exist in the request"
        }
-        return jsonify(response_body),200
+        return jsonify(response_body),400
     
     update_review= Review.query.get(id)
     update_review.title = data["title"]
     update_review.description = data["description"]
-    update_review.author_name = data["author_name"]
     update_review.publishing_date = data["publishing_date"]
     update_review.price = data["price"]
 

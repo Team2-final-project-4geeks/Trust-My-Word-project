@@ -22,6 +22,7 @@ import ReviewTrip from "./pages/reviewTrip";
 import { Navbar } from "./component/navbar.js";
 import { Footer } from "./component/footer";
 import Activities from "./pages/activities";
+import Trips from "./pages/trips.js";
 
 //create your first component
 const Layout = () => {
@@ -41,7 +42,7 @@ const Layout = () => {
                         <Route element={<Login />} path="/login" />
                         <Route element={<CreateUser />} path="/create-user"/>  
                         {/*<Route element={<ModifyUser/>} path="/modify-user/:id" />*/}
-                        {/*<Route element={<Trips/>} path="/trips"/>*/}                 
+                        <Route element={<Trips/>} path="/trips"/>                 
                         <Route element={<SingleTrip />} path="/trip/:id" />
                         <Route element={<CreateTrip />} path="/create-trip" />
                         <Route element={<ReviewTrip/>} path="/review-trip/:id" />
