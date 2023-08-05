@@ -37,12 +37,21 @@ const ActivityCard = (props) =>{
 
     return(
         <div className="card-body d-flex flex-column p-0">
-            <h5 className="card-title">{activity.title}</h5>
-            <div className="card-text flex-grow-1"></div>
-                <span>{activity.location}</span>            
-                <span>{activity.type}</span>                
-                <span>{activity.author_name}</span>
-                <span>{activity.description}</span>
+            <h5 className="card-title text-center">{activity.title}</h5>
+            <div className="card-text d-inline"></div>
+                <div className="row justify-content-evenly">
+                    <div className="col">   
+                        <p className="card-text">{activity.location}</p>
+                    </div>
+                    <div className="col">            
+                        <p className="card-text">{activity.type}</p>
+                    </div>
+                    <div className="col">
+                        <p className="card-text">{activity.publishing_date}</p>
+                    </div>                
+                    <p>{activity.id}</p>
+                </div>
+                <p id="cardDescription">{activity.description}</p>
                 <span>
                     {[...Array(5)].map((_, index) => {
                         const starValue = index + 1;
@@ -65,10 +74,7 @@ const ActivityCard = (props) =>{
                         );
                     })}                    
                 </span> 
-                <button className="btn btn-outline-primary" onClick={(() => navigate("review/" + props.activity.id))} >I want to know more!</button>                         				
-            <div className="card-footer py-1 px-0">
-                <small className="text-muted">{activity.publishing_date}</small>                
-            </div>
+                <button className="btn btn-outline-primary" onClick={(() => navigate("review/" + props.activity.id))} >I want to know more!</button>           
         </div>
     )
 }

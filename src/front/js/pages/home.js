@@ -6,6 +6,7 @@ import { Product } from "../component/productcard.jsx";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
 import TriipCard from "../component/triipcard.jsx";
+import { FaRegHeart } from 'react-icons/fa';
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -85,7 +86,10 @@ export const Home = () => {
 			return(
 				<li key={index} className= "col">					
 					<div className="card h-100">
-						<img src="https://picsum.photos/id/1/200" className="card-img-top" alt="..."></img>
+						<img src="https://cdn.pixabay.com/photo/2020/04/30/02/14/bali-5111131_1280.jpg" className="card-img-top" alt="..."></img>
+						<div className="heart-icon">
+        					<FaRegHeart />
+      					</div>
 						<ActivityCard activity={activity}/>
 					</div>						
 				</li>

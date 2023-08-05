@@ -1,0 +1,13 @@
+#cardDescription{
+    font-size: clamp(14px, 1rem, 18px);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+}
+
+.card-body{
+    min-height: 300px;
+}
