@@ -24,6 +24,7 @@ import { Footer } from "./component/footer";
 import Activities from "./pages/activities";
 import Trips from "./pages/trips.js";
 import SideBar from "./component/sidebar";
+import UserPage from "./pages/userPage";
 
 //create your first component
 const Layout = () => {
@@ -60,6 +61,7 @@ const Layout = () => {
                         <Route element={<Privacy_policy />} path="/privacy-policy" />
                         <Route element={<TermsServices/>} path="/termsServices" />
                         <Route element={<h1>Not found!</h1>} />
+                        <Route element={<UserPage />} path="user-page" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
