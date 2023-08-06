@@ -23,7 +23,7 @@ const SingleTrip = (props) =>{
     const map = `https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=300x300&key=${process.env.API_KEY}`
 
     const get_single_trip = () =>{
-        fetch('https://edijavier99-shiny-space-goggles-jjgrjrpvj43j5r7-3001.app.github.dev/api/review/' + params.id ,{
+        fetch('https://special-carnival-44xjjwqqp6xcj749-3001.app.github.dev/api/review/' + params.id ,{
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json"
@@ -37,7 +37,7 @@ const SingleTrip = (props) =>{
     }
 
     const getCityFromApi = () =>{
-        fetch('https://edijavier99-shiny-space-goggles-jjgrjrpvj43j5r7-3001.app.github.dev/api/review/' + params.id ,{
+        fetch('https://special-carnival-44xjjwqqp6xcj749-3001.app.github.dev/api/review/' + params.id ,{
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json"
@@ -71,28 +71,6 @@ const SingleTrip = (props) =>{
   
     
     return(
-    //     <div className="container-fluid">
-    //    {singleTrip.price} <br/>
-    //    {weather} grados
-    //             <div class="card mb-3" id="containerSingle">
-    //             <div class="row h-100 g-0">
-    //                 <div class="col-md-4">
-    //                 <img className="" src="https://cdn.pixabay.com/photo/2017/07/31/11/44/laptop-2557572_1280.jpg"/>
-    //                 </div>
-    //                 <div class="col-md-8">
-    //                 <div class="card-body h-100">
-    //                     <h5 class="card-title">{singleTrip.title}</h5>
-    //                     <p class="card-text">{singleTrip.description}</p>
-    //                     <p class="card-text"><small class="text-muted">{singleTrip.publishing_date}</small></p>
-    //                 </div>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //         <div className="container-fluid">
-    //                     <img className="rounded mx-auto d-block" src={map} id="map"/>
-    //         </div>
-    //     </div>
-
     <div className="container-fluid" >
             { singleTrip ? (
                 <div className="card mb-3" id="containerSingle">
@@ -108,6 +86,8 @@ const SingleTrip = (props) =>{
                             <p className="card-text">{singleTrip.location}</p>
                             <p className="card-text">{singleTrip.description}</p>
                             <p className="card-text">{singleTrip.price}</p>
+                            <p className="card-text">{singleTrip.category}</p>
+
                             <p className="card-text"><small className="text-muted">{singleTrip.publishing_date}</small></p>
                         </div>
                         </div>

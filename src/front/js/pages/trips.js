@@ -5,7 +5,7 @@ const Trips = () =>{
     const [trip,setTrips] = useState([])
 
     const get_all_trips = () =>{
-        fetch('https://edijavier99-shiny-space-goggles-jjgrjrpvj43j5r7-3001.app.github.dev/api/review', {
+        fetch('https://special-carnival-44xjjwqqp6xcj749-3001.app.github.dev/api/review', {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json"
@@ -13,8 +13,8 @@ const Trips = () =>{
 		})
 		.then(res => res.json())
 		.then(data => {
-			console.log(data);
-            setTrips(data)
+          
+      setTrips(data) 
 		})
 		.catch(err => console.error(err))	
     }
@@ -27,11 +27,11 @@ const Trips = () =>{
             )
         })
     }
+  
 
-     
     useEffect(()=>{
         get_all_trips()
-        showTrips()
+        showTrips() 
     },[])
 
     return(
@@ -44,6 +44,7 @@ const Trips = () =>{
 				</div>
 			)}
 		</div>
+
         </div>
     )
 }

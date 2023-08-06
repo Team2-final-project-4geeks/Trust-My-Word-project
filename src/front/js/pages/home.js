@@ -10,6 +10,7 @@ import TriipCard from "../component/triipcard.jsx";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const navigate= useNavigate()
+	const [reversedTrips, setReversedTrips] = useState([])
 
 	const [activities, setActivities] = useState([]);
   	const [products, setProducts] = useState([]);
@@ -46,39 +47,35 @@ export const Home = () => {
 			}
 		})
 		.then(resp => {
-			console.log(resp);					
 			return resp.json();
 		})
 		.then(data=> {
-			console.log(data);
 			setProducts(data);
 		})
 		.catch(error => {
-			console.log(error);
 			console.log('Oops something went wrong'+ error);
 		})
 	}
 
 	const getTrips = () =>{
-		fetch('https://edijavier99-shiny-space-goggles-jjgrjrpvj43j5r7-3001.app.github.dev/api/review', {
+		fetch('https://special-carnival-44xjjwqqp6xcj749-3001.app.github.dev/api/review', {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json"
 			}
 		})
 		.then(resp => {
-			console.log(resp);					
 			return resp.json();
 		})
 		.then(data=> {
-			console.log(data);
 			setTrips(data);
+			setReversedTrips(data)
 		})
 		.catch(error => {
-			console.log(error);
 			console.log('Oops something went wrong'+ error);
 		})
 	}
+
 
 	const showActivity = () =>{
 		return activities.map((activity, index) =>{
@@ -113,13 +110,21 @@ export const Home = () => {
 	}
 
 	const showTrips = () =>{
-		if (trips && trips.length > 0){
-			return trips.map((trips, index) => {
-				return (
-					
-						<TriipCard item={trips} trip={trips} profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg" img="https://picsum.photos/id/295/600/380" />					
-				)
-			})
+		
+		const reservedTrips = trips.slice().reverse();
+
+		if (reservedTrips && reservedTrips.length > 0) {
+			const firstThreeTrips = reservedTrips.slice(0, 3); 
+			return firstThreeTrips.map((trip, index) => (
+				<TriipCard
+					key={index} 
+					item={trip}
+					trip={trip}
+					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
+					img="https://picsum.photos/id/295/600/380"
+				/>
+			));
+
 			} else {
 				return (
 				<div className="spinner-border" role="status">
@@ -149,9 +154,13 @@ export const Home = () => {
 						</div>
 			</div>	
 
-			<div className="container-fluid">
-				<h1 className="py-5">Trips</h1>
-					<div className="container-fluid">			
+			<div className="container-fluid mt-5">
+				<div class="fondo">
+					<div class="general-image">
+						<h1 className="trip">TRIPS</h1>
+					</div>
+    			</div>
+					<div className="container-fluid mt-4">			
 						<div className="row row-cols-1 row-cols-md-5 g-4">													
 							{showTrips()}						
 						</div>	

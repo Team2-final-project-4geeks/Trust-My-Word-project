@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import enum
 from sqlalchemy import Enum,ForeignKey
 
+
 class myEnum(enum.Enum):
     activity = 1
     product = 2

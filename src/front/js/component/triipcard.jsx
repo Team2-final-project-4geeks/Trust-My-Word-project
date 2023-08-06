@@ -1,34 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/triipcard.css";
 import ViewMore from "./viewmore.jsx";
+import { Context} from "../store/appContext";
+
 
 const TriipCard = (props)=>{
-    // const [trip,setTrip] = useState("")
-
-    // const get_all_reviews = () =>{
-    //     fetch('https://edijavier99-shiny-space-goggles-jjgrjrpvj43j5r7-3001.app.github.dev/api/review' + props.item.id, {
-	// 		method: "GET",
-	// 		headers: {
-	// 			"Content-Type": "application/json"
-	// 		}
-	// 	})
-	// 	.then(res => res.json())
-	// 	.then(data => {
-    //         setTrip(data)
-	// 	})
-	// 	.catch(err => console.error(err))	
-    // }
-    // useEffect(()=>{
-    //     get_all_reviews()
-    // },[])
+    const { store, actions } = useContext(Context);
 
     return(
             <div className="card-body">
                 <div class="image-container">
                     <img src={props.img} class="card-img-top" alt="..."/>
                 <div class="image-overlay">
-                    <i class="far fa-heart fa-1x"></i>
+                    <i class="far fa-heart fa-1x" onClick={()=> actions.addFavourite()}></i>
+                    <h1>hola</h1>
                 </div>
 </div>
              <div class="card-body mx-3">
