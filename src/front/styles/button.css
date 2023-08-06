@@ -1,0 +1,13 @@
+.btn {
+    background-color: transparent;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.3s;
+  }
+  
+  .btn:hover {
+    transform: scale(1.15);
+    color: #404040;
+  }
