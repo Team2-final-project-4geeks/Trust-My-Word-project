@@ -24,6 +24,16 @@ li{
     border:none;
 }
 
-#homePhotoActivity{
-    height: 300px;
+#activityPhotoContainer{
+    max-height: 300px;
+}
+
+#activityPhoto{
+    object-fit: cover;
+}
+
+#textActivity{
+    text-align: center;
+    margin-top: 150px;
+    font-size: 100px;
 }

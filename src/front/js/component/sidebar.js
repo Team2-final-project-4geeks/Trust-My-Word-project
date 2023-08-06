@@ -4,50 +4,51 @@ import "../../styles/sidebar.css";
 
 const SideBar = () => {
     return(
-        <div className="ms-2">
-            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><BiSearch /></button>
-            <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-                <div class="offcanvas-header">
-                    <h4 class="offcanvas-title" id="offcanvasScrollingLabel">Search for ... </h4>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <div className="ms-2" id="sidebar">
+            <button className="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><BiSearch /></button>
+            <div className="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                <div className="offcanvas-header">
+                    <h4 className="offcanvas-title" id="offcanvasScrollingLabel">Search for ... </h4>
+                    <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                <div class="offcanvas-body">
+                <div className="offcanvas-body">
                     <h6>Here you can filter your choices!</h6>                
                     <p>Choose the city...</p>
-                    <div class="form-check">                    
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-                        <label class="form-check-label" for="flexCheckDefault"> Malaga </label>
+                    <div className="form-check">                    
+                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                        <label className="form-check-label" htmlFor="flexCheckDefault"> Malaga </label>
                     </div>
-                    <div class="form-check">                    
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-                        <label class="form-check-label" for="flexCheckChecked"> Cartama </label>
+                    <div className="form-check">                    
+                        <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+                        <label className="form-check-label" htmlFor="flexCheckChecked"> Cartama </label>
                     </div>
-                    <div class="form-check">                    
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-                        <label class="form-check-label" for="flexCheckDefault"> Almayate </label>
+                    <div className="form-check">                    
+                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                        <label className="form-check-label" htmlFor="flexCheckDefault"> Almayate </label>
                     </div>
-                    <div class="form-check">                    
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-                        <label class="form-check-label" for="flexCheckChecked"> Nerja </label>
+                    <div className="form-check">                    
+                        <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+                        <label className="form-check-label" htmlFor="flexCheckChecked"> Nerja </label>
                     </div>
-                    <div class="form-check">                    
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-                        <label class="form-check-label" for="flexCheckChecked"> Bilbao </label>
+                    <div className="form-check">                    
+                        <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+                        <label className="form-check-label" htmlFor="flexCheckChecked"> Bilbao </label>
                     </div>
-                    <div class="form-check">                    
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-                        <label class="form-check-label" for="flexCheckChecked"> Puerto de la Cruz </label>
+                    <div className="form-check">                    
+                        <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+                        <label className="form-check-label" htmlFor="flexCheckChecked"> Puerto de la Cruz </label>
                     </div>
-                    <div class="form-check">                    
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-                        <label class="form-check-label" for="flexCheckChecked"> Barcelona </label>
+                    <div className="form-check">                    
+                        <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+                        <label className="form-check-label" htmlFor="flexCheckChecked"> Barcelona </label>
                     </div>
-                    <div class="form-check">                    
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-                        <label class="form-check-label" for="flexCheckChecked"> Algarve </label>
+                    <div className="form-check">                    
+                        <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+                        <label className="form-check-label" htmlFor="flexCheckChecked"> Algarve </label>
                     </div>
-                </div>
-            </div>                
+                <button type="button" className="btn btn-secondary ms-2 mt-4"> Search </button>    
+                </div>                
+            </div>           
         </div>
     )
 }

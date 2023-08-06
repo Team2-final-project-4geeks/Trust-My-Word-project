@@ -37,43 +37,42 @@ const ActivityCard = (props) =>{
 
     return(
         <div className="card-body d-flex flex-column p-0 h-100" id="cardActivityBody">
-            <h5 className="card-title mt-4 mb-3">{activity.title}</h5>
+            <h5 className="card-title mt-4 mb-2">{activity.title}</h5>
+            <span className="mb-2">
+                {[...Array(5)].map((_, index) => {
+                    const starValue = index + 1;
+                    return (
+                        <span
+                        key={index}
+                        onClick={() => handleStarClick(index)}
+                        style={{ cursor: 'pointer' }}
+                        >
+                        {starValue <= rating ? (
+                            <FaStar color="#ffc107" />
+                            ) : starValue - 0.5 === rating ? (
+                            <FaStarHalfAlt color="#ffc107" />
+                            ) : (
+                            <FaRegStar color="#ffc107" />
+                            )
+                        }
+                        </span>                            
+                    );
+                })}                    
+                </span>
             <div className="card-text d-inline"></div>
-                <div className="row justify-content-between">
-                    <div className="col">   
-                        <p className="card-text">{activity.location}</p>
+                <div className="row">
+                    <div className="col-4">   
+                        <p className="card-text text-left">{activity.location}</p>
                     </div>
-                    <div className="col">            
-                        <p className="card-text">{activity.type}</p>
+                    <div className="col-4">            
+                        <p className="card-text text-center">{activity.type}</p>
                     </div>
-                    <div className="col">
-                        <p className="card-text">{activity.publishing_date}</p>
+                    <div className="col-4">
+                        <p className="card-text text-center">{activity.publishing_date}</p>
                     </div>                
                     <p>{activity.user}</p>
                 </div>
-                <p id="cardDescription">{activity.description}</p>
-                <span>
-                    {[...Array(5)].map((_, index) => {
-                        const starValue = index + 1;
-                        return (
-                            <span
-                            key={index}
-                            onClick={() => handleStarClick(index)}
-                            style={{ cursor: 'pointer' }}
-                            >
-                            {starValue <= rating ? (
-                                <FaStar color="#ffc107" />
-                                ) : starValue - 0.5 === rating ? (
-                                <FaStarHalfAlt color="#ffc107" />
-                                ) : (
-                                <FaRegStar color="#ffc107" />
-                                )
-                            }
-                            </span>
-                            
-                        );
-                    })}                    
-                </span> 
+                <p id="cardDescription">{activity.description}</p>                 
                 {/*<button className="btn btn-outline-primary" onClick={(() => navigate("review/" + props.activity.id))} >I want to know more!</button>*/}           
         </div>
     )
