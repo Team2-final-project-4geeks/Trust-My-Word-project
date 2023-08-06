@@ -63,8 +63,7 @@ def get_all_users():
 @api.route('/user/<int:id>',methods=["GET"])
 def get_single_user(id):
     user = User.query.get(id)
-    user.serialize()
-    return jsonify(user)
+    return jsonify(user.serialize()), 200
 
 @api.route('user/<int:id>',methods=['PUT'])
 def update_user(id):
