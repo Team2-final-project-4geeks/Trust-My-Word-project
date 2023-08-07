@@ -25,14 +25,12 @@ export const Navbar = () => {
 	}
 	
     return (
-        <nav className="navbar">
-			<div className="container-fluid">
-				<Link to="/">
+        <nav className="navbar container-fluid">
+				<Link to="/" className="logo-link">
 					<img src="https://sd.keepcalms.com/i/keep-calm-and-trust-my-words.png" width="150" alt="..." height="80" bg="light" className="d-inline-block align-text-top"/>                  
                 </Link>		
-				<div class="navbar-items d-flex-block">
-						<div className="navbar-links">
-							<ul class="d-flex align-items-end">
+						<div className="navbar-items">
+							<ul class="d-flex d-flex align-items-end">
 								<li class="nav-item">
 									<a class="nav-link text-light" href="#" onClick={() => navigate("/")}>Home</a>
 								</li>
@@ -53,32 +51,29 @@ export const Navbar = () => {
 								</li>
 								<li class="nav-item">
 									<a class="nav-link text-light" href="#" onClick={logOut}>Logout</a>
-								</li>							
+								</li>
+								<div className="btn-group mx-5">
+									<button type="button" className="btn-navbar btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="dropdownMenuClickableInside" aria-expanded="false">
+										Favourites <span className="p-1 text-secondary text-center text-white">{store.favourite.length}</span>
+									</button>
+									<ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="dropdownMenuClickableInside">
+										{store.favourite.map((fav, index) => {
+											return(
+												<li key={index}>
+													<a className="dropdown-item d-flex text-black justify-content-between ps-2 pe-2" href="#">
+														{fav}
+														<i className="fas fa-trash pt-1"
+															onClick={() => {
+																actions.deleteFavourite(fav)
+															}}
+														></i>
+													</a>
+												</li>
+											)})}
+									</ul>													
+								</div>
 							</ul>
-						</div>				
-						<div className="btn-group-favourites">
-							<button type="button" className="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="dropdownMenuClickableInside" aria-expanded="false">
-								Favourites <span className="p-1 text-secondary text-center text-white">{store.favourite.length}</span>
-							</button>
-							<ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="dropdownMenuClickableInside">
-								{store.favourite.map((fav, index) => {
-									return(
-										<li key={index}>
-											<a className="dropdown-item d-flex text-black justify-content-between ps-2 pe-2" href="#">
-												{fav}
-												<i className="fas fa-trash pt-1"
-													onClick={() => {
-														actions.deleteFavourite(fav)
-													}}
-												></i>
-											</a>
-										</li>
-									)})}
-							</ul>
-						</div>											
-					<br/>			
-				</div>
-			</div>			
+						</div>			
         </nav>
     )
 }

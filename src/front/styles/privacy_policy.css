@@ -1,0 +1,13 @@
+.privacy_policy{
+    font-size: 30px;
+    margin-left: 50px;
+    margin-right: 50px;
+    text-align: center;
+    margin-top: 100px;
+}
+.btn-privacy{
+    background-color: black;
+    border-radius: 20px;
+    font-size: 30px;
+    padding: 10px;
+}
