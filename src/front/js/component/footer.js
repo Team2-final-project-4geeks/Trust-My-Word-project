@@ -1,27 +1,27 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export const Footer = () => {
+
+	const navigate =  useNavigate()
 	
 	return (
-		<div class="container">
+		<div class="footer bg-black">
 			<footer class="py-3 my-4">
 				<ul class="nav justify-content-center border-bottom pb-3 mb-3">
 					<li class="nav-item p-3">
-						<a class="nav-link" href="#" onClick={() => navigate("/")}>Home </a>
+						<a class="nav-link text-light" href="#" onClick={() => navigate("/")}>Home </a>
 					</li>
 					<li class="nav-item p-3">
-						<a class="nav-link" href="#" onClick={() => navigate("/privacy_policy")}>Privacy Policy </a>	
+						<a class="nav-link text-light" href="#" onClick={() => navigate("/privacy-policy")}>Privacy Policy </a>	
 					</li>
 					<li class="nav-item p-3">
-						<a class="nav-link" href="#" onClick={() => navigate("/terms&services")}>Terms & Services </a>
+						<a class="nav-link text-light" href="#" onClick={() => navigate("/termsServices")}>Terms & Services </a>
 					</li>
-					<li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
-					<li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About Us</a></li>
 				</ul>
 				<div class="b-example-divider"></div>
-					<p class="text-center text-muted">&copy; 2023 4Geeks Academy</p>		
+					<p class="text-center text-light">&copy; 2023 4Geeks Academy</p>		
 			</footer>
 		</div>
 	)

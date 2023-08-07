@@ -32,3 +32,40 @@
     text-overflow: ellipsis; /* Agrega puntos suspensivos (...) si el texto es más largo que 3 líneas */
   }
   
+/* Estilos para la imagen y el contenedor */
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.image-container img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  transition: filter 0.3s;
+}
+
+/* Efecto de oscurecimiento en hover */
+.image-container:hover img {
+  filter: brightness(80%);
+}
+
+/* Superpuesto para el efecto de oscurecimiento */
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1); /* Ajusta el color y la opacidad según tus preferencias */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.image-container:hover .image-overlay {
+  opacity: 1;
+}
+.image-overlay i {
+  font-size: 36px; /* Ajusta el tamaño del icono según tus preferencias */
+  color: white; /* Color del icono */
+}
