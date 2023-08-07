@@ -1,0 +1,33 @@
+.profile-image{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.publishing-date{
+    font-size: 11px;
+}
+
+.btn-container {
+    position: absolute;
+    bottom: 10px; /* Puedes ajustar esta distancia según tus necesidades */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Asegúrate de que el botón no se salga del contenedor */
+  .card-body {
+    position: relative;
+    min-height: 350px; /* Puedes ajustar esta altura mínima según tus necesidades */
+  }
+
+
+.card-description {
+    font-size: clamp(14px, 1rem, 18px); /* Ajusta los valores según tus preferencias */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limita el texto a mostrar solo 3 líneas */
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    text-overflow: ellipsis; /* Agrega puntos suspensivos (...) si el texto es más largo que 3 líneas */
+  }

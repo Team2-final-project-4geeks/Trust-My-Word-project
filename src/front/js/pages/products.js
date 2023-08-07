@@ -4,7 +4,7 @@ import { Context } from "../store/appContext";
 import { Product } from "../component/productcard.jsx";
 
 
-export const Products = (props) => {
+export const Products = () => {
 
 	const { store, actions } = useContext(Context);
 
