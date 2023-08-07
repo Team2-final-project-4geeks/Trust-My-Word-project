@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../../styles/home.css";
 import { cloudinary } from "cloudinary-core";
+import "../../styles/reviewform.css";
 
 export const ReviewForm = () => {
   const presetKey = "dumn5jgp";
@@ -83,18 +83,19 @@ export const ReviewForm = () => {
 
             <div class="container-fluid login-card">
                <h1 className="mb-5 d-flex justify-content-center align-items-center">INSERT YOUR REVIEW </h1>
-                        <div class="row d-flex justify-content-center align-items-center vh-100">
+                        <div class="row-review d-flex justify-content-center">
                             <div class="col-10">
-                                <div class="card mb-3">
-                                    <div class="row g-0 d-flex justify-content-center align-items-center">
-                                        <div class="col-md-4 img-board">
-                                            <div>
-                                                <input type="file" name="imageCloud" onChange={handleFile} />
-                                            </div>
+                                <div class="card-review mb-3">
+                                    <div class="row-inputs g-0 d-flex justify-content-center">
+                                        <div class="col-md-4 mt-5 img-board">
+                                            <div className="review-image">
                                             {reviewImage}
                                             {image && typeof image === "string" && (
                                             <img src={image} style={{width:'80%', height:'80%'}} class="img-fluid rounded-start" alt="..." />
                                             )}
+                                            <br/>
+                                            <input type="file" name="imageCloud" onChange={handleFile} />
+                                            </div>
                                         </div>
                                         <div class="col-md-8 d-flex justify-content-center align-items-center flex-column">
                                                 <select class="form-select" aria-label="Default select example">

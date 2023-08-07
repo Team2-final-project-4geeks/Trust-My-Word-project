@@ -65,6 +65,10 @@ export const Product = (props) => {
                                 >
                                 Learn more
                                 </button>
+                                <button type="button" className="btn_favorite " onClick={() => {
+                                    actions.addFavourite(props.product.title)}}>
+                                <i className="far fa-heart"></i>
+                                </button>   
                         </div>
                     </div>
                 </div>
