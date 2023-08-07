@@ -1,4 +1,5 @@
 import React from "react";
+import { FaPencilAlt } from 'react-icons/fa';
 
 const ModifyReview = () => {
     return(

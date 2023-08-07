@@ -36,8 +36,7 @@ const Activities = () =>{
                             <p className="card-text">{activity.author_name}</p>
                             <p className="card-text">{activity.description}</p>                            
                             <p className="card-text">{activity.link}</p>
-                            <p className="card-text">{activity.publishing_date}</p>
-                            
+                            <p className="card-text">{activity.publishing_date}</p>                            
                         </div>
                         </div>
                     </div>
