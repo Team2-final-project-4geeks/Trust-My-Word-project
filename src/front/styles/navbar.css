@@ -3,11 +3,8 @@ li{
     list-style: none;
     display: flex;
     text-decoration-line: none;
-    font-size: 24px;
-    padding-bottom: 500px;
-}
-.navbar-links{
-    margin-right: 30px;
+    font-size: 30px;
+    margin-bottom:50px;
 }
 .link{
     font-style: none;
@@ -15,8 +12,14 @@ li{
 }
 .navbar {
     background-image: url(https://cdn.pixabay.com/photo/2017/07/31/11/44/laptop-2557572_1280.jpg);
-    height: 100%;
-    width: 100%;
+    background-position: center;
+    background-size: cover;
+    height: 600px;
     background-repeat: no-repeat;
     color: white;
+}
+.btn-group-favourites{
+    margin-right: 0px;
+    margin-bottom: 400px;
+
 }
