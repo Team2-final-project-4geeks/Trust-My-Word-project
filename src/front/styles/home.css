@@ -23,3 +23,17 @@ li{
     font-size: 50px;
     color: white;
 }
+.product-breack {
+    background-image: url('https://cdn.pixabay.com/photo/2018/03/21/09/00/mall-3245949_1280.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.product{
+    font-size: 50px;
+    color: white;
+}
