@@ -1,11 +1,25 @@
-/*
-    home.css: This website contains selectors only used in home.css
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
 
 li{
     list-style-type: none;       
+}
+
+.fondo {
+    background-image: url('https://images.pexels.com/photos/1058277/pexels-photo-1058277.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.general-image {
+    text-align: center;
+}
+
+.trip{
+    font-size: 50px;
+    color: white;
 }

@@ -1,34 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/triipcard.css";
+import ViewMore from "./viewmore.jsx";
+import { Context} from "../store/appContext";
 
 
 const TriipCard = (props)=>{
-    const navigate = useNavigate()
-    const [trip,setTrip] = useState("")
-
-    const get_single_trip = () =>{
-        fetch('https://edijavier99-shiny-space-goggles-jjgrjrpvj43j5r7-3001.app.github.dev/api/review' + props.item.id, {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
-		.then(res => res.json())
-		.then(data => {
-            console.log(data);
-            setTrip(data)
-		})
-		.catch(err => console.error(err))	
-    }
-    useEffect(()=>{
-        get_single_trip()
-    },[])
+    const { store, actions } = useContext(Context);
 
     return(
             <div className="card-body">
-                <img src={props.img} class="card-img-top" alt="..."/>
-
+                <div class="image-container">
+                    <img src={props.img} class="card-img-top" alt="..."/>
+                <div class="image-overlay">
+                    <i class="far fa-heart fa-1x" onClick={()=> actions.addFavourite()}></i>
+                    <h1>hola</h1>
+                </div>
+</div>
              <div class="card-body mx-3">
             <div class="d-flex flex-column align-items-center justify-content-center ">
                 <div className=" col-11">
@@ -42,26 +30,17 @@ const TriipCard = (props)=>{
                     
                     <h3 class="card-title text-center mt-4">{props.trip.title}</h3>
                     <div className="text-center">
-                    <i class="fas fa-star fa-sm text-warning text-center"></i>
-                    <i class="fas fa-star fa-sm text-warning text-center"></i>
-                    <i class="fas fa-star fa-sm text-warning text-center"></i>
+                        <i class="fas fa-star fa-sm text-warning text-center"></i>
+                        <i class="fas fa-star fa-sm text-warning text-center"></i>
+                        <i class="fas fa-star fa-sm text-warning text-center"></i>
                     </div>
                     <div className="card-description">
-
-                   
-                    <p class="card-text"><i class="fas fa-quote-left mt-2 me-2"></i> <i> {props.trip.description}</i></p>
-                    <p class="card-text"><i>{props.trip.price}</i></p>
+                        <p class="card-text"><i class="fas fa-quote-left mt-2 me-2"></i> <i> {props.trip.description}</i></p>
+                        <p class="card-text"><i>{props.trip.price}</i></p>
                     </div>
                    
                     <div className="btn-container">
-                        <button
-                        className="btn btn-success"
-                        onClick={() => {
-                            navigate("/trip/" + props.item.id);
-                        }}
-                        >
-                        Learn more
-                        </button>
+                        <ViewMore item={props.item.id}/>
                     </div>
                  </div>
             </div>
