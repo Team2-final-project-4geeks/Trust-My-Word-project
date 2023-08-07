@@ -5,7 +5,7 @@ const Trips = () =>{
     const [trip,setTrips] = useState([])
 
     const get_all_trips = () =>{
-        fetch('https://special-carnival-44xjjwqqp6xcj749-3001.app.github.dev/api/review', {
+        fetch(process.env.BACKEND_URL + 'api/review?category=trip', {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json"

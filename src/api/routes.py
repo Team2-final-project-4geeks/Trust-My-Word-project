@@ -134,7 +134,9 @@ def user_login():
 
 @api.route('/review', methods=['GET'])
 def get_all_reviews():
-    all_reviews = Review.query.all()
+    category = request.args.get("category")
+    print(category)
+    all_reviews = Review.query.filter_by(category=category)
     all_reviews = list(map(lambda x: x.serialize(), all_reviews))
 
     return jsonify(all_reviews), 200
@@ -248,5 +250,7 @@ def get_single_review(id):
     review = Review.query.get(id)
 
     return jsonify(review.serialize()),200
+
+
 
 

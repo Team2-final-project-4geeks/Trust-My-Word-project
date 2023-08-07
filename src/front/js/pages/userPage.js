@@ -16,7 +16,7 @@ const UserPage = () =>{
 	}, []);
 
 const getReviews = () =>{
-    fetch("https://redesigned-eureka-w6vv5q955r9hgwp6-3001.app.github.dev/api/user/17",{
+    fetch("https://special-carnival-44xjjwqqp6xcj749-3001.app.github.dev/api/users/130",{
         method: 'GET',
           headers: {
             "Content-Type": "application/json"

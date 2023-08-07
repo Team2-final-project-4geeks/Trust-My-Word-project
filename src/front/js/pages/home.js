@@ -23,7 +23,7 @@ export const Home = () => {
 	}, []);
 	
 	const getActivities = () => {
-		fetch(process.env.BACKEND_URL + 'api/review',{
+		fetch(process.env.BACKEND_URL + 'api/review?category=activity' ,{
 			method: 'GET',
       		headers: {
 				"Content-Type": "application/json"
@@ -58,7 +58,7 @@ export const Home = () => {
 	}
 
 	const getTrips = () =>{
-		fetch('https://special-carnival-44xjjwqqp6xcj749-3001.app.github.dev/api/review', {
+		fetch(process.env.BACKEND_URL + 'api/review?category=trip', {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json"
@@ -68,6 +68,7 @@ export const Home = () => {
 			return resp.json();
 		})
 		.then(data=> {
+			console.log("estpy aqui");
 			setTrips(data);
 			setReversedTrips(data)
 		})

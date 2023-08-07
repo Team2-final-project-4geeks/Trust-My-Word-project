@@ -23,7 +23,7 @@ const SingleTrip = (props) =>{
     const map = `https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=300x300&key=${process.env.API_KEY}`
 
     const get_single_trip = () =>{
-        fetch('https://special-carnival-44xjjwqqp6xcj749-3001.app.github.dev/api/review/' + params.id ,{
+        fetch(process.env.BACKEND_URL + 'api/review/' + params.id ,{
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json"
@@ -37,7 +37,7 @@ const SingleTrip = (props) =>{
     }
 
     const getCityFromApi = () =>{
-        fetch('https://special-carnival-44xjjwqqp6xcj749-3001.app.github.dev/api/review/' + params.id ,{
+        fetch(process.env.BACKEND_URL + 'api/review/' + params.id ,{
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json"
@@ -45,6 +45,8 @@ const SingleTrip = (props) =>{
 		})
 		.then(res => res.json())
 		.then(data => {
+            console.log("estoy en ciudad");
+            console.log(data);
             setCity(data.location)
 		})
 		.catch(err => console.error(err))
@@ -59,6 +61,7 @@ const SingleTrip = (props) =>{
 			return resp.json();
 		})
 		.then(data=> {
+            console.log("estoy en la temperatura");
 			setWeather(data.main.temp);
 		})
 		.catch(error => {
