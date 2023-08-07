@@ -40,7 +40,7 @@ export const Home = () => {
 		})
 	}
 	const getProduct = () =>{
-		fetch('https://fakestoreapi.com/products', {
+		fetch(process.env.BACKEND_URL + 'api/review?category=product', {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json"

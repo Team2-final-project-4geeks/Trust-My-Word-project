@@ -17,7 +17,7 @@ export const SingleProduct = () => {
         }, [])
     
         const getOneProduct = () => {
-            fetch("https://fakestoreapi.com/products/" + params.id,{
+            fetch(process.env.BACKEND_URL + 'api/review/' + params.id, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
