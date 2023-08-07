@@ -16,7 +16,7 @@ const UserPage = () =>{
 	}, []);
 
 const getReviews = () =>{
-    fetch("https://special-carnival-44xjjwqqp6xcj749-3001.app.github.dev/api/users/130",{
+    fetch("https://redesigned-eureka-w6vv5q955r9hgwp6-3001.app.github.dev/api/user/19",{
         method: 'GET',
           headers: {
             "Content-Type": "application/json"
@@ -36,7 +36,7 @@ const getReviews = () =>{
 }
 
 const getUser = () =>{
-    fetch("https://redesigned-eureka-w6vv5q955r9hgwp6-3001.app.github.dev/api/user/17",{
+    fetch("https://redesigned-eureka-w6vv5q955r9hgwp6-3001.app.github.dev/api/user/19",{
         method: 'GET',
           headers: {
             "Content-Type": "application/json"
@@ -60,13 +60,11 @@ const showUsersReviews =()=> {
     return reviews.map((review, index) =>{
         return(
             <li key={index}>
-                <div className="mb-3 row">
-                    <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Title :</label>
+                <div className="input-group mb-3">
+                    <span className="input-group-text">Title</span>
                     <span className="input-group-text"><FaPencilAlt size={20} color="grey" id="pencil"/></span>
-                    <div className="col-sm-10">
-                        <input type="text" readonly className="form-control-plaintext" id="staticEmail" value={review.title}/>
-                    </div>
-                </div>                						
+                    <input type="text" readonly className="form-control" aria-label="Dollar amount (with dot and two decimal places)" value={review.title}/>
+                </div>                                  						
             </li>
         )
     })
