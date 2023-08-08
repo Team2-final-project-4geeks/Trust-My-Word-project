@@ -1,14 +1,80 @@
-#cardDescription{
-    font-size: clamp(14px, 1rem, 18px);
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    word-wrap: break-word;
-    text-overflow: ellipsis;
+#profileActivityCard{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+#publishingDateActivityCard{
+    font-size: 11px;
 }
 
-#cardActivityBody{
-    min-height: 300px;
-    border: none;
+.btn-container-activity{
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }  
+
+.card-body {
+    position: relative;
+    min-height: 350px;
+}
+
+#description {
+    font-size: clamp(14px, 1rem, 18px);
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    text-overflow: ellipsis;   
+}
+
+#activityCardViewMore{
+  background-color: transparent;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: color 0.3s, transform 0.3s;
+}
+
+#activityCardViewMore:hover {
+  transform: scale(1.15);
+  color: #404040;
+  text-decoration: underline;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.image-container img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  transition: filter 0.3s;
+}
+
+.image-container:hover img {
+  filter: brightness(80%);
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1); 
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.image-container:hover .image-overlay {
+  opacity: 1;
+}
+.image-overlay i {
+  font-size: 36px; 
+  color: white; 
 }

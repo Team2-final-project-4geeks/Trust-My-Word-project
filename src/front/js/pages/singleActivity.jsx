@@ -10,7 +10,7 @@ const SingleActivity = () => {
     const map = `https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=300x300&key=${process.env.API_KEY}`
 
     useEffect(() => {
-        fetchSingleActivity();                
+        fetchSingleActivity();               
     }, [])
 
     useEffect(() => {
@@ -18,7 +18,7 @@ const SingleActivity = () => {
     }, [city])
 
     const fetchSingleActivity = () => {
-        fetch(process.env.BACKEND_URL + 'api/review/' + + params.id,{
+        fetch(process.env.BACKEND_URL + 'api/review/' + params.id,{
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -30,6 +30,7 @@ const SingleActivity = () => {
         .then(data=>{
             setActivity(data);
             setCity(data.location)
+            console.log(data.location);
             
         })
         .catch(err => console.error(err))
@@ -42,30 +43,35 @@ const SingleActivity = () => {
             .then(res => res.json())
             .then(data => {                
                 setWeather(data.main.temp);
+                console.log(data.main.temp);
             })
             .catch(err => console.error(err))
-    }
+    }    
 
     return(
         <div className="container-fluid" >
 			{ activity ? (
-                <div className="card mb-3" id="containerSingle">
-                    <div className="row g-0 h-100">
+                <div className="card border-0" id="containerSingleActivity">
+                    <div className="row g-0">
                         <div className="col-md-5">
-                            <img src="https://clubhipicoelpinar.es/wp-content/uploads/2016/05/IMG_8542-1024x683.jpg" className="img-fluid rounded-start h-100" alt="..."/>
+                            <img 
+                            id="singleActivityImage"
+                            src="https://clubhipicoelpinar.es/wp-content/uploads/2016/05/IMG_8542-1024x683.jpg" 
+                            className="img-fluid rounded-start" 
+                            alt="..."/>
                         </div>
                         <div className="col-md-7">
-                        <div className="card-body h-100">
-                            <h5 className="card-title">{activity.title}</h5>
-                            <p className="card-text">{activity.id}</p>
-                            <p className="card-text"> Current weather: {weather}</p>
-                            <p className="card-text">{activity.type}</p>
-                            <p className="card-text">{activity.location}</p>
-                            <p className="card-text">{activity.description}</p>
-                            <p className="card-text">{activity.price}</p>
-                            <p className="card-text">{activity.link}</p>
-                            <p className="card-text"><small className="text-muted">{activity.publishing_date}</small></p>
-                        </div>
+                            <div className="card-body" id="cardBodySingleActivity">
+                                <h5 className="card-title">{activity.title}</h5>
+                                {/*<p className="card-text">{username.username}</p>*/}
+                                <p className="card-text"> Current weather: {weather}</p>
+                                <p className="card-text">{activity.type}</p>
+                                <p className="card-text">{activity.location}</p>
+                                <p className="card-text">{activity.description}</p>
+                                <p className="card-text">{activity.price}</p>
+                                <p className="card-text">{activity.link}</p>
+                                <p className="card-text"><small className="text-muted">{activity.publishing_date}</small></p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -73,12 +79,11 @@ const SingleActivity = () => {
                 <div className="spinner-border" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </div>
-            )}
-            <div className="container-fluid">
-                <img className="rounded mx-auto d-block" src={map} id="map"/>
-            </div>
-        </div>
-            
+            )}            
+                <div className="container-fluid" id="mapActivitySingle">
+                    <img className="rounded mx-auto d-block" src={map} id="map"/>
+                </div>
+        </div>         
 
     )
 }

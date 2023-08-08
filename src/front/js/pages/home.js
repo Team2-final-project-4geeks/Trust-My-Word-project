@@ -6,13 +6,11 @@ import { Product } from "../component/productcard.jsx";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
 import TriipCard from "../component/triipcard.jsx";
-import { FaRegHeart } from 'react-icons/fa';
+
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const navigate= useNavigate()
-	const [reversedTrips, setReversedTrips] = useState([])
-
 	const [activities, setActivities] = useState([]);
   	const [products, setProducts] = useState([]);
 	const [trips,setTrips] = useState([])
@@ -70,8 +68,7 @@ export const Home = () => {
 		})
 		.then(data=> {
 			console.log("estpy aqui");
-			setTrips(data);
-			setReversedTrips(data)
+			setTrips(data);			
 		})
 		.catch(error => {
 			console.log('Oops something went wrong'+ error);
@@ -80,19 +77,27 @@ export const Home = () => {
 
 
 	const showActivity = () =>{
-		return activities.map((activity, index) =>{
-			return(
-				<li key={index} className= "col">					
-					<div className="card h-100 border-0">
-						<img src="https://cdn.pixabay.com/photo/2020/04/30/02/14/bali-5111131_1280.jpg" className="card-img-top" alt="..."></img>
-						<div className="heart-icon">
-        					<FaRegHeart />
-      					</div>
-						<ActivityCard activity={activity}/>
-					</div>						
-				</li>
-			)
-		})
+		const reservedActivities = activities.slice().reverse();
+
+		if (reservedActivities && reservedActivities.length > 0) {
+			const firstThreeActivities = reservedActivities.slice(0, 3); 
+			return firstThreeActivities.map((activity, index) => (
+				<ActivityCard
+					key={index} 
+					item={activity}
+					activity={activity}
+					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
+					img="https://cdn.pixabay.com/photo/2014/12/16/22/25/sunset-570881_1280.jpg"
+				/>
+			));
+
+			} else {
+				return (
+				<div className="spinner-border" role="status">
+					<span className="visually-hidden">Loading...</span>
+				</div>
+				)
+				}
 	}
 	const showProducts = () => {
 		if (products && products.length > 0){
@@ -140,18 +145,14 @@ export const Home = () => {
 	}
 	return (	
 		<div className="container-fluid mt-5">
-			<div className="container-fluid mb-5" id="activityPhotoContainer">
-				<div class="card bg-dark text-white mb-5">
-					<img class="card-img h-100" id="activityPhoto" src="https://cdn.pixabay.com/photo/2020/04/30/02/14/bali-5111131_1280.jpg" alt="Card image"/>
-					<div class="card-img-overlay">
-						<h5 class="card-title" id="textActivity">Activities</h5>						
+			<div className="container-fluid" id="activityPhotoContainer">
+					<div class="general-image">
+						<h1 id="titleActivities">ACTIVITIES</h1>
 					</div>
-				</div>
 			</div>
-
 			<div className="container-fluid mt-5">				
 				<div className="container-fluid mt-5">			
-					<div className="row row-cols-1 row-cols-md-3 g-4">													
+					<div className="row row-cols-1 row-cols-md-5 g-4">													
 						{showActivity()}						
 					</div>	
 				</div>						
@@ -178,7 +179,6 @@ export const Home = () => {
 						</div>	
 					</div>						
 			</div>
-
 		</div>	
 	);
 }

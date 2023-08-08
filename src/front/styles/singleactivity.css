@@ -1,9 +1,14 @@
-img{
+#singleActivityImage{
     object-fit: cover;
+    height: 100%;
 }
 
-#containerSingle{
+#containerSingleActivity{
     margin:auto;
     width:800px;
     height:400px;
+}
+
+#mapActivitySingle{
+    margin-top: 150px;
 }
