@@ -2,13 +2,14 @@ import React, {useState, useEffect} from "react";
 //import { useNavigate } from "react-router-dom";
 import { FaPencilAlt } from 'react-icons/fa';
 import "../../styles/userpage.css";
+import { useNavigate } from "react-router-dom";
 
 const UserPage = () =>{
 
     const [reviews, setReviews] = useState([]);
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {		
 		getReviews();
@@ -16,7 +17,7 @@ const UserPage = () =>{
 	}, []);
 
 const getReviews = () =>{
-    fetch("https://redesigned-eureka-w6vv5q955r9hgwp6-3001.app.github.dev/api/user/19",{
+    fetch( process.env.BACKEND_URL + "/api/user/71",{
         method: 'GET',
           headers: {
             "Content-Type": "application/json"
@@ -26,9 +27,7 @@ const getReviews = () =>{
         return resp.json();
     })
     .then(data=> {		
-        console.log(data)	
         setReviews(data.reviews);
-        console.log(data.reviews[1].title)
     })
     .catch(error => {			
         console.log('Oops something went wrong'+ error);
@@ -36,7 +35,7 @@ const getReviews = () =>{
 }
 
 const getUser = () =>{
-    fetch("https://redesigned-eureka-w6vv5q955r9hgwp6-3001.app.github.dev/api/user/19",{
+    fetch( process.env.BACKEND_URL + "/api/user/71",{
         method: 'GET',
           headers: {
             "Content-Type": "application/json"
@@ -46,7 +45,6 @@ const getUser = () =>{
         return resp.json();
     })
     .then(data=> {
-        console.log("estoy aqui")			
         setEmail(data.email);
         setUsername(data.username);
     })
@@ -56,13 +54,15 @@ const getUser = () =>{
 }
 
 const showUsersReviews =()=> {
-    console.log(reviews)
     return reviews.map((review, index) =>{
         return(
             <li key={index}>
                 <div className="input-group mb-3">
                     <span className="input-group-text">Title</span>
-                    <span className="input-group-text"><FaPencilAlt size={20} color="grey" id="pencil"/></span>
+                    <span className="input-group-text"><FaPencilAlt 
+                    onClick={()=>{
+                        navigate("/modify-review/" + review.id)
+                    }} size={20} color="grey" id="pencil"/></span>
                     <input type="text" readonly className="form-control" aria-label="Dollar amount (with dot and two decimal places)" value={review.title}/>
                 </div>                                  						
             </li>
@@ -71,20 +71,44 @@ const showUsersReviews =()=> {
 }
     return(
         <div className="container-fluid">
-            <div className="userSection">
-                <div className="mb-3 row">
-                    <label htmlFor="staticEmail" className="col-sm-2 col-form-label"> Email :</label>
-                    <div className="col-sm-10">
-                        <input type="text" readonly className="form-control-plaintext" id="staticEmail" value={email}/>
+             
+            <div className="userSection mt-5">
+                <div class="container">
+                    <div class="circle">
+                        <img src="https://picsum.photos/id/345/200" alt="Foto"/>
                     </div>
-                </div>
-                <div className="mb-3 row">
-                    <label htmlFor="staticUsername" className="col-sm-2 col-form-label"> User name :</label>
-                    <div className="col-sm-10">
-                        <input type="text" readonly className="form-control-plaintext" id="staticUsername" value={username}/>
+                    <div className="mb-3 row">
+                        <p><i class="fas fa-at"></i>:</p>
+                            <div className="col-sm-10">
+                                <input type="text" readonly className="form-control-plaintext" id="staticEmail" value={email}/>
+                            </div>
                     </div>
+                    <div className="mb-3 row">
+                        <p> <i class="fas fa-user"></i>:</p>
+                        <div className="col-sm-10">
+                            <input type="text" readonly className="form-control-plaintext" id="staticUsername" value={username}/>
+                        </div>
+                    </div> 
                 </div>
             </div>
+            <div className="container-fluid dashboard-user"> 
+                    <h3 className="mt-2">Insights</h3>
+                    <div className="dashboard-insights d-flex flex-row mt-3">
+                        <div className="d-flex flex-column">
+                            <p className="title">Reviews</p>
+                            <p className="reviews">{reviews.length}</p>
+                        </div>
+                        <div className="d-flex flex-column mx-5">
+                            <p className="title">Favorites</p>
+                            <p className="reviews">0</p>
+                        </div>
+                        <div className="d-flex flex-column">
+                            <p className="title">Comments</p>
+                            <p className="reviews">0</p>
+                        </div>
+                    </div>
+                </div>
+               
             <div>
                 {showUsersReviews()}
             </div>
