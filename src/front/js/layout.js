@@ -23,7 +23,6 @@ import { Navbar } from "./component/navbar.js";
 import { Footer } from "./component/footer";
 import Activities from "./pages/activities";
 import Trips from "./pages/trips.js";
-import SideBar from "./component/sidebar";
 import UserPage from "./pages/userPage";
 import ModifyReview from "./pages/modifyReview";
 
@@ -39,8 +38,7 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
-                    <Navbar />
-                    <SideBar />
+                    <Navbar />                    
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Login />} path="/login" />
@@ -56,7 +54,7 @@ const Layout = () => {
                         {/*<Route element={<CreateProduct />} path="/create-product" />
                         <Route element={<ReviewProduct/>} path="/review-product/:id" />*/}
                         <Route element={<SingleActivity />} path="/review/:id" />                        
-                        <Route element={<Activities />} path="/review" />
+                        <Route element={<Activities />} path="/activities" />
                         <Route element={<CreateActivity />} path="/create-activity" />
                         <Route element={<ReviewActivity/>} path="/review-activity/:id" />
                         <Route element={<Privacy_policy />} path="/privacy-policy" />

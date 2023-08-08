@@ -1,11 +1,15 @@
 import React, {useState, useEffect} from "react";
+import SideBar from "../component/sidebar";
+
 const Activities = () =>{
     const [activities, setActivities] = useState([]);
+
     useEffect(() => {
         getActivities();
     }, []);
+
     const getActivities = () => {
-        fetch(process.env.BACKEND_URL + 'api/review',{
+        fetch(process.env.BACKEND_URL + 'api/review?category=activity' ,{
             method: 'GET',
             headers: {
                 "Content-Type": "application/json"
@@ -45,8 +49,11 @@ const Activities = () =>{
         })
     }
     return (
-        <div className="row row-cols-1 row-cols-md-2 g-4">     
-            {showActivity()}
+        <div className="container-fluid">
+            <SideBar />
+            <div className="row row-cols-1 row-cols-md-2 g-4 mt-3">     
+                {showActivity()}
+            </div>
         </div>
     )
 }
