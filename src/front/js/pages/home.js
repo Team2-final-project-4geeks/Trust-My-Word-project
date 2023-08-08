@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState  } from "react";
 import { Context} from "../store/appContext";
 import ActivityCard from "../component/activitycard.jsx";
-import { Product } from "../component/productcard.jsx";
+import { ProductCard } from "../component/productcard.jsx";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
 import TriipCard from "../component/triipcard.jsx";
@@ -11,6 +11,7 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const navigate= useNavigate()
 	const [reversedTrips, setReversedTrips] = useState([])
+	const [reversedProducts, setReversedProducts] = useState([])
 
 	const [activities, setActivities] = useState([]);
   	const [products, setProducts] = useState([]);
@@ -51,6 +52,7 @@ export const Home = () => {
 		})
 		.then(data=> {
 			setProducts(data);
+			setReversedProducts(data)
 		})
 		.catch(error => {
 			console.log('Oops something went wrong'+ error);
@@ -91,23 +93,22 @@ export const Home = () => {
 		})
 	}
 	const showProducts = () => {
-		if (products && products.length > 0){
-		return products.map((product, index) => {
-			return (
-				<li key={index} className= "col">					
-					<div className="card h-100">
-						<Product product={product}/>
-					</div>						
-				</li>
-			)
-		})
-		} else {
-			return (
-			<div className="spinner-border" role="status">
-				<span className="visually-hidden">Loading...</span>
-			</div>
-			)
-			}
+
+		if (reversedProducts && reversedProducts.length > 0) {
+			return reversedProducts.slice(0, 3).map((product, index) => (
+				<ProductCard
+					key={index}
+					product={product}
+					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
+				/>
+			));
+			} else {
+				return (
+				<div className="spinner-border" role="status">
+					<span className="visually-hidden">Loading...</span>
+				</div>
+				)
+				}
 	}
 
 	const showTrips = () =>{
@@ -137,7 +138,7 @@ export const Home = () => {
 	return (
 	
 		<div className="">
-			<div className="container-fluid">
+			<div className="container-fluid mt-5">
 				<h1 className="py-5">Activities</h1>
 					<div className="container-fluid">			
 						<div className="row row-cols-1 row-cols-md-5 g-4">													
@@ -153,8 +154,8 @@ export const Home = () => {
 					</div>
     			</div>
 					<div className="container-fluid mt-4" >
-						<div className="row row-cols-1 row-cols-md-4 g-4 ">
-							{products && showProducts()}
+						<div className="row row-cols-1 row-cols-md-4 g-3">
+							{showProducts()}
 						</div>
 					</div>
 			</div>	

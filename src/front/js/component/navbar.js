@@ -25,10 +25,10 @@ export const Navbar = () => {
 	}
 	
     return (
-        <nav className="navbar container-fluid">
+        <nav className="navbar container-fluid d-flex">
 				<Link to="/" className="logo-link">
-					<img src="https://sd.keepcalms.com/i/keep-calm-and-trust-my-words.png" width="150" alt="..." height="80" bg="light" className="d-inline-block align-text-top"/>                  
-                </Link>		
+					<img src="https://i.ibb.co/MVxbZnr/0d3b546942f94de196812ac8af0bf4d9.png" alt="0d3b546942f94de196812ac8af0bf4d9" border="0" />
+				</Link>		
 						<div className="navbar-items">
 							<ul class="d-flex d-flex align-items-end">
 								<li class="nav-item">
