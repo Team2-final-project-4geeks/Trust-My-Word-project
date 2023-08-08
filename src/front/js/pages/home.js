@@ -6,6 +6,7 @@ import { Product } from "../component/productcard.jsx";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
 import TriipCard from "../component/triipcard.jsx";
+import DinamicText from "../component/dinamictext.jsx";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -68,7 +69,6 @@ export const Home = () => {
 			return resp.json();
 		})
 		.then(data=> {
-			console.log("estpy aqui");
 			setTrips(data);
 			setReversedTrips(data)
 		})
@@ -76,8 +76,7 @@ export const Home = () => {
 			console.log('Oops something went wrong'+ error);
 		})
 	}
-
-
+	
 	const showActivity = () =>{
 		return activities.map((activity, index) =>{
 			return(
@@ -135,8 +134,11 @@ export const Home = () => {
 				}
 	}
 	return (
-	
+		
 		<div className="">
+			<div className="container-fluid">
+				<DinamicText  phrase={"inspire you"} phrase2={"save your time"}  phrase3={"solve your planning problems"} phrase4={" support people's opinions"} phrase1={"provide value"}/>
+			</div>
 			<div className="container-fluid">
 				<h1 className="py-5">Activities</h1>
 					<div className="container-fluid">			
@@ -156,12 +158,12 @@ export const Home = () => {
 			</div>	
 
 			<div className="container-fluid mt-5">
-				<div class="fondo">
-					<div class="general-image">
+				<div className="fondo">
+					<div className="general-image">
 						<h1 className="trip">TRIPS</h1>
 					</div>
     			</div>
-					<div className="container-fluid mt-4">			
+					<div className="container-fluid mt-2">			
 						<div className="row row-cols-1 row-cols-md-5 g-4">													
 							{showTrips()}						
 						</div>	
