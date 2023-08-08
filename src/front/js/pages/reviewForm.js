@@ -81,8 +81,14 @@ export const ReviewForm = () => {
     
     return (
 
-            <div class="container-fluid login-card">
-               <h1 className="mb-5 d-flex justify-content-center align-items-center">INSERT YOUR REVIEW </h1>
+            <div class="container-fluid">
+               <h1 className="title d-flex justify-content-center">INSERT YOUR REVIEW </h1>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Category</option>
+                        <option value="1">Activities</option>
+                        <option value="2">Products</option>
+                        <option value="3">Trips</option>
+                    </select>
                         <div class="row-review d-flex justify-content-center">
                             <div class="col-10">
                                 <div class="card-review mb-3">
@@ -97,13 +103,7 @@ export const ReviewForm = () => {
                                             <input type="file" name="imageCloud" onChange={handleFile} />
                                             </div>
                                         </div>
-                                        <div class="col-md-8 d-flex justify-content-center align-items-center flex-column">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected>Category</option>
-                                                    <option value="1">Activities</option>
-                                                    <option value="2">Products</option>
-                                                    <option value="3">Trips</option>
-                                                </select>
+                                        <div class="col-md-8 d-flex justify-content-center align-items-center flex-column">                             
                                             <div className="input-board mt-3">                                     
                                                 <input 
                                                     type="text" 
