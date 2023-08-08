@@ -9,6 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				image: "",		
 			},
 			favourite: [],
+			storeCities: {}
 			
 		},
 		actions: {
@@ -24,7 +25,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			deleteFavourite: (favToDelete) => {
 				const store = getStore();
 				setStore({favourite: store.favourite.filter((fav) => fav !== favToDelete)})
-			}
+			},
+			addCity: (city) => {
+				const store = getStore();
+				setStore({storeCities: city})
+		
+				
+				
+			},
 		}
 	};
 };

@@ -1,5 +1,6 @@
 #ActivitiesPageContainer{    
-    padding-left: 10; 
-    padding-right: 10;
+    margin-left: 15px; 
+    margin-right: 15px;
     min-height: 350px;
+    gap: 20px;
 }
