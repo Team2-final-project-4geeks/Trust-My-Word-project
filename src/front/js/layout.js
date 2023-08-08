@@ -23,7 +23,6 @@ import { Navbar } from "./component/navbar.js";
 import { Footer } from "./component/footer";
 import Activities from "./pages/activities";
 import Trips from "./pages/trips.js";
-import SideBar from "./component/sidebar";
 import UserPage from "./pages/userPage";
 import ModifyReview from "./pages/modifyReview";
 
@@ -39,8 +38,7 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
-                    <Navbar />
-                    <SideBar />
+                    <Navbar />                    
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Login />} path="/login" />

@@ -1,8 +1,4 @@
 import React, {useState, useEffect} from "react";
-import ActivityCard from "../component/activitycard.jsx";
-import "../../styles/activities.css";
-import "../../styles/activitycard.css";
-
 
 const Activities = () =>{
     const [activities, setActivities] = useState([]);
@@ -11,6 +7,7 @@ const Activities = () =>{
         getActivities();
         showActivities();
     }, []);
+
 
     const getActivities = () => {
         fetch(process.env.BACKEND_URL + 'api/review?category=activity' ,{
