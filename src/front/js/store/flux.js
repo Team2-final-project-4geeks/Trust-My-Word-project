@@ -18,13 +18,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 		
 				store.favourite.includes(fav) ? alert("Favourite already exists!!") : (
 					setStore({favourite: [...store.favourite, fav]})
-				)
-				
+				)	
 			},
 			deleteFavourite: (favToDelete) => {
 				const store = getStore();
 				setStore({favourite: store.favourite.filter((fav) => fav !== favToDelete)})
-			}
+			},
+			clearFavourites: () => {
+                setStore({ favourite: [] });
+            },
 		}
 	};
 };

@@ -14,15 +14,24 @@ export const Navbar = () => {
 		if (storedFavourites) {
 		  actions.addFavourite(storedFavourites);
 		}
-	  }, []);
+	  }, [store.token]);
 
 	useEffect(() => {
 		localStorage.setItem("favourites", JSON.stringify(store.favourite));
 	}, [store.favourite]);
 
 	const logOut = () => {
-		localStorage.removeItem('jwt-token')
+		localStorage.removeItem('jwt-token');
+		actions.clearFavourites();
+		navigate("/");
+		alert("You are Logged Out")
 	}
+	useEffect(() => {
+		const storedFavourites = JSON.parse(localStorage.getItem("stored-favourites"));
+		if (storedFavourites) {
+			actions.addFavourite(storedFavourites);
+		}
+	}, []);
 	
     return (
 			<div class="row navbar-row d-flex justify-content-between">
