@@ -9,10 +9,10 @@ const ActivityCard = (props)=>{
     const navigate= useNavigate();
 
     return(
-        <div className="card-body">
+        <div className="card-body" id="activityBody">
             <div className="image-container">
                 <img src={props.img} className="card-img-top" alt="..."/>
-                <div className="image-overlay">
+                <div className="image-overlay" id="heartIconActivity">
                     <i className="far fa-heart fa-1x" onClick={()=> actions.addFavourite()}></i>                        
                 </div>
             </div>

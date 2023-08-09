@@ -9,8 +9,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				image: "",		
 			},
 			favourite: [],
-			storeCities: {}
-			
+			storeCities: {},
+			checked: false			
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -28,11 +28,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			addCity: (city) => {
 				const store = getStore();
-				setStore({storeCities: city})
-		
-				
-				
+				setStore({storeCities: city})			
 			},
+			handleChecked: (bool) => {
+				const store = getStore();
+				setStore({checked:bool})
+			}
 		}
 	};
 };

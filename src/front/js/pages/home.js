@@ -145,8 +145,8 @@ export const Home = () => {
 	}
 	return (	
 		<div className="container-fluid mt-5">
-			<div className="container-fluid" id="activityPhotoContainer">
-					<div class="general-image">
+			<div className="container-fluid">
+					<div className="general-image" id="imageContainerActivities">
 						<h1 id="titleActivities">ACTIVITIES</h1>
 					</div>
 			</div>
