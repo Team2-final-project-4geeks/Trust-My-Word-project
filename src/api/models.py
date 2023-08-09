@@ -66,7 +66,7 @@ class Review(db.Model):
             "publishing_date": self.publishing_date,
             "link": self.link,
             "price": self.price,
-            "image": self.image,
+            "image": self.image
         }
     
 class Comment(db.Model):

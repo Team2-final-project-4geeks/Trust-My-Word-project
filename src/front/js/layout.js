@@ -53,13 +53,13 @@ const Layout = () => {
                         <Route element={<ReviewForm/>} path="/create-review"/>
                         {/*<Route element={<CreateProduct />} path="/create-product" />
                         <Route element={<ReviewProduct/>} path="/review-product/:id" />*/}
-                        <Route element={<SingleActivity />} path="/review/:id" />                        
+                        <Route element={<SingleActivity />} path="/activity/:id" />                        
                         <Route element={<Activities />} path="/activities" />
                         <Route element={<CreateActivity />} path="/create-activity" />
                         <Route element={<ReviewActivity/>} path="/review-activity/:id" />
                         <Route element={<Privacy_policy />} path="/privacy-policy" />
                         <Route element={<TermsServices/>} path="/termsServices" />
-                        <Route element={<h1>Not found!</h1>} />
+                        <Route element={<h1>Not found!</h1>} path="*"/>
                         <Route element={<UserPage />} path="user-page" />
                         <Route element={<ModifyReview />} path="modify-review" />
                     </Routes>

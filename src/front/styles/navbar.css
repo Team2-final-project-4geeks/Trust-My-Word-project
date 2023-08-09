@@ -3,16 +3,14 @@
     background-image: url(https://cdn.pixabay.com/photo/2017/07/31/11/44/laptop-2557572_1280.jpg);
     background-size: cover;
     background-position: center;
-    height: 500px;
-    width: 100vw;
-    display: flex;
+    background-size: cover;
+    height: 1000px;
+    background-repeat: no-repeat;
 }
-.pages-navbar{
-    margin-block-start: 20px;
-    font-size: 1.5rem;
-    align-items: end; 
-    height: auto;
-    max-height: 100px;
+.navbar-items{
+    margin-right: 30px;
+    margin-bottom: 550px;
+   
 }
 .btn-navbar{
     background-color: black;
@@ -22,7 +20,6 @@
 
 }
 .logo-link{
-    margin: 1rem;
-    height: auto;
-    max-height: 150px;
+    margin-bottom: 550px;
+    margin-left: 100px;
 }
