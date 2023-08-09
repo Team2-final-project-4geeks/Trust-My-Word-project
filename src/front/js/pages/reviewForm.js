@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { cloudinary } from "cloudinary-core";
+
 import "../../styles/reviewform.css";
 
 export const ReviewForm = () => {
@@ -14,13 +15,25 @@ export const ReviewForm = () => {
   const [link, setLink] = useState("")
   const [price, setPrice] = useState("")
   const [image, setImage] = useState("")
+  const [category, setCategory] = useState("")
+
+  const [imagePreview, setImagePreview] = useState(null);
 
   const reviewImage = <img src="https://fastly.picsum.photos/id/163/2000/1333.jpg?hmac=htdHeSJwlYOxS8b0TTpz2s8tD_QDlmsd3JHYa_HGrg8" style={{width:'80%', height:'80%'}} class="img-fluid rounded-start" alt="..." /> 
 
   const handleFile = (e) => {
     const file = e.target.files[0];
     setImage(file);
+    setImagePreview(URL.createObjectURL(file));
   };
+
+  useEffect(() => {
+    return () => {
+      if (imagePreview) {
+        URL.revokeObjectURL(imagePreview);
+      }
+    };
+  }, [imagePreview]);
   
 
   const handleUpload = () => {
@@ -33,8 +46,8 @@ export const ReviewForm = () => {
         let validDate = !(month < 1 || month > 12 || day < 1 || day > 31 || (month === 2 && day > 28 + (year % 4 == 0 ? 1 : 0)) || ((month === 4 || month === 6 || month === 9 || month === 11) && day > 30));
         if(validDate) {
             uploadImage(image);
-            setTimeout(() => sendDataToAPI(), 5000)
-            console.log(imageCloud)
+            setTimeout(() => sendDataToAPI(), 3000)
+            alert("You have created a Review")
         } else {
             console.log("Invalid Date");
             alert("Invalid Date Format. Format should be dd/mm/yyyy")
@@ -69,7 +82,7 @@ export const ReviewForm = () => {
             headers: { 
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({title, type, description, location, publishing_date, link, price, imageCloud}) 
+            body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud}) 
         })
         .then((res) => res.json())
         .then((result) => {
@@ -85,25 +98,25 @@ export const ReviewForm = () => {
                <h1 className="title d-flex justify-content-center">INSERT YOUR REVIEW </h1>
                     <select class="form-select" aria-label="Default select example">
                         <option selected>Category</option>
-                        <option value="1">Activities</option>
-                        <option value="2">Products</option>
-                        <option value="3">Trips</option>
+                        <option value="activity" onClick={(e) => setCategory(e.target.value)}>Activities</option>
+                        <option value="product" onClick={(e) => setCategory(e.target.value)}>Products</option>
+                        <option value="trip" onClick={(e) => setCategory(e.target.value)}>Trips</option>
                     </select>
                         <div class="row-review d-flex justify-content-center">
                             <div class="col-10">
-                                <div class="card-review mb-3">
                                     <div class="row-inputs g-0 d-flex justify-content-center">
-                                        <div class="col-md-4 mt-5 img-board">
+                                        <div class="col-4 img-board">
                                             <div className="review-image">
-                                            {reviewImage}
-                                            {image && typeof image === "string" && (
-                                            <img src={image} style={{width:'80%', height:'80%'}} class="img-fluid rounded-start" alt="..." />
-                                            )}
-                                            <br/>
-                                            <input type="file" name="imageCloud" onChange={handleFile} />
+                                                {imagePreview ? (
+                                                <img src={imagePreview} style={{ width: '80%', height: '80%' }} className="img-fluid rounded-start" alt="Preview" />
+                                                ) : (
+                                                    reviewImage
+                                                )}
+                                                <br/>
+                                                <input type="file" name="imageCloud" onChange={handleFile} />
                                             </div>
                                         </div>
-                                        <div class="col-md-8 d-flex justify-content-center align-items-center flex-column">                             
+                                        <div class="col-md-4 d-flex justify-content-center align-items-center flex-column">                             
                                             <div className="input-board mt-3">                                     
                                                 <input 
                                                     type="text" 
@@ -124,17 +137,6 @@ export const ReviewForm = () => {
                                                     placeholder="Family, Adveture, Relax..."
                                                     value={type}
                                                     onChange={(e) => setType(e.target.value)}
-                                                    />                               
-                                            </div>
-                                            <div className="input-board mt-3">
-                                                <input 
-                                                    type="text" 
-                                                    id="description" 
-                                                    className="p-1 col-12 review-input"  
-                                                    placeholder="Description" 
-                                                    name="description"
-                                                    value={description}
-                                                    onChange={(e) => setDescription(e.target.value)}
                                                     />                               
                                             </div>
                                             <div className="input-board mt-3">
@@ -181,15 +183,27 @@ export const ReviewForm = () => {
                                                     onChange={(e) => setPrice(e.target.value)}
                                                     />                               
                                             </div>
+                                        </div>
+                                        <div class="col-md-4 d-flex justify-content-center align-items-center flex-column">
+                                            <div className="input-board mt-3">
+                                                <input 
+                                                    type="text" 
+                                                    id="description" 
+                                                    className="p-1 col-12 review-input"  
+                                                    placeholder="Description" 
+                                                    name="description"
+                                                    value={description}
+                                                    onChange={(e) => setDescription(e.target.value)}
+                                                    />                               
+                                            </div>
                                             <div>
                                                 <button onClick={handleUpload}>Subir a Cloudinary y enviar a la API</button>
                                             </div> 
-                                            <br/>                                
                                         </div>
+                                            <br/>                                
                                     </div>
-                                </div>
                             </div>
                         </div>
-                    </div>
+            </div>
     );
   };
