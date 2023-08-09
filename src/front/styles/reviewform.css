@@ -4,29 +4,43 @@
 .row-inputs{
     height: 800px;
     margin-top: 30px;
-    margin-bottom: 400px;
 }
-.card-review{
-    margin-bottom: 100px;
+#inputs-review{
+    width: 600px;
+    
 }
-.review-image{
-    margin-top: 150px;
-    margin-left: auto;
+#input-description{
+    width: 500px;
+    height: 400px;
+    border: none;
+}
+.image-create-review{
+    margin-top: 100px;
+    height: 600px;
+    width: 600px; 
+    margin-left: 20%;
     margin-right: auto;
-}
-.imageCloud{
-    margin-top: 30px;   
 }
 .title{
     margin-top:50px;
 }
 .form-select{
-    width: 30%;
-    padding-left: 12%;
+    width: 25%;
+    padding-left: 10%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 25px;
     color: #404040;
     height: 50px;
     font-size: 25px;
+}
+.photo-uploader{
+    margin-top: 3rem;
+    font-size: 1.5rem;
+    margin-left: 30%; 
+}
+.finish-review{
+    margin-top: 3rem;
+    font-size: 1.5rem;
+    padding:10px;
 }

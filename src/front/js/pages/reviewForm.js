@@ -19,7 +19,7 @@ export const ReviewForm = () => {
 
   const [imagePreview, setImagePreview] = useState(null);
 
-  const reviewImage = <img src="https://fastly.picsum.photos/id/163/2000/1333.jpg?hmac=htdHeSJwlYOxS8b0TTpz2s8tD_QDlmsd3JHYa_HGrg8" style={{width:'80%', height:'80%'}} class="img-fluid rounded-start" alt="..." /> 
+  const reviewImage = <img src="https://fastly.picsum.photos/id/163/2000/1333.jpg?hmac=htdHeSJwlYOxS8b0TTpz2s8tD_QDlmsd3JHYa_HGrg8" class="image-create-review" alt="..." /> 
 
   const handleFile = (e) => {
     const file = e.target.files[0];
@@ -46,7 +46,7 @@ export const ReviewForm = () => {
         let validDate = !(month < 1 || month > 12 || day < 1 || day > 31 || (month === 2 && day > 28 + (year % 4 == 0 ? 1 : 0)) || ((month === 4 || month === 6 || month === 9 || month === 11) && day > 30));
         if(validDate) {
             uploadImage(image);
-            setTimeout(() => sendDataToAPI(), 3000)
+            setTimeout(() => sendDataToAPI(), 5000)
             alert("You have created a Review")
         } else {
             console.log("Invalid Date");
@@ -77,7 +77,7 @@ export const ReviewForm = () => {
   
   const sendDataToAPI = () => {
 
-    fetch(process.env.BACKEND_URL + `/api/create-review`, { 
+    fetch(process.env.BACKEND_URL + 'api/create-review', { 
             method: "POST", 
             headers: { 
                 "Content-Type": "application/json",
@@ -96,11 +96,11 @@ export const ReviewForm = () => {
 
             <div class="container-fluid">
                <h1 className="title d-flex justify-content-center">INSERT YOUR REVIEW </h1>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Category</option>
-                        <option value="activity" onClick={(e) => setCategory(e.target.value)}>Activities</option>
-                        <option value="product" onClick={(e) => setCategory(e.target.value)}>Products</option>
-                        <option value="trip" onClick={(e) => setCategory(e.target.value)}>Trips</option>
+                    <select class="form-select" onChange={(e) => setCategory(e.target.value)} aria-label="Default select example">
+                        <option selected >Category</option>
+                        <option value="activity" >Activities</option>
+                        <option value="product" >Products</option>
+                        <option value="trip" >Trips</option>
                     </select>
                         <div class="row-review d-flex justify-content-center">
                             <div class="col-10">
@@ -108,75 +108,80 @@ export const ReviewForm = () => {
                                         <div class="col-4 img-board">
                                             <div className="review-image">
                                                 {imagePreview ? (
-                                                <img src={imagePreview} style={{ width: '80%', height: '80%' }} className="img-fluid rounded-start" alt="Preview" />
+                                                <img src={imagePreview} className="image-create-review" alt="Preview" />
                                                 ) : (
                                                     reviewImage
                                                 )}
                                                 <br/>
-                                                <input type="file" name="imageCloud" onChange={handleFile} />
+                                                <input className="photo-uploader" type="file" name="imageCloud" onChange={handleFile} />
                                             </div>
                                         </div>
-                                        <div class="col-md-4 d-flex justify-content-center align-items-center flex-column">                             
-                                            <div className="input-board mt-3">                                     
+                                        <div class="col-md-5 d-flex justify-content-center align-items-center flex-column">                             
+                                            <h3>Title</h3><div className="input-board mb-3" id="inputs-review">                                 
                                                 <input 
                                                     type="text" 
                                                     id="title" 
-                                                    className="p-1 col-12 review-input"  
-                                                    placeholder="Title" 
+                                                    className="review-input"  
+                                                    placeholder="Title"
                                                     name="title"
                                                     value={title}
                                                     onChange={(e) => setTitle(e.target.value)}
                                                     />                               
                                             </div>
-                                            <div className="input-board mt-3">
+                                            <h4>Type</h4>
+                                            <div className="input-board mt-2" id="inputs-review">
                                                 <input 
                                                     type="text" 
                                                     id="type" 
-                                                    className="p-1 col-12 review-input"  
+                                                    className="review-input"  
                                                     name="type"
                                                     placeholder="Family, Adveture, Relax..."
                                                     value={type}
                                                     onChange={(e) => setType(e.target.value)}
                                                     />                               
                                             </div>
-                                            <div className="input-board mt-3">
+                                            <div className="input-board mt-3" id="inputs-review">
+                                            <h4 className="location p-2" >City</h4>
                                                 <input 
                                                     type="text" 
                                                     id="location" 
-                                                    className="p-1 col-12 review-input"  
+                                                    className="review-input"  
                                                     placeholder="City" 
                                                     name="location"
                                                     value={location}
                                                     onChange={(e) => setLocation(e.target.value)}
                                                     />                               
                                             </div>
-                                            <div className="input-board mt-3">
+                                            <div className="input-board mt-3" id="inputs-review">
+                                            <h4 className="date p-2">Date</h4>
                                                 <input 
                                                     type="text" 
                                                     id="publishing_date" 
-                                                    className="p-1 col-12 review-input"  
+                                                    className="review-input"  
                                                     placeholder="dd/mm/yyyy" 
                                                     name="publishing_date"
                                                     value={publishing_date}
                                                     onChange={(e) => setPublishing_date(e.target.value)}
                                                     />                               
                                             </div>
-                                            <div className="input-board mt-3">
+                                            <h4>Link</h4>
+                                            <div className="input-board mt-3" id="inputs-review">
                                                 <input 
                                                     type="text" 
                                                     id="link" 
-                                                    className="p-1 col-12 review-input"  
+                                                    className="review-input"  
                                                     placeholder="Link" 
                                                     name="link"
                                                     value={link}
                                                     onChange={(e) => setLink(e.target.value)}
                                                     />                               
                                             </div>
-                                            <div className="input-board mt-3">
+                                            <div className="input-board mt-3" id="inputs-review">
+                                            <h4 className="price p-2">Price</h4>
                                                 <input 
                                                     type="text" 
                                                     id="price" 
-                                                    className="p-1 col-12 review-input"  
+                                                    className="review-input"  
                                                     placeholder=" €€€" 
                                                     name="price"
                                                     value={price}
@@ -184,20 +189,20 @@ export const ReviewForm = () => {
                                                     />                               
                                             </div>
                                         </div>
-                                        <div class="col-md-4 d-flex justify-content-center align-items-center flex-column">
-                                            <div className="input-board mt-3">
-                                                <input 
-                                                    type="text" 
-                                                    id="description" 
-                                                    className="p-1 col-12 review-input"  
-                                                    placeholder="Description" 
-                                                    name="description"
+                                        <div class="col-md-3 d-flex justify-content-center align-items-center flex-column">
+                                        <h2 className="description mb-1">Description</h2>
+                                            <div className="input-board mt-0" id="input-description">
+                                                <textarea
+                                                    className="form-control"
+                                                    id="description"
+                                                    placeholder="Enter description..."
                                                     value={description}
-                                                    onChange={(e) => setDescription(e.target.value)}
-                                                    />                               
+                                                    onChange={e => setDescription(e.target.value)}
+                                                    rows={6}
+                                                />              
                                             </div>
                                             <div>
-                                                <button onClick={handleUpload}>Subir a Cloudinary y enviar a la API</button>
+                                                <button className="finish-review" onClick={handleUpload}>Finish Review</button>
                                             </div> 
                                         </div>
                                             <br/>                                
