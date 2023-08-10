@@ -1,20 +1,20 @@
-li{
-    text-align: start;
-    list-style: none;
-    display: flex;
-    text-decoration-line: none;
-    font-size: 30px;
-}
 .navbar {
     background-image: url(https://cdn.pixabay.com/photo/2017/07/31/11/44/laptop-2557572_1280.jpg);
     background-position: center;
+    width: 100%;
     background-size: cover;
-    height: 1000px;
+    height: 600px;
     background-repeat: no-repeat;
+    margin-top: none;
 }
 .navbar-items{
-    margin-right: 30px;
-    margin-bottom: 550px;
+    margin-right: 30px; 
+    margin-bottom: 580px;
+    text-align: end;
+    list-style: none;
+    display: flex;
+    text-decoration-line: none;
+    font-size: 150%;
    
 }
 .btn-navbar{
@@ -26,4 +26,6 @@ li{
 .logo-link{
     margin-bottom: 550px;
     margin-left: 100px;
+    margin-top: 25px;
+    background-color: transparent;
 }
