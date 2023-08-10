@@ -94,8 +94,119 @@ export const ReviewForm = () => {
     
     return (
 
-            <div class="review-content">
-               <h1 className="title d-flex justify-content-center">INSERT YOUR REVIEW </h1>
+        <div className="review-form">
+            <h1>Insert Your Review</h1>
+            <select class="form-select" onChange={(e) => setCategory(e.target.value)} aria-label="Default select example">
+                <option selected >Category</option>
+                <option value="activity" >Activities</option>
+                <option value="product" >Products</option>
+                <option value="trip" >Trips</option>
+            </select>
+            <form>
+            <div className="image-section">
+                <div>
+                    {imagePreview ? (
+                    <img src={imagePreview} className="image-create-review" alt="Preview" />
+                    ) : (
+                        reviewImage
+                    )}
+                    <br/>
+                    <input className="photo-uploader" type="file" name="imageCloud" onChange={handleFile} />
+                </div>
+                <div>
+                    <button className="finish-review" onClick={handleUpload}>Finish Review</button>
+                </div> 
+            </div>
+                <div className="inputs-section">
+                <div className="form-group">
+                    <label htmlFor="title">Title</label>
+                    <input 
+                        type="text" 
+                        id="title" 
+                        className="review-input"  
+                        placeholder="Title"
+                        name="title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        />  
+                </div>
+                <div className="form-group">
+                    <label htmlFor="type">Type</label>
+                    <input 
+                        type="text" 
+                        id="type" 
+                        className="review-input"  
+                        name="type"
+                        placeholder="Family, Adveture, Relax..."
+                        value={type}
+                        onChange={(e) => setType(e.target.value)}
+                        /> 
+                </div>
+                <div className="form-group">
+                    <label htmlFor="type">Location</label>
+                    <input
+                        type="text" 
+                        id="location" 
+                        className="review-input"  
+                        placeholder="City" 
+                        name="location"
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                        /> 
+                </div>
+                <div className="form-group">
+                    <label htmlFor="type">Descrition</label>
+                    <textarea
+                        className="form-control"
+                        id="description"
+                        placeholder="Enter description..."
+                        value={description}
+                        onChange={e => setDescription(e.target.value)}
+                        rows={6}
+                    />  
+                </div>
+                <div className="form-group">
+                    <label htmlFor="type">Date</label>
+                    <input 
+                        type="text" 
+                        id="publishing_date" 
+                        className="review-input"  
+                        placeholder="dd/mm/yyyy" 
+                        name="publishing_date"
+                        value={publishing_date}
+                        onChange={(e) => setPublishing_date(e.target.value)}
+                        />   
+                </div>
+                <div className="form-group">
+                    <label htmlFor="type">Link</label>
+                    <input
+                        type="text" 
+                        id="link" 
+                        className="review-input"  
+                        placeholder="Link" 
+                        name="link"
+                        value={link}
+                        onChange={(e) => setLink(e.target.value)}
+                        />  
+                </div>
+                <div className="form-group">
+                    <label htmlFor="type">Price</label>
+                    <input
+                        type="text" 
+                        id="price" 
+                        className="review-input"  
+                        placeholder=" €€€" 
+                        name="price"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                        /> 
+                </div>
+                </div>
+        </form>
+      </div>
+
+           /*<div class="review-content">
+               <h1 className="title">INSERT YOUR REVIEW </h1>
                     <select class="form-select" onChange={(e) => setCategory(e.target.value)} aria-label="Default select example">
                         <option selected >Category</option>
                         <option value="activity" >Activities</option>
@@ -209,6 +320,6 @@ export const ReviewForm = () => {
                                     </div>
                             </div>
                         </div>
-            </div>
+                                                </div>*/
     );
   };
