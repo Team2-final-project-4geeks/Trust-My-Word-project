@@ -102,6 +102,8 @@ export const Home = () => {
 	}
 	const showProducts = () => {
 
+		const reversedProducts = products.slice().reverse();
+
 		if (reversedProducts && reversedProducts.length > 0) {
 			return reversedProducts.slice(0, 3).map((product, index) => (
 				<ProductCard

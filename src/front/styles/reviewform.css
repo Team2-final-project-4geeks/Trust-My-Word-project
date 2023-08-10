@@ -1,9 +1,21 @@
+.review-content{
+    height: 108vh;
+}
+
 .row-review{
-    height: 1000px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: max-content;
+
 }
 .row-inputs{
     height: 800px;
     margin-top: 30px;
+    border-color:red;
+}
+.inputs-content{
+    border-radius: blue;
 }
 #inputs-review{
     width: 600px;

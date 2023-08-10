@@ -94,7 +94,7 @@ export const ReviewForm = () => {
     
     return (
 
-            <div class="container-fluid">
+            <div class="review-content">
                <h1 className="title d-flex justify-content-center">INSERT YOUR REVIEW </h1>
                     <select class="form-select" onChange={(e) => setCategory(e.target.value)} aria-label="Default select example">
                         <option selected >Category</option>
@@ -102,10 +102,9 @@ export const ReviewForm = () => {
                         <option value="product" >Products</option>
                         <option value="trip" >Trips</option>
                     </select>
-                        <div class="row-review d-flex justify-content-center">
-                            <div class="col-10">
-                                    <div class="row-inputs g-0 d-flex justify-content-center">
-                                        <div class="col-4 img-board">
+                        <div class="row-review">
+                                <div class="inputs-content col-10">
+                                        <div class="left-side col-3">
                                             <div className="review-image">
                                                 {imagePreview ? (
                                                 <img src={imagePreview} className="image-create-review" alt="Preview" />
@@ -116,8 +115,9 @@ export const ReviewForm = () => {
                                                 <input className="photo-uploader" type="file" name="imageCloud" onChange={handleFile} />
                                             </div>
                                         </div>
-                                        <div class="col-md-5 d-flex justify-content-center align-items-center flex-column">                             
-                                            <h3>Title</h3><div className="input-board mb-3" id="inputs-review">                                 
+                                        <div class="middle col-4"> 
+                                            <div className="input-board mt-2" id="inputs-review">                            
+                                                <h3>Title</h3><div className="input-board mb-3" id="inputs-review">                                 
                                                 <input 
                                                     type="text" 
                                                     id="title" 
@@ -128,7 +128,7 @@ export const ReviewForm = () => {
                                                     onChange={(e) => setTitle(e.target.value)}
                                                     />                               
                                             </div>
-                                            <h4>Type</h4>
+                                                <h4>Type</h4>
                                             <div className="input-board mt-2" id="inputs-review">
                                                 <input 
                                                     type="text" 
@@ -141,7 +141,7 @@ export const ReviewForm = () => {
                                                     />                               
                                             </div>
                                             <div className="input-board mt-3" id="inputs-review">
-                                            <h4 className="location p-2" >City</h4>
+                                                <h4 className="location p-2" >City</h4>
                                                 <input 
                                                     type="text" 
                                                     id="location" 
@@ -153,7 +153,7 @@ export const ReviewForm = () => {
                                                     />                               
                                             </div>
                                             <div className="input-board mt-3" id="inputs-review">
-                                            <h4 className="date p-2">Date</h4>
+                                                <h4 className="date p-2">Date</h4>
                                                 <input 
                                                     type="text" 
                                                     id="publishing_date" 
@@ -164,7 +164,7 @@ export const ReviewForm = () => {
                                                     onChange={(e) => setPublishing_date(e.target.value)}
                                                     />                               
                                             </div>
-                                            <h4>Link</h4>
+                                                <h4>Link</h4>
                                             <div className="input-board mt-3" id="inputs-review">
                                                 <input 
                                                     type="text" 
@@ -177,7 +177,7 @@ export const ReviewForm = () => {
                                                     />                               
                                             </div>
                                             <div className="input-board mt-3" id="inputs-review">
-                                            <h4 className="price p-2">Price</h4>
+                                                <h4 className="price p-2">Price</h4>
                                                 <input 
                                                     type="text" 
                                                     id="price" 
@@ -189,8 +189,8 @@ export const ReviewForm = () => {
                                                     />                               
                                             </div>
                                         </div>
-                                        <div class="col-md-3 d-flex justify-content-center align-items-center flex-column">
-                                        <h2 className="description mb-1">Description</h2>
+                                        <div class="middle col-4"> 
+                                            <h2 className="description mb-1">Description</h2>
                                             <div className="input-board mt-0" id="input-description">
                                                 <textarea
                                                     className="form-control"

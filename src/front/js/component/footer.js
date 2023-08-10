@@ -10,17 +10,17 @@ export const Footer = () => {
 		<div class="footer bg-black d-flex flex-column">
 			<footer class="mt-auto">
 				<ul class="nav justify-content-center border-bottom">
-					<li class="nav-item p-3">
+					<li class="nav-item px-3">
 						<a class="nav-link text-light" href="#" onClick={() => navigate("/")}>Home </a>
 					</li>
-					<li class="nav-item p-3">
+					<li class="nav-item px-3">
 						<a class="nav-link text-light" href="#" onClick={() => navigate("/privacy-policy")}>Privacy Policy </a>	
 					</li>
-					<li class="nav-item p-3">
+					<li class="nav-item px-3">
 						<a class="nav-link text-light" href="#" onClick={() => navigate("/termsServices")}>Terms & Services </a>
 					</li>
 				</ul>
-				<div class="b-example-divider my-2"></div>
+				<div class="b-example-divider my-1"></div>
 					<p class="text-center text-light">&copy; 2023 4Geeks Academy</p>		
 			</footer>
 		</div>
