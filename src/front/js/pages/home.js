@@ -7,8 +7,10 @@ import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
 import TriipCard from "../component/triipcard.jsx";
 import DinamicText from "../component/dinamictext.jsx";
+import { useParams } from "react-router-dom";
 
 export const Home = () => {
+	const params = useParams()
 	const { store, actions } = useContext(Context);
 	const navigate= useNavigate()
 	const [reversedTrips, setReversedTrips] = useState([])
@@ -21,6 +23,7 @@ export const Home = () => {
 		getActivities();
     	getProduct();
 		getTrips()
+		console.log(params);
 	}, []);
 	
 	const getActivities = () => {
@@ -136,6 +139,7 @@ export const Home = () => {
 	return (
 		
 		<div className="">
+			<button onClick={()=>{}}> ir a usuario</button>
 			<div className="container-fluid">
 				<DinamicText  phrase={"inspire you"} phrase2={"save your time"}  phrase3={"solve your planning problems"} phrase4={" support people's opinions"} phrase1={"provide value"}/>
 			</div>

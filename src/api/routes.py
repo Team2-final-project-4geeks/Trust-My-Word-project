@@ -182,7 +182,7 @@ def create_review():
        }
         return jsonify(response_body),400
     
-    new_review= Review(title = data["title"], description=data["description"], publishing_date= data["publishing_date"], price= data["price"], image= data["imageCloud"])
+    new_review= Review(title = data["title"], category=data["category"], description=data["description"], publishing_date= data["publishing_date"], price= data["price"], image= data["imageCloud"])
     db.session.add(new_review)
     db.session.commit()
 

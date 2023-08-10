@@ -5,9 +5,9 @@
 .dashboard-user{
     width: 500px;
     height: 160px;
-    border: solid 2px rgb(195, 192, 192);
     border-radius: 2px;
     position: relative;
+
 
 }
 .dashboard-insights{
@@ -22,27 +22,37 @@
     font-size: 25px;
 }
 .container {
-    position: relative;
-    width: 100%; /* Ajusta el ancho del contenedor según lo que desees */
-    height: 180px; /* Ajusta la altura del contenedor según lo que desees */
-    background-color: #f0f0f0; /* Color de fondo gris */
+     /* position: relative; */
+    border: solid 1px black
+    
+  
   }
   
   .circle {
-    position: absolute;
-    top: -70px; /* Ajusta la posición vertical del círculo */
-    left: 50%; /* Ajusta la posición horizontal del círculo */
-    transform: translateX(-50%);
-    width: 150px; /* Ajusta el diámetro del círculo */
-    height: 150px; /* Ajusta el diámetro del círculo */
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: #fff; /* Color de fondo del círculo */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para dar un efecto de elevación */
+    /* position: absolute;
+    top: -70px; 
+    left: 50%; */
+    transform: translateY(+50%);
+
+    width: 150px; 
+    height: 150px;  
+    /* overflow: hidden;
+    background-color: #fff; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);   */
   }
   
   .circle img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ajusta la imagen para que cubra todo el círculo */
+    border-radius: 50%; 
+
+    /* object-fit: cover; Ajusta la imagen para que cubra todo el círculo */
+  }
+ 
+  .right{
+    height: 300px;
+  }
+  .user-info{
+    height: 300px;
+
   }
