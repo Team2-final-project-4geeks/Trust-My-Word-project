@@ -10,6 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			favourite: [],
 			storeCities: {},
+			storeTypes: {},
 			checked: false			
 		},
 		actions: {
@@ -29,6 +30,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			addCity: (city) => {
 				const store = getStore();
 				setStore({storeCities: city})			
+			},
+			addType: (type) => {
+				const store = getStore();
+				setStore({storeTypes: type})			
 			},
 			handleChecked: (bool) => {
 				const store = getStore();
