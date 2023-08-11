@@ -21,6 +21,7 @@ class User(db.Model):
     reviews = db.relationship("Review", back_populates="user")
     # 1 - N with Comments
     comments = db.relationship("Comment", back_populates="user")
+    # 1 - N with Reviews
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -31,8 +32,10 @@ class User(db.Model):
             "id": self.id,
             "email": self.email,
             "username": self.username,
+            # "favourites" : self.favourites, 
             "reviews": [review.serialize() for review in self.reviews],  # serialize each review
-            "comments": [comment.serialize() for comment in self.comments]  # serialize each comment
+            "comments": [comment.serialize() for comment in self.comments], # serialize each comment
+
         }        
       
 class Review(db.Model):

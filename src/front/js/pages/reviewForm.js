@@ -46,7 +46,7 @@ export const ReviewForm = () => {
         let validDate = !(month < 1 || month > 12 || day < 1 || day > 31 || (month === 2 && day > 28 + (year % 4 == 0 ? 1 : 0)) || ((month === 4 || month === 6 || month === 9 || month === 11) && day > 30));
         if(validDate) {
             uploadImage(image);
-            setTimeout(() => sendDataToAPI(), 5000)
+            setTimeout(() => sendDataToAPI(), 1000)
             alert("You have created a Review")
         } else {
             console.log("Invalid Date");

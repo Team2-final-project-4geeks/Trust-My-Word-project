@@ -1,3 +1,62 @@
 #pencil{
     padding-top: 5px;
 }
+
+.dashboard-user{
+    width: 500px;
+    height: 160px;
+    border-radius: 2px;
+    position: relative;
+
+
+}
+.dashboard-insights{
+    width: 90%;
+    height: 100px;
+    position: absolute;
+}
+.title{
+    font-size: 17px;
+}
+.reviews{
+    font-size: 25px;
+}
+.container {
+     /* position: relative; */
+    border: solid 1px black
+    
+  
+  }
+  
+  .circle {
+    /* position: absolute;
+    top: -70px; 
+    left: 50%; */
+    transform: translateY(-25%);
+    width: 250px; 
+    height: 250px;  
+    /* overflow: hidden;
+    background-color: #fff; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);   */
+  }
+  
+  .circle img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; 
+
+    /* object-fit: cover; Ajusta la imagen para que cubra todo el círculo */
+  }
+ 
+  .right{
+    height: 300px;
+  }
+  .user-info{
+    height: 300px;
+
+  }
+
+  .userSection{
+    height: 700px;
+    margin-top: 100px;
+  }

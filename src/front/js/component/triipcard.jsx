@@ -10,35 +10,36 @@ const TriipCard = (props)=>{
 
     return(
             <div className="card-body">
-                <div class="image-container">
-                    <img src={props.img} class="card-img-top" alt="..."/>
-                <div class="image-overlay">
-                    <i class="far fa-heart fa-1x" onClick={()=> actions.addFavourite()}></i>
-                    <h1>hola</h1>
+                <div className="image-container">
+                    <img src={props.img} className="card-img-top" alt="..."/>
+                    <div className="image-overlay d-flex justify-content-end align-items-start p-2">
+                        <i className="fas fa-heart text-danger" onClick={() => actions.addFavourite(props.trip.title)}></i>
+                    </div>
                 </div>
-</div>
-             <div class="card-body mx-3">
-            <div class="d-flex flex-column align-items-center justify-content-center ">
+             <div className="card-body mx-3">
+            <div className="d-flex flex-column">
                 <div className=" col-11">
                     <div className="d-flex flex-row">
-                        <img src={props.profile} class="profile-image" alt="..."/>
+                        <img src={props.profile} className="profile-image" alt="..."/>
                             <div className="d-flex flex-column mx-3">
-                                <p class="card-text"><small class="text-muted publishing-date">{props.trip.publishing_date}</small></p>
+                                <hr className="mb-0"/>
+                                <p className="card-text"><small className="text-muted publishing-date">{props.trip.publishing_date}</small></p>
+                            </div>     
+                    </div>
+                    <div className="d-flex flex-column align-items-center ">
+                        <h3 className="card-title text-center mt-2">{props.trip.title}</h3>
+                        <div className="text-center">
+                            <i className="fas fa-star fa-sm text-warning text-center"></i>
+                            <i className="fas fa-star fa-sm text-warning text-center"></i>
+                            <i className="fas fa-star fa-sm text-warning text-center"></i>
+                        </div>
+                        <div id="trip-board" classNameName="mt-2">
+                            <div id="card-description-trip">
+                                <p className="card-text"><i className="fas fa-quote-left mt-2 me-2"></i> <i> {props.trip.description}</i></p>
                             </div>
-                        
+                            <p className="card-text mt-4">{props.trip.price}</p>
+                        </div>
                     </div>
-                    
-                    <h3 class="card-title text-center mt-4">{props.trip.title}</h3>
-                    <div className="text-center">
-                        <i class="fas fa-star fa-sm text-warning text-center"></i>
-                        <i class="fas fa-star fa-sm text-warning text-center"></i>
-                        <i class="fas fa-star fa-sm text-warning text-center"></i>
-                    </div>
-                    <div className="card-description">
-                        <p class="card-text"><i class="fas fa-quote-left mt-2 me-2"></i> <i> {props.trip.description}</i></p>
-                        <p class="card-text"><i>{props.trip.price}</i></p>
-                    </div>
-                   
                     <div className="btn-container">
                         <ViewMore item={props.item.id}/>
                     </div>
