@@ -11,7 +11,7 @@ export const TermsServices = () =>{
     return (
 
 <div className="termsServices">
-  <h1>Sample Website Terms and Conditions Template</h1>
+  <h1>Sample Website Terms and Conditions</h1>
     <p>
       Please read these terms and conditions carefully before using <strong>TrustMyWord</strong> website operated by TrustMyWord Company.
     </p>
