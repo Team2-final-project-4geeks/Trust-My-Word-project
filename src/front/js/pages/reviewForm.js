@@ -102,7 +102,7 @@ export const ReviewForm = () => {
                     <option value="product" >Products</option>
                     <option value="trip" >Trips</option>
                 </select>
-            <div class="row" id="row-review">    
+            <div class="row" id="row-review">
                     <div class="col" id="left-side">
                         {imagePreview ? (
                         <img src={imagePreview} className="image-create-review" alt="Preview" />
@@ -135,7 +135,7 @@ export const ReviewForm = () => {
                                 onChange={(e) => setType(e.target.value)}
                                 /> 
                         </div>
-                        <div className="form-group" id="inputs">
+                        <div className="form-group mb-3" id="inputs">
                             <input
                                 type="text" 
                                 id="location" 
@@ -144,7 +144,8 @@ export const ReviewForm = () => {
                                 name="location"
                                 value={location}
                                 onChange={(e) => setLocation(e.target.value)}
-                                /> 
+                                />
+                            <p className="little-legends">You won't be able to chage that after</p> 
                         </div>
                         <div className="form-group" id="inputs">
                             <input
@@ -170,7 +171,7 @@ export const ReviewForm = () => {
                         </div>
                     </div>
                     <div class="col" id="right-side">
-                        <label htmlFor="title">Description</label>
+                        <span className="title">Description</span>
                         <div className="form-group">
                             <textarea
                                 className="form-control mt-3 mb-2"
@@ -181,7 +182,7 @@ export const ReviewForm = () => {
                                 rows={6}
                             />  
                         </div>
-                        <label htmlFor="title">Date</label>
+                        <span className="title">Date</span>
                         <div className="form-group" id="inputs">
                             <input 
                                 type="text" 
@@ -191,10 +192,11 @@ export const ReviewForm = () => {
                                 name="publishing_date"
                                 value={publishing_date}
                                 onChange={(e) => setPublishing_date(e.target.value)}
-                                />   
+                                />
+                            <p className="little-legends">You won't be able to chage that after</p> 
                         </div>
-                    </div>
-            </div>
+                </div>
+        </div>
             <button className="finish-review" onClick={handleUpload}>Finish Review</button>
         </div>
     );

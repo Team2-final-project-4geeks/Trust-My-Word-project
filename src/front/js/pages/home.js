@@ -159,11 +159,10 @@ export const Home = () => {
 					</div>	
 				</div>						
 			</div>
-		
 			<div className="container-fluid mt-5">
-				<div class="product-breack">
-					<div class="general-image">
-						<h1 className="product">PRODUCTS</h1>
+				<div class="container-fluid">
+					<div class="general-image" id="imageContainerProducts">
+						<h1 id="titleProducts">PRODUCTS</h1>
 					</div>
     			</div>
 					<div className="container-fluid mt-4" >

@@ -60,6 +60,9 @@ export const Navbar = () => {
 									<a class="nav-link text-light" href="#" onClick={() => navigate("/create-user")}>Create User </a>
 								</div>
 								<div class="nav-item">
+									<a class="nav-link text-light" href="#" onClick={() => navigate("/user-page")}>User Page </a>
+								</div>
+								<div class="nav-item">
 									<a class="nav-link text-light" href="#" onClick={() => navigate("/login")}>Login</a>
 								</div>
 								<div class="nav-item">
