@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import "../../styles/login.css";
 import { useNavigate } from "react-router-dom";
+import { Context} from "../store/appContext";
+
 
 const Login = () =>{
+    const {store,actions} = useContext(Context)
     const [email,setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
@@ -25,6 +28,7 @@ const Login = () =>{
 				console.log('Token is Here =====>', result);
 				localStorage.setItem("jwt-token", result.token);
 				alert('You are logged in!')
+                actions.addId(user:id)
 				navigate("/")
 			}).catch((err) => {
 				console.log(err);

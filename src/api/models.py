@@ -22,8 +22,6 @@ class User(db.Model):
     # 1 - N with Comments
     comments = db.relationship("Comment", back_populates="user")
     # 1 - N with Reviews
-    favourites = db.relationship("Review", back_populates="user")
-
 
     def __repr__(self):
         return f'<User {self.email}>'

@@ -53,7 +53,6 @@ export const Home = () => {
 		})
 		.then(data=> {
 			setProducts(data);
-			setReversedProducts(data)
 		})
 		.catch(error => {
 			console.log('Oops something went wrong'+ error);

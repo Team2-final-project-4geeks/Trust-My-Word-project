@@ -56,3 +56,16 @@
     color:white;
 }
 
+#commentSection{
+    width: 1350px;
+    min-height: 450px;
+    margin:auto;
+    margin-bottom: 50px;
+}
+#basic-addon1, #commentWrite{
+    background: rgb(95,191,153);
+}
+#sumbitButtonSingle{
+    background:black;
+    color:white;
+}
