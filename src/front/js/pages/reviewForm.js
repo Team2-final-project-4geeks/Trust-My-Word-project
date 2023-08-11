@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import "../../styles/home.css";
+import React, { useState, useEffect } from "react";
 import { cloudinary } from "cloudinary-core";
+
+import "../../styles/reviewform.css";
 
 export const ReviewForm = () => {
   const presetKey = "dumn5jgp";
   const cloudName = "dbxeaqsv4"; 
-  const [imageCloud, setImageCloud] = useState("https://fastly.picsum.photos/id/163/2000/1333.jpg?hmac=htdHeSJwlYOxS8b0TTpz2s8tD_QDlmsd3JHYa_HGrg8");
+  const [imageCloud, setImageCloud] = useState("");
   const [title, setTitle] = useState("")
   const [type, setType] = useState("")
   const [description, setDescription] = useState("")
@@ -14,13 +15,25 @@ export const ReviewForm = () => {
   const [link, setLink] = useState("")
   const [price, setPrice] = useState("")
   const [image, setImage] = useState("")
+  const [category, setCategory] = useState("")
 
-  const reviewImage = <img src="https://fastly.picsum.photos/id/163/2000/1333.jpg?hmac=htdHeSJwlYOxS8b0TTpz2s8tD_QDlmsd3JHYa_HGrg8" style={{width:'80%', height:'80%'}} class="img-fluid rounded-start" alt="..." /> 
+  const [imagePreview, setImagePreview] = useState(null);
+
+  const reviewImage = <img src="https://fastly.picsum.photos/id/163/2000/1333.jpg?hmac=htdHeSJwlYOxS8b0TTpz2s8tD_QDlmsd3JHYa_HGrg8" class="image-create-review" alt="..." /> 
 
   const handleFile = (e) => {
     const file = e.target.files[0];
     setImage(file);
+    setImagePreview(URL.createObjectURL(file));
   };
+
+  useEffect(() => {
+    return () => {
+      if (imagePreview) {
+        URL.revokeObjectURL(imagePreview);
+      }
+    };
+  }, [imagePreview]);
   
 
   const handleUpload = () => {
@@ -34,7 +47,7 @@ export const ReviewForm = () => {
         if(validDate) {
             uploadImage(image);
             setTimeout(() => sendDataToAPI(), 5000)
-            console.log(imageCloud)
+            alert("You have created a Review")
         } else {
             console.log("Invalid Date");
             alert("Invalid Date Format. Format should be dd/mm/yyyy")
@@ -64,12 +77,12 @@ export const ReviewForm = () => {
   
   const sendDataToAPI = () => {
 
-    fetch(process.env.BACKEND_URL + `/api/create-review`, { 
+    fetch(process.env.BACKEND_URL + 'api/create-review', { 
             method: "POST", 
             headers: { 
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({title, type, description, location, publishing_date, link, price, imageCloud}) 
+            body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud}) 
         })
         .then((res) => res.json())
         .then((result) => {
@@ -80,115 +93,111 @@ export const ReviewForm = () => {
         }
     
     return (
-
-            <div class="container-fluid login-card">
-               <h1 className="mb-5 d-flex justify-content-center align-items-center">INSERT YOUR REVIEW </h1>
-                        <div class="row d-flex justify-content-center align-items-center vh-100">
-                            <div class="col-10">
-                                <div class="card mb-3">
-                                    <div class="row g-0 d-flex justify-content-center align-items-center">
-                                        <div class="col-md-4 img-board">
-                                            <div>
-                                                <input type="file" name="imageCloud" onChange={handleFile} />
-                                            </div>
-                                            {reviewImage}
-                                            {image && typeof image === "string" && (
-                                            <img src={image} style={{width:'80%', height:'80%'}} class="img-fluid rounded-start" alt="..." />
-                                            )}
-                                        </div>
-                                        <div class="col-md-8 d-flex justify-content-center align-items-center flex-column">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected>Category</option>
-                                                    <option value="1">Activities</option>
-                                                    <option value="2">Products</option>
-                                                    <option value="3">Trips</option>
-                                                </select>
-                                            <div className="input-board mt-3">                                     
-                                                <input 
-                                                    type="text" 
-                                                    id="title" 
-                                                    className="p-1 col-12 review-input"  
-                                                    placeholder="Title" 
-                                                    name="title"
-                                                    value={title}
-                                                    onChange={(e) => setTitle(e.target.value)}
-                                                    />                               
-                                            </div>
-                                            <div className="input-board mt-3">
-                                                <input 
-                                                    type="text" 
-                                                    id="type" 
-                                                    className="p-1 col-12 review-input"  
-                                                    name="type"
-                                                    placeholder="Family, Adveture, Relax..."
-                                                    value={type}
-                                                    onChange={(e) => setType(e.target.value)}
-                                                    />                               
-                                            </div>
-                                            <div className="input-board mt-3">
-                                                <input 
-                                                    type="text" 
-                                                    id="description" 
-                                                    className="p-1 col-12 review-input"  
-                                                    placeholder="Description" 
-                                                    name="description"
-                                                    value={description}
-                                                    onChange={(e) => setDescription(e.target.value)}
-                                                    />                               
-                                            </div>
-                                            <div className="input-board mt-3">
-                                                <input 
-                                                    type="text" 
-                                                    id="location" 
-                                                    className="p-1 col-12 review-input"  
-                                                    placeholder="City" 
-                                                    name="location"
-                                                    value={location}
-                                                    onChange={(e) => setLocation(e.target.value)}
-                                                    />                               
-                                            </div>
-                                            <div className="input-board mt-3">
-                                                <input 
-                                                    type="text" 
-                                                    id="publishing_date" 
-                                                    className="p-1 col-12 review-input"  
-                                                    placeholder="dd/mm/yyyy" 
-                                                    name="publishing_date"
-                                                    value={publishing_date}
-                                                    onChange={(e) => setPublishing_date(e.target.value)}
-                                                    />                               
-                                            </div>
-                                            <div className="input-board mt-3">
-                                                <input 
-                                                    type="text" 
-                                                    id="link" 
-                                                    className="p-1 col-12 review-input"  
-                                                    placeholder="Link" 
-                                                    name="link"
-                                                    value={link}
-                                                    onChange={(e) => setLink(e.target.value)}
-                                                    />                               
-                                            </div>
-                                            <div className="input-board mt-3">
-                                                <input 
-                                                    type="text" 
-                                                    id="price" 
-                                                    className="p-1 col-12 review-input"  
-                                                    placeholder=" €€€" 
-                                                    name="price"
-                                                    value={price}
-                                                    onChange={(e) => setPrice(e.target.value)}
-                                                    />                               
-                                            </div>
-                                            <div>
-                                                <button onClick={handleUpload}>Subir a Cloudinary y enviar a la API</button>
-                                            </div> 
-                                            <br/>                                
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+        <div class="container text-center" id="border-box">
+             <h1>Insert Your Review</h1>
+            
+                <select class="form-select" onChange={(e) => setCategory(e.target.value)} aria-label="Default select example">
+                    <option selected >Category</option>
+                    <option value="activity" >Activities</option>
+                    <option value="product" >Products</option>
+                    <option value="trip" >Trips</option>
+                </select>
+            <div class="row" id="row-review">
+                    <div class="col" id="left-side">
+                        {imagePreview ? (
+                        <img src={imagePreview} className="image-create-review" alt="Preview" />
+                        ) : (
+                            reviewImage
+                        )}
+                        <br/>
+                        <input className="photo-uploader" type="file" name="imageCloud" onChange={handleFile} />
+                    </div>
+                    <div class="col" id="middle">
+                    <div className="form-group" id="inputs">
+                            <input 
+                                type="text" 
+                                id="title" 
+                                className="review-input"  
+                                placeholder="Title"
+                                name="title"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                                />  
+                        </div>
+                        <div className="form-group" id="inputs">
+                            <input 
+                                type="text" 
+                                id="type" 
+                                className="review-input"  
+                                name="type"
+                                placeholder="Family, Adveture, Relax..."
+                                value={type}
+                                onChange={(e) => setType(e.target.value)}
+                                /> 
+                        </div>
+                        <div className="form-group mb-3" id="inputs">
+                            <input
+                                type="text" 
+                                id="location" 
+                                className="review-input"  
+                                placeholder="City" 
+                                name="location"
+                                value={location}
+                                onChange={(e) => setLocation(e.target.value)}
+                                />
+                            <p className="little-legends">You won't be able to chage that after</p> 
+                        </div>
+                        <div className="form-group" id="inputs">
+                            <input
+                                type="text" 
+                                id="link" 
+                                className="review-input"  
+                                placeholder="Link" 
+                                name="link"
+                                value={link}
+                                onChange={(e) => setLink(e.target.value)}
+                                />  
+                        </div>
+                        <div className="form-group" id="inputs">
+                            <input
+                                type="text" 
+                                id="price" 
+                                className="review-input"  
+                                placeholder=" €€€" 
+                                name="price"
+                                value={price}
+                                onChange={(e) => setPrice(e.target.value)}
+                                /> 
                         </div>
                     </div>
+                    <div class="col" id="right-side">
+                        <span className="title">Description</span>
+                        <div className="form-group">
+                            <textarea
+                                className="form-control mt-3 mb-2"
+                                id="description"
+                                placeholder="Enter description..."
+                                value={description}
+                                onChange={e => setDescription(e.target.value)}
+                                rows={6}
+                            />  
+                        </div>
+                        <span className="title">Date</span>
+                        <div className="form-group" id="inputs">
+                            <input 
+                                type="text" 
+                                id="publishing_date" 
+                                className="review-input"  
+                                placeholder="dd/mm/yyyy" 
+                                name="publishing_date"
+                                value={publishing_date}
+                                onChange={(e) => setPublishing_date(e.target.value)}
+                                />
+                            <p className="little-legends">You won't be able to chage that after</p> 
+                        </div>
+                </div>
+        </div>
+            <button className="finish-review" onClick={handleUpload}>Finish Review</button>
+        </div>
     );
   };

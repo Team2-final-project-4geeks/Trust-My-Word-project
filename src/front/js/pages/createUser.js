@@ -14,7 +14,7 @@ const CreateUser = () =>{
         } else if ( username === " "){
             alert("username empty")
         } else {
-            fetch(`https://edijavier99-improved-space-memory-44xjjwqqpvgcq99g-3001.preview.app.github.dev/api/create-user`, { 
+            fetch(process.env.BACKEND_URL + 'api/create-user', { 
             method: "POST", 
             headers: { 
                 "Content-Type": "application/json",

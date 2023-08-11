@@ -2,14 +2,12 @@ import React, { Component } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/footer.css";
 
-
 export const Footer = () => {
 
 	const navigate =  useNavigate()
 	
 	return (
 		<div class="footer bg-black d-flex flex-column">
-			<div class="footer bg-black d-flex flex-column">
 			<footer class="mt-auto">
 				<ul class="nav justify-content-center border-bottom">
 					<li class="nav-item px-3">
