@@ -21,7 +21,7 @@ export const Home = () => {
 		getActivities();
     	getProduct();
 		getTrips()
-		console.log(params);
+		console.log(store.userId);
 	}, []);
 	
 	const getActivities = () => {

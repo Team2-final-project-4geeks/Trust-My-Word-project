@@ -9,6 +9,7 @@ const Login = () =>{
     const [email,setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
+    const [userId,setUserId] = useState("")
 
     const user_login = () =>{
 			if(email === '') {
@@ -28,7 +29,8 @@ const Login = () =>{
 				console.log('Token is Here =====>', result);
 				localStorage.setItem("jwt-token", result.token);
 				alert('You are logged in!')
-                actions.addId(user:id)
+                console.log(result.user_id);
+                setUserId(result.user_id)
 				navigate("/")
 			}).catch((err) => {
 				console.log(err);
@@ -36,7 +38,8 @@ const Login = () =>{
 			}
 
     }
-    
+  
+  
     return(
         <div class="container-fluid login-card">
             <div class="row d-flex justify-content-center align-items-center vh-100">
@@ -74,7 +77,11 @@ const Login = () =>{
                                         }}
                                         /><br/><br/>
                                 </div>
-                                <button type="submit" className="btn btn-success mt-4" onClick={user_login}>Login</button>
+                                <button type="submit" className="btn btn-success mt-4" 
+                                onClick={()=>{
+                                    user_login()
+                                    actions.addId(userId)
+                                }}>Login</button>
                                 <div className="d-flex flex-row mt-3">
                                     <a href="/" className="me-5 text-muted"><small>Forgot password?</small></a>
                                     <a href="/create-user"><small>Register now</small></a>

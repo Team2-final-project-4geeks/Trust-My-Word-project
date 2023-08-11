@@ -44,7 +44,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			addId: (id) =>{
 				const store = getStore();
-				setStore({userId: id})
+				setStore({userId:id})
 			}
 		}
 	};
