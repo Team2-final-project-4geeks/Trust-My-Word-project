@@ -1,11 +1,12 @@
-.privacy_policy{
+.termsServices{
     font-size: 30px;
     margin-left: 50px;
     margin-right: 50px;
     text-align: center;
     margin-top: 100px;
+    margin-bottom: 50px;
 }
-.btn-privacy{
+.btn-terms{
     background-color: black;
     border-radius: 20px;
     font-size: 30px;
@@ -13,4 +14,6 @@
     margin-bottom: 5%;
     margin-top: 2%;
 }
-
+h1, h2{
+    margin: 1%;
+}

@@ -81,6 +81,7 @@
 		"react-polyfills": "0.0.1",
 		"react-router-dom": "^6.14.2",
 		"react-social-login-buttons": "^3.9.1",
-		"reactjs-social-login": "^2.6.2"
+		"reactjs-social-login": "^2.6.2",
+		"sweetalert2": "^11.7.20"
 	}
 }

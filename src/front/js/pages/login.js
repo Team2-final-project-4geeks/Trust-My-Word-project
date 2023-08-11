@@ -13,7 +13,7 @@ const Login = () =>{
 			} else if(password === ''){
 				alert('Password is empty!')
 			} else {
-				fetch(`https://edijavier99-improved-space-memory-44xjjwqqpvgcq99g-3001.preview.app.github.dev/api/login`, { 
+				fetch(process.env.BACKEND_URL + 'api/login', { 
 				method: "POST",
 				headers: { 
 					"Content-Type": "application/json",
