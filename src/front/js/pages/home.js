@@ -148,6 +148,8 @@ export const Home = () => {
 	return (
 		
 		<div className="">
+			            <div class="sharethis-inline-share-buttons bg-danger"></div>
+
 			<button onClick={()=>{}}> ir a usuario</button>
 			<div className="container-fluid">
 				<DinamicText  phrase={"inspire you"} phrase2={"save your time"}  phrase3={"solve your planning problems"} phrase4={" support people's opinions"} phrase1={"provide value"}/>
@@ -175,16 +177,16 @@ export const Home = () => {
 			</div>	
 
 			<div className="container-fluid mt-5">
-				<div className="fondo">
-					<div className="general-image">
-						<h1 className="trip">TRIPS</h1>
-					</div>
+				<div id="imageContainerTrips">
+					<h1 id="titleTrips">TRIPS</h1>
     			</div>
-					<div className="container-fluid mt-2">			
-						<div className="row row-cols-1 row-cols-md-5 g-4">													
-							{showTrips()}						
-						</div>	
-					</div>						
+				<div className="container-fluid mt-3">			
+					<div className="row row-cols-1 row-cols-md-5 g-4">													
+						{showTrips()}						
+					</div>	
+				</div>						
+			</div>
+			<div>
 			</div>
 		</div>	
 	);

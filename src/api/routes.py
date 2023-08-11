@@ -119,15 +119,15 @@ def user_login():
         }
         return jsonify(response_body), 400
     
-    usuario = User.query.filter_by(email=email, password=password).first()
-    if(usuario is None):
+    user = User.query.filter_by(email=email, password=password).first()
+    if(user is None):
         response_body = {
             "msg": "something you type wrong"
         }
         return jsonify(response_body),400
     
-    access_token = create_access_token(identity=usuario.id)
-    return jsonify({ "token": access_token, "user_id": usuario.id })
+    access_token = create_access_token(identity=user.id)
+    return jsonify({ "token": access_token, "user_id": user.id , "username": user.username, "email":user.email})
 
 
 # FOR REVIEWS 
