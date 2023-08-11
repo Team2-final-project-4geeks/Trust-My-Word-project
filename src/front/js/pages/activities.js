@@ -7,6 +7,7 @@ const Activities = () =>{
     const [activities, setActivities] = useState([]);
     const { store, actions } = useContext(Context);
     const city = store.storeCities;
+    const type= store.storeTypes;
     const checked = store.checked;
     console.log(checked);
     
@@ -38,10 +39,14 @@ const Activities = () =>{
         })
     }    
     
-    const showActivities = () =>{        
+    const showActivities = () =>{   
+        const selectedCity = Object.keys(city).filter(cityName=> city[cityName])
+        const selectedType = Object.keys(type).filter(typeName=>type[typeName])     
         return(
             checked ? 
-            (activities.filter(activity => city[activity.location]).map((activity, index) =>{            
+            (
+                activities.filter(activity=>(selectedCity.length == 0 || selectedCity.includes(activity.location) && (selectedType.length == 0 || selectedType.includes(activity.type))))
+                .map((activity, index) =>{            
                 return(  
                     <li key={index}>              
                         <div className="col">

@@ -23,11 +23,17 @@ const SideBar = () => {
             [type]: !prev[type]
         })
     )}
+    const uncheck=()=>{
+        const checkbox = document.querySelectorAll(".form-check-input");
+        checkbox.forEach(box=>{
+            box.checked = false;
+        })
 
+    }
     return(
         <div className="ms-2">
             <button className="btn btn-outline-secondary" id="magnifyingButton"type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><BiSearch /></button>
-            {store.checked && <button className="btn btn-outline-secondary ms-5" type="button" id="showAll" onClick={()=> actions.handleChecked(false)}>Show All</button>}
+            {store.checked && <button className="btn btn-outline-secondary ms-5" type="button" id="showAll" onClick={()=> {actions.handleChecked(false); uncheck()}}>Show All</button>}
             <div className="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
                 <div className="offcanvas-header">
                     <h4 className="offcanvas-title" id="offcanvasScrollingLabel">Search for ... </h4>
@@ -74,15 +80,15 @@ const SideBar = () => {
                         <label className="form-check-label" htmlFor="Algarve"> family </label>
                     </div>
                     <div className="form-check">                    
-                        <input className="form-check-input" type="checkbox" onChange={() => {handleTypes("Algarve"); actions.handleChecked(true)}}value="" id="adventure"/>
+                        <input className="form-check-input" type="checkbox" onChange={() => {handleTypes("adventure"); actions.handleChecked(true)}}value="" id="adventure"/>
                         <label className="form-check-label" htmlFor="Algarve"> adventure </label>
                     </div>
                     <div className="form-check">                    
-                        <input className="form-check-input" type="checkbox" onChange={() => {handleTypes("Algarve"); actions.handleChecked(true)}}value="" id="romantic"/>
+                        <input className="form-check-input" type="checkbox" onChange={() => {handleTypes("romantic"); actions.handleChecked(true)}}value="" id="romantic"/>
                         <label className="form-check-label" htmlFor="Algarve"> romantic </label>
                     </div>
                     <div className="form-check">                    
-                        <input className="form-check-input" type="checkbox" onChange={() => {handleTypes("Algarve"); actions.handleChecked(true)}}value="" id="group"/>
+                        <input className="form-check-input" type="checkbox" onChange={() => {handleTypes("group"); actions.handleChecked(true)}}value="" id="group"/>
                         <label className="form-check-label" htmlFor="Algarve"> group </label>
                     </div>
 

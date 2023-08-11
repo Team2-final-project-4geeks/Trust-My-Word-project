@@ -1,5 +1,6 @@
 #magnifyingButton, #showAll{
     background-color: lightgray;
+    text-decoration: none;
 }
 
 #searchButtonSidebar{
