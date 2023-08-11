@@ -1,0 +1,9 @@
+img{
+    object-fit: cover;
+}
+
+#containerSingle{
+    margin:auto;
+    width:800px;
+    height:400px;
+}

@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Context } from "../store/appContext";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "../../styles/singleproduct.css";
 
 import { useParams} from "react-router-dom";
 
@@ -17,7 +17,7 @@ export const SingleProduct = () => {
         }, [])
     
         const getOneProduct = () => {
-            fetch("https://fakestoreapi.com/products/" + params.id,{
+            fetch(process.env.BACKEND_URL + 'api/review/' + params.id, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -32,31 +32,38 @@ export const SingleProduct = () => {
         }
     
         return (
-            <div className="card-single">
-                 <img src={oneProduct.image} width="400" height="400" className="card-img-single"></img>
-                <div className="card-body-single">
-                    {oneProduct ? (
-                        <div className="text-center">
-                            <h1 className="card-title mt-3 mb-4">
-                            {oneProduct.title}
-                            </h1>
-                                <p className="card-text">
-                                    <p className='mt-0 mb-0'>Price: {oneProduct.price}</p>
-                                    <p className='mt-0 mb-0'>Description: {oneProduct.description}</p>
-                                                    
-                                    <Link to="/">
-                                        <span className="btn btn-primary btn-lg my-5 text-center" href="#" role="button">
-                                            Back home
-                                        </span>
-			                        </Link>
-                                </p>
+
+            <div className="container-fluid" >
+                {oneProduct ? (
+                    <div className="card mb-3" id="containerSingle">
+                        <div className="row g-0 h-100">
+                            <div className="col-md-5">
+                            <img src={oneProduct.image} className="img-fluid rounded-start h-100" alt="..."/>
+                            </div>
+                            <div className="col-md-7">
+                            <div className="card-body h-100">
+                                <h5 className="card-title">{oneProduct.title}</h5>
+                                <p className="card-text">{oneProduct.description}</p>
+                                <p className="card-text">{oneProduct.type}</p>
+                                <p className="card-text">{oneProduct.price}</p>
+                                <p className="card-text">{oneProduct.link}</p>
+                                <p className="card-text"><small className="text-muted">{oneProduct.publishing_date}</small></p>
+                            </div>
+                            </div>
                         </div>
-                    ) : (
-                    <div className="spinner-border" role="status">
-                        <span className="visually-hidden">Loading...</span>
                     </div>
-                    )}
+                ):(
+                <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
                 </div>
+                )}
+
+                <Link to="/">
+                    <span className="btn btn-primary btn-lg my-5 text-center" href="#" role="button">
+                        Back home
+                    </span>
+                </Link>
             </div>
+                 
         )
     }

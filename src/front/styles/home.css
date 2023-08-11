@@ -33,6 +33,10 @@ li{
 }
 #imageContainerTrips {
     background-image: url('https://images.pexels.com/photos/1058277/pexels-photo-1058277.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+}
+    
+#imageContainerProducts{
+    background-image: url('https://cdn.pixabay.com/photo/2018/03/21/09/00/mall-3245949_1280.jpg');
     background-size: cover;
     background-position: center;
     height: 41vh;
@@ -54,6 +58,17 @@ li{
     width: 50%;
     text-align: center; 
     position: absolute; 
+}
+#titleProducts{
+    background-color: white;
+    color: black;
+    font-size: 5.2vw; /* Responsive font size */
+    font-weight: bold;
+    margin: 0 auto; /* Center the text container */
+    padding: 10px;
+    width: 50%;
+    text-align: center; /* Center text */
+    position: absolute; /* Position text */
     top: 50%; /* Position text in the middle */
     left: 50%; /* Position text in the middle */
     transform: translate(-50%, -50%); /* Position text in the middle */

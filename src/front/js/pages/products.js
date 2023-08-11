@@ -2,9 +2,10 @@ import React, { useEffect, useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Product } from "../component/productcard.jsx";
+import SideBar from "../component/sidebar";
 
 
-export const Products = (props) => {
+export const Products = () => {
 
 	const { store, actions } = useContext(Context);
 
@@ -16,7 +17,7 @@ export const Products = (props) => {
 	}, [])
 
 	const getProduct = () =>{
-		fetch('https://fakestoreapi.com/products', {
+		fetch(process.env.BACKEND_URL + 'api/review?category=product', {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json"
@@ -31,26 +32,29 @@ export const Products = (props) => {
 	}
 
 	const showProducts = () => {
-		if (products && products.length > 0){
-		return products.map((product) => {
-			return <Product product={product} />
-		})
-		} else {
+		return products.map((product, index) => {
 			return (
-			<div className="spinner-border" role="status">
-				<span className="visually-hidden">Loading...</span>
-			</div>
-			);
-		}
-	}
+				<li key={index} className= "col">
+					<div className="col">
+						<div className="card">
+							<img src={product.image} className="card-img-top" alt="..."/>
+						</div>
+						<div className="card-body">
+							<h5 className="card-title">{product.title}</h5>
+							<p className="card-text">{product.description}</p>                            
+							<p className="card-text">{product.link}</p>
+							<p className="card-text">{product.publishing_date}</p> 
+						</div>
+					</div>
+				</li>)
+				})
+			}
 
 	return (
 		<div className="Container">		
-				<div className="scrollmenu" >
-						<h1 className="font-bold text-white text-center my-5">Products</h1>
-							<div className="row row-cols-1 row-cols-md-2 g-4 ">
-								{products && showProducts()}
-							</div>
+				<SideBar />
+				<div className="row row-cols-1 row-cols-md-2 g-4 mt-3"> 
+					{showProducts()}
 				</div>
 		</div>			
 	);
