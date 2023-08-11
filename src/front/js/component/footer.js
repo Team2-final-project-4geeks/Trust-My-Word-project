@@ -24,6 +24,6 @@ export const Footer = () => {
 					<p class="text-center text-light">&copy; 2023 4Geeks Academy</p>		
 			</footer>
 		</div>
-		</div>
+	
 	)
 };
