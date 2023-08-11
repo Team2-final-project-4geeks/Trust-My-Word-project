@@ -40,6 +40,14 @@
 #activityTitle{
     text-decoration: underline overline;
 }
+#commentSection{
+    width: 1350px;
+    min-height: 450px;
+    margin:auto;
+}
+#basic-addon1, #commentWrite{
+    background: rgb(95,191,153);
+}
 
 #sumbitButtonSingle{
     background:black;
