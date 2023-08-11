@@ -1,9 +1,60 @@
-img{
-    object-fit: cover;
+#singleProductPicture{
+    object-fit: cover;    
 }
 
 #containerSingle{
     margin:auto;
-    width:800px;
+    width:1300px;
     height:400px;
+    justify-content: center;
+    align-items: center;
+    display:flex;
+}
+
+#backgroundSingleProduct{
+    background: rgb(95,191,153);
+    background: linear-gradient(to top right, rgba(95,191,153,1) 0%, rgba(253,187,45,1) 100%);
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px; 
+    overflow: hidden;
+    margin:auto;
+    width:1350px;
+    height:450px;
+    display:flex;
+    justify-content: center;
+    align-items: center;   
+}
+
+#mapSingleProduct{
+    object-fit: cover;
+    height: 100%;
+}
+
+
+#productRow{
+    justify-content: space-between;
+    margin-right: 15px;
+}
+
+#productTitle{
+    text-decoration: underline overline;
+}
+
+#sumbitButtonSingle{
+    background:black;
+    color:white;
+}
+#commentSection{
+    width: 1350px;
+    min-height: 450px;
+    margin:auto;
+    margin-bottom: 50px;
+}
+#basic-addon1, #commentWrite{
+    background: rgb(95,191,153);
+}
+#sumbitButtonSingle{
+    background:black;
+    color:white;
 }
