@@ -6,7 +6,7 @@ import "../../styles/reviewform.css";
 export const ReviewForm = () => {
   const presetKey = "dumn5jgp";
   const cloudName = "dbxeaqsv4"; 
-  const [imageCloud, setImageCloud] = useState("https://fastly.picsum.photos/id/163/2000/1333.jpg?hmac=htdHeSJwlYOxS8b0TTpz2s8tD_QDlmsd3JHYa_HGrg8");
+  const [imageCloud, setImageCloud] = useState("");
   const [title, setTitle] = useState("")
   const [type, setType] = useState("")
   const [description, setDescription] = useState("")
