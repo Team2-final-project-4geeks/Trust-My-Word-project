@@ -86,7 +86,7 @@ const SideBar = () => {
                         <label className="form-check-label" htmlFor="Algarve"> group </label>
                     </div>
 
-                <button type="button" id="searchButtonSidebar" onClick={()=> {actions.addCity(cities); actions.handleChecked(true)}} className="btn btn-secondary ms-2 mt-4"> Search </button>    
+                <button type="button" id="searchButtonSidebar" onClick={()=> {actions.addCity(cities); actions.addType(types); actions.handleChecked(true)}} className="btn btn-secondary ms-2 mt-4"> Search </button>    
                 </div>                
             </div>           
         </div>
