@@ -16,6 +16,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     username = db.Column(db.String(120), nullable=False)
+    favorites= db.Column(db.ARRAY(db.String(120)))
     password = db.Column(db.String(80), unique=False, nullable=False)
     # 1 - N with Reviews
     reviews = db.relationship("Review", back_populates="user")
