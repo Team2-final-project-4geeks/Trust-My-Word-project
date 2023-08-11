@@ -83,12 +83,6 @@ export const SingleProduct = () => {
                 </div>
                 <button type="button" className="btn btn-dark mt-5" id="sumbitButtonSingle"> Send </button>
             </div>
-                <Link to="/">
-                    <span className="btn btn-primary btn-lg my-5 text-center" href="#" role="button">
-                        Back home
-                    </span>
-                </Link>
             </div>
-                 
         )
     }

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
-import ViewMore from "./viewmore.jsx";
+import ViewMoreProduct from "./viewMoreProduct.js";
 
 import "../../styles/productcard.css";
 
@@ -42,7 +42,7 @@ export const ProductCard = (props) => {
                                 <p class="card-text"><i>{props.product.price}</i></p> 
                             </div>  
                             <div className="btn-container">
-                                <ViewMore item={props.product.id}/>
+                                <ViewMoreProduct item={props.product.id}/>
                             </div>
                         </div>
                 </div>
