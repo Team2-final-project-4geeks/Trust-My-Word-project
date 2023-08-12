@@ -1,13 +1,6 @@
 import React, {useState, useEffect,useContext} from "react";
 import { Context} from "../store/appContext";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
-import "../../styles/carousel.css";
-// import required modules
-import { EffectCoverflow, Pagination } from 'swiper/modules';
-//import { useNavigate } from "react-router-dom";
+import profile from "../../img/profile.png";
 import { FaPencilAlt } from 'react-icons/fa';
 import "../../styles/userpage.css";
 import { useNavigate } from "react-router-dom";
@@ -42,19 +35,19 @@ const getReviews = () =>{
         console.log('Oops something went wrong'+ error);
     })
 }
-
-
 const showUsersReviews =()=> {
     return reviews.map((review, index) =>{
         return(
-            <SwiperSlide key={index}>
-                <img src="https://swiperjs.com/demos/images/nature-1.jpg" alt="review-image"/>
-                {review.title}  
-                    <span className="input-group-text"><FaPencilAlt 
-                     onClick={()=>{
-                        navigate("/modify-review/" + review.id)
-                     }} size={20} color="grey" id="pencil"/></span>
-            </SwiperSlide>
+                <li style={{ '--cardColor': '#ffc600' }} key={index}>
+                <div class="content">
+                    <div class="icon"> <span className="input-group-text"><FaPencilAlt 
+                      onClick={()=>{
+                         navigate("/modify-review/" + review.id)
+                        }} size={45} color="grey" id="pencil"/></span></div>
+                    <div class="title">{review.title}</div>
+                    <div class="text">{review.description}</div>
+                </div>
+            </li>
         )
     })
 }
@@ -80,7 +73,7 @@ const showUsersReviews =()=> {
                     </div>
                     <div className="col-3">
                         <div class="circle">
-                            <img src="https://picsum.photos/id/3/700" alt="Foto"/>
+                            <img src={profile} alt="Foto"/>
                         </div>
                     </div>
                     <div className="col-4">
@@ -92,34 +85,18 @@ const showUsersReviews =()=> {
                             <div className="username">
                                 <p><i class="fas fa-user "></i>: {username}</p>
                             </div>
-
                         </div>
-                    </div>
-                    
+                    </div> 
                 </div>
                 <div className="row">
-                    <h1 className="px-5">MY REVIEWS</h1>
-                    <div>
                     <div className='carousel-container'>
-                        <Swiper
-                            effect={'coverflow'}
-                            grabCursor={true}
-                            centeredSlides={true}
-                            slidesPerView={'auto'}
-                            coverflowEffect={{
-                            rotate: 50,
-                            stretch: 0,
-                            depth: 100,
-                            modifier: 1,
-                            }}
-                            pagination={true}
-                            modules={[EffectCoverflow, Pagination]}
-                            className="mySwiper"
-                        >
-                            {showUsersReviews()}
-                        </Swiper>
-                    </div>
-                    </div> 
+                        <div className="reviews-body">          
+                            <h1>My reviews</h1>
+                            <ol class="olcards">
+                                {showUsersReviews()}
+                            </ol>
+                        </div>
+                    </div>          
                 </div>
             </div>
         </div>

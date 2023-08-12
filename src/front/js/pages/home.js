@@ -17,11 +17,11 @@ export const Home = () => {
   	const [products, setProducts] = useState([]);
 	const [trips,setTrips] = useState([])
   
-		console.log(store.favButtonPress)
 	useEffect(() => {		
 		getActivities();
     	getProduct();
 		getTrips()
+		console.log(store.userId);
 	}, []);
 
 	const getActivities = () => {

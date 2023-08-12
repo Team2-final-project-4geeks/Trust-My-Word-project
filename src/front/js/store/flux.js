@@ -78,7 +78,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log('Oops something went wrong'+ error);
 				})
 			},
-		}
+			addId: (id) =>{
+				const store = getStore();
+				setStore({...store,userId:id})
+			},
+			addUsername: (username) =>{
+				const store = getStore();
+				setStore({...store,userName:username})
+			}
+		},
+		
 	};
 };
 

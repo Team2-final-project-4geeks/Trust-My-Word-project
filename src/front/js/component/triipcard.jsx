@@ -21,7 +21,7 @@ const TriipCard = (props)=>{
                     <div className="d-flex flex-row">
                         <img src={props.profile} className="profile-image" alt="..."/>
                             <div className="d-flex flex-column mx-3">
-                                <p className="card-text"><small className="text-muted username">{store.addUsername}</small></p>
+                                <p className="card-text"><small className="text-muted username">{store.userName}</small></p>
                                 <hr className="mb-0"/>
                                 <p className="card-text"><small className="text-muted publishing-date">{props.trip.publishing_date}</small></p>
                             </div>     
@@ -33,7 +33,7 @@ const TriipCard = (props)=>{
                             <i className="fas fa-star fa-sm text-warning text-center"></i>
                             <i className="fas fa-star fa-sm text-warning text-center"></i>
                         </div>
-                        <div id="trip-board" classNameName="mt-2">
+                        <div id="trip-board" className="mt-2">
                             <div id="card-description-trip">
                                 <p className="card-text"><i className="fas fa-quote-left mt-2 me-2"></i> <i> {props.trip.description}</i></p>
                             </div>

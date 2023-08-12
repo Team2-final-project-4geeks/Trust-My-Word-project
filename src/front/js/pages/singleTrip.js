@@ -1,9 +1,7 @@
 import React, { useEffect,useState } from "react";
 import { useParams } from "react-router-dom";
 import "../../styles/singletrip.css";
-
-
-
+import ShareComponent from "../component/shareComponent.js";
 
 const SingleTrip = (props) =>{
     const params = useParams()
@@ -45,8 +43,6 @@ const SingleTrip = (props) =>{
 		})
 		.then(res => res.json())
 		.then(data => {
-            console.log("estoy en ciudad");
-            console.log(data);
             setCity(data.location)
 		})
 		.catch(err => console.error(err))
@@ -88,10 +84,11 @@ const SingleTrip = (props) =>{
                                         <p className="card-text ms-2">{weather} °C</p>                                        
                                         <p className="card-text ms-2">{singleTrip.publishing_date}</p>
                                     </div>
-                                <p className="card-text ms-2">{singleTrip.type} singleTrip</p>
+                                <p className="card-text ms-2">{singleTrip.type}</p>
                                 <p className="card-text ms-2">{singleTrip.location}</p>
                                 <p className="card-text ms-2"><i>"{singleTrip.description}"</i></p>
                                 <p className="card-text ms-2">{singleTrip.price}</p>
+                                <ShareComponent/>
                             </div>
                         </div>
                         <div className="col-md-3 border-0 h-100">

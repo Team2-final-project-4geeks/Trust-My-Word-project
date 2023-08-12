@@ -16,7 +16,8 @@ export const Navbar = () => {
 	}
 	useEffect(() => {		
 		//el parametro tiene que venir del user_id
-		actions.getUser(10)
+		actions.getUser(store.userId)
+		console.log(store.userId);
 	}, []);
 
 	
@@ -70,7 +71,7 @@ export const Navbar = () => {
 															onClick={() => {
 																actions.deleteFavourite(fav)
 																{/*//el parametro tiene que venir del user_id*/}
-																actions.addUserFavourites(store.favourite, 10)
+																actions.addUserFavourites(store.favourite, store.userId)
 															}}
 														></i>
 													</a>

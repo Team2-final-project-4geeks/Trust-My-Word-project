@@ -2,6 +2,8 @@ import React, {useState, useEffect, useContext} from "react";
 import SideBar from "../component/sidebar.js"
 import { Context } from "../store/appContext.js";
 import "../../styles/activities.css"
+import { useNavigate } from "react-router-dom";
+
 
 
 const Activities = () =>{
@@ -10,6 +12,9 @@ const Activities = () =>{
     const city = store.storeCities;
     const type= store.storeTypes;
     const checked = store.checked;
+    const navigate= useNavigate()
+
+
     console.log(checked);
     
     
@@ -80,6 +85,7 @@ const Activities = () =>{
                                     <p className="card-text">{activity.publishing_date}</p>                            
                                     <p className="card-text">{activity.description}</p>
                                     <p className="card-text">{activity.link}</p>
+                                    <button onClick={()=> navigate("/activity/" + activity.id)}>holaaa</button>
                                 </div>
                             </div>
                         </div>
