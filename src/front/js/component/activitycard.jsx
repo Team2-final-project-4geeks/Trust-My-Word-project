@@ -12,31 +12,32 @@ const ActivityCard = (props)=>{
         <div className="card-body" id="activityBody">
             <div className="image-container">
                 <img src={props.img} className="card-img-top" alt="..."/>
-                <div className="image-overlay" id="heartIconActivity">
-                    <i className="far fa-heart fa-1x" onClick={()=> actions.addFavourite()}></i>                        
+                <div className="image-overlay d-flex justify-content-end align-items-start p-2" id="heartIconActivity">
+                    <i className="fas fa-heart text-danger" onClick={()=> actions.addFavourite(props.activity.title)}></i>                        
                 </div>
             </div>
             <div className="card-body mx-3">
-                <div className="d-flex flex-column align-items-center justify-content-center ">
+                <div className="d-flex flex-column">
                     <div className=" col-11">
                         <div className="d-flex flex-row">
                             <img src={props.profile} className="profile-image" id="profileActivityCard"alt="..."/>
                             <div className="d-flex flex-column mx-3">
-                                <p className="card-text"><small className="text-muted publishing-date" id="publishingDateActivityCard">{props.activity.publishing_date}</small></p>
+                                <p className="card-text"><small className="text-muted username">{store.addUsername}</small></p>
+                                <hr className="mb-0"></hr>
+                                <p className="card-text"><small className="text-muted publishing-date">{props.activity.publishing_date}</small></p>
                             </div>                        
-                        </div>                    
-                        <h3 className="card-title text-center mt-4">{props.activity.title}</h3>
-                        <div className="text-center">
-                            <i className="fas fa-star fa-sm text-warning text-center"></i>
-                            <i className="fas fa-star fa-sm text-warning text-center"></i>
-                            <i className="fas fa-star fa-sm text-warning text-center"></i>
                         </div>
-                        <div className="card-description" id="description">
-                            <p className="card-text"><i className="fas fa-quote-left mt-2 me-2"></i><i>{props.activity.description}</i></p>                            
-                        </div>
-                        <p className="card-text mt-2" id="priceTag"><i>{props.activity.price}</i></p>                   
-                        <div className="btn-container-activity">
-                            <button className="btn" type="button" id="activityCardViewMore"onClick={()=> navigate("/activity/" + props.activity.id)}> <strong>View more</strong></button> 
+                        <div className="d-flex flex-column align-items-center ">
+                            <h3 className="card-title text-center mt-2">{props.activity.title}</h3>
+                            <div className="mt-2">                                
+                                <div className="card-description" id="description">
+                                    <p className="card-text"><i className="fas fa-quote-left mt-2 me-2"></i><i>{props.activity.description}</i></p>                            
+                                </div>
+                                <p className="card-text mt-2" id="priceTag"><i>{props.activity.price}</i></p>
+                            </div>                   
+                            <div className="btn-container-activity">
+                                <button className="btn" type="button" onClick={()=> navigate("/activity/" + props.activity.id)}> <strong>View more</strong></button> 
+                            </div>
                         </div>
                     </div>
                 </div>
