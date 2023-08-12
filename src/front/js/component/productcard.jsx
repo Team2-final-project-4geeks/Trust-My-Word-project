@@ -18,7 +18,10 @@ export const ProductCard = (props) => {
              <img src={props.product.image} class="card-img-top" alt="..."/>
                 <div class="image-overlay">
                     <i class="far fa-heart fa-1x" onClick={() => {
-                            actions.addFavourite(props.product.title)}}></i>
+                            actions.addFavourite(props.product.title); 
+                            	{/*Passar id Hardcoded pero después tendria que venir del store (stor.id o como lo tenga añadido Edi en flux)}*/}
+                            actions.addUserFavourites(store.favourite, 10)
+                            }}></i>
                     <h1></h1>
                 </div>
             </div>

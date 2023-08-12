@@ -52,7 +52,6 @@ export const SingleProduct = () => {
                                 <p className="card-text">{oneProduct.type}</p>
                                 <p className="card-text">{oneProduct.price}</p>
                                 <p className="card-text">{oneProduct.link}</p>
-    
                                 </div>
                             </div>
                             </div>
