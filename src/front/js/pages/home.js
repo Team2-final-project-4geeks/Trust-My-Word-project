@@ -6,20 +6,22 @@ import { ProductCard } from "../component/productcard.jsx";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
 import TriipCard from "../component/triipcard.jsx";
-
+import DinamicText from "../component/dinamictext.jsx";
+import { useParams } from "react-router-dom";
 
 export const Home = () => {
+	const params = useParams()
 	const { store, actions } = useContext(Context);
 	const navigate= useNavigate()
 	const [activities, setActivities] = useState([]);
   	const [products, setProducts] = useState([]);
 	const [trips,setTrips] = useState([])
   
-		console.log(store.favButtonPress)
 	useEffect(() => {		
 		getActivities();
     	getProduct();
 		getTrips()
+		console.log(store.userId);
 	}, []);
 
 	const getActivities = () => {
@@ -51,7 +53,6 @@ export const Home = () => {
 		})
 		.then(data=> {
 			setProducts(data);
-			setReversedProducts(data)
 		})
 		.catch(error => {
 			console.log('Oops something went wrong'+ error);
@@ -69,18 +70,15 @@ export const Home = () => {
 			return resp.json();
 		})
 		.then(data=> {
-			console.log("estpy aqui");
 			setTrips(data);			
 		})
 		.catch(error => {
 			console.log('Oops something went wrong'+ error);
 		})
 	}
-
-
+	
 	const showActivity = () =>{
 		const reservedActivities = activities.slice().reverse();
-
 		if (reservedActivities && reservedActivities.length > 0) {
 			const firstThreeActivities = reservedActivities.slice(0, 3); 
 			return firstThreeActivities.map((activity, index) => (
@@ -92,19 +90,16 @@ export const Home = () => {
 					img="https://cdn.pixabay.com/photo/2014/12/16/22/25/sunset-570881_1280.jpg"
 				/>
 			));
-
 			} else {
 				return (
 				<div className="spinner-border" role="status">
 					<span className="visually-hidden">Loading...</span>
 				</div>
 				)
-				}
+			}
 	}
 	const showProducts = () => {
-
 		const reversedProducts = products.slice().reverse();
-
 		if (reversedProducts && reversedProducts.length > 0) {
 			return reversedProducts.slice(0, 3).map((product, index) => (
 				<ProductCard
@@ -123,9 +118,7 @@ export const Home = () => {
 	}
 
 	const showTrips = () =>{
-		
 		const reservedTrips = trips.slice().reverse();
-
 		if (reservedTrips && reservedTrips.length > 0) {
 			const firstThreeTrips = reservedTrips.slice(0, 3); 
 			return firstThreeTrips.map((trip, index) => (
@@ -137,7 +130,6 @@ export const Home = () => {
 					img="https://picsum.photos/id/295/600/380"
 				/>
 			));
-
 			} else {
 				return (
 				<div className="spinner-border" role="status">
@@ -146,8 +138,12 @@ export const Home = () => {
 				)
 				}
 	}
-	return (	
-		<div className="container-fluid mt-5">
+	return (
+		
+		<div className="">
+			<div className="container-fluid">
+				<DinamicText  phrase={"inspire you"} phrase2={"save your time"}  phrase3={"solve your planning problems"} phrase4={" support people's opinions"} phrase1={"provide value"}/>
+			</div>
 			<div className="container-fluid">
 					<div className="general-image" id="imageContainerActivities">
 						<h1 id="titleActivities">ACTIVITIES</h1>
@@ -174,16 +170,16 @@ export const Home = () => {
 			</div>	
 
 			<div className="container-fluid mt-5">
-				<div class="fondo">
-					<div class="general-image">
-						<h1 className="trip">TRIPS</h1>
-					</div>
+				<div id="imageContainerTrips">
+					<h1 id="titleTrips">TRIPS</h1>
     			</div>
-					<div className="container-fluid mt-4">			
-						<div className="row row-cols-1 row-cols-md-5 g-4">													
-							{showTrips()}						
-						</div>	
-					</div>						
+				<div className="container-fluid mt-3">			
+					<div className="row row-cols-1 row-cols-md-5 g-4">													
+						{showTrips()}						
+					</div>	
+				</div>						
+			</div>
+			<div>
 			</div>
 		</div>	
 	);

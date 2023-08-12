@@ -109,8 +109,9 @@ const SingleActivity = () => {
                     <span className="input-group-text rounded me-2" id="commentWrite">Write your comment:</span>
                     <textarea className="form-control rounded-pill" aria-label="With textarea"></textarea>
                 </div>
-                <button type="button" className="btn btn-dark mt-5 mb-4" id="sumbitButtonSingle"> Send </button>                
-            </div>            
+                <button type="button" className="btn btn-dark mt-5" id="sumbitButtonSingle"> Send </button>                
+            </div>             
+            
         </div>
 
     )

@@ -2,25 +2,6 @@ li{
     list-style-type: none;       
 }
 
-.fondo {
-    background-image: url('https://images.pexels.com/photos/1058277/pexels-photo-1058277.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
-    background-size: cover;
-    background-position: center;
-    height: 400px;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.general-image {
-    text-align: center;
-}
-
-.trip{
-    font-size: 50px;
-}
-
 #titleActivities{
     background-color: white;
     color: black;
@@ -50,6 +31,20 @@ li{
     position: relative;
     height: 31vh;
 }
+#imageContainerTrips {
+    background-image: url('https://images.pexels.com/photos/1058277/pexels-photo-1058277.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+    background-size: cover;
+    background-position: center;
+    height: 41vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    position: relative;
+    height: 31vh;
+}
+    
 #imageContainerProducts{
     background-image: url('https://cdn.pixabay.com/photo/2018/03/21/09/00/mall-3245949_1280.jpg');
     background-size: cover;
@@ -62,6 +57,21 @@ li{
     background-size: cover;
     position: relative;
     height: 31vh;
+}
+#titleTrips{
+    background-color: white;
+    color: black;
+    font-size: 5.2vw; /* Responsive font size */
+    font-weight: bold;
+    margin: 0 auto; /* Center the text container */
+    padding: 10px;
+    width: 50%;
+    text-align: center; /* Center text */
+    position: absolute; /* Position text */
+    top: 50%; /* Position text in the middle */
+    left: 50%; /* Position text in the middle */
+    transform: translate(-50%, -50%); /* Position text in the middle */
+    mix-blend-mode: screen; /* This makes the cutout text possible */
 }
 #titleProducts{
     background-color: white;

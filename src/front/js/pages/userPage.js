@@ -1,22 +1,23 @@
-import React, {useState, useEffect} from "react";
-//import { useNavigate } from "react-router-dom";
+import React, {useState, useEffect,useContext} from "react";
+import { Context} from "../store/appContext";
+import profile from "../../img/profile.png";
 import { FaPencilAlt } from 'react-icons/fa';
 import "../../styles/userpage.css";
+import { useNavigate } from "react-router-dom";
 
 const UserPage = () =>{
-
+    const navigate= useNavigate()
+    const {store,actions} = useContext(Context)
     const [reviews, setReviews] = useState([]);
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
-    //const navigate = useNavigate();
 
     useEffect(() => {		
 		getReviews();
-        getUser();    	
 	}, []);
 
 const getReviews = () =>{
-    fetch("https://redesigned-eureka-w6vv5q955r9hgwp6-3001.app.github.dev/api/user/19",{
+    fetch( process.env.BACKEND_URL + "/api/user/" + store.userId,{
         method: 'GET',
           headers: {
             "Content-Type": "application/json"
@@ -26,27 +27,7 @@ const getReviews = () =>{
         return resp.json();
     })
     .then(data=> {		
-        console.log(data)	
         setReviews(data.reviews);
-        console.log(data.reviews[1].title)
-    })
-    .catch(error => {			
-        console.log('Oops something went wrong'+ error);
-    })
-}
-
-const getUser = () =>{
-    fetch("https://redesigned-eureka-w6vv5q955r9hgwp6-3001.app.github.dev/api/user/19",{
-        method: 'GET',
-          headers: {
-            "Content-Type": "application/json"
-        }
-    })
-     .then(resp => {								
-        return resp.json();
-    })
-    .then(data=> {
-        console.log("estoy aqui")			
         setEmail(data.email);
         setUsername(data.username);
     })
@@ -54,39 +35,69 @@ const getUser = () =>{
         console.log('Oops something went wrong'+ error);
     })
 }
-
 const showUsersReviews =()=> {
-    console.log(reviews)
     return reviews.map((review, index) =>{
         return(
-            <li key={index}>
-                <div className="input-group mb-3">
-                    <span className="input-group-text">Title</span>
-                    <span className="input-group-text"><FaPencilAlt size={20} color="grey" id="pencil"/></span>
-                    <input type="text" readonly className="form-control" aria-label="Dollar amount (with dot and two decimal places)" value={review.title}/>
-                </div>                                  						
+                <li style={{ '--cardColor': '#ffc600' }} key={index}>
+                <div class="content">
+                    <div class="icon"> <span className="input-group-text"><FaPencilAlt 
+                      onClick={()=>{
+                         navigate("/modify-review/" + review.id)
+                        }} size={45} color="grey" id="pencil"/></span></div>
+                    <div class="title">{review.title}</div>
+                    <div class="text">{review.description}</div>
+                </div>
             </li>
         )
     })
 }
     return(
         <div className="container-fluid">
-            <div className="userSection">
-                <div className="mb-3 row">
-                    <label htmlFor="staticEmail" className="col-sm-2 col-form-label"> Email :</label>
-                    <div className="col-sm-10">
-                        <input type="text" readonly className="form-control-plaintext" id="staticEmail" value={email}/>
+            <div className="userSection bg-light ">
+                <div className="row">
+                    <div className="col-5">
+                            <div className="insight d-flex flex-row p-5">
+                                <div className="">
+                                    <p className="title mx-4">Reviews</p>
+                                    <p className="reviews  mx-4">{reviews.length}</p>
+                                </div>
+                                <div className="">
+                                    <p className="title mx-4">Favorites</p>
+                                    <p className="reviews  mx-4">0</p>
+                                </div>
+                                <div className="">
+                                    <p className="title mx-4">Comments</p>
+                                    <p className="reviews  mx-4">0</p>
+                                </div>
+                            </div>
                     </div>
-                </div>
-                <div className="mb-3 row">
-                    <label htmlFor="staticUsername" className="col-sm-2 col-form-label"> User name :</label>
-                    <div className="col-sm-10">
-                        <input type="text" readonly className="form-control-plaintext" id="staticUsername" value={username}/>
+                    <div className="col-3">
+                        <div class="circle">
+                            <img src={profile} alt="Foto"/>
+                        </div>
                     </div>
+                    <div className="col-4">
+                        <div className="user-info d-flex flex-column py-5">
+                            <h3 className="mb-3">My details</h3>
+                            <div className="email">
+                                <p><i class="fas fa-at "></i>: {email}</p>       
+                            </div>
+                            <div className="username">
+                                <p><i class="fas fa-user "></i>: {username}</p>
+                            </div>
+                        </div>
+                    </div> 
                 </div>
-            </div>
-            <div>
-                {showUsersReviews()}
+                <div className="row">
+                    <div className='carousel-container'>
+                        <div className="reviews-body">          
+                            <h1>My reviews</h1>
+                            <ol class="olcards">
+                                {showUsersReviews()}
+                            </ol>
+                        </div>
+                    </div>          
+                </div>
             </div>
         </div>
     )
