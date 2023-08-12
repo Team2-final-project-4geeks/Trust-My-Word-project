@@ -10,9 +10,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			favourite: [],
 			storeCities: {},
+
 			storeTypes: {},
-			checked: false
-			
+			checked: false,			
+			userId: null,
+			userName: "",
+			email:"",		
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -75,7 +78,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log('Oops something went wrong'+ error);
 				})
 			},
-		}
+			addId: (id) =>{
+				const store = getStore();
+				setStore({...store,userId:id})
+			},
+			addUsername: (username) =>{
+				const store = getStore();
+				setStore({...store,userName:username})
+			}
+		},
+		
 	};
 };
 

@@ -4,7 +4,6 @@ import SideBar from "../component/sidebar.js"
 import { Context } from "../store/appContext.js";
 import "../../styles/activities.css"
 
-
 const Activities = () =>{
     const [activities, setActivities] = useState([]);
     const { store, actions } = useContext(Context);

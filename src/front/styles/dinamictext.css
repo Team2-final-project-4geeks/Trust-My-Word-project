@@ -1,0 +1,14 @@
+.animated-text-board{
+    background-color: #ffc600;
+    padding-left: 15px;
+    padding-right: 15px;
+    opacity: 0.9;
+    border-radius: 8px;
+}
+.titulo{
+    font-size: 50px;
+}
+h4{
+    font-size: 70px;
+}
+

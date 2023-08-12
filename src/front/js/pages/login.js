@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import "../../styles/login.css";
 import { useNavigate } from "react-router-dom";
+import { Context} from "../store/appContext";
+
 
 const Login = () =>{
+    const {store,actions} = useContext(Context)
     const [email,setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
 
     const user_login = () =>{
-			if(email === '') {
+			if(email ==='') {
 				alert(' Email is Empty!')
 			} else if(password === ''){
 				alert('Password is empty!')
 			} else {
-				fetch(process.env.BACKEND_URL + 'api/login', { 
+				fetch( process.env.BACKEND_URL + `api/login`, { 
 				method: "POST",
 				headers: { 
 					"Content-Type": "application/json",
@@ -22,17 +25,16 @@ const Login = () =>{
 			})
 			.then((res) => res.json())
 			.then((result) => {
-				console.log('Token is Here =====>', result);
 				localStorage.setItem("jwt-token", result.token);
-				alert('You are logged in!')
+                actions.addId(result.user_id)
+                actions.addUsername(result.username)
+                console.log(result.user_id);
 				navigate("/")
 			}).catch((err) => {
 				console.log(err);
 			})
 			}
-
     }
-    
     return(
         <div class="container-fluid login-card">
             <div class="row d-flex justify-content-center align-items-center vh-100">
@@ -70,12 +72,15 @@ const Login = () =>{
                                         }}
                                         /><br/><br/>
                                 </div>
-                                <button type="submit" className="btn btn-success mt-4" onClick={user_login}>Login</button>
+                                <button type="submit" className="btn btn-success mt-4" 
+                                onClick={()=>{
+                                    user_login()
+                                   
+                                }}>Login</button>
                                 <div className="d-flex flex-row mt-3">
                                     <a href="/" className="me-5 text-muted"><small>Forgot password?</small></a>
                                     <a href="/create-user"><small>Register now</small></a>
                                 </div>
-
                                 <br/>                                
                             </div>
                         </div>
