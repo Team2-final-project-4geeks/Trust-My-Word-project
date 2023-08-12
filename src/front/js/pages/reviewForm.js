@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import TextAreaWithLimit from "../component/limitTextArea.js"
 import { cloudinary } from "cloudinary-core";
 
 import "../../styles/reviewform.css";
@@ -173,7 +174,8 @@ export const ReviewForm = () => {
                     <div class="col" id="right-side">
                         <span className="title">Description</span>
                         <div className="form-group">
-                            <textarea
+                            <TextAreaWithLimit
+                                maxLength={375}
                                 className="form-control mt-3 mb-2"
                                 id="description"
                                 placeholder="Enter description..."
