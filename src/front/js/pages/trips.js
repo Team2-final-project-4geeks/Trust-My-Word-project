@@ -3,7 +3,6 @@ import TriipCard from "../component/triipcard.jsx";
 
 const Trips = () =>{
     const [trip,setTrips] = useState([])
-
     const get_all_trips = () =>{
         fetch(process.env.BACKEND_URL + 'api/review?category=trip', {
 			method: "GET",
@@ -27,24 +26,20 @@ const Trips = () =>{
             )
         })
     }
-  
-
     useEffect(()=>{
         get_all_trips()
         showTrips() 
     },[])
-
     return(
-        <div className="py-2" style={{ overflowX: 'auto', overflowY: 'hidden', paddingLeft: 10, paddingRight: 10}}>
+        <div className="py-2" >
 		<h2 className="font-weight-light">TRIPS </h2>
-		<div className="d-flex flex-row flex-nowrap">
+		<div className="d-flex flex-row">
 			{trip.length !== 0 ? showTrips() : (
 				<div className="spinner-border" role="status">
 					<span className="visually-hidden">Loading...</span>
 				</div>
 			)}
 		</div>
-
         </div>
     )
 }

@@ -1,24 +1,30 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect,useContext} from "react";
+import { Context} from "../store/appContext";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import "../../styles/carousel.css";
+// import required modules
+import { EffectCoverflow, Pagination } from 'swiper/modules';
 //import { useNavigate } from "react-router-dom";
 import { FaPencilAlt } from 'react-icons/fa';
 import "../../styles/userpage.css";
 import { useNavigate } from "react-router-dom";
-import Carousel from "../component/usercarousel.jsx";
 
 const UserPage = () =>{
-
+    const navigate= useNavigate()
+    const {store,actions} = useContext(Context)
     const [reviews, setReviews] = useState([]);
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
-    const navigate = useNavigate();
 
     useEffect(() => {		
 		getReviews();
-        getUser();    	
 	}, []);
 
 const getReviews = () =>{
-    fetch( process.env.BACKEND_URL + "/api/user/99",{
+    fetch( process.env.BACKEND_URL + "/api/user/" + store.userId,{
         method: 'GET',
           headers: {
             "Content-Type": "application/json"
@@ -29,23 +35,6 @@ const getReviews = () =>{
     })
     .then(data=> {		
         setReviews(data.reviews);
-    })
-    .catch(error => {			
-        console.log('Oops something went wrong'+ error);
-    })
-}
-
-const getUser = () =>{
-    fetch( process.env.BACKEND_URL + "/api/user/99",{
-        method: 'GET',
-          headers: {
-            "Content-Type": "application/json"
-        }
-    })
-     .then(resp => {								
-        return resp.json();
-    })
-    .then(data=> {
         setEmail(data.email);
         setUsername(data.username);
     })
@@ -54,25 +43,23 @@ const getUser = () =>{
     })
 }
 
+
 const showUsersReviews =()=> {
     return reviews.map((review, index) =>{
         return(
-            <li key={index}>
-                <div className="input-group mb-3">
-                    <span className="input-group-text">Title</span>
+            <SwiperSlide key={index}>
+                <img src="https://swiperjs.com/demos/images/nature-1.jpg" alt="review-image"/>
+                {review.title}  
                     <span className="input-group-text"><FaPencilAlt 
-                    onClick={()=>{
+                     onClick={()=>{
                         navigate("/modify-review/" + review.id)
-                    }} size={20} color="grey" id="pencil"/></span>
-                    <input type="text" readonly className="form-control" aria-label="Dollar amount (with dot and two decimal places)" value={review.title}/>
-                </div>                                  						
-            </li>
+                     }} size={20} color="grey" id="pencil"/></span>
+            </SwiperSlide>
         )
     })
 }
     return(
         <div className="container-fluid">
-
             <div className="userSection bg-light ">
                 <div className="row">
                     <div className="col-5">
@@ -97,30 +84,43 @@ const showUsersReviews =()=> {
                         </div>
                     </div>
                     <div className="col-4">
-                            <div className="user-info d-flex flex-column py-5">
-                                <h3 className="mb-3">My details</h3>
-                                <div className="email">
-                                    <p><i class="fas fa-at "></i>: {email}</p>
-                                    
-                                </div>
+                        <div className="user-info d-flex flex-column py-5">
+                            <h3 className="mb-3">My details</h3>
+                            <div className="email">
+                                <p><i class="fas fa-at "></i>: {email}</p>       
+                            </div>
                             <div className="username">
                                 <p><i class="fas fa-user "></i>: {username}</p>
                             </div>
 
-                            </div>
+                        </div>
                     </div>
                     
                 </div>
                 <div className="row">
-                <h1 className="px-5">MY REVIEWS</h1>
-                <Carousel/>
+                    <h1 className="px-5">MY REVIEWS</h1>
+                    <div>
+                    <div className='carousel-container'>
+                        <Swiper
+                            effect={'coverflow'}
+                            grabCursor={true}
+                            centeredSlides={true}
+                            slidesPerView={'auto'}
+                            coverflowEffect={{
+                            rotate: 50,
+                            stretch: 0,
+                            depth: 100,
+                            modifier: 1,
+                            }}
+                            pagination={true}
+                            modules={[EffectCoverflow, Pagination]}
+                            className="mySwiper"
+                        >
+                            {showUsersReviews()}
+                        </Swiper>
+                    </div>
+                    </div> 
                 </div>
-            
-            </div>
-           
-               
-            <div>
-                {showUsersReviews()}
             </div>
         </div>
     )

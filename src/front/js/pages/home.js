@@ -21,7 +21,6 @@ export const Home = () => {
 		getActivities();
     	getProduct();
 		getTrips()
-		console.log(store.userId);
 	}, []);
 	
 	const getActivities = () => {
@@ -70,7 +69,6 @@ export const Home = () => {
 			return resp.json();
 		})
 		.then(data=> {
-			console.log("estpy aqui");
 			setTrips(data);			
 		})
 		.catch(error => {
@@ -80,7 +78,6 @@ export const Home = () => {
 	
 	const showActivity = () =>{
 		const reservedActivities = activities.slice().reverse();
-
 		if (reservedActivities && reservedActivities.length > 0) {
 			const firstThreeActivities = reservedActivities.slice(0, 3); 
 			return firstThreeActivities.map((activity, index) => (
@@ -92,19 +89,16 @@ export const Home = () => {
 					img="https://cdn.pixabay.com/photo/2014/12/16/22/25/sunset-570881_1280.jpg"
 				/>
 			));
-
 			} else {
 				return (
 				<div className="spinner-border" role="status">
 					<span className="visually-hidden">Loading...</span>
 				</div>
 				)
-				}
+			}
 	}
 	const showProducts = () => {
-
 		const reversedProducts = products.slice().reverse();
-
 		if (reversedProducts && reversedProducts.length > 0) {
 			return reversedProducts.slice(0, 3).map((product, index) => (
 				<ProductCard
@@ -123,9 +117,7 @@ export const Home = () => {
 	}
 
 	const showTrips = () =>{
-		
 		const reservedTrips = trips.slice().reverse();
-
 		if (reservedTrips && reservedTrips.length > 0) {
 			const firstThreeTrips = reservedTrips.slice(0, 3); 
 			return firstThreeTrips.map((trip, index) => (
@@ -137,7 +129,6 @@ export const Home = () => {
 					img="https://picsum.photos/id/295/600/380"
 				/>
 			));
-
 			} else {
 				return (
 				<div className="spinner-border" role="status">
@@ -149,9 +140,6 @@ export const Home = () => {
 	return (
 		
 		<div className="">
-			            <div class="sharethis-inline-share-buttons bg-danger"></div>
-
-			<button onClick={()=>{}}> ir a usuario</button>
 			<div className="container-fluid">
 				<DinamicText  phrase={"inspire you"} phrase2={"save your time"}  phrase3={"solve your planning problems"} phrase4={" support people's opinions"} phrase1={"provide value"}/>
 			</div>

@@ -7,7 +7,6 @@ import { Context} from "../store/appContext";
 
 const TriipCard = (props)=>{
     const { store, actions } = useContext(Context);
-
     return(
             <div className="card-body">
                 <div className="image-container">
@@ -22,6 +21,7 @@ const TriipCard = (props)=>{
                     <div className="d-flex flex-row">
                         <img src={props.profile} className="profile-image" alt="..."/>
                             <div className="d-flex flex-column mx-3">
+                                <p className="card-text"><small className="text-muted username">{store.addUsername}</small></p>
                                 <hr className="mb-0"/>
                                 <p className="card-text"><small className="text-muted publishing-date">{props.trip.publishing_date}</small></p>
                             </div>     

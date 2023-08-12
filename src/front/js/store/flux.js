@@ -13,7 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			storeTypes: {},
 			checked: false,			
-			userId: "",
+			userId: null,
 			userName: "",
 			email:"",		
 		},
@@ -43,8 +43,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({checked:bool})
 			},
 			addId: (id) =>{
-				const store = getStore();
-				setStore({userId:id})
+				const store = getStore()
+				setStore({...store, userId:id})
+			},
+			addUsername: (username)=>{
+				const store = getStore()
+				setStore({...store, userName:username})
 			}
 		}
 	};
