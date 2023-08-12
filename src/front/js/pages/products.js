@@ -2,7 +2,6 @@ import React, { useEffect, useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Product } from "../component/productcard.jsx";
-import SideBar from "../component/sidebar";
 
 
 export const Products = () => {
@@ -51,11 +50,10 @@ export const Products = () => {
 			}
 
 	return (
-		<div className="Container">		
-				<SideBar />
+		<div className="Container">
 				<div className="row row-cols-1 row-cols-md-2 g-4 mt-3"> 
 					{showProducts()}
 				</div>
-		</div>			
+					</div>		
 	);
 };
