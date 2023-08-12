@@ -11,7 +11,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			favourite: [],
 			storeCities: {},
 			storeTypes: {},
-			checked: false			
+			checked: false
+			
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -37,7 +38,43 @@ const getState = ({ getStore, getActions, setStore }) => {
 			handleChecked: (bool) => {
 				const store = getStore();
 				setStore({checked:bool})
-			}
+			},
+			addUserFavourites: (favs, id) => {
+				fetch(process.env.BACKEND_URL + 'api/user/' + id ,{
+					method: 'PUT',
+					  headers: {
+						"Content-Type": "application/json"
+					},
+					body : JSON.stringify({favourites: favs})
+				})
+				 .then(resp => {								
+					return resp.json();
+				})
+				.then(data=> {			
+					console.log(data)
+				})
+				.catch(error => {			
+					console.log('Oops something went wrong'+ error);
+				})
+			},
+			getUser: (id) => {
+				fetch(process.env.BACKEND_URL + 'api/user/' + id ,{
+					method: 'GET',
+					  headers: {
+						"Content-Type": "application/json"
+					},
+				})
+				 .then(resp => {								
+					return resp.json();
+				})
+				.then(data=> {	
+					const store = getStore();		
+					setStore({favourite: data.favourites})
+				})
+				.catch(error => {			
+					console.log('Oops something went wrong'+ error);
+				})
+			},
 		}
 	};
 };
