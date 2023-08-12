@@ -3,9 +3,6 @@ import { useNavigate } from "react-router-dom";
 import SideBar from "../component/sidebar.js"
 import { Context } from "../store/appContext.js";
 import "../../styles/activities.css"
-import { useNavigate } from "react-router-dom";
-
-
 
 const Activities = () =>{
     const [activities, setActivities] = useState([]);
@@ -93,7 +90,6 @@ const Activities = () =>{
                                     <p className="card-text">{activity.location}</p>                                                              
                                     <p className="card-text">{activity.description}</p>
                                     <p className="card-text">{activity.link}</p>
-                                    <button onClick={()=> navigate("/activity/" + activity.id)}>holaaa</button>
                                 </div>
                                 <button className="btn" type="button" id="activityCardViewMore" onClick={()=> navigate("/activity/" + activity.id)}> <strong>View more</strong></button>
                             </div>
