@@ -16,6 +16,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     username = db.Column(db.String(120), nullable=False)
+    favourites= db.Column(db.ARRAY(db.String(120)))
     password = db.Column(db.String(80), unique=False, nullable=False)
     # 1 - N with Reviews
     reviews = db.relationship("Review", back_populates="user")
@@ -31,6 +32,7 @@ class User(db.Model):
             "id": self.id,
             "email": self.email,
             "username": self.username,
+            "favourites": self.favourites,
             "reviews": [review.serialize() for review in self.reviews],  # serialize each review
             "comments": [comment.serialize() for comment in self.comments]  # serialize each comment
         }        

@@ -48,11 +48,23 @@ def create_user():
        }
         return jsonify(response_body),400
    
-   new_user= User(email = data["email"], password= data["password"])
+   elif "favourites" not in data:
+        response_body = {
+           "msg": "favorites dont exist in the request"
+       }
+        return jsonify(response_body),400
+   
+   elif "username" not in data:
+        response_body = {
+           "msg": "username dont exist in the request"
+       }
+        return jsonify(response_body),400
+   
+   new_user= User(email = data["email"], password= data["password"], favourites=data["favourites"], username=data["username"])
    db.session.add(new_user)
    db.session.commit() 
 
-   return jsonify(new_user),200
+   return jsonify({"msg": "user added"}),200
 
 @api.route('/users',methods=['GET'])
 def get_all_users():
@@ -68,26 +80,21 @@ def get_single_user(id):
 @api.route('user/<int:id>',methods=['PUT'])
 def update_user(id):
     data = request.get_json()
-    if "email" not in data:
-        response_body={
-            "msg":"email is not in the request"
-        }
-        return jsonify(response_body),400
-    elif "password" not in data:
-        response_body={
-            "msg":"password is not in the request"
-        }
-        return jsonify(response_body),400
 
-    elif data is None:
+    if data is None:
         response_body={
             "msg":"body should be passed with request parameters"
         }
         return jsonify(response_body),400
     
     update_user= User.query.get(id)
-    update_user.email = data["email"]
-    update_user.password = data["password"]
+    
+    if "email" in data:
+        update_user.email = data["email"]
+    if "password" in data:
+        update_user.password = data["password"]
+    if "favourites" in data:
+        update_user.favourites = data["favourites"]
     db.session.commit()
 
     user = User.query.get(id)
@@ -182,7 +189,7 @@ def create_review():
        }
         return jsonify(response_body),400
     
-    new_review= Review(title = data["title"], description=data["description"], publishing_date= data["publishing_date"], price= data["price"], image= data["imageCloud"])
+    new_review= Review(title = data["title"], description=data["description"], category=data["category"], publishing_date= data["publishing_date"], price= data["price"], image= data["imageCloud"])
     db.session.add(new_review)
     db.session.commit()
 

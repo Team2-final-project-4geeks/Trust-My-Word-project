@@ -1,8 +1,13 @@
 #magnifyingButton, #showAll{
     background-color: lightgray;
+    text-decoration: none;
 }
 
 #searchButtonSidebar{
     background-color:lightgray;
+}
+
+.offcanvas-start{
+    width: 350px;
 }
 

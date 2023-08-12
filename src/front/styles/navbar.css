@@ -1,31 +1,83 @@
 .navbar {
-    background-image: url(https://cdn.pixabay.com/photo/2017/07/31/11/44/laptop-2557572_1280.jpg);
-    background-position: center;
-    width: 100%;
-    background-size: cover;
-    height: 600px;
-    background-repeat: no-repeat;
-    margin-top: none;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  height: 50vh;
+  width: 100%;
+  position: relative;
 }
-.navbar-items{
-    margin-right: 30px; 
-    margin-bottom: 580px;
-    text-align: end;
-    list-style: none;
-    display: flex;
-    text-decoration-line: none;
-    font-size: 150%;
-   
+
+.navbar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://cdn.pixabay.com/photo/2017/10/10/21/47/laptop-2838921_1280.jpg");
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
 }
-.btn-navbar{
-    background-color: black;
-    border-radius: 20px;
-    font-size: 30px;
-    padding: 10px;
+.logo{
+    align-self: flex-start;
+    margin-left:25px;
+    margin-top: 20px;
 }
-.logo-link{
-    margin-bottom: 550px;
-    margin-left: 100px;
-    margin-top: 25px;
+  
+.logo img {
+    max-width: 80px;
+}
+  
+.menu {
+    display:flex;
+    align-self: flex-start;
+    align-items: center;
+    margin-right: 25px;
+    font-size: 1.5rem;
+}
+.nav-item {
+    margin-left: -20px;
+    font-size: 15px; 
+}
+.btn-navbar {
     background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 5px 10px;
+    position: relative;
+    transition: background-color 0.3s ease; /* Agregar transición de color de fondo */
+  }
+.btn-navbar:hover {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #343a40; 
 }
+   
+  .dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .dropdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+    padding: 5px 10px;
+    font-size: 1rem;
+    flex-direction: row-reverse;
+  }
+ 
+  @media (max-width: 800px) {
+    .navbar {
+      flex-direction: column;
+    }
+
+    .menu {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 10px;
+    }
+  
+  }

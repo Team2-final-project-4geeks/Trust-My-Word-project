@@ -91,25 +91,25 @@ const SingleActivity = () => {
                     <span className="visually-hidden">Loading...</span>
                 </div>
             )}
-            <div className="container-fluid">
+            <div className="container-fluid" id="commentSection">
                 <h4 className="my-5">Comments</h4>
-                <div class="input-group mb-3">                    
-                    <span class="input-group-text" id="basic-addon1">Username</span>
-                    <input type="text" class="form-control" placeholder="Lorem Ipsum" aria-label="Username" aria-describedby="basic-addon1"/> 
+                <div className="input-group mb-5">                    
+                    <span className="input-group-text rounded me-2" id="basic-addon1">Username</span>
+                    <input type="text" className="form-control rounded-pill" placeholder="Lorem Ipsum" aria-label="Username" aria-describedby="basic-addon1"/> 
                 </div>
-                <div class="input-group mb-3">                    
-                    <span class="input-group-text" id="basic-addon1">Username</span>
-                    <input type="text" class="form-control" placeholder="Lorem Ipsum Xmas Banana Happy" aria-label="Username" aria-describedby="basic-addon1"/> 
+                <div className="input-group mb-5">                    
+                    <input type="text" className="form-control rounded-pill me-2" placeholder="Lorem Ipsum Xmas Banana Happy" aria-label="Username" aria-describedby="basic-addon1"/>
+                    <span className="input-group-text rounded" id="basic-addon1">Username</span> 
                 </div>
-                <div class="input-group mb-3">                    
-                    <span class="input-group-text" id="basic-addon1">Username</span>
-                    <input type="text" class="form-control" placeholder="Lorem Summer Coding Sad" aria-label="Username" aria-describedby="basic-addon1"/> 
+                <div className="input-group mb-5">                    
+                    <span className="input-group-text rounded me-2" id="basic-addon1">Username</span>
+                    <input type="text" className="form-control rounded-pill" placeholder="Lorem Summer Coding Sad" aria-label="Username" aria-describedby="basic-addon1"/> 
                 </div>
-                <div class="input-group">
-                    <span class="input-group-text">Write your comment:</span>
-                    <textarea class="form-control" aria-label="With textarea"></textarea>
+                <div className="input-group">
+                    <span className="input-group-text rounded me-2" id="commentWrite">Write your comment:</span>
+                    <textarea className="form-control rounded-pill" aria-label="With textarea"></textarea>
                 </div>
-                <button type="button" className="btn btn-dark mt-5" id="sumbitButtonSingle"> Send </button>                
+                <button type="button" className="btn btn-dark mt-5 mb-4" id="sumbitButtonSingle"> Send </button>                
             </div>            
         </div>
 

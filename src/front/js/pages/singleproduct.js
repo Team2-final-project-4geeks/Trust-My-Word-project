@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Context } from "../store/appContext";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "../../styles/singleproduct.css";
 
 import { useParams} from "react-router-dom";
 
@@ -17,7 +17,7 @@ export const SingleProduct = () => {
         }, [])
     
         const getOneProduct = () => {
-            fetch("https://fakestoreapi.com/products/" + params.id,{
+            fetch(process.env.BACKEND_URL + 'api/review/' + params.id, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -32,31 +32,56 @@ export const SingleProduct = () => {
         }
     
         return (
-            <div className="card-single">
-                 <img src={oneProduct.image} width="400" height="400" className="card-img-single"></img>
-                <div className="card-body-single">
-                    {oneProduct ? (
-                        <div className="text-center">
-                            <h1 className="card-title mt-3 mb-4">
-                            {oneProduct.title}
-                            </h1>
-                                <p className="card-text">
-                                    <p className='mt-0 mb-0'>Price: {oneProduct.price}</p>
-                                    <p className='mt-0 mb-0'>Description: {oneProduct.description}</p>
-                                                    
-                                    <Link to="/">
-                                        <span className="btn btn-primary btn-lg my-5 text-center" href="#" role="button">
-                                            Back home
-                                        </span>
-			                        </Link>
-                                </p>
+
+            <div className="container-fluid mt-5 mb-5" >
+                {oneProduct ? (
+                    <div id="backgroundSingleProduct">
+                        <div className="card m-0 border-0 " id="containerSingle">
+                            <div className="row g-0 h-100">
+                            <div className="col-md-3">
+                                <img src={oneProduct.image} className="img-fluid rounded-start h-100" alt="..."/>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="card h-100 border-0 px-3">
+                                    <h5 className="card-title ms-3 mt-3 mb-4 text-center" id="activityTitle">{oneProduct.title}</h5>
+                                        <div className="d-flex flex-row mt-2" id="activityRow">
+                                            <p className="card-text ms-2">{oneProduct.id}</p>
+                                            <p className="card-text ms-2">{oneProduct.publishing_date}</p>
+                                        </div>
+                                <p className="card-text">{oneProduct.description}</p>
+                                <p className="card-text">{oneProduct.type}</p>
+                                <p className="card-text">{oneProduct.price}</p>
+                                <p className="card-text">{oneProduct.link}</p>
+                                </div>
+                            </div>
+                            </div>
                         </div>
-                    ) : (
-                    <div className="spinner-border" role="status">
-                        <span className="visually-hidden">Loading...</span>
                     </div>
-                    )}
+                ):(
+                <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
                 </div>
+                )}
+                <div className="container-fluid" id="commentSection">
+                <h4 className="my-5">Comments</h4>
+                <div className="input-group mb-5">
+                    <span className="input-group-text rounded me-2" id="basic-addon1">Username</span>
+                    <input type="text" className="form-control rounded-pill" placeholder="Lorem Ipsum" aria-label="Username" aria-describedby="basic-addon1"/>
+                </div>
+                <div className="input-group mb-5">
+                    <input type="text" className="form-control rounded-pill me-2" placeholder="Lorem Ipsum Xmas Banana Happy" aria-label="Username" aria-describedby="basic-addon1"/>
+                    <span className="input-group-text rounded" id="basic-addon1">Username</span>
+                </div>
+                <div className="input-group mb-5">
+                    <span className="input-group-text rounded me-2" id="basic-addon1">Username</span>
+                    <input type="text" className="form-control rounded-pill" placeholder="Lorem Summer Coding Sad" aria-label="Username" aria-describedby="basic-addon1"/>
+                </div>
+                <div className="input-group">
+                    <span className="input-group-text rounded me-2" id="commentWrite">Write your comment:</span>
+                    <textarea className="form-control rounded-pill" aria-label="With textarea"></textarea>
+                </div>
+                <button type="button" className="btn btn-dark mt-5" id="sumbitButtonSingle"> Send </button>
+            </div>
             </div>
         )
     }
