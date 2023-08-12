@@ -42,14 +42,42 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({checked:bool})
 			},
-			addId: (id) =>{
-				const store = getStore()
-				setStore({...store, userId:id})
+			addUserFavourites: (favs, id) => {
+				fetch(process.env.BACKEND_URL + 'api/user/' + id ,{
+					method: 'PUT',
+					  headers: {
+						"Content-Type": "application/json"
+					},
+					body : JSON.stringify({favourites: favs})
+				})
+				 .then(resp => {								
+					return resp.json();
+				})
+				.then(data=> {			
+					console.log(data)
+				})
+				.catch(error => {			
+					console.log('Oops something went wrong'+ error);
+				})
 			},
-			addUsername: (username)=>{
-				const store = getStore()
-				setStore({...store, userName:username})
-			}
+			getUser: (id) => {
+				fetch(process.env.BACKEND_URL + 'api/user/' + id ,{
+					method: 'GET',
+					  headers: {
+						"Content-Type": "application/json"
+					},
+				})
+				 .then(resp => {								
+					return resp.json();
+				})
+				.then(data=> {	
+					const store = getStore();		
+					setStore({favourite: data.favourites})
+				})
+				.catch(error => {			
+					console.log('Oops something went wrong'+ error);
+				})
+			},
 		}
 	};
 };

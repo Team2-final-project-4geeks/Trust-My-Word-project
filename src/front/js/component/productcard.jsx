@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
-import ViewMore from "./viewmore.jsx";
+import ViewMoreProduct from "./viewMoreProduct.js";
 
 import "../../styles/productcard.css";
 
@@ -18,7 +18,10 @@ export const ProductCard = (props) => {
              <img src={props.product.image} class="card-img-top" alt="..."/>
                 <div class="image-overlay">
                     <i class="far fa-heart fa-1x" onClick={() => {
-                            actions.addFavourite(props.product.title)}}></i>
+                            actions.addFavourite(props.product.title); 
+                            	{/*Passar id Hardcoded pero después tendria que venir del store (stor.id o como lo tenga añadido Edi en flux)}*/}
+                            actions.addUserFavourites(store.favourite, 10)
+                            }}></i>
                     <h1></h1>
                 </div>
             </div>
@@ -42,7 +45,7 @@ export const ProductCard = (props) => {
                                 <p class="card-text"><i>{props.product.price}</i></p> 
                             </div>  
                             <div className="btn-container">
-                                <ViewMore item={props.product.id}/>
+                                <ViewMoreProduct item={props.product.id}/>
                             </div>
                         </div>
                 </div>

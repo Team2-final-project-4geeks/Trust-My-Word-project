@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import "../../styles/singleactivity.css";
+import ShareComponent from "../component/shareComponent.js";
 
 const SingleActivity = () => {
     const [activity, setActivity] = useState();
@@ -63,13 +64,18 @@ const SingleActivity = () => {
                                     <div className="d-flex flex-row mt-2" id="activityRow">
                                         <p className="card-text ms-2">{activity.id}</p>
                                         <p className="card-text ms-2">{weather} °C</p>                                        
-                                        <p className="card-text ms-2">{activity.publishing_date}</p>
+                                        <p className="card-text ms-2">{activity.publishing_date}</p> 
+                                        <p className="card-text ms-2 mb-0">{activity.price}</p>
                                     </div>
                                 <p className="card-text ms-2">{activity.type} activity</p>
                                 <p className="card-text ms-2">{activity.location}</p>
-                                <p className="card-text ms-2"><i>"{activity.description}"</i></p>
-                                <p className="card-text ms-2">{activity.price}</p>
-                                <p className="card-text ms-2"><i>{activity.link}</i></p>                               
+                                <p className="card-text ms-2"><i>"{activity.description}"</i></p>                                  
+                               
+                                <div className="d-flex flex-row" id="activityRow2">
+                                    <p className="card-text ms-2"><i>{activity.link}</i></p>
+                                    <ShareComponent />
+                                </div>
+                                                            
                             </div>
                         </div>
                         <div className="col-md-3 border-0 h-100">

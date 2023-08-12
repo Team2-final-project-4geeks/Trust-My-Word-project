@@ -9,29 +9,16 @@ export const Navbar = () => {
 	const {store, actions} = useContext(Context);
 	const navigate =  useNavigate()
 
-	useEffect(() => {
-		const storedFavourites = JSON.parse(localStorage.getItem("favourites"));
-		if (storedFavourites) {
-		  actions.addFavourite(storedFavourites);
-		}
-	  }, [store.token]);
-
-	useEffect(() => {
-		localStorage.setItem("favourites", JSON.stringify(store.favourite));
-	}, [store.favourite]);
-
 	const logOut = () => {
 		localStorage.removeItem('jwt-token');
-		actions.clearFavourites();
 		navigate("/");
 		alert("You are Logged Out")
 	}
-	useEffect(() => {
-		const storedFavourites = JSON.parse(localStorage.getItem("stored-favourites"));
-		if (storedFavourites) {
-			actions.addFavourite(storedFavourites);
-		}
+	useEffect(() => {		
+		//el parametro tiene que venir del user_id
+		actions.getUser(10)
 	}, []);
+
 	
     return (
 			<div class="navbar">
@@ -72,21 +59,24 @@ export const Navbar = () => {
 									<button type="button" className="btn-navbar btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="dropdownMenuClickableInside" aria-expanded="false">
 										Favourites <span className="p-1 text-secondary text-center text-white">{store.favourite.length}</span>
 									</button>
+									{store.favourite.length> 0 ?
 									<ul className="dropdown-menu dropdown-menu-start dropdown-menu-lg-start" aria-labelledby="dropdownMenuClickableInside">
 										{store.favourite.map((fav, index) => {
-											return(
+											return (
 												<li key={index}>
 													<a className="dropdown-item d-flex text-black justify-content-between ps-2 pe-2" href="#">
 														{fav}
 														<i className="fas fa-trash pt-1"
 															onClick={() => {
 																actions.deleteFavourite(fav)
+																{/*//el parametro tiene que venir del user_id*/}
+																actions.addUserFavourites(store.favourite, 10)
 															}}
 														></i>
 													</a>
-												</li>
-											)})}
-									</ul>													
+												</li>)
+											})}
+									</ul> :""}													
 								</div>
 							
 				</div>

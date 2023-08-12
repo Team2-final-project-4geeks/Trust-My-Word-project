@@ -17,12 +17,13 @@ export const Home = () => {
   	const [products, setProducts] = useState([]);
 	const [trips,setTrips] = useState([])
   
+		console.log(store.favButtonPress)
 	useEffect(() => {		
 		getActivities();
     	getProduct();
 		getTrips()
 	}, []);
-	
+
 	const getActivities = () => {
 		fetch(process.env.BACKEND_URL + 'api/review?category=activity' ,{
 			method: 'GET',
