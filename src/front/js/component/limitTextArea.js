@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 
-const TextAreaWithLimit = ({ maxLength }) => {
-  const [text, setText] = useState("");
-  
-  const handleChange = (event) => {
+const TextAreaWithLimit = ({ maxLength, maxRows, value, onChange }) => {
+  const [text, setText] = useState(value);
+
+  const handleChangeText = (event) => {
     const inputValue = event.target.value;
     if (inputValue.length <= maxLength) {
       setText(inputValue);
+      onChange && onChange(inputValue); // Chame a função onChange se fornecida
+    }
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      const lines = text.split("\n");
+      if (lines.length >= maxRows) {
+        event.preventDefault();
+      }
     }
   };
 
@@ -16,10 +26,10 @@ const TextAreaWithLimit = ({ maxLength }) => {
     <div>
       <textarea
         value={text}
-        onChange={handleChange}
+        onChange={handleChangeText}
+        onKeyDown={handleKeyPress}
         placeholder={`Digit max ${maxLength} characters`}
-        rows="4"
-        cols="50"
+        rows={maxRows}
       />
       <p>Remaining characters: {remainingChars}</p>
     </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TextAreaWithLimit from "../component/limitTextArea.js"
+import { useNavigate } from "react-router-dom";
 import { cloudinary } from "cloudinary-core";
 
 import "../../styles/reviewform.css";
@@ -20,10 +21,17 @@ export const ReviewForm = () => {
 
   const [imagePreview, setImagePreview] = useState(null);
 
+  const navigate= useNavigate();
+
   const reviewImage = <img src="https://fastly.picsum.photos/id/163/2000/1333.jpg?hmac=htdHeSJwlYOxS8b0TTpz2s8tD_QDlmsd3JHYa_HGrg8" class="image-create-review" alt="..." /> 
 
   const handleFile = (e) => {
     const file = e.target.files[0];
+
+    if (file && file.type !== 'image/jpeg') {
+      alert('Only .jpg format is allowed.');
+      return;
+    }
     setImage(file);
     setImagePreview(URL.createObjectURL(file));
   };
@@ -46,19 +54,18 @@ export const ReviewForm = () => {
         let year = parseInt(match[3], 10);
         let validDate = !(month < 1 || month > 12 || day < 1 || day > 31 || (month === 2 && day > 28 + (year % 4 == 0 ? 1 : 0)) || ((month === 4 || month === 6 || month === 9 || month === 11) && day > 30));
         if(validDate) {
-            uploadImage(image);
-            setTimeout(() => sendDataToAPI(), 1000)
-            alert("You have created a Review")
-        } else {
-            console.log("Invalid Date");
-            alert("Invalid Date Format. Format should be dd/mm/yyyy")
-        }
+              uploadImage(image)
+                    setTimeout(() => sendDataToAPI(), 5000);
+                    alert('You have created a Review');
+                    navigate('/');
+                  } 
     } else {
         alert("Invalid Date Format. Format should be dd/mm/yyyy");
-    }  
+    }
   };
 
   const uploadImage = (imageFile) => {
+
     const formData = new FormData();
     formData.append("file", imageFile);
     formData.append("upload_preset", presetKey);
@@ -94,7 +101,7 @@ export const ReviewForm = () => {
         }
     
     return (
-        <div class="container text-center" id="border-box">
+        <div class="container text-center" id="full-content">
              <h1>Insert Your Review</h1>
             
                 <select class="form-select" onChange={(e) => setCategory(e.target.value)} aria-label="Default select example">
@@ -111,7 +118,7 @@ export const ReviewForm = () => {
                             reviewImage
                         )}
                         <br/>
-                        <input className="photo-uploader" type="file" name="imageCloud" onChange={handleFile} />
+                        <input className="photo-uploader" type="file" name="imageCloud" accept="image/jpeg" onChange={handleFile} />
                     </div>
                     <div class="col" id="middle">
                     <div className="form-group" id="inputs">
@@ -181,7 +188,7 @@ export const ReviewForm = () => {
                                 placeholder="Enter description..."
                                 value={description}
                                 onChange={e => setDescription(e.target.value)}
-                                rows={6}
+                                maxRows={6}
                             />  
                         </div>
                         <span className="title">Date</span>
