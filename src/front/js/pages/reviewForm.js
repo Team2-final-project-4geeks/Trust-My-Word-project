@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import TextAreaWithLimit from "../component/limitTextArea.js"
 import { useNavigate } from "react-router-dom";
 import { cloudinary } from "cloudinary-core";
@@ -59,7 +59,7 @@ export const ReviewForm = () => {
         let validDate = !(month < 1 || month > 12 || day < 1 || day > 31 || (month === 2 && day > 28 + (year % 4 == 0 ? 1 : 0)) || ((month === 4 || month === 6 || month === 9 || month === 11) && day > 30));
         if(validDate) {
               uploadImage(image)
-                    setTimeout(() => sendDataToAPI(), 5000);
+                    setTimeout(() => sendDataToAPI(), 1000);
                     alert('You have created a Review');
                     navigate('/');
                   } 
@@ -80,6 +80,7 @@ export const ReviewForm = () => {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setImageCloud(data.secure_url)
       })
       .catch((error) => {
@@ -185,15 +186,15 @@ export const ReviewForm = () => {
                     <div class="col" id="right-side">
                         <span className="title">Description</span>
                         <div className="form-group">
-                            <TextAreaWithLimit
-                                maxLength={375}
-                                className="form-control mt-3 mb-2"
-                                id="description"
-                                placeholder="Enter description..."
+                            <input
+                                type="text" 
+                                id="description" 
+                                className="review-input"  
+                                placeholder=" €€€" 
+                                name="price"
                                 value={description}
-                                onChange={e => setDescription(e.target.value)}
-                                maxRows={6}
-                            />  
+                                onChange={(e) => setDescription(e.target.value)}
+                                /> 
                         </div>
                         <span className="title">Date</span>
                         <div className="form-group" id="inputs">

@@ -57,7 +57,9 @@ const Trips = () =>{
             <p className="quote">“People don't take trips, trips take people”</p> 
             <p className="text-muted"><small>-Someone</small></p>
         </div>
+
 		<div className="row row-cols-1 row-cols-md-3 g-4">
+
 			{trip.length !== 0 ? showTrips() : (
 				<div className="spinner-border" role="status">
 					<span className="visually-hidden">Loading...</span>
@@ -69,3 +71,4 @@ const Trips = () =>{
 }
 
 export default Trips
+
