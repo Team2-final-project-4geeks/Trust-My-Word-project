@@ -83,6 +83,7 @@ export const ReviewForm = () => {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setImageCloud(data.secure_url)
       })
       .catch((error) => {
@@ -188,13 +189,13 @@ export const ReviewForm = () => {
                     <div class="col" id="right-side">
                         <span className="title">Description</span>
                         <div className="form-group">
-                            <textarea
+                            <TextAreaWithLimit
                                 maxLength={375}
                                 className="form-control mt-3 mb-2"
                                 id="description"
-                                placeholder="Digit max 375 characters"
+                                placeholder="Enter description..."
                                 value={description}
-                                onChange={(e) => setDescription(e.target.value)}
+                                onChange={e => setDescription(e.target.value)}
                                 maxRows={6}
                             />  
                         </div>
