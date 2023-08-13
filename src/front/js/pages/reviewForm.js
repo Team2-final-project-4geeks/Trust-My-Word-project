@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import TextAreaWithLimit from "../component/limitTextArea.js"
 import { useNavigate } from "react-router-dom";
 import { cloudinary } from "cloudinary-core";
+import { Context } from "../store/appContext";
 
 import "../../styles/reviewform.css";
 
@@ -18,6 +19,8 @@ export const ReviewForm = () => {
   const [price, setPrice] = useState("")
   const [image, setImage] = useState("")
   const [category, setCategory] = useState("")
+  const {store,actions} = useContext(Context)
+  const [user,setUser] = useState(store.userId)
 
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -40,6 +43,7 @@ export const ReviewForm = () => {
     return () => {
       if (imagePreview) {
         URL.revokeObjectURL(imagePreview);
+        console.log(store.userId);
       }
     };
   }, [imagePreview]);
@@ -90,7 +94,7 @@ export const ReviewForm = () => {
             headers: { 
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud}) 
+            body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud,user}) 
         })
         .then((res) => res.json())
         .then((result) => {
