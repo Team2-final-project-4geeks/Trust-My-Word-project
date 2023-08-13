@@ -144,7 +144,7 @@ def get_all_reviews():
     return jsonify(all_reviews), 200
 
 
-@api.route('/create-review', methods=['POST'])
+@api.route('/create-review',methods=['POST'])
 def create_review():
     data =request.get_json()
 
@@ -184,7 +184,7 @@ def create_review():
        }
         return jsonify(response_body),400
     
-    new_review= Review(title = data["title"], category=data["category"], description=data["description"], publishing_date= data["publishing_date"], price= data["price"], user_id=data["user.id"] ,image= data["imageCloud"])
+    new_review= Review(title = data["title"], category=data["category"], type=data["type"], location=data["location"],link=data["link"],description=data["description"], publishing_date=data["publishing_date"], price=data["price"], user_id=data["user"], image=data["imageCloud"])
     db.session.add(new_review)
     db.session.commit()
 
