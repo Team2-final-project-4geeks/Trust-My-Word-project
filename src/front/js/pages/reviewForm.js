@@ -189,7 +189,7 @@ export const ReviewForm = () => {
                     <div class="col" id="right-side">
                         <span className="title">Description</span>
                         <div className="form-group">
-                            <TextAreaWithLimit
+                            <textarea
                                 maxLength={375}
                                 className="form-control mt-3 mb-2"
                                 id="description"

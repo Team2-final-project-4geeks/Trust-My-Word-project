@@ -71,7 +71,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				.then(data=> {	
 					const store = getStore();		
-					setStore({favourite: data.favourites})
+					setStore({...store, favourite: data.favourites})
 				})
 				.catch(error => {			
 					console.log('Oops something went wrong'+ error);
@@ -84,6 +84,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 			addUsername: (username) =>{
 				const store = getStore();
 				setStore({...store,userName:username})
+			},
+			clearUser: () => {
+                const store = getStore();
+                setStore({
+                    ...store,
+                    userId: null,
+                    userName: "",
+                    email: "",
+                    favourite: [] 
+                });
 			}
 		},
 		

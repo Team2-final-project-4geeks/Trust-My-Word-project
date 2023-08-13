@@ -10,12 +10,13 @@ export const Navbar = () => {
 	const navigate =  useNavigate()
 
 	const logOut = () => {
+
+		actions.clearUser();
 		localStorage.removeItem('jwt-token');
 		navigate("/");
 		alert("You are Logged Out")
 	}
 	useEffect(() => {		
-		//el parametro tiene que venir del user_id
 		actions.getUser(store.userId)
 	}, []);
 
@@ -69,7 +70,6 @@ export const Navbar = () => {
 														<i className="fas fa-trash pt-1"
 															onClick={() => {
 																actions.deleteFavourite(fav)
-																{/*//el parametro tiene que venir del user_id*/}
 																actions.addUserFavourites(store.favourite, store.userId)
 															}}
 														></i>
