@@ -18,7 +18,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			email:"",		
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
 			addFavourite: (fav) => {
 				const store = getStore();
 		
