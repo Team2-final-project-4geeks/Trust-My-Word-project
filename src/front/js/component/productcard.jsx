@@ -20,7 +20,7 @@ export const ProductCard = (props) => {
                     <i class="far fa-heart fa-1x" onClick={() => {
                             actions.addFavourite(props.product.title); 
                             	{/*Passar id Hardcoded pero después tendria que venir del store (stor.id o como lo tenga añadido Edi en flux)}*/}
-                            actions.addUserFavourites(store.favourite, 10)
+                            actions.addUserFavourites(store.favourite, store.userId)
                             }}></i>
                     <h1></h1>
                 </div>

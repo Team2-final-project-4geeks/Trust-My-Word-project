@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import TextAreaWithLimit from "../component/limitTextArea.js"
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { cloudinary } from "cloudinary-core";
 import { Context } from "../store/appContext";
@@ -20,7 +19,7 @@ export const ReviewForm = () => {
   const [image, setImage] = useState("")
   const [category, setCategory] = useState("")
   const {store,actions} = useContext(Context)
-  const [user,setUser] = useState(store.userId)
+ 
 
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -29,6 +28,11 @@ export const ReviewForm = () => {
   const reviewImage = <img src="https://fastly.picsum.photos/id/163/2000/1333.jpg?hmac=htdHeSJwlYOxS8b0TTpz2s8tD_QDlmsd3JHYa_HGrg8" class="image-create-review" alt="..." /> 
 
   const handleFile = (e) => {
+    if (!category) {
+      alert('Please select a category before creating a review.');
+      return;
+    };
+
     const file = e.target.files[0];
 
     if (file && file.type !== 'image/jpeg') {
@@ -48,7 +52,8 @@ export const ReviewForm = () => {
     };
   }, [imagePreview]);
   
-  const handleUpload = async () => {
+  const handleUpload = () => {
+
     let regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
     const match = publishing_date.match(regex);
 
@@ -73,7 +78,7 @@ export const ReviewForm = () => {
     }
 
     try {
-      await uploadImage(image);
+      uploadImage(image);
       sendDataToAPI();
       alert('You have created a Review');
       navigate('/');
@@ -81,7 +86,7 @@ export const ReviewForm = () => {
       console.error('Error uploading:', error);
       alert('Error uploading image. Please try again.');
     }
-  };
+  }
 
   const uploadImage = (imageFile) => {
 
@@ -104,7 +109,7 @@ export const ReviewForm = () => {
   
   const sendDataToAPI = () => {
 
-    fetch(process.env.BACKEND_URL + 'api/create-review', { 
+    fetch(process.env.BACKEND_URL + `api/create-review`, { 
             method: "POST", 
             headers: { 
                 "Content-Type": "application/json",
@@ -117,7 +122,7 @@ export const ReviewForm = () => {
         }).catch((err) => {
             console.log(err);
         })
-        }
+        };
     
     return (
         <div class="container text-center" id="full-content">
@@ -200,13 +205,13 @@ export const ReviewForm = () => {
                     <div class="col" id="right-side">
                         <span className="title">Description</span>
                         <div className="form-group">
-                            <TextAreaWithLimit
+                            <textarea
                                 maxLength={375}
                                 className="form-control mt-3 mb-2"
                                 id="description"
-                                placeholder="Enter description..."
+                                placeholder="Digit max 375 characters"
                                 value={description}
-                                onChange={e => setDescription(e.target.value)}
+                                onChange={(e) => setDescription(e.target.value)}
                                 maxRows={6}
                             />  
                         </div>
