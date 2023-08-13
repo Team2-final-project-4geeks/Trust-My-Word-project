@@ -47,12 +47,7 @@ def create_user():
            "msg": "Password dont exist in the request"
        }
         return jsonify(response_body),400
-   
-   elif "favourites" not in data:
-        response_body = {
-           "msg": "favorites dont exist in the request"
-       }
-        return jsonify(response_body),400
+  
    
    elif "username" not in data:
         response_body = {
@@ -60,7 +55,7 @@ def create_user():
        }
         return jsonify(response_body),400
    
-   new_user= User(email = data["email"], password= data["password"], favourites=data["favourites"], username=data["username"])
+   new_user= User(email = data["email"], password= data["password"], username=data["username"])
    db.session.add(new_user)
    db.session.commit() 
 
@@ -189,7 +184,7 @@ def create_review():
        }
         return jsonify(response_body),400
     
-    new_review= Review(title = data["title"], category=data["category"], description=data["description"], publishing_date= data["publishing_date"], price= data["price"], image= data["imageCloud"])
+    new_review= Review(title = data["title"], category=data["category"], description=data["description"], publishing_date= data["publishing_date"], price= data["price"], user_id=data["user.id"] ,image= data["imageCloud"])
     db.session.add(new_review)
     db.session.commit()
 
