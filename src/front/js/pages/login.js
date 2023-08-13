@@ -28,7 +28,6 @@ const Login = () =>{
 				localStorage.setItem("jwt-token", result.token);
                 actions.addId(result.user_id)
                 actions.addUsername(result.username)
-                console.log(result.user_id);
 				navigate("/")
 			}).catch((err) => {
 				console.log(err);
