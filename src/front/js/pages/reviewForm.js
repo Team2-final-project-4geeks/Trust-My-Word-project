@@ -44,23 +44,38 @@ export const ReviewForm = () => {
     };
   }, [imagePreview]);
   
-
-  const handleUpload = () => {
+  const handleUpload = async () => {
     let regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
-    const match = publishing_date.match(regex)
-    if(match) {
-        let day = parseInt(match[1], 10);
-        let month = parseInt(match[2], 10);
-        let year = parseInt(match[3], 10);
-        let validDate = !(month < 1 || month > 12 || day < 1 || day > 31 || (month === 2 && day > 28 + (year % 4 == 0 ? 1 : 0)) || ((month === 4 || month === 6 || month === 9 || month === 11) && day > 30));
-        if(validDate) {
-              uploadImage(image)
-                    setTimeout(() => sendDataToAPI(), 5000);
-                    alert('You have created a Review');
-                    navigate('/');
-                  } 
-    } else {
-        alert("Invalid Date Format. Format should be dd/mm/yyyy");
+    const match = publishing_date.match(regex);
+
+    if (!match) {
+      alert("Invalid Date Format. Format should be dd/mm/yyyy");
+      return;
+    }
+
+    let day = parseInt(match[1], 10);
+    let month = parseInt(match[2], 10);
+    let year = parseInt(match[3], 10);
+    let validDate = !(month < 1 || month > 12 || day < 1 || day > 31 || (month === 2 && day > 28 + (year % 4 == 0 ? 1 : 0)) || ((month === 4 || month === 6 || month === 9 || month === 11) && day > 30));
+
+    if (!validDate) {
+      alert('Invalid Date');
+      return;
+    }
+
+    if (!image) {
+      alert('Please select an image before uploading.');
+      return;
+    }
+
+    try {
+      await uploadImage(image);
+      sendDataToAPI();
+      alert('You have created a Review');
+      navigate('/');
+    } catch (error) {
+      console.error('Error uploading:', error);
+      alert('Error uploading image. Please try again.');
     }
   };
 
