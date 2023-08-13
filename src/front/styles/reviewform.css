@@ -1,8 +1,9 @@
-#border-box{
+#full-content{
   height: 600px;
   display:flex;
   flex-direction: column;
   margin-bottom: 50px;
+  border: none;
 }
 #row-review{
   height: 450px;

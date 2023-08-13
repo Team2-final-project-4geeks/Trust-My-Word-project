@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import ShareComponent from "../component/shareComponent";
 import "../../styles/singleproduct.css";
 
 import { useParams} from "react-router-dom";
@@ -47,11 +47,13 @@ export const SingleProduct = () => {
                                         <div className="d-flex flex-row mt-2" id="activityRow">
                                             <p className="card-text ms-2">{oneProduct.id}</p>
                                             <p className="card-text ms-2">{oneProduct.publishing_date}</p>
+                                            <p className="card-text">{oneProduct.price}</p>
                                         </div>
-                                <p className="card-text">{oneProduct.description}</p>
-                                <p className="card-text">{oneProduct.type}</p>
-                                <p className="card-text">{oneProduct.price}</p>
-                                <p className="card-text">{oneProduct.link}</p>
+                                    <p className="card-text"><i>{oneProduct.description}</i></p>
+                                <div className="d-flex flex-row" id="activityRow2">
+                                    <p className="card-text ms-2"><i>{oneProduct.link}</i></p>
+                                    <ShareComponent />
+                                </div>
                                 </div>
                             </div>
                             </div>
