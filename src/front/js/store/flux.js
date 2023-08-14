@@ -15,16 +15,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 			checked: false,			
 			userId: null,
 			userName: "",
-			email:"",		
+			email:"",
 		},
 		actions: {
 			addFavourite: (fav) => {
-				const store = getStore();
-		
-				store.favourite.includes(fav) ? alert("Favourite already exists!!") : (
-					setStore({favourite: [...store.favourite, fav]})
-				)	
-			},
+                const store = getStore();
+				const actions = getActions()
+                if (!store.favourite.includes(fav)) {
+                    setStore({ favourite: [...store.favourite, fav] });
+                    actions.addUserFavourites(store.userId);
+                } else {
+                    alert("Favourite already exists!!");
+                }
+            },
 			deleteFavourite: (favToDelete) => {
 				const store = getStore();
 				setStore({favourite: store.favourite.filter((fav) => fav !== favToDelete)})
@@ -41,19 +44,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({checked:bool})
 			},
-			addUserFavourites: (favs, id) => {
+			addUserFavourites: (id) => {
+
+				const store = getStore()
+
 				fetch(process.env.BACKEND_URL + 'api/user/' + id ,{
 					method: 'PUT',
-					  headers: {
+					headers: {
 						"Content-Type": "application/json"
 					},
-					body : JSON.stringify({favourites: favs})
+					body : JSON.stringify({ favourites: store.favourite })
 				})
-				 .then(resp => {								
+				.then(resp => {								
 					return resp.json();
 				})
-				.then(data=> {			
-					console.log(data)
+				.then(data => {            
+					console.log(data);
+					actions.getUser(id);
 				})
 				.catch(error => {			
 					console.log('Oops something went wrong'+ error);
@@ -71,7 +78,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				.then(data=> {	
 					const store = getStore();		
-					setStore({favourite: data.favourites})
+					setStore({ ...store, favourite: data.favourites });
 				})
 				.catch(error => {			
 					console.log('Oops something went wrong'+ error);
@@ -84,6 +91,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 			addUsername: (username) =>{
 				const store = getStore();
 				setStore({...store,userName:username})
+			},
+			clearUser: () => {
+                const store = getStore();
+                setStore({
+                    ...store,
+                    userId: null,
+                    userName: "",
+                    email: "",
+                    favourite: [] 
+                });
 			}
 		},
 		

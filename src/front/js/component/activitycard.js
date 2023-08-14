@@ -13,7 +13,10 @@ const ActivityCard = (props)=>{
             <div className="image-container">
                 <img src={props.img} className="card-img-top" alt="..."/>
                 <div className="image-overlay d-flex justify-content-end align-items-start p-2" id="heartIconActivity">
-                    <i className="fas fa-heart text-danger" onClick={()=> actions.addFavourite(props.activity.title)}></i>                        
+                    <i className="fas fa-heart text-danger" onClick={() => {
+                        actions.addFavourite(props.activity.title);
+                        actions.addUserFavourites(store.userId)
+                        }}></i>
                 </div>
             </div>
             <div className="card-body mx-3">
