@@ -19,6 +19,7 @@ export const ReviewForm = () => {
   const [image, setImage] = useState("")
   const [category, setCategory] = useState("")
   const {store,actions} = useContext(Context)
+  const user = store.userId;
  
 
   const [imagePreview, setImagePreview] = useState(null);
@@ -62,9 +63,8 @@ export const ReviewForm = () => {
         let validDate = !(month < 1 || month > 12 || day < 1 || day > 31 || (month === 2 && day > 28 + (year % 4 == 0 ? 1 : 0)) || ((month === 4 || month === 6 || month === 9 || month === 11) && day > 30));
         if(validDate) {
               uploadImage(image)
-                    setTimeout(() => sendDataToAPI(), 1000);
-                    alert('You have created a Review');
-                    navigate('/');
+                    setTimeout(() => sendDataToAPI(), 7000);
+                    alert('You have created a Review');                    
                   } 
     } else {
         alert("Invalid Date Format. Format should be dd/mm/yyyy");
@@ -92,11 +92,14 @@ export const ReviewForm = () => {
   };
   
   const sendDataToAPI = () => {
-
+    const token = localStorage.getItem('jwt-token');
+    console.log(token);
+    if(token) {
     fetch(process.env.BACKEND_URL + `api/create-review`, { 
             method: "POST", 
             headers: { 
                 "Content-Type": "application/json",
+                "Authorization" : "Bearer " + token
             },
             body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud,user}) 
         })
@@ -106,7 +109,10 @@ export const ReviewForm = () => {
         }).catch((err) => {
             console.log(err);
         })
-        };
+        }else{
+          alert('Something went wrong')
+        }
+      }
     
     return (
         <div class="container text-center" id="full-content">
@@ -189,14 +195,14 @@ export const ReviewForm = () => {
                     <div class="col" id="right-side">
                         <span className="title">Description</span>
                         <div className="form-group">
-                            <TextAreaWithLimit
-                                maxLength={375}
-                                className="form-control mt-3 mb-2"
-                                id="description"
-                                placeholder="Enter description..."
-                                value={description}
-                                onChange={e => setDescription(e.target.value)}
-                                maxRows={6}
+                          <textarea
+                              maxLength={375}
+                              className="form-control mt-3 mb-2"
+                              id="description"
+                              placeholder="Enter description..."
+                              value={description}
+                              onChange={e => setDescription(e.target.value)}
+                              maxRows={6}
                             />  
                         </div>
                         <span className="title">Date</span>

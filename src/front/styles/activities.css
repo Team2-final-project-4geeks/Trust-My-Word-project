@@ -13,6 +13,10 @@
     margin-right: 15px;
 }
 
+#cardActivity{
+    height: 84.4vh;
+}
+
 .blockquote-footer{
     color: #ffc600;
 }

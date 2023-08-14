@@ -25,16 +25,13 @@ const Activities = () =>{
 				"Content-Type": "application/json"
 			}
 		})
-        .then(resp => {
-            console.log(resp);                  
+        .then(resp => {                             
             return resp.json();
         })
-        .then(data=> {
-            console.log(data);
+        .then(data=> {            
             setActivities(data);
         })
-        .catch(error => {
-            console.log(error);
+        .catch(error => {           
             console.log('Oops something went wrong'+ error);
         })
     }    
@@ -73,8 +70,8 @@ const Activities = () =>{
             (activities.map((activity, index) =>{            
                 return(
                     <li key={index}>                
-                        <div className="col">
-                            <div className="card h-100">
+                        <div className="col"id="cardActivity">
+                            <div className="card h-100" >
                                 <div className="image-container">
                                     <img src="https://cdn.pixabay.com/photo/2016/11/29/13/08/skateboard-1869727_1280.jpg" className="card-img-top h-100" id="photoActivities" alt="..."/>
                                     <div className="image-overlay d-flex justify-content-end align-items-start p-2" id="heartIconActivity">
@@ -82,16 +79,17 @@ const Activities = () =>{
                                     </div>
                                 </div>
                                 <div className="card-body">
-                                    <h5 className="card-title">{activity.title}</h5>
-                                    <div className="d-flex flex-row mt-2" id="row">
-                                        <p className="card-text">{activity.id}</p>
-                                        <p className="card-text">{activity.publishing_date}</p>
-                                    </div> 
-                                    <p className="card-text">{activity.location}</p>                                                              
-                                    <p className="card-text">{activity.description}</p>
-                                    <p className="card-text">{activity.link}</p>
+                                    <h3 className="card-title text-center">{activity.title}</h3>
+                                    <div className="trip-location mt-5">
+                                        <p className="card-text">{activity.location}</p>
+                                        <p className="card-text">{activity.publishing_date}</p> 
+                                    </div>                            
+                                    <div className="description-trips mb-3">
+                                        <p className="card-text">{activity.description}</p>
+                                        <p className="card-text">{activity.price}</p>
+                                    </div>
                                 </div>
-                                <button className="btn" type="button" id="activityCardViewMore" onClick={()=> navigate("/activity/" + activity.id)}> <strong>View more</strong></button>
+                                <button className="btn mt-5" type="button" id="activityCardViewMore" onClick={()=> navigate("/activity/" + activity.id)}> <strong>View more</strong></button>
                             </div>
                         </div>
                     </li>
@@ -106,7 +104,7 @@ const Activities = () =>{
             <div className="card mt-4 mb-5 border-0" id="quoteActivity">                    
                 <div className="card-body d-flex">
                     <blockquote className="blockquote mb-0">
-                    <p className="text-center mt-4" id="quote">"Activity equals results If you want to increase your success, increase your activity."</p>
+                    <p className="text-center mt-4" id="quote">"Activity equals results. If you want to increase your success, increase your activity."</p>
                     <footer className="blockquote-footer text-center mt-4 mb-4">Brian Tracy</footer>
                     </blockquote>
                 </div>
