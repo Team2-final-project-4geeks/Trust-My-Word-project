@@ -71,7 +71,8 @@ const SingleActivity = () => {
 			return resp.json();
 		})
 		.then(data=> {		
-            console.log(data)	
+            console.log(data)
+            console.log(data.user_id)	
 			setAllDescriptions(data);
             setAuthor(data.user_id);
 		})
@@ -114,7 +115,7 @@ const SingleActivity = () => {
             return(         
                 <li key={index}>   
                     <div className="input-group mb-5">                    
-                        <span className="input-group-text rounded me-2" id="basic-addon1">{author}</span>
+                        <span className="input-group-text rounded me-2" id="basic-addon1">Author</span>
                         <input type="text" className="form-control rounded-pill" placeholder={comment.description} aria-label="Username" aria-describedby="basic-addon1"/> 
                     </div>
                 </li>           
