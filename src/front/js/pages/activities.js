@@ -25,16 +25,13 @@ const Activities = () =>{
 				"Content-Type": "application/json"
 			}
 		})
-        .then(resp => {
-            console.log(resp);                  
+        .then(resp => {                             
             return resp.json();
         })
-        .then(data=> {
-            console.log(data);
+        .then(data=> {            
             setActivities(data);
         })
-        .catch(error => {
-            console.log(error);
+        .catch(error => {           
             console.log('Oops something went wrong'+ error);
         })
     }    

@@ -31,7 +31,6 @@ const SingleActivity = () => {
 
     const fetchSingleActivity = () => {
         const token = localStorage.getItem('jwt-token');
-        console.log(token);
         if(token) {
         fetch(process.env.BACKEND_URL + 'api/review/' + params.id,{
             method: "GET",
@@ -45,8 +44,7 @@ const SingleActivity = () => {
         })
         .then(data=>{
             setActivity(data);
-            setCity(data.location)
-            console.log(data.location);            
+            setCity(data.location);                        
         })
         .catch(err => Swal.fire({
             icon: 'error',
@@ -67,15 +65,13 @@ const SingleActivity = () => {
             })
             .then(res => res.json())
             .then(data => {                
-                setWeather(data.main.temp);
-                console.log(data.main.temp);
+                setWeather(data.main.temp);                
             })
             .catch(err => console.log(err))
     }
 
     const fetchComments =() =>{        
-        const token = localStorage.getItem('jwt-token');
-        console.log(token);
+        const token = localStorage.getItem('jwt-token');        
         if(token) {        
         fetch(process.env.BACKEND_URL + 'api/comments',{
 			method: 'GET',
@@ -88,9 +84,7 @@ const SingleActivity = () => {
 			return resp.json();
 		})
 		.then(data=> {		
-            console.log(data)
-            console.log(data.user_id)	
-			setAllDescriptions(data);            
+           setAllDescriptions(data);            
 		})
 		.catch(error => {			
 			Swal.fire({
@@ -121,11 +115,9 @@ const SingleActivity = () => {
           body: JSON.stringify({description, user_id, review_id}) 
         })
         .then((response) => {
-            console.log(response);
             return response.json();
         })
-        .then((data) => {
-            console.log("Estoooy aquiiiiiiiiiiii");
+        .then((data) => {  
             setDescription(data.description);
             Swal.fire(
                 'Good job!',
@@ -149,7 +141,6 @@ const SingleActivity = () => {
 
     const deleteComment = (commentId) => {
         const token = localStorage.getItem('jwt-token');
-        console.log(token);
         if(token) {
 		fetch(process.env.BACKEND_URL + 'api/comment/' + commentId, {
 			method: 'DELETE',
@@ -163,8 +154,7 @@ const SingleActivity = () => {
 			return resp.json();
 		})
 		.then(data => {
-			Swal.fire('You have deleted a comment');
-			console.log(data);			
+			Swal.fire('You have deleted a comment');					
 			fetchComments();
 		})
 		.catch(error => {

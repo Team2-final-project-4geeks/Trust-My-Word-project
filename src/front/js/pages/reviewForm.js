@@ -64,8 +64,7 @@ export const ReviewForm = () => {
         if(validDate) {
               uploadImage(image)
                     setTimeout(() => sendDataToAPI(), 7000);
-                    alert('You have created a Review');
-                    
+                    alert('You have created a Review');                    
                   } 
     } else {
         alert("Invalid Date Format. Format should be dd/mm/yyyy");

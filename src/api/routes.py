@@ -296,3 +296,4 @@ def delete_comment(id):
     comment_to_delete = Comment.query.get(id)
     db.session.delete(comment_to_delete)
     db.session.commit()
+    return jsonify({"message":"Comment deleted"}), 200
