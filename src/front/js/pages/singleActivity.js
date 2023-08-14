@@ -11,8 +11,7 @@ const SingleActivity = () => {
     const [city, setCity] = useState([]);
     const [weather,setWeather] = useState();
     const [allDescriptions, setAllDescriptions] = useState([]);
-    const [description, setDescription] = useState("");
-    const [author, setAuthor]= useState();    
+    const [description, setDescription] = useState("");       
     const params = useParams();
     const {store, actions} = useContext(Context);
     const user_id=store.userId;
@@ -31,10 +30,13 @@ const SingleActivity = () => {
 
 
     const fetchSingleActivity = () => {
+        const token = localStorage.getItem('jwt-token');
+        if(token) {
         fetch(process.env.BACKEND_URL + 'api/review/' + params.id,{
             method: "GET",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization" : "Bearer " + token
             } 
         })
         .then(resp=> {            
@@ -42,11 +44,20 @@ const SingleActivity = () => {
         })
         .then(data=>{
             setActivity(data);
-            setCity(data.location)
-            console.log(data.location);            
+            setCity(data.location);                        
         })
-        .catch(err => console.error(err))
+        .catch(err => Swal.fire({
+            icon: 'error',
+            title: 'Oops...'                        
+          }))        
+    } else {       
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...'                        
+          })
+		}
     }
+
 
     const fetchTemp = () => {
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&limit=1&appid=331b322b5b7b3278dc6b42817399e72f&units=metric`,{
@@ -54,47 +65,59 @@ const SingleActivity = () => {
             })
             .then(res => res.json())
             .then(data => {                
-                setWeather(data.main.temp);
-                console.log(data.main.temp);
+                setWeather(data.main.temp);                
             })
-            .catch(err => console.error(err))
+            .catch(err => console.log(err))
     }
 
-    const fetchComments =() =>{
+    const fetchComments =() =>{        
+        const token = localStorage.getItem('jwt-token');        
+        if(token) {        
         fetch(process.env.BACKEND_URL + 'api/comments',{
 			method: 'GET',
       		headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+                "Authorization" : "Bearer " + token
 			}
 		})
      	.then(resp => {								
 			return resp.json();
 		})
 		.then(data=> {		
-            console.log(data)
-            console.log(data.user_id)	
-			setAllDescriptions(data);
-            setAuthor(data.user_id);
+           setAllDescriptions(data);            
 		})
 		.catch(error => {			
-			console.log('Oops something went wrong'+ error);
+			Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!'            
+              })
 		})
+    }else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!'            
+          })
     }
+}
     
-    const createComment = () => {        
+    const createComment = () => {
+        const token = localStorage.getItem('jwt-token');
+        console.log(token);
+        if(token) {
         fetch(process.env.BACKEND_URL + 'api/create-comment', {
           method: "POST",          
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization" : "Bearer " + token
           },
           body: JSON.stringify({description, user_id, review_id}) 
         })
         .then((response) => {
-            console.log(response);
             return response.json();
         })
-        .then((data) => {
-            console.log("Estoooy aquiiiiiiiiiiii");
+        .then((data) => {  
             setDescription(data.description);
             Swal.fire(
                 'Good job!',
@@ -104,18 +127,59 @@ const SingleActivity = () => {
             setDescription("")
             fetchComments();            
         })
-        .catch((error) => {
-        console.error(error);
-        });
+        .catch(err => Swal.fire({
+            icon: 'error',
+            title: 'Oops...'                        
+          }))
+    } else {       
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...'                      
+          })
+		}
     }
 
+    const deleteComment = (commentId) => {
+        const token = localStorage.getItem('jwt-token');
+        if(token) {
+		fetch(process.env.BACKEND_URL + 'api/comment/' + commentId, {
+			method: 'DELETE',
+			headers: { 
+                "Authorization" : "Bearer " + token
+            },
+		})
+		.then(resp => {			
+			console.log(resp.ok);
+			console.log(resp.status);
+			return resp.json();
+		})
+		.then(data => {
+			Swal.fire('You have deleted a comment');					
+			fetchComments();
+		})
+		.catch(error => {
+            console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!'            
+            })
+        })		
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!'            
+          })
+    }
+	}
+
     const showComments = () =>{
-        console.log(allDescriptions)
         return allDescriptions.map((comment, index) => {
             return(         
                 <li key={index}>   
                     <div className="input-group mb-5">                    
-                        <span className="input-group-text rounded me-2" id="basic-addon1">Author</span>
+                        <span className="input-group-text rounded me-2" id="basic-addon1"><i class="fas fa-trash fa-xs" onClick={()=> deleteComment(comment.id)}></i></span>
                         <input type="text" className="form-control rounded-pill" placeholder={comment.description} aria-label="Username" aria-describedby="basic-addon1"/> 
                     </div>
                 </li>           
@@ -135,20 +199,20 @@ const SingleActivity = () => {
                         </div>
                         <div className="col-md-6">
                             <div className="card h-100 border-0 px-3">
-                                <h5 className="card-title fs-3 ms-3 mt-3 mb-4 text-center">{activity.title}</h5>                                
+                                <h5 className="card-title fs-3 ms-3 mt-4 mb-5 text-center">{activity.title}</h5>                                
                                     <div className="d-flex flex-row mt-2" id="singleRow1">
                                         <p className="card-text ms-2"><i class="fas fa-heart fa-xs me-2"></i>{userName}</p>
                                         <p className="card-text text-center ms-2"><i class="fas fa-info-circle fa-sm me-2"></i>{activity.type} activity</p>
                                         <p className="card-text ms-2"><i class="fas fa-calendar-alt fa-sm me-2"></i>{activity.publishing_date}</p>   
                                     </div>
-                                <p className="card-text ms-2"><i>" {activity.description} " </i></p>
-                                    <div className="d-flex flex-row mt-2" id="singleRow2">                                        
+                                <p className="card-text ms-2 my-1"><i>" {activity.description} " </i></p>
+                                    <div className="d-flex flex-row mt-3" id="singleRow2">                                        
                                         <p className="card-text ms-2 mb-0"><i class="fas fa-money-bill-wave me-2"></i>{activity.price}</p>
                                         <p className="card-text ms-2"><i class="fas fa-thermometer-half fa-sm me-2"></i>{weather}</p>
-                                        <p className="card-text ms-2"><i class="fas fa-map-marker-alt fa-sm me-2"></i>{activity.location}</p> 
+                                        <p className="card-text ms-2 pe-3"><i class="fas fa-map-marker-alt fa-sm me-2"></i>{activity.location}</p> 
                                     </div>                                             
-                                <div className="d-flex flex-row mt-4 position-absolute bottom-0" id="activityRow2">
-                                    <p className="card-text ms-2 text-center"><i className="fas fa-pager fa-sm me-2"></i>{activity.link}</p>
+                                <div className="d-flex flex-row ms-4 mt-4 position-absolute bottom-0" id="activityRow">
+                                    <p className="card-text ms-3 me-5 text-center"><i className="fas fa-pager fa-sm me-2"></i>{activity.link}</p>
                                     <ShareComponent />
                                 </div>                                                            
                             </div>

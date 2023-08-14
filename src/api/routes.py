@@ -13,16 +13,16 @@ from flask_jwt_extended import (
 
 api = Blueprint('api', __name__)
 
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
+#@api.route('/hello', methods=['POST', 'GET'])
+#def handle_hello():
 
-    populate_user();
-    populate_reviews();
+#    populate_user();
+#    populate_reviews();
 
-    response_body = {
-        "message": "Helloooo! This is 4Geeks Group 2 Final Project"
-    }
-    return jsonify(response_body), 200
+#    response_body = {
+#        "message": "Helloooo! This is 4Geeks Group 2 Final Project"
+#    }
+#    return jsonify(response_body), 200#
 
 
 #FOR USERS
@@ -255,6 +255,7 @@ def delete_review(id):
     db.session.commit()
 
 @api.route('/review/<int:id>',methods=["GET"])
+@jwt_required()
 def get_single_review(id):
     review = Review.query.get(id)
 
@@ -264,14 +265,14 @@ def get_single_review(id):
 # FOR COMMENTS
 
 @api.route('/comments',methods=['GET'])
-#@jwt_required()
+@jwt_required()
 def get_all_comments():    
     all_comments = Comment.query.all()
     all_comments = list(map(lambda x: x.serialize(), all_comments))
     return jsonify(all_comments), 200
 
 @api.route('/create-comment',methods=['POST'])
-#@jwt_required()
+@jwt_required()
 def create_comment():
     data =request.get_json()
 
@@ -294,8 +295,9 @@ def create_comment():
     return jsonify(new_comment.serialize()), 200
 
 @api.route('/comment/<int:id>',methods=['DELETE'])
-#@jwt_required()
+@jwt_required()
 def delete_comment(id):
     comment_to_delete = Comment.query.get(id)
     db.session.delete(comment_to_delete)
     db.session.commit()
+    return jsonify({"message":"Comment deleted"}), 200
