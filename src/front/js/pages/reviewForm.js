@@ -19,6 +19,7 @@ export const ReviewForm = () => {
   const [image, setImage] = useState("")
   const [category, setCategory] = useState("")
   const {store,actions} = useContext(Context)
+  const [user, setUser] = useState("")
  
 
   const [imagePreview, setImagePreview] = useState(null);
@@ -98,7 +99,7 @@ export const ReviewForm = () => {
             headers: { 
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud,user}) 
+            body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud, user}) 
         })
         .then((res) => res.json())
         .then((result) => {

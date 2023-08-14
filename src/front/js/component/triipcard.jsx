@@ -12,7 +12,10 @@ const TriipCard = (props)=>{
                 <div className="image-container">
                     <img src={props.img} className="card-img-top" alt="..."/>
                     <div className="image-overlay d-flex justify-content-end align-items-start p-2">
-                        <i className="fas fa-heart text-danger" onClick={() => actions.addFavourite(props.trip.title)}></i>
+                        <i className="fas fa-heart text-danger" onClick={() => {
+                        actions.addFavourite(props.trip.title);
+                        actions.addUserFavourites(store.userId)
+                        }}></i>
                     </div>
                 </div>
              <div className="card-body mx-3">

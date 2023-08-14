@@ -92,10 +92,7 @@ def update_user(id):
         update_user.favourites = data["favourites"]
     db.session.commit()
 
-    user = User.query.get(id)
-    user= user.serialize()
-
-    return jsonify(user),200
+    return jsonify({"msg":"user updated"}),200
     
 @api.route('/user/<int:id>',methods=['DELETE'])
 def delete_user(id):
