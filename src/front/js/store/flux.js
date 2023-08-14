@@ -67,10 +67,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 			},
 			getUser: (id) => {
+				const token = localStorage.getItem('jwt-token');
+				if(token) {
 				fetch(process.env.BACKEND_URL + 'api/user/' + id ,{
 					method: 'GET',
 					  headers: {
-						"Content-Type": "application/json"
+						"Content-Type": "application/json",
+						"Authorization" : "Bearer " + token
 					},
 				})
 				 .then(resp => {								
@@ -83,6 +86,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.catch(error => {			
 					console.log('Oops something went wrong'+ error);
 				})
+			}else{
+				alert("error")
+			}
 			},
 			addId: (id) =>{
 				const store = getStore();
