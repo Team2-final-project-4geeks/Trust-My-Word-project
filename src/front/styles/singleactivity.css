@@ -39,9 +39,11 @@
 #singleRow2{
     justify-content: space-between;
 }
-#activityRow2{
+
+#activityRow{
     justify-content: space-between;
 }
+
 #commentSection{
     width: 1350px;
     min-height: 450px;
