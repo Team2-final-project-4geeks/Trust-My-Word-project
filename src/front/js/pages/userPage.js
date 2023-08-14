@@ -17,10 +17,13 @@ const UserPage = () =>{
 	}, []);
 
 const getReviews = () =>{
-    fetch( process.env.BACKEND_URL + "/api/user/" + store.userId,{
+    const token = localStorage.getItem('jwt-token');
+	if(token) {
+    fetch( process.env.BACKEND_URL + "/api/user/" + localStorage.getItem("userId"),{
         method: 'GET',
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization" : "Bearer " + token
         }
     })
      .then(resp => {								
@@ -34,6 +37,10 @@ const getReviews = () =>{
     .catch(error => {			
         console.log('Oops something went wrong'+ error);
     })
+    }else  {
+    alert(' You are not logged in!')
+     }
+
 }
 const showUsersReviews =()=> {
     return reviews.map((review, index) =>{

@@ -11,6 +11,7 @@ export const Navbar = () => {
 
 	const logOut = () => {
 		localStorage.removeItem('jwt-token');
+		localStorage.removeItem('userId')
 		navigate("/");
 		alert("You are Logged Out")
 	}

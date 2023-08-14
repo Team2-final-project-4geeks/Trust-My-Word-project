@@ -192,7 +192,10 @@ def create_review():
     db.session.add(new_review)
     db.session.commit()   
 
-    return jsonify(new_review), 200
+    serialized_review = new_review.serialize()  # Serialize the object
+
+    return jsonify(serialized_review), 200
+
 
 
 @api.route('/modify-review/<int:id>', methods=['PUT'])
@@ -235,12 +238,13 @@ def modify_review(id):
     update_review.description = data["description"]
     update_review.publishing_date = data["publishing_date"]
     update_review.price = data["price"]
-
+    update_review.location = data["location"] 
+    update_review.type = data["type"]
+    update_review.link = data["link"]
     db.session.commit()
 
-    review = Review.query.get(id)
 
-    return jsonify(review.serialize()),200
+    return jsonify(update_review.serialize()),200
     
 
 @api.route('/review/<int:id>',methods=['DELETE'])

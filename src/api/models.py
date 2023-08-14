@@ -28,7 +28,6 @@ class User(db.Model):
         return f'<User {self.username}>'
 
     def serialize(self):
-        
         return {
             "id": self.id,
             "email": self.email,

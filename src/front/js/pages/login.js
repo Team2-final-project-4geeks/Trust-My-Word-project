@@ -26,6 +26,7 @@ const Login = () =>{
 			.then((res) => res.json())
 			.then((result) => {
 				localStorage.setItem("jwt-token", result.token);
+                localStorage.setItem("userId",result.user_id)
                 actions.addId(result.user_id)
                 actions.addUsername(result.username)
 				navigate("/")
