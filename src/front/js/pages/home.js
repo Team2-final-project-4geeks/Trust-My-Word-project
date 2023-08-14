@@ -1,7 +1,7 @@
 
 import React, { useContext, useEffect, useState  } from "react";
 import { Context} from "../store/appContext";
-import ActivityCard from "../component/activitycard.jsx";
+import ActivityCard from "../component/activitycard"
 import { ProductCard } from "../component/productcard.jsx";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";

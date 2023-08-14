@@ -8,17 +8,13 @@ import { Home } from "./pages/home.js";
 import Login from "./pages/login.js";
 import injectContext from "./store/appContext";
 import CreateUser from "./pages/createUser.js";
-import CreateActivity from "./pages/createActivity";
-import CreateTrip from "./pages/createTrip";
 import SingleTrip from "./pages/singleTrip.js";
 import { SingleProduct } from "./pages/singleproduct.js";
 import {ReviewForm} from  "./pages/reviewForm.js";
 import {Products} from "./pages/products.js";
 import {Privacy_policy} from "./pages/privacy_policy.js";
 import { TermsServices } from "./pages/termsServices.js";
-import SingleActivity from "./pages/singleActivity.jsx";
-import ReviewActivity from "./pages/reviewActivity";
-import ReviewTrip from "./pages/reviewTrip";
+import SingleActivity from "./pages/singleActivity";
 import { Navbar } from "./component/navbar.js";
 import { Footer } from "./component/footer";
 import Activities from "./pages/activities";
@@ -45,18 +41,12 @@ const Layout = () => {
                         <Route element={<CreateUser />} path="/create-user"/>  
                         {/*<Route element={<ModifyUser/>} path="/modify-user/:id" />*/}
                         <Route element={<Trips/>} path="/trips"/>                 
-                        <Route element={<SingleTrip />} path="/trip/:id" />
-                        <Route element={<CreateTrip />} path="/create-trip" />
-                        <Route element={<ReviewTrip/>} path="/review-trip/:id" />
+                        <Route element={<SingleTrip />} path="/trip/:id" />                        
                         <Route element={<SingleProduct />} path="/product/:id" />
                         <Route element={<Products/>} path="/products"/>
-                        <Route element={<ReviewForm/>} path="/create-review"/>
-                        {/*<Route element={<CreateProduct />} path="/create-product" />
-                        >Route element={<ReviewProduct/>} path="/review-product/:id" />*/}
+                        <Route element={<ReviewForm/>} path="/create-review"/>                        
                         <Route element={<SingleActivity />} path="/activity/:id" />                        
-                        <Route element={<Activities />} path="/activities" />
-                        <Route element={<CreateActivity />} path="/create-activity" />
-                        <Route element={<ReviewActivity/>} path="/review-activity/:id" />
+                        <Route element={<Activities />} path="/activities" />                        
                         <Route element={<Privacy_policy />} path="/privacy-policy" />
                         <Route element={<TermsServices/>} path="/termsServices" />
                         <Route element={<h1>Not found!</h1>} path="*"/>
