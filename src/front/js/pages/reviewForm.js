@@ -101,7 +101,7 @@ export const ReviewForm = () => {
                 "Content-Type": "application/json",
                 "Authorization" : "Bearer " + token
             },
-            body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud,user}) 
+            body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud, user}) 
         })
         .then((res) => res.json())
         .then((result) => {
