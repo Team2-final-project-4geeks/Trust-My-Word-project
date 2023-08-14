@@ -31,17 +31,16 @@
     height: 100%;
 }
 
-
-#activityRow{
+#singleRow1{
     justify-content: space-between;
     margin-right: 15px;
 }
-#activityRow2{
+
+#singleRow2{
     justify-content: space-between;
 }
-
-#activityTitle{
-    text-decoration: underline overline;
+#activityRow2{
+    justify-content: space-between;
 }
 #commentSection{
     width: 1350px;
@@ -60,7 +59,6 @@
 #commentSection{
     width: 1350px;
     min-height: 450px;
-
 }
 #basic-addon1, #commentWrite{
     background: rgb(95,191,153);

@@ -38,20 +38,20 @@ def create_user():
        return jsonify(response_body),400
    elif "email" not in data:
         response_body = {
-           "msg": "Email dont exist in the request"
+           "msg": "Email doesnt exist in the request"
        }
         return jsonify(response_body),400
 
    elif "password" not in data:
         response_body = {
-           "msg": "Password dont exist in the request"
+           "msg": "Password doesnt exist in the request"
        }
         return jsonify(response_body),400
   
    
    elif "username" not in data:
         response_body = {
-           "msg": "username dont exist in the request"
+           "msg": "username doesnt exist in the request"
        }
         return jsonify(response_body),400
    
@@ -59,7 +59,7 @@ def create_user():
    db.session.add(new_user)
    db.session.commit() 
 
-   return jsonify({"msg": "user added"}),200
+   return jsonify({"msg": "user has been added"}),200
 
 @api.route('/users',methods=['GET'])
 def get_all_users():
@@ -68,11 +68,13 @@ def get_all_users():
     return jsonify(all_users),200
 
 @api.route('/user/<int:id>',methods=["GET"])
+@jwt_required()
 def get_single_user(id):
     user = User.query.get(id)
     return jsonify(user.serialize()), 200
 
 @api.route('user/<int:id>',methods=['PUT'])
+@jwt_required()
 def update_user(id):
     data = request.get_json()
 
@@ -98,6 +100,7 @@ def update_user(id):
     return jsonify(user),200
     
 @api.route('/user/<int:id>',methods=['DELETE'])
+@jwt_required()
 def delete_user(id):
     user_to_delete = User.query.get(id)
     db.session.delete(user_to_delete)
@@ -111,20 +114,20 @@ def user_login():
 
     if(email is None):
         response_body = {
-            "message": " email not exist"
+            "message": " email does not exist"
         }
         return jsonify(response_body), 400
 
     elif(password is None):
         response_body = {
-            "msg": "password not exist"
+            "msg": "password does not exist"
         }
         return jsonify(response_body), 400
     
     user = User.query.filter_by(email=email, password=password).first()
     if(user is None):
         response_body = {
-            "msg": "something you type wrong"
+            "msg": "You typed something wrong"
         }
         return jsonify(response_body),400
     
@@ -144,7 +147,8 @@ def get_all_reviews():
     return jsonify(all_reviews), 200
 
 
-@api.route('/create-review',methods=['POST'])
+@api.route('/create-review', methods=['POST'])
+@jwt_required()
 def create_review():
     data =request.get_json()
 
@@ -162,39 +166,37 @@ def create_review():
    
     elif "description" not in data:
         response_body = {
-           "msg": "Description dont exist in the request"
+           "msg": "Description doesnt exist in the request"
        }
         return jsonify(response_body),400
 
     elif "publishing_date" not in data:
         response_body = {
-           "msg": "publishing_date dont exist in the request"
+           "msg": "publishing_date doesnt exist in the request"
        }
         return jsonify(response_body),400
     
     elif "price" not in data:
         response_body = {
-           "msg": "Price dont exist in the request"
+           "msg": "Price doesnt exist in the request"
        }
         return jsonify(response_body),400
     
     elif "imageCloud" not in data:
         response_body = {
-           "msg": "Image dont exist in the request"
+           "msg": "Image doesnt exist in the request"
        }
         return jsonify(response_body),400
     
     new_review= Review(title = data["title"], category=data["category"], type=data["type"], location=data["location"],link=data["link"],description=data["description"], publishing_date=data["publishing_date"], price=data["price"], user_id=data["user"], image=data["imageCloud"])
     db.session.add(new_review)
-    db.session.commit()
+    db.session.commit()   
 
-    all_reviews = Review.query.all()
-    all_reviews = list(map(lambda x: x.serialize(),all_reviews))
-
-    return jsonify(all_reviews), 200
+    return jsonify(new_review), 200
 
 
 @api.route('/modify-review/<int:id>', methods=['PUT'])
+@jwt_required()
 def modify_review(id):
     data = request.get_json()
     if data is None:
@@ -212,19 +214,19 @@ def modify_review(id):
    
     elif "description" not in data:
         response_body = {
-           "msg": "Description dont exist in the request"
+           "msg": "Description doesnt exist in the request"
        }
         return jsonify(response_body),400
 
     elif "publishing_date" not in data:
         response_body = {
-           "msg": "publishing_date dont exist in the request"
+           "msg": "publishing_date doesnt exist in the request"
        }
         return jsonify(response_body),400
     
     elif "price" not in data:
         response_body = {
-           "msg": "Price dont exist in the request"
+           "msg": "Price doesnt exist in the request"
        }
         return jsonify(response_body),400
     
@@ -242,6 +244,7 @@ def modify_review(id):
     
 
 @api.route('/review/<int:id>',methods=['DELETE'])
+@jwt_required()
 def delete_review(id):
     review_to_delete = Review.query.get(id)
     db.session.delete(review_to_delete)
@@ -254,8 +257,41 @@ def get_single_review(id):
     return jsonify(review.serialize()),200
 
 
+# FOR COMMENTS
 
+@api.route('/comments',methods=['GET'])
+#@jwt_required()
+def get_all_comments():    
+    all_comments = Comment.query.all()
+    all_comments = list(map(lambda x: x.serialize(), all_comments))
+    return jsonify(all_comments), 200
 
+@api.route('/create-comment',methods=['POST'])
+#@jwt_required()
+def create_comment():
+    data =request.get_json()
 
+    if data is None:
+        response_body= {
+            "msg" : "body should be passed with request"
+        }
+        return jsonify(response_body),400
+    
+    elif "description" not in data:
+        response_body= {
+            "msg" : "description should be passed with request"
+        }
+        return jsonify(response_body),400        
+    
+    new_comment= Comment(description=data["description"], review_id=data["review_id"], user_id=data["user_id"])
+    db.session.add(new_comment)
+    db.session.commit()
+    
+    return jsonify(new_comment.serialize()), 200
 
-
+@api.route('/comment/<int:id>',methods=['DELETE'])
+#@jwt_required()
+def delete_comment(id):
+    comment_to_delete = Comment.query.get(id)
+    db.session.delete(comment_to_delete)
+    db.session.commit()

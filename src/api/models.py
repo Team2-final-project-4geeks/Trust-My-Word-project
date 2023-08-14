@@ -25,7 +25,7 @@ class User(db.Model):
     # 1 - N with Reviews
 
     def __repr__(self):
-        return f'<User {self.email}>'
+        return f'<User {self.username}>'
 
     def serialize(self):
         
@@ -88,5 +88,7 @@ class Comment(db.Model):
      def serialize(self):
         return {
             "id": self.id,
-            "description" : self.description
+            "description" : self.description,
+            "review_id": self.review_id,
+            "user_id": self.user_id
         }       
