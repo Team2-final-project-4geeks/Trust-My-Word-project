@@ -298,3 +298,17 @@ def delete_comment(id):
     db.session.delete(comment_to_delete)
     db.session.commit()
     return jsonify({"message":"Comment deleted"}), 200
+
+@api.route('/reviews-comments/<int:id>',methods=['GET'])
+def get_reviews_with_comments():
+    reviews = Review.query.all(id)
+    review_data = []
+    for review in reviews:
+        review_data.append({
+            'id': review.id,
+            'reviewer': review.user.username,
+            'comments': [{'id': comment.id, 'description': comment.description} for comment in review.comments]
+        })
+
+    return jsonify({'reviews': review_data.serialize()})
+

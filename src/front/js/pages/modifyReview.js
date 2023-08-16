@@ -3,6 +3,8 @@ import { FaPencilAlt } from 'react-icons/fa';
 import { useParams } from "react-router-dom";
 
 const ModifyReview = () => {
+
+
     const [review,setReview] = useState("")
     const [title,setTitle] = useState("")
     const [description, setDescription] = useState("")
@@ -15,10 +17,13 @@ const ModifyReview = () => {
     const params = useParams()
 
     const getSingleReview = () =>{
+        const token = localStorage.getItem('jwt-token');
+		if(token) {
 		fetch(process.env.BACKEND_URL + 'api/review/' + params.id, {
 			method: "GET",
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+                "Authorization" : "Bearer " + token
 			}
 		})
 		.then(resp => {
@@ -34,6 +39,9 @@ const ModifyReview = () => {
 		.catch(error => {
 			console.log('Oops something went wrong'+ error);
 		})
+        }else {
+            alert("errror")
+        }
 	}
 
     const updateReview = () =>{

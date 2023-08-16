@@ -27,9 +27,8 @@ const Login = () =>{
 			.then((result) => {
 				localStorage.setItem("jwt-token", result.token);
                 localStorage.setItem("userId",result.user_id)
-                actions.addId(result.user_id)
                 actions.addUsername(result.username)
-                actions.getUser(result.user_id)
+                actions.getUser(localStorage.getItem("userId"))
 				navigate("/")
 			}).catch((err) => {
 				console.log(err);

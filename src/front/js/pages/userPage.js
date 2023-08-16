@@ -9,6 +9,8 @@ const UserPage = () =>{
     const navigate= useNavigate()
     const {store,actions} = useContext(Context)
     const [reviews, setReviews] = useState([]);
+    const [comments, setComments] = useState([])
+    const [favourites, setFavourites] = useState([])
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
 
@@ -29,7 +31,10 @@ const getReviews = () =>{
      .then(resp => {								
         return resp.json();
     })
-    .then(data=> {		
+    .then(data=> {	
+        console.log(data);
+        setComments(data.comments)
+        setFavourites(data.favourites)	
         setReviews(data.reviews);
         setEmail(data.email);
         setUsername(data.username);
@@ -39,8 +44,7 @@ const getReviews = () =>{
     })
     }else  {
     alert(' You are not logged in!')
-     }
-
+    }
 }
 const showUsersReviews =()=> {
     return reviews.map((review, index) =>{
@@ -70,11 +74,11 @@ const showUsersReviews =()=> {
                                 </div>
                                 <div className="">
                                     <p className="title mx-4">Favorites</p>
-                                    <p className="reviews  mx-4">0</p>
+                                    <p className="reviews  mx-4">{favourites.length}</p>
                                 </div>
                                 <div className="">
                                     <p className="title mx-4">Comments</p>
-                                    <p className="reviews  mx-4">0</p>
+                                    <p className="reviews  mx-4">{comments.length}</p>
                                 </div>
                             </div>
                     </div>

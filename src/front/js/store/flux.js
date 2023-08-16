@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			loggedIn: false,
 			product: {
 				id: "",
 				title: "",
@@ -20,10 +21,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			addFavourite: (fav) => {
                 const store = getStore();
-				const actions = getActions()
                 if (!store.favourite.includes(fav)) {
                     setStore({ favourite: [...store.favourite, fav] });
-                    actions.addUserFavourites(store.userId);
                 } else {
                     alert("Favourite already exists!!");
                 }
@@ -47,11 +46,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			addUserFavourites: (id) => {
 
 				const store = getStore()
-
+				const actions=getActions()
+				const token = localStorage.getItem('jwt-token');
+				if(token) {
 				fetch(process.env.BACKEND_URL + 'api/user/' + id ,{
 					method: 'PUT',
 					headers: {
-						"Content-Type": "application/json"
+						"Content-Type": "application/json",
+						"Authorization" : "Bearer " + token
 					},
 					body : JSON.stringify({ favourites: store.favourite })
 				})
@@ -65,6 +67,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.catch(error => {			
 					console.log('Oops something went wrong'+ error);
 				})
+			}else{
+				alert("error")
+			}
 			},
 			getUser: (id) => {
 				const token = localStorage.getItem('jwt-token');
@@ -79,7 +84,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				 .then(resp => {								
 					return resp.json();
 				})
-				.then(data=> {	
+				.then(data=> {
 					const store = getStore();		
 					setStore({ ...store, favourite: data.favourites });
 				})
@@ -107,7 +112,12 @@ const getState = ({ getStore, getActions, setStore }) => {
                     email: "",
                     favourite: [] 
                 });
-			}
+			},
+			setLoggedIn: (value) => {
+                const store = getStore();
+                setStore({ ...store, loggedIn: value });
+              },
+
 		},
 		
 	};
