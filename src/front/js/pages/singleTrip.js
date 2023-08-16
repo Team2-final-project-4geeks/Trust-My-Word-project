@@ -21,6 +21,7 @@ const SingleTrip = (props) =>{
     const map = `https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=300x300&key=${process.env.API_KEY}`
 
     const get_single_trip = () =>{
+        
         fetch(process.env.BACKEND_URL + 'api/review/' + params.id ,{
 			method: "GET",
 			headers: {

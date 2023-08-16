@@ -23,7 +23,7 @@ li{
     background-size: cover;
     background-position: center;
     height: 41vh;
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,7 +36,7 @@ li{
     background-size: cover;
     background-position: center;
     height: 41vh;
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,7 +50,7 @@ li{
     background-size: cover;
     background-position: center;
     height: 41vh;
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;

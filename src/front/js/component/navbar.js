@@ -7,20 +7,26 @@ import "../../styles/navbar.css";
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
+  const localUserId = localStorage.getItem("userId")
+  const token = localStorage.getItem("jwt-token")
 
-
-  const logOut = () => {
-    actions.clearUser();
-    localStorage.removeItem("jwt-token");
-    navigate("/");
-    alert("You are Logged Out");
-  };
+	const logOut = () => {
+		localStorage.removeItem('jwt-token');
+		localStorage.removeItem('userId')
+    actions.setLoggedIn(false)
+		navigate("/");
+		alert("You are Logged Out")
+	}
+	useEffect(() => {		
+		//el parametro tiene que venir del user_id
+		actions.getUser(localStorage.getItem("userId"))
+	}, []);
 
   useEffect(() => {
-    if (store.userId) {
-      actions.getUser(store.userId);
+    if (localUserId) {
+      actions.getUser(localUserId);
     }
-  }, [store.userId]);
+  }, [localUserId]);
 
   return (
     <div className="navbar">
@@ -51,33 +57,30 @@ export const Navbar = () => {
           </a>
         </div>
         <div className="nav-item">
-          <a className="nav-link text-light" href="#" onClick={() => navigate("/create-review")}>
-            Create Review
-          </a>
-        </div>
-        <div className="nav-item">
           <a className="nav-link text-light" href="#" onClick={() => navigate("/create-user")}>
             Create User
           </a>
         </div>
-        <div className="nav-item">
-          <a className="nav-link text-light" href="#" onClick={() => navigate("/user-page")}>
-            User Page
-          </a>
-        </div>
-        <div className="nav-item">
-          <a className="nav-link text-light" href="#" onClick={() => navigate("/login")}>
-            Login
-          </a>
-        </div>
-        <div className="nav-item">
-          <a className="nav-link text-light" href="#" onClick={logOut}>
-            Logout
-          </a>
-        </div>
-        <div className="btn-group" id="favourites">
+        {token ? ( 
+          <>
+            <div className="nav-item">
+              <a className="nav-link text-light" href="#" onClick={() => navigate("/user-page")}>
+                User Page
+              </a>
+            </div>
+            <div className="nav-item">
+              <a className="nav-link text-light" href="#" onClick={() => navigate("/create-review")}>
+                Create Review
+              </a>
+            </div>
+            <div className="nav-item">
+              <a className="nav-link text-light" href="#" onClick={logOut}>
+                Logout
+              </a>
+            </div>
+            <div className="btn-group" id="favourites">
               <button type="button" className="btn-navbar btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="dropdownMenuClickableInside" aria-expanded="false">
-                  Favourites <span className="p-1 text-secondary text-center text-white">{store.favourite.length > 0 ? store.favourite.length:"0"}</span>
+                  Favourites <span className="p-1 text-secondary text-center text-white">{(store.favourite && store.favourite!=null && store.favourite!=undefined)? store.favourite.length:"0"}</span>
               </button>
               {store.favourite && store.favourite.length > 0 ? (
                   <ul className="dropdown-menu dropdown-menu-start dropdown-menu-lg-start" aria-labelledby="dropdownMenuClickableInside">
@@ -90,7 +93,7 @@ export const Navbar = () => {
                                           className="fas fa-trash pt-1"
                                           onClick={() => {
                                               actions.deleteFavourite(fav);
-                                              actions.addUserFavourites(store.favourite, store.userId);
+                                              actions.addUserFavourites(localUserId);
                                           }}
                                       ></i>
                                   </a>
@@ -102,6 +105,14 @@ export const Navbar = () => {
                   ""
               )}
           </div>
+          </>
+        ) : (
+          <div className="nav-item">
+            <a className="nav-link text-light" href="#" onClick={() => navigate("/login")}>
+              Login
+            </a>
+          </div>
+        )}
       </div>
     </div>
   );

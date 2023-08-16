@@ -189,7 +189,10 @@ def create_review():
     db.session.add(new_review)
     db.session.commit()   
 
-    return jsonify(new_review), 200
+    serialized_review = new_review.serialize()  # Serialize the object
+
+    return jsonify(serialized_review), 200
+
 
 
 @api.route('/modify-review/<int:id>', methods=['PUT'])
@@ -232,12 +235,13 @@ def modify_review(id):
     update_review.description = data["description"]
     update_review.publishing_date = data["publishing_date"]
     update_review.price = data["price"]
-
+    update_review.location = data["location"] 
+    update_review.type = data["type"]
+    update_review.link = data["link"]
     db.session.commit()
 
-    review = Review.query.get(id)
 
-    return jsonify(review.serialize()),200
+    return jsonify(update_review.serialize()),200
     
 
 @api.route('/review/<int:id>',methods=['DELETE'])
@@ -294,3 +298,17 @@ def delete_comment(id):
     db.session.delete(comment_to_delete)
     db.session.commit()
     return jsonify({"message":"Comment deleted"}), 200
+
+@api.route('/reviews-comments/<int:id>',methods=['GET'])
+def get_reviews_with_comments():
+    reviews = Review.query.all(id)
+    review_data = []
+    for review in reviews:
+        review_data.append({
+            'id': review.id,
+            'reviewer': review.user.username,
+            'comments': [{'id': comment.id, 'description': comment.description} for comment in review.comments]
+        })
+
+    return jsonify({'reviews': review_data.serialize()})
+

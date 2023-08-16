@@ -6,22 +6,23 @@ import { Context } from "../store/appContext";
 import Swal from 'sweetalert2'
 
 const SingleActivity = () => {
-
+    const [reviews,setReviews] = useState([])
     const [activity, setActivity] = useState();
-    const [city, setCity] = useState([]);
+    const [city, setCity] = useState();
     const [weather,setWeather] = useState();
     const [allDescriptions, setAllDescriptions] = useState([]);
     const [description, setDescription] = useState("");       
     const params = useParams();
     const {store, actions} = useContext(Context);
-    const user_id=store.userId;
+    const user_id=localStorage.getItem("userId")
     const userName=store.userName;
     const review_id= params.id;
     const map = `https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=350x350&key=${process.env.API_KEY}`
 
     useEffect(() => {
         fetchSingleActivity();
-        fetchComments();                     
+        fetchComments();  
+        fetchReviews()                   
     }, []);
 
     useEffect(() => {
@@ -43,6 +44,7 @@ const SingleActivity = () => {
             return resp.json();
         })
         .then(data=>{
+            console.log(data);
             setActivity(data);
             setCity(data.location);                        
         })
@@ -70,21 +72,20 @@ const SingleActivity = () => {
             .catch(err => console.log(err))
     }
 
-    const fetchComments =() =>{        
-        const token = localStorage.getItem('jwt-token');        
-        if(token) {        
-        fetch(process.env.BACKEND_URL + 'api/comments',{
+    const fetchReviews =() =>{        
+               
+        fetch(process.env.BACKEND_URL + 'api/reviews-comments/' + params.id,{
 			method: 'GET',
       		headers: {
 				"Content-Type": "application/json",
-                "Authorization" : "Bearer " + token
 			}
 		})
      	.then(resp => {								
 			return resp.json();
 		})
 		.then(data=> {		
-           setAllDescriptions(data);            
+            console.log(data);
+            console.log("eooooooo");
 		})
 		.catch(error => {			
 			Swal.fire({
@@ -93,18 +94,42 @@ const SingleActivity = () => {
                 text: 'Something went wrong!'            
               })
 		})
-    }else{
+}
+
+const fetchComments =() =>{        
+    const token = localStorage.getItem('jwt-token');        
+    if(token) {        
+    fetch(process.env.BACKEND_URL + 'api/comments',{
+        method: 'GET',
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization" : "Bearer " + token
+        }
+    })
+     .then(resp => {								
+        return resp.json();
+    })
+    .then(data=> {		
+       setAllDescriptions(data);            
+    })
+    .catch(error => {			
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'Something went wrong!'            
           })
-    }
+    })
+}else{
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!'            
+      })
+}
 }
     
     const createComment = () => {
         const token = localStorage.getItem('jwt-token');
-        console.log(token);
         if(token) {
         fetch(process.env.BACKEND_URL + 'api/create-comment', {
           method: "POST",          

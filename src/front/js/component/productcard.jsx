@@ -7,19 +7,17 @@ import "../../styles/productcard.css";
 
 
 export const ProductCard = (props) => {
-
     const navigate = useNavigate ()
     const {store, actions} = useContext(Context);
 
-
     return (
             <div className="card-body">
-                <div className="image-container">
-                    <img src={props.product.image} className="card-img-top" alt="..."/>
+                <div className="image-container-product">
+                    <img src={props.product.image} alt="..."/>
                     <div className="image-overlay d-flex justify-content-end align-items-start p-2">
                         <i className="fas fa-heart text-danger" onClick={() => {
                         actions.addFavourite(props.product.title);
-                        actions.addUserFavourites(store.userId)
+                        actions.addUserFavourites(localStorage.getItem("userId"))
                         }}></i>
                     </div>
                 </div>
@@ -35,7 +33,7 @@ export const ProductCard = (props) => {
                             </div>     
                     </div>
                     <div className="d-flex flex-column align-items-center ">
-                        <h3 className="card-title text-center mt-2">{props.product.title}</h3>
+                        <h5 className="card-title text-center mt-2">{props.product.title}</h5>
                         <div className="text-center">
                             <i className="fas fa-star fa-sm text-warning text-center"></i>
                             <i className="fas fa-star fa-sm text-warning text-center"></i>
@@ -48,12 +46,12 @@ export const ProductCard = (props) => {
                             <p className="card-text mt-4">{props.product.price}</p>
                         </div>
                     </div>
-                        <div className="btn-container">
-                            <ViewMoreProduct item={props.product.id}/>
-                        </div>
+                    <div id="productCardViewMore">
+                        <ViewMoreProduct item={props.product.id}/>
                     </div>
-                </div>
+                 </div>
             </div>
+        </div>
         </div>
     )
 }

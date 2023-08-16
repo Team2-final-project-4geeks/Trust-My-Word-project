@@ -14,11 +14,11 @@ const TriipCard = (props)=>{
                     <div className="image-overlay d-flex justify-content-end align-items-start p-2">
                         <i className="fas fa-heart text-danger" onClick={() => {
                         actions.addFavourite(props.trip.title);
-                        actions.addUserFavourites(store.userId)
+                        actions.addUserFavourites(localStorage.getItem("userId"))
                         }}></i>
                     </div>
                 </div>
-             <div className="card-body mx-3">
+             <div className="card-body mx-3 ">
             <div className="d-flex flex-column">
                 <div className=" col-11">
                     <div className="d-flex flex-row">
@@ -30,7 +30,7 @@ const TriipCard = (props)=>{
                             </div>     
                     </div>
                     <div className="d-flex flex-column align-items-center ">
-                        <h3 className="card-title text-center mt-2">{props.trip.title}</h3>
+                        <h5 className="card-title text-center mt-2">{props.trip.title}</h5>
                         <div className="text-center">
                             <i className="fas fa-star fa-sm text-warning text-center"></i>
                             <i className="fas fa-star fa-sm text-warning text-center"></i>
@@ -43,7 +43,7 @@ const TriipCard = (props)=>{
                             <p className="card-text mt-4">{props.trip.price}</p>
                         </div>
                     </div>
-                    <div className="btn-container">
+                    <div className="btn-container-trip">
                         <ViewMore item={props.item.id}/>
                     </div>
                  </div>

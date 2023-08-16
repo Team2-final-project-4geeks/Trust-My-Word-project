@@ -21,7 +21,6 @@ export const Home = () => {
 		getActivities();
     	getProduct();
 		getTrips()
-		console.log(store.userId);
 	}, []);
 
 	const getActivities = () => {
@@ -157,11 +156,10 @@ export const Home = () => {
 				</div>						
 			</div>
 			<div className="container-fluid mt-5">
-				<div class="container-fluid">
 					<div class="general-image" id="imageContainerProducts">
 						<h1 id="titleProducts">PRODUCTS</h1>
 					</div>
-    			</div>
+    	
 					<div className="container-fluid mt-4" >
 						<div className="row row-cols-1 row-cols-md-4 g-3">
 							{showProducts()}
