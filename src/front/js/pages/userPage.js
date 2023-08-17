@@ -7,18 +7,81 @@ import { useNavigate } from "react-router-dom";
 
 const UserPage = () =>{
     const navigate= useNavigate()
+    const presetKey = "577211589791536";
+    const cloudName = "dhyrv5g3w"; 
     const {store,actions} = useContext(Context)
     const [reviews, setReviews] = useState([]);
     const [comments, setComments] = useState([])
     const [favourites, setFavourites] = useState([])
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
+    const [image,setImage] = useState("")
 
     useEffect(() => {		
 		getReviews();
 	}, []);
 
-const getReviews = () =>{
+    const handleFile = (e) => {
+        const file = e.target.files[0];
+    
+        if (file && file.type !== 'image/jpeg') {
+          alert('Only .jpg format is allowed.');
+          return;
+        }
+        setImage(file);
+      };
+
+    const uploadImage = (imageFile) => {
+        return new Promise((resolve, reject) => {
+          const formData = new FormData();
+          formData.append("file", imageFile);
+          formData.append("upload_preset", presetKey);
+      
+          fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+            method: "POST",
+            body: formData,
+          })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            if (data.secure_url) {
+              resolve(data.secure_url);
+            } else {
+              reject(new Error("Image upload failed."));
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+            reject(error);
+          });
+        });
+      };
+      const sendDataToAPI = (image) => {
+        const token = localStorage.getItem('jwt-token');
+            if(token) {
+        fetch(process.env.BACKEND_URL + `api/create-review`, { 
+                method: "POST", 
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization" : "Bearer " + token
+                },
+                body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud:image,user}) 
+            })
+            .then((res) => res.json())
+            .then((result) => {
+              console.log("estoyyyy dentroooo");
+              console.log(result);
+            }).catch((err) => {
+                console.log(err);
+            })
+            }else  {
+              alert('Image not uploaded')
+            }
+    
+          };
+    
+
+    const getReviews = () =>{
     const token = localStorage.getItem('jwt-token');
 	if(token) {
     fetch( process.env.BACKEND_URL + "/api/user/" + localStorage.getItem("userId"),{

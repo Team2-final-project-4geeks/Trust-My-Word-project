@@ -7,7 +7,7 @@ const ViewMore = (props) =>{
 
     const navigate = useNavigate()
     return(
-        <button className="btn" type="button"  onClick={()=> navigate("/trip/" + props.item)}> <strong>View more</strong></button>
+        <button id="viewMore" type="button"  onClick={()=> navigate("/trip/" + props.item)}> <strong>View more</strong></button>
     )
 }
 

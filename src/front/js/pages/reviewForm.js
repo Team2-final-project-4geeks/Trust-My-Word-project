@@ -19,14 +19,13 @@ export const ReviewForm = () => {
   const [image, setImage] = useState("")
   const [category, setCategory] = useState("")
   const {store,actions} = useContext(Context)
-  const user = store.userId
+  const user = localStorage.getItem("userId")
  
  
 
   const [imagePreview, setImagePreview] = useState(null);
-
-  const navigate= useNavigate();
-
+  const navigate= useNavigate()
+  
   const reviewImage = <img src="https://fastly.picsum.photos/id/163/2000/1333.jpg?hmac=htdHeSJwlYOxS8b0TTpz2s8tD_QDlmsd3JHYa_HGrg8" class="image-create-review" alt="..." /> 
 
   const handleFile = (e) => {

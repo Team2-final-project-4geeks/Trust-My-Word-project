@@ -18,6 +18,8 @@ class User(db.Model):
     username = db.Column(db.String(120), nullable=False)
     favourites= db.Column(db.ARRAY(db.String(120)))
     password = db.Column(db.String(80), unique=False, nullable=False)
+    image = db.Column(db.String(200), nullable=False,default="google.com")
+
     # 1 - N with Reviews
     reviews = db.relationship("Review", back_populates="user")
     # 1 - N with Comments
@@ -35,6 +37,8 @@ class User(db.Model):
             "favourites": self.favourites,
             "reviews": [review.serialize() for review in self.reviews],  # serialize each review
             "comments": [comment.serialize() for comment in self.comments], # serialize each comment
+            "image": self.image
+
 
         }        
       

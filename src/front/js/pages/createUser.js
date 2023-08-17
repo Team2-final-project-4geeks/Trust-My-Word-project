@@ -1,10 +1,12 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CreateUser = () =>{
     const [email,setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [username,setUsername] = useState("") 
+    const navigate = useNavigate()
 
     const create_user = () =>{
         if(email === '') {
@@ -66,7 +68,7 @@ const CreateUser = () =>{
                             <div className="input-board mt-3">
                                 <i class="fa-solid fa-key me-3"></i>
                                 <input 
-                                    type="text" 
+                                    type="password" 
                                     id="password" 
                                     className="p-3 col-10 register-input"  
                                     placeholder="Password" 
@@ -75,7 +77,12 @@ const CreateUser = () =>{
                                     onChange={(e)=>{setPassword(e.target.value)}}
                                     /><br/><br/>
                             </div>
-                            <button type="submit" className="btn btn-success mt-4" onClick={create_user}>SUBMIT</button>
+                            <button 
+                                type="submit" 
+                                className="btn btn-warning mt-4" 
+                                onClick={()=>{ create_user()
+                                               navigate("/login")
+                                }}>SUBMIT</button>
                         </div>
                     </div>
                 </div>

@@ -13,8 +13,8 @@ from flask_jwt_extended import (
 
 api = Blueprint('api', __name__)
 
-#@api.route('/hello', methods=['POST', 'GET'])
-#def handle_hello():
+# @api.route('/hello', methods=['POST', 'GET'])
+# def handle_hello():
 
 #    populate_user();
 #    populate_reviews();
@@ -300,7 +300,7 @@ def delete_comment(id):
     return jsonify({"message":"Comment deleted"}), 200
 
 @api.route('/reviews-comments/<int:id>',methods=['GET'])
-def get_reviews_with_comments():
+def get_reviews_with_comments(id):
     reviews = Review.query.all(id)
     review_data = []
     for review in reviews:

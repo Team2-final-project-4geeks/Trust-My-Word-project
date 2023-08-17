@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -6,6 +6,7 @@ import "../../styles/navbar.css";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
+  const [fav, setfavor] = useState([])
   const navigate = useNavigate();
   const localUserId = localStorage.getItem("userId")
   const token = localStorage.getItem("jwt-token")
@@ -62,7 +63,7 @@ export const Navbar = () => {
           </a>
         </div>
         {token ? ( 
-          <>
+          <div>
             <div className="nav-item">
               <a className="nav-link text-light" href="#" onClick={() => navigate("/user-page")}>
                 User Page
@@ -84,10 +85,10 @@ export const Navbar = () => {
               </button>
               {store.favourite && store.favourite.length > 0 ? (
                   <ul className="dropdown-menu dropdown-menu-start dropdown-menu-lg-start" aria-labelledby="dropdownMenuClickableInside">
-                      {store.favourite.map((fav, index) => {
+                      {store.favourite.map((fav, index,id) => {
                           return (
                               <li key={index}>
-                                  <a className="dropdown-item d-flex text-black justify-content-between ps-2 pe-2" href="#">
+                                  <a className="dropdown-item d-flex text-black justify-content-between ps-2 pe-2"  href="#">
                                       {fav}
                                       <i
                                           className="fas fa-trash pt-1"
@@ -105,7 +106,7 @@ export const Navbar = () => {
                   ""
               )}
           </div>
-          </>
+          </div>
         ) : (
           <div className="nav-item">
             <a className="nav-link text-light" href="#" onClick={() => navigate("/login")}>

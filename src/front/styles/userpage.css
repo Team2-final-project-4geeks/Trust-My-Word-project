@@ -57,7 +57,7 @@
   .olcards li {
     counter-increment: cardCount;
     display: flex;
-    color: white;
+    color: rgb(0, 0, 0);
     --labelOffset: 1rem;
     --arrowClipSize: 1.5rem;
     margin-top: var(--labelOffset);

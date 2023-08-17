@@ -34,11 +34,6 @@ export const ProductCard = (props) => {
                     </div>
                     <div className="d-flex flex-column align-items-center ">
                         <h5 className="card-title text-center mt-2">{props.product.title}</h5>
-                        <div className="text-center">
-                            <i className="fas fa-star fa-sm text-warning text-center"></i>
-                            <i className="fas fa-star fa-sm text-warning text-center"></i>
-                            <i className="fas fa-star fa-sm text-warning text-center"></i>
-                        </div>
                         <div id="trip-board" className="mt-2">
                             <div id="card-description-trip">
                                 <p className="card-text"><i className="fas fa-quote-left mt-2 me-2"></i> <i> {props.product.description}</i></p>

@@ -61,7 +61,7 @@ const Login = () =>{
                                 <div className="input-board mt-3">
                                     <i class="fa-solid fa-key me-3"></i>
                                     <input 
-                                        type="text" 
+                                        type="password" 
                                         id="password" 
                                         className="p-3 col-10 login-input"  
                                         placeholder="Password" 
@@ -72,7 +72,7 @@ const Login = () =>{
                                         }}
                                         /><br/><br/>
                                 </div>
-                                <button type="submit" className="btn btn-success mt-4" 
+                                <button type="submit" className="btn btn-warning mt-4" 
                                 onClick={()=>{
                                     user_login()
                                    
