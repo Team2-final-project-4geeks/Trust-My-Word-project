@@ -21,9 +21,9 @@ class User(db.Model):
     image = db.Column(db.String(200), nullable=True,default="google.com")
 
     # 1 - N with Reviews
-    reviews = db.relationship("Review", back_populates="user")
+    reviews = db.relationship("Review", back_populates="users")
     # 1 - N with Comments
-    comments = db.relationship("Comment", back_populates="user")
+    comments = db.relationship("Comment", back_populates="userComment")
     # 1 - N with Reviews
 
     def __repr__(self):
@@ -55,10 +55,10 @@ class Review(db.Model):
     category = db.Column(Enum(myEnum))
     comments = db.relationship("Comment", back_populates="review")
     user_id = db.Column(db.Integer, ForeignKey('user.id'))
-    user = db.relationship("User", back_populates="reviews")
+    users = db.relationship("User", back_populates="reviews")
     image = db.Column(db.String(200), nullable=False,default="google.com")
+    rating = db.Column(db.String(50), nullable=True, default="0")
     
-
 
     def __repr__(self):
         return f'<Reviews {self.id}>'
@@ -73,7 +73,9 @@ class Review(db.Model):
             "publishing_date": self.publishing_date,
             "link": self.link,
             "price": self.price,
-            "image": self.image
+            "image": self.image,
+            "rating": self.rating,
+            "user_id": self.user_id
         }
     
 class Comment(db.Model):
@@ -83,7 +85,7 @@ class Comment(db.Model):
      review_id = db.Column(db.Integer, ForeignKey('review.id'))
      review = db.relationship("Review", back_populates="comments")
      user_id = db.Column(db.Integer, ForeignKey('user.id'))
-     user = db.relationship("User", back_populates="comments")
+     userComment = db.relationship("User", back_populates="comments")
 
      def __repr__(self):
         return f'<Comments {self.id}>'
@@ -93,5 +95,5 @@ class Comment(db.Model):
             "id": self.id,
             "description" : self.description,
             "review_id": self.review_id,
-            "user_id": self.user_id
+            "user_id": self.user_id,
         }       

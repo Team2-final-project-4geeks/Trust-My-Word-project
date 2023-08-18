@@ -77,8 +77,6 @@ export const Home = () => {
 		})
 	}
 
-	
-	
 	const showActivity = () =>{
 		const reservedActivities = activities.slice().reverse();
 		if (reservedActivities && reservedActivities.length > 0) {
