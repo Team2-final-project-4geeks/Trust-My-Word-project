@@ -1,4 +1,4 @@
-.btn {
+#viewMore {
     background-color: transparent;
     border: none;
     color: black;
@@ -7,7 +7,7 @@
     transition: color 0.3s, transform 0.3s;
   }
   
-  .btn:hover {
+  #viewMore:hover {
     transform: scale(1.15);
     color: #404040;
     text-decoration: underline;

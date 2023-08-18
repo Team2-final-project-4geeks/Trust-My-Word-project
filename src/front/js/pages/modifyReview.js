@@ -112,7 +112,7 @@ const ModifyReview = () => {
                 </div>
             </div>
             <div className="text-center">
-            <button className="btn btn-success mx-3"  onClick={updateReview}>submit</button>
+            <button className="btn btn-warning mx-3 my-4"  onClick={updateReview}>submit</button>
             </div>
       </div>
 

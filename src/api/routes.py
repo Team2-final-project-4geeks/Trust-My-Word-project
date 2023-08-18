@@ -13,8 +13,8 @@ from flask_jwt_extended import (
 
 api = Blueprint('api', __name__)
 
-#@api.route('/hello', methods=['POST', 'GET'])
-#def handle_hello():
+# @api.route('/hello', methods=['POST', 'GET'])
+# def handle_hello():
 
 #    populate_user();
 #    populate_reviews();
@@ -92,6 +92,8 @@ def update_user(id):
         update_user.password = data["password"]
     if "favourites" in data:
         update_user.favourites = data["favourites"]
+    if "imageCloud" in data:
+        update_user.image = data["imageCloud"]
     db.session.commit()
 
     return jsonify({"msg":"user updated"}),200
@@ -300,7 +302,7 @@ def delete_comment(id):
     return jsonify({"message":"Comment deleted"}), 200
 
 @api.route('/reviews-comments/<int:id>',methods=['GET'])
-def get_reviews_with_comments():
+def get_reviews_with_comments(id):
     reviews = Review.query.all(id)
     review_data = []
     for review in reviews:

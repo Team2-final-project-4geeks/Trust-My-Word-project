@@ -32,3 +32,30 @@ a{
     border: 1px solid black;
     border-radius: 5px;
 }
+
+.half-container {
+    display: flex;
+    height: 100%;
+    cursor: pointer;
+}
+
+.half-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: #f5f5f5;
+    transition: all 0.3s ease-in-out;
+}
+
+.half-content img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+
+
+
+

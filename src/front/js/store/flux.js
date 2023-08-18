@@ -11,7 +11,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			favourite: [],
 			storeCities: {},
-
 			storeTypes: {},
 			checked: false,			
 			userId: null,
@@ -91,8 +90,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.catch(error => {			
 					console.log('Oops something went wrong'+ error);
 				})
-			}else{
-				alert("error")
 			}
 			},
 			addId: (id) =>{

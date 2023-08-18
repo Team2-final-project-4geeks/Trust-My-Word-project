@@ -21,12 +21,12 @@
 }
 .logo{
     align-self: flex-start;
-    margin-left:25px;
-    margin-top: 20px;
+    margin-left:15px;
+    margin-top: 5px;
 }
   
 .logo img {
-    max-width: 80px;
+    max-width: 110px;
 }
   
 .menu {
@@ -38,7 +38,7 @@
 }
 .nav-item {
     margin-left: -20px;
-    font-size: 15px; 
+    font-size: 20px; 
 }
 .btn-navbar {
     background-color: transparent;

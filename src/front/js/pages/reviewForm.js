@@ -19,14 +19,22 @@ export const ReviewForm = () => {
   const [image, setImage] = useState("")
   const [category, setCategory] = useState("")
   const {store,actions} = useContext(Context)
-  const user = store.userId
- 
- 
+  const user = localStorage.getItem("userId")
+  const [rating, setRating] = useState(0); // Estado para almacenar la calificación
+
+  const handleStarClick = (selectedRating) => {
+    setRating(selectedRating);
+  };
+  const handleSubmit = () => {
+    // Aquí puedes enviar 'rating' al backend (Python) usando una solicitud HTTP (por ejemplo, fetch).
+    // Asegúrate de manejar la comunicación con el backend según tus necesidades.
+    console.log('Calificación enviada:', rating);
+  };
+
 
   const [imagePreview, setImagePreview] = useState(null);
-
-  const navigate= useNavigate();
-
+  const navigate= useNavigate()
+  
   const reviewImage = <img src="https://fastly.picsum.photos/id/163/2000/1333.jpg?hmac=htdHeSJwlYOxS8b0TTpz2s8tD_QDlmsd3JHYa_HGrg8" class="image-create-review" alt="..." /> 
 
   const handleFile = (e) => {
@@ -242,6 +250,21 @@ export const ReviewForm = () => {
                                 onChange={(e) => setPublishing_date(e.target.value)}
                                 />
                             <p className="little-legends">You won't be able to chage that after</p> 
+                        </div>
+                        <div className="mt-3">
+                          <h2>Your rating</h2>
+                          <div>
+                            {[1, 2, 3, 4, 5].map((star) => (
+                              <span
+                                key={star}
+                                onClick={() => handleStarClick(star)}
+                                style={{ cursor: 'pointer', color: star <= rating ? 'gold' : 'gray' }}
+                              >
+                                &#9733;
+                              </span>
+                            ))}
+                          </div>
+                          <button onClick={handleSubmit}>Enviar calificación</button>
                         </div>
                 </div>
         </div>

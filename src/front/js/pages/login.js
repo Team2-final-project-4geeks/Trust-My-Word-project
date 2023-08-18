@@ -9,6 +9,8 @@ const Login = () =>{
     const [email,setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
+    const [showHello, setShowHello] = useState(false);
+    const handleClick = () => setShowHello(!showHello);
 
     const user_login = () =>{
 			if(email ==='') {
@@ -61,7 +63,7 @@ const Login = () =>{
                                 <div className="input-board mt-3">
                                     <i class="fa-solid fa-key me-3"></i>
                                     <input 
-                                        type="text" 
+                                        type="password" 
                                         id="password" 
                                         className="p-3 col-10 login-input"  
                                         placeholder="Password" 
@@ -72,7 +74,7 @@ const Login = () =>{
                                         }}
                                         /><br/><br/>
                                 </div>
-                                <button type="submit" className="btn btn-success mt-4" 
+                                <button type="submit" className="btn btn-warning mt-4" 
                                 onClick={()=>{
                                     user_login()
                                    
@@ -87,6 +89,39 @@ const Login = () =>{
                     </div>
                 </div>
             </div>
+            <div className="container mt-4">
+            <div className="row">
+                <div className="col-6" onClick={handleClick}>
+                    {showHello ? 'Adios' : 'Hola'}
+                </div>
+                <div className="col-6">
+                    {showHello ? (
+                       
+                            <div className="half-content">
+                                <img
+                                    src="https://picsum.photos/id/295/600/380"
+                                    alt="Foto Adios"
+                                    className="img-fluid"
+                                />
+                            </div>
+                       
+                    ) : (
+                        <div className="half-container">
+                            <div className="half-content">
+                            <img
+                                    src="https://picsum.photos/id/233/600/380"
+                                    alt="Foto Hola"
+                                    className="img-fluid"
+                                />
+                            </div>
+                            
+                                
+                            
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
         </div>
     )
 }

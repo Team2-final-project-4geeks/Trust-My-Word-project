@@ -1,4 +1,4 @@
-import React, {useState, useEffect,useContext} from "react";
+import React, {useState, useEffect,useContext, useRef } from "react";
 import { Context} from "../store/appContext";
 import profile from "../../img/profile.png";
 import { FaPencilAlt } from 'react-icons/fa';
@@ -7,18 +7,126 @@ import { useNavigate } from "react-router-dom";
 
 const UserPage = () =>{
     const navigate= useNavigate()
+    const presetKey = "ptwmh2mt";
+    const cloudName = "dhyrv5g3w"; 
     const {store,actions} = useContext(Context)
     const [reviews, setReviews] = useState([]);
     const [comments, setComments] = useState([])
     const [favourites, setFavourites] = useState([])
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
+    const [image,setImage] = useState("")
+    const [userimage, setUserimage] = useState("")
+    const fileInputRef = useRef(null);
+
 
     useEffect(() => {		
 		getReviews();
+        getUserItems()
 	}, []);
 
-const getReviews = () =>{
+    const handleFile = (e) => {
+        const file = e.target.files[0];
+    
+        if (file && file.type !== 'image/jpeg') {
+          alert('Only .jpg format is allowed.');
+          return;
+        }
+        setImage(file);
+      };
+    
+    
+      const handleUpload = async () => {      
+        if (!image) {
+          alert('Please select an image before uploading.');
+          return;
+        }
+      
+        try {
+          const imageUrl = await uploadImage(image); 
+          sendDataToAPI(imageUrl);
+          alert('You have created a Review');
+          navigate('/');
+        } catch (error) {
+          console.error('Error uploading:', error);
+          alert('Error uploading image. Please try again.');
+        }
+      };
+
+    const uploadImage = (imageFile) => {
+        return new Promise((resolve, reject) => {
+          const formData = new FormData();
+          formData.append("file", imageFile);
+          formData.append("upload_preset", presetKey);
+      
+          fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+            method: "POST",
+            body: formData,
+          })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            if (data.secure_url) {
+              resolve(data.secure_url);
+            } else {
+              reject(new Error("Image upload failed."));
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+            reject(error);
+          });
+        });
+      };
+
+    const sendDataToAPI = (image) => {
+        const token = localStorage.getItem('jwt-token');
+            if(token) {
+        fetch(process.env.BACKEND_URL + "api/user/" + localStorage.getItem("userId"), { 
+                method: "PUT", 
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization" : "Bearer " + token
+                },
+                body: JSON.stringify({imageCloud:image}) 
+            })
+            .then((res) => res.json())
+            .then((result) => {
+              console.log("estoyyyy dentroooo");
+              console.log(result);
+            }).catch((err) => {
+                console.log(err);
+            })
+            }else  {
+              alert('Image not uploaded')
+            }
+    
+          };
+
+          const getUserItems = () => {
+            const token = localStorage.getItem('jwt-token');
+                if(token) {
+            fetch(process.env.BACKEND_URL + "api/user/" + localStorage.getItem("userId"), { 
+                    method: "GET", 
+                    headers: { 
+                        "Content-Type": "application/json",
+                        "Authorization" : "Bearer " + token
+                    },
+                })
+                .then((res) => res.json())
+                .then((result) => {
+                    console.log(result);
+                    setUserimage(result.image)
+                }).catch((err) => {
+                    console.log(err);
+                })
+                }else  {
+                  alert('User not found')
+                }
+              };
+    
+
+    const getReviews = () =>{
     const token = localStorage.getItem('jwt-token');
 	if(token) {
     fetch( process.env.BACKEND_URL + "/api/user/" + localStorage.getItem("userId"),{
@@ -84,7 +192,34 @@ const showUsersReviews =()=> {
                     </div>
                     <div className="col-3">
                         <div class="circle">
-                            <img src={profile} alt="Foto"/>
+                           { userimage ? (
+                                <> 
+                                    <img src={userimage} alt="Foto"/>
+                                </>
+                           ):(
+                            <>
+                                <img src={profile} alt="Foto"/>
+                            </>
+                           )}
+                           <div className="d-flex flex-row align-items-center justify-content-center mt-4">
+                           <label htmlFor="fileInput">
+                                <i
+                                    className="fa-solid fa-pencil mx-3"
+                                    onClick={() => fileInputRef.current.click()} 
+                                ></i>
+                            </label>
+                            <input
+                                id="fileInput"
+                                type="file"
+                                accept="image/jpeg"
+                                onChange={handleFile}
+                                ref={fileInputRef} 
+                                style={{ display: 'none' }} 
+                            />
+                            <button className="btn btn-warning"  onClick={handleUpload}>Submit</button> 
+                           </div>
+                          
+    
                         </div>
                     </div>
                     <div className="col-4">
