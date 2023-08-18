@@ -16,7 +16,8 @@ export const Home = () => {
 	const [activities, setActivities] = useState([]);
   	const [products, setProducts] = useState([]);
 	const [trips,setTrips] = useState([])
-  
+
+	  
 	useEffect(() => {		
 		getActivities();
     	getProduct();
@@ -33,7 +34,7 @@ export const Home = () => {
      	.then(resp => {								
 			return resp.json();
 		})
-		.then(data=> {			
+		.then(data=> {		
 			setActivities(data);
 		})
 		.catch(error => {			
@@ -75,6 +76,8 @@ export const Home = () => {
 			console.log('Oops something went wrong'+ error);
 		})
 	}
+
+	
 	
 	const showActivity = () =>{
 		const reservedActivities = activities.slice().reverse();
@@ -86,7 +89,7 @@ export const Home = () => {
 					item={activity}
 					activity={activity}
 					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
-					img="https://cdn.pixabay.com/photo/2014/12/16/22/25/sunset-570881_1280.jpg"
+					img={activity.image}
 				/>
 			));
 			} else {
@@ -126,7 +129,7 @@ export const Home = () => {
 					item={trip}
 					trip={trip}
 					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
-					img="https://picsum.photos/id/295/600/380"
+					img={trip.image}
 				/>
 			));
 			} else {

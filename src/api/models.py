@@ -18,7 +18,7 @@ class User(db.Model):
     username = db.Column(db.String(120), nullable=False)
     favourites= db.Column(db.ARRAY(db.String(120)))
     password = db.Column(db.String(80), unique=False, nullable=False)
-    image = db.Column(db.String(200), nullable=False,default="google.com")
+    image = db.Column(db.String(200), nullable=True,default="google.com")
 
     # 1 - N with Reviews
     reviews = db.relationship("Review", back_populates="user")
@@ -57,7 +57,7 @@ class Review(db.Model):
     user_id = db.Column(db.Integer, ForeignKey('user.id'))
     user = db.relationship("User", back_populates="reviews")
     image = db.Column(db.String(200), nullable=False,default="google.com")
-
+    
 
 
     def __repr__(self):

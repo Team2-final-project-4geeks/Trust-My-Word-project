@@ -1,4 +1,4 @@
-import React, {useState, useEffect,useContext} from "react";
+import React, {useState, useEffect,useContext, useRef } from "react";
 import { Context} from "../store/appContext";
 import profile from "../../img/profile.png";
 import { FaPencilAlt } from 'react-icons/fa';
@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const UserPage = () =>{
     const navigate= useNavigate()
-    const presetKey = "577211589791536";
+    const presetKey = "ptwmh2mt";
     const cloudName = "dhyrv5g3w"; 
     const {store,actions} = useContext(Context)
     const [reviews, setReviews] = useState([]);
@@ -16,9 +16,13 @@ const UserPage = () =>{
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [image,setImage] = useState("")
+    const [userimage, setUserimage] = useState("")
+    const fileInputRef = useRef(null);
+
 
     useEffect(() => {		
 		getReviews();
+        getUserItems()
 	}, []);
 
     const handleFile = (e) => {
@@ -29,6 +33,24 @@ const UserPage = () =>{
           return;
         }
         setImage(file);
+      };
+    
+    
+      const handleUpload = async () => {      
+        if (!image) {
+          alert('Please select an image before uploading.');
+          return;
+        }
+      
+        try {
+          const imageUrl = await uploadImage(image); 
+          sendDataToAPI(imageUrl);
+          alert('You have created a Review');
+          navigate('/');
+        } catch (error) {
+          console.error('Error uploading:', error);
+          alert('Error uploading image. Please try again.');
+        }
       };
 
     const uploadImage = (imageFile) => {
@@ -56,16 +78,17 @@ const UserPage = () =>{
           });
         });
       };
-      const sendDataToAPI = (image) => {
+
+    const sendDataToAPI = (image) => {
         const token = localStorage.getItem('jwt-token');
             if(token) {
-        fetch(process.env.BACKEND_URL + `api/create-review`, { 
-                method: "POST", 
+        fetch(process.env.BACKEND_URL + "api/user/" + localStorage.getItem("userId"), { 
+                method: "PUT", 
                 headers: { 
                     "Content-Type": "application/json",
                     "Authorization" : "Bearer " + token
                 },
-                body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud:image,user}) 
+                body: JSON.stringify({imageCloud:image}) 
             })
             .then((res) => res.json())
             .then((result) => {
@@ -79,6 +102,28 @@ const UserPage = () =>{
             }
     
           };
+
+          const getUserItems = () => {
+            const token = localStorage.getItem('jwt-token');
+                if(token) {
+            fetch(process.env.BACKEND_URL + "api/user/" + localStorage.getItem("userId"), { 
+                    method: "GET", 
+                    headers: { 
+                        "Content-Type": "application/json",
+                        "Authorization" : "Bearer " + token
+                    },
+                })
+                .then((res) => res.json())
+                .then((result) => {
+                    console.log(result);
+                    setUserimage(result.image)
+                }).catch((err) => {
+                    console.log(err);
+                })
+                }else  {
+                  alert('User not found')
+                }
+              };
     
 
     const getReviews = () =>{
@@ -147,7 +192,34 @@ const showUsersReviews =()=> {
                     </div>
                     <div className="col-3">
                         <div class="circle">
-                            <img src={profile} alt="Foto"/>
+                           { userimage ? (
+                                <> 
+                                    <img src={userimage} alt="Foto"/>
+                                </>
+                           ):(
+                            <>
+                                <img src={profile} alt="Foto"/>
+                            </>
+                           )}
+                           <div className="d-flex flex-row align-items-center justify-content-center mt-4">
+                           <label htmlFor="fileInput">
+                                <i
+                                    className="fa-solid fa-pencil mx-3"
+                                    onClick={() => fileInputRef.current.click()} 
+                                ></i>
+                            </label>
+                            <input
+                                id="fileInput"
+                                type="file"
+                                accept="image/jpeg"
+                                onChange={handleFile}
+                                ref={fileInputRef} 
+                                style={{ display: 'none' }} 
+                            />
+                            <button className="btn btn-warning"  onClick={handleUpload}>Submit</button> 
+                           </div>
+                          
+    
                         </div>
                     </div>
                     <div className="col-4">

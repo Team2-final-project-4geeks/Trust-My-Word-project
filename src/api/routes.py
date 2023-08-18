@@ -92,6 +92,8 @@ def update_user(id):
         update_user.password = data["password"]
     if "favourites" in data:
         update_user.favourites = data["favourites"]
+    if "imageCloud" in data:
+        update_user.image = data["imageCloud"]
     db.session.commit()
 
     return jsonify({"msg":"user updated"}),200
