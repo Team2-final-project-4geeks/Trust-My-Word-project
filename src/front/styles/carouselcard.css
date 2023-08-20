@@ -1,0 +1,25 @@
+#carouselBody{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 250px;
+    height:200px;
+    margin: auto 1rem;
+    text-align: center;
+    font-family: arial;
+  }
+  #carouselBody button{
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;  
+  }
+
+  #fotoCarouselCard{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
