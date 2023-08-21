@@ -7,9 +7,7 @@ import { useParams} from "react-router-dom";
 
 
 export const SingleProduct = () => {
-
         const params = useParams ()
-
         const [oneProduct, setOneProduct]= useState()
     
         useEffect (() => {
@@ -17,10 +15,13 @@ export const SingleProduct = () => {
         }, [])
     
         const getOneProduct = () => {
+            const token = localStorage.getItem('jwt-token');
+            if(token) {
             fetch(process.env.BACKEND_URL + 'api/review/' + params.id, {
                 method: "GET",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Authorization" : "Bearer " + token
                 }
             })
             .then(res => res.json())
@@ -30,6 +31,7 @@ export const SingleProduct = () => {
             })
             .catch(err => console.error(err))
         }
+    }
     
         return (
 

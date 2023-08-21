@@ -20,17 +20,11 @@ export const ReviewForm = () => {
   const [category, setCategory] = useState("")
   const {store,actions} = useContext(Context)
   const user = localStorage.getItem("userId")
-  const [rating, setRating] = useState(0); // Estado para almacenar la calificación
+  const [rating, setRating] = useState(0); //
 
   const handleStarClick = (selectedRating) => {
     setRating(selectedRating);
   };
-  const handleSubmit = () => {
-    // Aquí puedes enviar 'rating' al backend (Python) usando una solicitud HTTP (por ejemplo, fetch).
-    // Asegúrate de manejar la comunicación con el backend según tus necesidades.
-    console.log('Calificación enviada:', rating);
-  };
-
 
   const [imagePreview, setImagePreview] = useState(null);
   const navigate= useNavigate()
@@ -131,7 +125,7 @@ export const ReviewForm = () => {
                 "Content-Type": "application/json",
                 "Authorization" : "Bearer " + token
             },
-            body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud:image,user}) 
+            body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud:image,user,rating}) 
         })
         .then((res) => res.json())
         .then((result) => {
@@ -143,10 +137,8 @@ export const ReviewForm = () => {
         }else  {
           alert(' You are not logged in!')
         }
-
       };
 
-  
     return (
         <div class="container text-center" id="full-content">
              <h1>Insert Your Review</h1>
@@ -264,11 +256,12 @@ export const ReviewForm = () => {
                               </span>
                             ))}
                           </div>
-                          <button onClick={handleSubmit}>Enviar calificación</button>
+                          <button onClick={handleUpload}>Enviar calificación</button>
+
                         </div>
                 </div>
         </div>
-            <button className="finish-review" onClick={handleUpload}>Finish Review</button>
+            {/* <button className="finish-review" onClick={handleUpload}>Finish Review</button> */}
         </div>
     );
   };

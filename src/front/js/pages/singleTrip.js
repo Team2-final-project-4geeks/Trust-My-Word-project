@@ -1,13 +1,16 @@
-import React, { useEffect,useState } from "react";
+import React, { useContext, useEffect,useState } from "react";
 import { useParams } from "react-router-dom";
 import "../../styles/singletrip.css";
 import ShareComponent from "../component/shareComponent.js";
+import { Context } from "../store/appContext";
 
-const SingleTrip = (props) =>{
+const SingleTrip = () =>{
     const params = useParams()
     const [singleTrip, setSingleTrip] = useState("")
     const [weather, setWeather] = useState("")
     const [city,setCity] = useState("")
+    const [image,setImage] = useState("")
+    const {store,actions} = useContext(Context)
 
     useEffect(()=>{
         get_single_trip()
@@ -21,33 +24,42 @@ const SingleTrip = (props) =>{
     const map = `https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=300x300&key=${process.env.API_KEY}`
 
     const get_single_trip = () =>{
-        
+        const token = localStorage.getItem('jwt-token');
+        if(token) {
         fetch(process.env.BACKEND_URL + 'api/review/' + params.id ,{
 			method: "GET",
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+                "Authorization" : "Bearer " + token
 			}
 		})
 		.then(res => res.json())
 		.then(data => {
             setSingleTrip(data)
 		})
-		.catch(err => console.error(err))	
+		.catch(err => console.error(err))
+    }
     }
 
     const getCityFromApi = () =>{
+        const token = localStorage.getItem('jwt-token');
+        if(token) {
         fetch(process.env.BACKEND_URL + 'api/review/' + params.id ,{
 			method: "GET",
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+                "Authorization" : "Bearer " + token
 			}
 		})
 		.then(res => res.json())
 		.then(data => {
+            console.log(data);
+            setImage(data.image)
             setCity(data.location)
 		})
 		.catch(err => console.error(err))
     }
+}
 
     const getWeather = () =>{
 		fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=331b322b5b7b3278dc6b42817399e72f&units=metric`, {
@@ -58,7 +70,6 @@ const SingleTrip = (props) =>{
 			return resp.json();
 		})
 		.then(data=> {
-            console.log("estoy en la temperatura");
 			setWeather(data.main.temp);
 		})
 		.catch(error => {
@@ -66,7 +77,11 @@ const SingleTrip = (props) =>{
 			console.log('Oops something went wrong'+ error);
 		})
 	}
-      
+
+	const handleReviewClick = () => {
+        actions.clikcs(params.id)
+	  };
+                
     return(
 
     <div className="container-fluid mt-5 mb-5" >
@@ -75,7 +90,7 @@ const SingleTrip = (props) =>{
                 <div className="card m-0 border-0 " id="containerSingleTrip">                    
                     <div className="row g-0 h-100">
                         <div className="col-md-3">
-                            <img id="singleTripPicture"src="https://clubhipicoelpinar.es/wp-content/uploads/2016/05/IMG_8542-1024x683.jpg" className="img-fluid rounded-start h-100" alt="..."/>
+                            <img id="singleTripPicture"src={image} className="img-fluid rounded-start h-100" alt="..."/>
                         </div>
                         <div className="col-md-6">
                             <div className="card h-100 border-0 px-3">
@@ -105,6 +120,10 @@ const SingleTrip = (props) =>{
                     <span className="visually-hidden">Loading...</span>
                 </div>
             )}
+            <div>
+                <button onClick={() => handleReviewClick()}>Hacer Clic</button>
+
+            </div>
            <div className="container-fluid" id="commentSection">
                 <h4 className="my-5">Comments</h4>
                 <div className="input-group mb-5">

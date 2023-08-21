@@ -13,20 +13,20 @@ const Trips = () =>{
 		})
 		.then(res => res.json())
 		.then(data => {
-          
-      setTrips(data) 
+            setTrips(data) 
 		})
 		.catch(err => console.error(err))	
     }
    
     const showTrips = () =>{
         return trip.map((trip, index) =>{
-            console.log(trip);
             return(
                 <li key={index}>                
                 <div className="col">
-                    <div className="card h-100 text-center">
-                        <img src="https://picsum.photos/id/425/600/380" className="card-img-top h-100" alt="..."/>
+                    <div className="card-trips text-center">
+                        <div className="image-container-trips">
+                            <img src={trip.image} className="card-img-top" alt="..."/>
+                        </div>
                         <div className="card-body p-4">
                             <h3 className="card-title">{trip.title}</h3>
                             <div className="trip-location mt-5">

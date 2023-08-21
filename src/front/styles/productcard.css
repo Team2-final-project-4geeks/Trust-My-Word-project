@@ -45,7 +45,7 @@ width: 300px;
   background-color: red;
   height: 270px;
   width: 430px;
-  overflow: hidden; /* Evita que la imagen se desborde del contenedorrrr */
+  overflow: hidden; /* Evita que la imagen se desborde del contenedor */
 }
 
 .image-container-product img {

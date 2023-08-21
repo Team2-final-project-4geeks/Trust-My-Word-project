@@ -10,19 +10,77 @@ import DinamicText from "../component/dinamictext.jsx";
 import { useParams } from "react-router-dom";
 
 export const Home = () => {
-	const params = useParams()
 	const { store, actions } = useContext(Context);
 	const navigate= useNavigate()
 	const [activities, setActivities] = useState([]);
   	const [products, setProducts] = useState([]);
 	const [trips,setTrips] = useState([])
+	const [latitude,setLatitude] = useState("")
+	const [longitude,setLongitude] = useState("")
+	const [placeName, setPlaceName] = useState(""); 
+	const [filteredReviews, setFilteredReviews] = useState([]);
+	const [coordinatesAvailable, setCoordinatesAvailable] = useState(false); 
 
-	  
-	useEffect(() => {		
-		getActivities();
-    	getProduct();
-		getTrips()
+	useEffect(() => {
+	  getActivities();
+	  getProduct();
+	  getTrips();
+	  geo();
 	}, []);
+  
+	useEffect(() => {
+	  if (coordinatesAvailable) { 
+		getPlaceFromCoordinates();
+		fetchFilteredReviews();
+	  }
+	}, [coordinatesAvailable]);
+  
+	const fetchFilteredReviews = () => {
+		fetch(process.env.BACKEND_URL + '/api/getFilteredReviews' ,{
+			method: 'POST',
+      		headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({latitude: latitude,longitude:longitude}) 
+		})
+     	.then(resp => {								
+			return resp.json();
+		})
+		.then(data=> {		
+			console.log(data);
+		})
+		.catch(error => {			
+			console.log('Oops something went wrong'+ error);
+		})
+	};
+  
+	const getPlaceFromCoordinates = () => {
+	  fetch(`https://nominatim.openstreetmap.org/reverse?format=geojson&lat=${latitude}&lon=${longitude}`)
+		.then((response) => response.json())
+		.then((data) => {
+		  setPlaceName(data.features[0].properties.address.quarter);
+		  localStorage.setItem("myLocation",data.features[0].properties.address.quarter)
+		})
+		.catch((error) => {
+		  console.error("Error al obtener el lugar:", error);
+		});
+	};
+  
+	const geo = () => {
+	  if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(success, error);
+	  } else {
+		console.log("Geolocation not supported");
+	  }
+	  function success(position) {
+		setLatitude(position.coords.latitude);
+		setLongitude(position.coords.longitude);
+		setCoordinatesAvailable(true); 
+	  }
+	  function error() {
+		console.log("Unable to retrieve your location");
+	  }
+	};
 
 	const getActivities = () => {
 		fetch(process.env.BACKEND_URL + 'api/review?category=activity' ,{
@@ -41,6 +99,25 @@ export const Home = () => {
 			console.log('Oops something went wrong'+ error);
 		})
 	}
+
+	// const holaaaa = () => {
+	// 	fetch(process.env.BACKEND_URL + 'api/getFilteredReviews' ,{
+	// 		method: 'GET',
+    //   		headers: {
+	// 			"Content-Type": "application/json"
+	// 		}
+	// 	})
+    //  	.then(resp => {								
+	// 		return resp.json();
+	// 	})
+	// 	.then(data=> {		
+	// 		console.log(data);
+	// 	})
+	// 	.catch(error => {			
+	// 		console.log('Oops something went wrong'+ error);
+	// 	})
+	// }
+
 	const getProduct = () =>{
 		fetch(process.env.BACKEND_URL + 'api/review?category=product', {
 			method: "GET",
@@ -70,6 +147,7 @@ export const Home = () => {
 			return resp.json();
 		})
 		.then(data=> {
+			console.log(data);
 			setTrips(data);			
 		})
 		.catch(error => {
@@ -98,6 +176,7 @@ export const Home = () => {
 				)
 			}
 	}
+
 	const showProducts = () => {
 		const reversedProducts = products.slice().reverse();
 		if (reversedProducts && reversedProducts.length > 0) {
@@ -114,7 +193,7 @@ export const Home = () => {
 					<span className="visually-hidden">Loading...</span>
 				</div>
 				)
-				}
+		}
 	}
 
 	const showTrips = () =>{
@@ -128,6 +207,7 @@ export const Home = () => {
 					trip={trip}
 					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
 					img={trip.image}
+					rating={trip.rating}
 				/>
 			));
 			} else {
@@ -136,13 +216,15 @@ export const Home = () => {
 					<span className="visually-hidden">Loading...</span>
 				</div>
 				)
-				}
-	}
+		}
+	} 
 	return (
-		
 		<div className="">
 			<div className="container-fluid">
 				<DinamicText  phrase={"inspire you"} phrase2={"save your time"}  phrase3={"solve your planning problems"} phrase4={" support people's opinions"} phrase1={"provide value"}/>
+			</div>
+			<div>
+				{placeName}
 			</div>
 			<div className="container-fluid">
 					<div className="general-image" id="imageContainerActivities">

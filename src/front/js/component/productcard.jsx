@@ -34,6 +34,11 @@ export const ProductCard = (props) => {
                     </div>
                     <div className="d-flex flex-column align-items-center ">
                         <h5 className="card-title text-center mt-2">{props.product.title}</h5>
+                        <div className="rating-board">      
+                                {Array.from({ length: parseInt(props.product.rating) }).map((_, index) => (
+                                <span key={index} style={{ color: 'gold' }}>&#9733;</span>
+                                ))}
+					    </div>
                         <div id="trip-board" className="mt-2">
                             <div id="card-description-trip">
                                 <p className="card-text"><i className="fas fa-quote-left mt-2 me-2"></i> <i> {props.product.description}</i></p>
