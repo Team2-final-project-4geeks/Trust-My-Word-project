@@ -46,7 +46,7 @@ const ActivityCard = (props)=>{
                         </div>
                     </div>
                     <div id="activityCardViewMore">
-                        <ViewMore item={props.item.id}/>
+                        <button className="btn" type="button" id="activityCardViewMore"onClick={()=> navigate("/activity/" + props.activity.id)}> <strong>View more</strong></button>
                     </div>
                  </div>
             </div>
