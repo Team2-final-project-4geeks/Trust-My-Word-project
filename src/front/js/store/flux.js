@@ -114,7 +114,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const store = getStore();
                 setStore({ ...store, loggedIn: value });
               },
-			clikcs : (id) =>{
+			addToCounter : (id) =>{
 				fetch(process.env.BACKEND_URL + 'api/review/' + id , {
 					method: "PUT",
 					headers: {
@@ -125,7 +125,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return resp.json();
 				})
 				.then(data=> {
-					console.log(data);
 				})
 				.catch(error => {
 					console.log('Oops something went wrong'+ error);

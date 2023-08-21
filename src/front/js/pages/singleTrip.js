@@ -76,12 +76,7 @@ const SingleTrip = () =>{
 			console.log(error);
 			console.log('Oops something went wrong'+ error);
 		})
-	}
-
-	const handleReviewClick = () => {
-        actions.clikcs(params.id)
-	  };
-                
+	}           
     return(
 
     <div className="container-fluid mt-5 mb-5" >
@@ -121,8 +116,6 @@ const SingleTrip = () =>{
                 </div>
             )}
             <div>
-                <button onClick={() => handleReviewClick()}>Hacer Clic</button>
-
             </div>
            <div className="container-fluid" id="commentSection">
                 <h4 className="my-5">Comments</h4>

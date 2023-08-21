@@ -14,16 +14,16 @@ from flask_jwt_extended import (
 )
 
 api = Blueprint('api', __name__)
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
+# @api.route('/hello', methods=['POST', 'GET'])
+# def handle_hello():
 
-   populate_user();
-   populate_reviews();
+#    populate_user();
+#    populate_reviews();
 
-   response_body = {
-       "message": "Helloooo! This is 4Geeks Group 2 Final Project"
-   }
-   return jsonify(response_body), 200#
+#    response_body = {
+#        "message": "Helloooo! This is 4Geeks Group 2 Final Project"
+#    }
+#    return jsonify(response_body), 200#
 
 
 #FOR USERS
@@ -109,8 +109,8 @@ def delete_user(id):
 # LOGIN PART
 @api.route('/login', methods=['POST'])
 def user_login():
-    email = request.json.get("email",None)
-    password = request.json.get("password",None)
+    email = request.json.get("loginEmail",None)
+    password = request.json.get("loginPassword",None)
 
     if(email is None):
         response_body = {
@@ -396,11 +396,11 @@ def addToCounter(id):
     return jsonify(review.serialize()),200
 
 
-@api.route('/getFilteredReviews', methods=['GET'])
-def get_all_reviews_filtered():
-    all_reviews = Review.query.all()
-    all_reviews = list(map(lambda x: x.serialize(), all_reviews))
+# @api.route('/getFilteredReviews', methods=['GET'])
+# def get_all_reviews_filtered():
+#     all_reviews = Review.query.all()
+#     all_reviews = list(map(lambda x: x.serialize(), all_reviews))
 
-    return jsonify(all_reviews), 200
+#     return jsonify(all_reviews), 200
 
 

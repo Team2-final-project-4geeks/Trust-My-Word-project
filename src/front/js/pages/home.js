@@ -58,6 +58,7 @@ export const Home = () => {
 	  fetch(`https://nominatim.openstreetmap.org/reverse?format=geojson&lat=${latitude}&lon=${longitude}`)
 		.then((response) => response.json())
 		.then((data) => {
+			console.log(data);
 		  setPlaceName(data.features[0].properties.address.quarter);
 		  localStorage.setItem("myLocation",data.features[0].properties.address.quarter)
 		})
@@ -100,23 +101,6 @@ export const Home = () => {
 		})
 	}
 
-	// const holaaaa = () => {
-	// 	fetch(process.env.BACKEND_URL + 'api/getFilteredReviews' ,{
-	// 		method: 'GET',
-    //   		headers: {
-	// 			"Content-Type": "application/json"
-	// 		}
-	// 	})
-    //  	.then(resp => {								
-	// 		return resp.json();
-	// 	})
-	// 	.then(data=> {		
-	// 		console.log(data);
-	// 	})
-	// 	.catch(error => {			
-	// 		console.log('Oops something went wrong'+ error);
-	// 	})
-	// }
 
 	const getProduct = () =>{
 		fetch(process.env.BACKEND_URL + 'api/review?category=product', {

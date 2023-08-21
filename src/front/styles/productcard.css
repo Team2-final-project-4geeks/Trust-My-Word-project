@@ -42,7 +42,6 @@ width: 300px;
 .image-container-product {
   position: relative;
   display: inline-block;
-  background-color: red;
   height: 270px;
   width: 430px;
   overflow: hidden; /* Evita que la imagen se desborde del contenedor */

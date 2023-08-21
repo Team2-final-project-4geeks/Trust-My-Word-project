@@ -8,6 +8,9 @@ import ViewMore from "./viewmore.jsx";
 const ActivityCard = (props)=>{
     const { store, actions } = useContext(Context);
     const navigate= useNavigate();
+    const handleReviewClick = (activityId) => {
+        actions.addToCounter(activityId)
+	  };
 
     return(
         <div className="card-body" id="activityBody">
@@ -46,7 +49,12 @@ const ActivityCard = (props)=>{
                         </div>
                     </div>
                     <div id="activityCardViewMore">
-                        <button className="btn" type="button" id="activityCardViewMore"onClick={()=> navigate("/activity/" + props.activity.id)}> <strong>View more</strong></button>
+                        <button className="btn" 
+                                type="button" id="activityCardViewMore" 
+                                onClick={()=>{ 
+                                    navigate("/activity/" + props.activity.id)
+                                    handleReviewClick(props.activity.id)
+                                    }}> <strong>View more</strong></button>
                     </div>
                  </div>
             </div>
