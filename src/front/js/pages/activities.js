@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useContext} from "react";
 import { useNavigate } from "react-router-dom";
-import SideBar from "../component/sidebar.js"
 import { Context } from "../store/appContext.js";
-import "../../styles/activities.css"
+import "../../styles/activities.css";
+import FilterBar from "../component/filterbar.js";
 
 const Activities = () =>{
     const [activities, setActivities] = useState([]);
@@ -100,7 +100,7 @@ const Activities = () =>{
     
     return (
         <div className="container-fluid mt-2">
-            <SideBar />
+            <FilterBar />
             <div className="card mt-4 mb-5 border-0" id="quoteActivity">                    
                 <div className="card-body d-flex">
                     <blockquote className="blockquote mb-0">
