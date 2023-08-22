@@ -10,12 +10,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				image: "",		
 			},
 			favourite: [],
-			storeCities: {},
-			storeTypes: {},
-			checked: false,			
+			storeTypes: {},						
 			userId: null,
 			userName: "",
 			email:"",
+			activities: [],
+			query:""
 		},
 		actions: {
 			addFavourite: (fav) => {
@@ -26,22 +26,26 @@ const getState = ({ getStore, getActions, setStore }) => {
                     alert("Favourite already exists!!");
                 }
             },
+			addActivities: (activity) => {
+                const store = getStore();
+                if (!store.activities.includes(activity)) {
+                    setStore({...store, activities: activity});
+                } else {
+                    alert("Activity already exists!!");
+                }
+            },
+			addQuery: (city) => {
+                const store = getStore();
+				setStore({...store, query: city})                
+            },
 			deleteFavourite: (favToDelete) => {
 				const store = getStore();
 				setStore({favourite: store.favourite.filter((fav) => fav !== favToDelete)})
-			},
-			addCity: (city) => {
-				const store = getStore();
-				setStore({storeCities: city})			
-			},
+			},			
 			addType: (type) => {
 				const store = getStore();
 				setStore({storeTypes: type})			
-			},
-			handleChecked: (bool) => {
-				const store = getStore();
-				setStore({checked:bool})
-			},
+			},			
 			addUserFavourites: (id) => {
 
 				const store = getStore()
