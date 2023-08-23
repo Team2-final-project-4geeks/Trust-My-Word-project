@@ -2,13 +2,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			loggedIn: false,
-			product: {
-				id: "",
-				title: "",
-				price: "",
-				description: "",
-				image: "",		
-			},
 			favourite: [],
 			storeTypes: {},						
 			userId: null,
@@ -16,7 +9,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			email:"",
 			activities: [],
 			query:"",
-			selectedType:""
+			selectedType:"",
+			products:[]
 		},
 		actions: {
 			addFavourite: (fav) => {

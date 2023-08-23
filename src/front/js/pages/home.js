@@ -60,8 +60,8 @@ export const Home = () => {
 		.then((response) => response.json())
 		.then((data) => {
 			console.log(data);
-		  setPlaceName(data.features[0].properties.address.quarter);
-		  localStorage.setItem("myLocation",data.features[0].properties.address.quarter)
+		  setPlaceName(data.features[0].properties.address.town);
+		  localStorage.setItem("myLocation",data.features[0].properties.address.town)
 		})
 		.catch((error) => {
 		  console.error("Error al obtener el lugar:", error);
