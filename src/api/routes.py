@@ -237,6 +237,12 @@ def modify_review(id):
            "msg": "Price doesnt exist in the request"
        }
         return jsonify(response_body),400
+    
+    elif "imageCloud" not in data:
+        response_body = {
+           "msg": "Image doesnt exist in the request"
+       }
+        return jsonify(response_body),400
    
     update_review= Review.query.get(id)
     update_review.title = data["title"]
@@ -247,6 +253,12 @@ def modify_review(id):
     update_review.type = data["type"]
     update_review.link = data["link"]
     update_review.rating= data["rating"]
+    update_review.image= data["imageCloud"]
+    update_review.latitude= data["latitude"]
+    update_review.longitude= data["longitude"]
+
+    print("-----------------------------------",update_review)
+
     db.session.commit()
 
 
