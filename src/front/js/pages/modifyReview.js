@@ -13,6 +13,11 @@ const ModifyReview = () => {
     const [location,setLocation]= useState("")
     const [type,setType] = useState("")
     const [link,setLink] = useState("")
+    const [imageCloud,setImageCloud] = useState("")
+    const [rating,setRating] = useState("")
+    const [latitude,setLatitude] = useState("")
+    const [longitude,setLongitude] = useState("")
+     
 
     const params = useParams()
 
@@ -30,11 +35,17 @@ const ModifyReview = () => {
 			return resp.json();
 		})
 		.then(data=> {
+            console.log(data);
+            setLocation(data.location)
             setReview(data)
             setTitle(data.title)
             setDescription(data.description)
             setPublishing_date(data.publishing_date)
             setPrice(data.price)
+            setImageCloud(data.image)
+            setRating(data.rating)
+            setLatitude(data.latitude)
+            setLongitude(data.longitude)
 		})
 		.catch(error => {
 			console.log('Oops something went wrong'+ error);
@@ -44,30 +55,33 @@ const ModifyReview = () => {
         }
 	}
 
-    const updateReview = () =>{
-        const token = localStorage.getItem('jwt-token');
-		if(token) {
-		fetch(process.env.BACKEND_URL + 'api/modify-review/' + params.id, {
-			method: "PUT",
-			headers: { 
-                "Content-Type": "application/json",
-                "Authorization" : "Bearer " + token
-            },
-            body: JSON.stringify({title, description, publishing_date, price ,location,link,type }) 
-		})
-		.then(resp => {
-			return resp.json();
-		})
-		.then(data=> {
-			console.log(data);
-		})
-		.catch(error => {
-			console.log('Oops something went wrong'+ error);
-		})
-        }else {
-            alert(' Review is not modified!')
+        const updateReview = () =>{
+            const token = localStorage.getItem('jwt-token');
+            if(token) {
+            fetch(process.env.BACKEND_URL + 'api/modify-review/' + params.id, {
+                method: "PUT",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization" : "Bearer " + token
+                },
+                body: JSON.stringify({title, description, publishing_date, price ,location,link,type,imageCloud,rating,latitude,longitude}) 
+            })
+            .then(resp => {
+                return resp.json();
+            })
+            .then(data=> {
+                console.log(data);
+            })
+            .catch(error => {
+                console.log('Oops something went wrong'+ error);
+            })
+            }else {
+                alert(' Review is not modified!')
+            }
         }
-	}
+
+  
+   
     useEffect(()=>{
         getSingleReview()
     },[])
@@ -78,6 +92,12 @@ const ModifyReview = () => {
                     <span className="input-group-text" id="inputGroup-sizing-default"> Title </span>
                     <span className="input-group-text"><FaPencilAlt size={20} color="grey" id="pencil"/></span>
                     <input type="text" className="form-control" value={title}  onChange={(e)=> setTitle(e.target.value) } aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                    
+                </div>
+                <div className="input-group mb-3">
+                    <span className="input-group-text" id="inputGroup-sizing-default"> Title </span>
+                    <span className="input-group-text"><FaPencilAlt size={20} color="grey" id="pencil"/></span>
+                    <input type="text" className="form-control" value={imageCloud}  onChange={(e)=> setImageCloud(e.target.value) } aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                     
                 </div>
                 <div className="input-group mb-3">

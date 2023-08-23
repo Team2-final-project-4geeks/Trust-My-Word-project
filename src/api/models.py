@@ -1,7 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 
 import enum
-from sqlalchemy import Enum,ForeignKey
+from sqlalchemy import Enum,ForeignKey,Float
+
 
 
 class myEnum(enum.Enum):
@@ -58,8 +59,11 @@ class Review(db.Model):
     users = db.relationship("User", back_populates="reviews")
     image = db.Column(db.String(200), nullable=False,default="google.com")
     rating = db.Column(db.String(50), nullable=True, default="0")
-    
+    counter = db.Column(db.Integer, nullable=True, default=0)
+    latitude = db.Column(Float, nullable=True)
+    longitude = db.Column(Float, nullable=True)
 
+    
     def __repr__(self):
         return f'<Reviews {self.id}>'
       
@@ -75,7 +79,10 @@ class Review(db.Model):
             "price": self.price,
             "image": self.image,
             "rating": self.rating,
-            "user_id": self.user_id
+            "user_id": self.user_id,
+            "counter": self.counter,
+            "latitude": self.latitude,
+            "longitude": self.longitude
         }
     
 class Comment(db.Model):

@@ -33,7 +33,6 @@ const Activities = () =>{
         })
     }    
     const filteredActivities = activities.filter((activity)=> activity.location.toLowerCase().includes(store.query))
-    //const filteredActivitiesByType= filteredActivities.filter((activity)=> activity.type== )          
     
     return (
         <div className="container-fluid mt-2">

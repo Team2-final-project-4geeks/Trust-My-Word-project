@@ -57,11 +57,6 @@ export const Navbar = () => {
             Trips
           </a>
         </div>
-        <div className="nav-item">
-          <a className="nav-link text-light" href="#" onClick={() => navigate("/create-user")}>
-            Create User
-          </a>
-        </div>
         {token ? ( 
           <div>
             <div className="nav-item">
@@ -85,10 +80,11 @@ export const Navbar = () => {
               </button>
               {store.favourite && store.favourite.length > 0 ? (
                   <ul className="dropdown-menu dropdown-menu-start dropdown-menu-lg-start" aria-labelledby="dropdownMenuClickableInside">
-                      {store.favourite.map((fav, index,id) => {
+                      {store.favourite.map((fav, index) => {
                           return (
                               <li key={index}>
-                                  <a className="dropdown-item d-flex text-black justify-content-between ps-2 pe-2"  href="#">
+                                  <a className="dropdown-item d-flex text-black justify-content-between ps-2 pe-2"  onClick={()=>{
+                                  }} href="#">
                                       {fav}
                                       <i
                                           className="fas fa-trash pt-1"

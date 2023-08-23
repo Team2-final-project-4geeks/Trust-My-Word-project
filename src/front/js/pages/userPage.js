@@ -35,7 +35,6 @@ const UserPage = () =>{
         setImage(file);
       };
     
-    
       const handleUpload = async () => {      
         if (!image) {
           alert('Please select an image before uploading.');
@@ -45,8 +44,8 @@ const UserPage = () =>{
         try {
           const imageUrl = await uploadImage(image); 
           sendDataToAPI(imageUrl);
-          alert('You have created a Review');
-          navigate('/');
+          alert('Profile photo updated');
+          window.location.reload();
         } catch (error) {
           console.error('Error uploading:', error);
           alert('Error uploading image. Please try again.');
@@ -92,8 +91,6 @@ const UserPage = () =>{
             })
             .then((res) => res.json())
             .then((result) => {
-              console.log("estoyyyy dentroooo");
-              console.log(result);
             }).catch((err) => {
                 console.log(err);
             })
@@ -103,9 +100,9 @@ const UserPage = () =>{
     
           };
 
-          const getUserItems = () => {
-            const token = localStorage.getItem('jwt-token');
-                if(token) {
+    const getUserItems = () => {
+        const token = localStorage.getItem('jwt-token');
+            if(token) {
             fetch(process.env.BACKEND_URL + "api/user/" + localStorage.getItem("userId"), { 
                     method: "GET", 
                     headers: { 
@@ -140,7 +137,6 @@ const UserPage = () =>{
         return resp.json();
     })
     .then(data=> {	
-        console.log(data);
         setComments(data.comments)
         setFavourites(data.favourites)	
         setReviews(data.reviews);
@@ -226,10 +222,13 @@ const showUsersReviews =()=> {
                         <div className="user-info d-flex flex-column py-5">
                             <h3 className="mb-3">My details</h3>
                             <div className="email">
-                                <p><i class="fas fa-at "></i>: {email}</p>       
+                                <p><i class="fas fa-at"></i>: {email}</p>       
                             </div>
                             <div className="username">
                                 <p><i class="fas fa-user "></i>: {username}</p>
+                            </div>
+                            <div className="ps-2">
+                                <p><i class="fa-solid fa-location-pin fa-xl"></i>: {localStorage.getItem("myLocation")}</p>
                             </div>
                         </div>
                     </div> 

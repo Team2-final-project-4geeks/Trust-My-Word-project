@@ -7,7 +7,6 @@ import { BackendURL } from "./component/backendURL";
 import { Home } from "./pages/home.js";
 import Login from "./pages/login.js";
 import injectContext from "./store/appContext";
-import CreateUser from "./pages/createUser.js";
 import SingleTrip from "./pages/singleTrip.js";
 import { SingleProduct } from "./pages/singleproduct.js";
 import {ReviewForm} from  "./pages/reviewForm.js";
@@ -38,7 +37,6 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Login />} path="/login" />
-                        <Route element={<CreateUser />} path="/create-user"/>  
                         {/*<Route element={<ModifyUser/>} path="/modify-user/:id" />*/}
                         <Route element={<Trips/>} path="/trips"/>                 
                         <Route element={<SingleTrip />} path="/trip/:id" />                        

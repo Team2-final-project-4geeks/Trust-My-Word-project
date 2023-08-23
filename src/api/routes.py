@@ -2,6 +2,8 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
+from math import radians, sin, cos, sqrt, atan2
+from sqlalchemy import not_  # Importar la función not_ de SQLAlchemy
 
 from api.models import db, User,Review,Comment
 from api.utils import generate_sitemap, APIException
@@ -12,7 +14,6 @@ from flask_jwt_extended import (
 )
 
 api = Blueprint('api', __name__)
-
 # @api.route('/hello', methods=['POST', 'GET'])
 # def handle_hello():
 
@@ -108,8 +109,8 @@ def delete_user(id):
 # LOGIN PART
 @api.route('/login', methods=['POST'])
 def user_login():
-    email = request.json.get("email",None)
-    password = request.json.get("password",None)
+    email = request.json.get("loginEmail",None)
+    password = request.json.get("loginPassword",None)
 
     if(email is None):
         response_body = {
@@ -139,7 +140,6 @@ def user_login():
 @api.route('/review', methods=['GET'])
 def get_all_reviews():
     category = request.args.get("category")
-    print(category)
     all_reviews = Review.query.filter_by(category=category)
     all_reviews = list(map(lambda x: x.serialize(), all_reviews))
 
@@ -187,7 +187,13 @@ def create_review():
        }
         return jsonify(response_body),400
     
-    new_review= Review(title = data["title"], category=data["category"], type=data["type"], location=data["location"],link=data["link"],description=data["description"], publishing_date=data["publishing_date"], price=data["price"], user_id=data["user"], image=data["imageCloud"])
+    elif "rating" not in data:
+        response_body = {
+           "msg": "Rating doesnt exist in the request"
+       }
+        return jsonify(response_body),400
+    
+    new_review= Review(title = data["title"], category=data["category"], type=data["type"], location=data["location"],link=data["link"],description=data["description"], publishing_date=data["publishing_date"], price=data["price"], user_id=data["user"], image=data["imageCloud"], rating=data["rating"])
     db.session.add(new_review)
     db.session.commit()   
 
@@ -232,6 +238,12 @@ def modify_review(id):
        }
         return jsonify(response_body),400
     
+    elif "imageCloud" not in data:
+        response_body = {
+           "msg": "Image doesnt exist in the request"
+       }
+        return jsonify(response_body),400
+   
     update_review= Review.query.get(id)
     update_review.title = data["title"]
     update_review.description = data["description"]
@@ -240,6 +252,13 @@ def modify_review(id):
     update_review.location = data["location"] 
     update_review.type = data["type"]
     update_review.link = data["link"]
+    update_review.rating= data["rating"]
+    update_review.image= data["imageCloud"]
+    update_review.latitude= data["latitude"]
+    update_review.longitude= data["longitude"]
+
+    print("-----------------------------------",update_review)
+
     db.session.commit()
 
 
@@ -313,4 +332,87 @@ def get_reviews_with_comments(id):
         })
 
     return jsonify({'reviews': review_data.serialize()})
+
+@api.route('/getFilteredReviews', methods=['POST'])
+def get_filtered_reviews():
+    data = request.get_json()
+    user_latitude_str = data.get('latitude')
+    user_longitude_str = data.get('longitude')
+
+    try:
+        user_latitude = float(user_latitude_str)
+        user_longitude = float(user_longitude_str)
+
+        filtered_reviews = []
+
+        all_reviews =  Review.query.filter(not_(Review.category == 'product')).all()
+
+        print(all_reviews)
+        
+        for review in all_reviews:
+            review_latitude = review.latitude
+            review_longitude = review.longitude
+
+            distance = haversine_distance(user_latitude, user_longitude, review_latitude, review_longitude)
+            
+
+            if distance <=3:
+                filtered_reviews.append({
+                    "id": review.id,
+                    "title": review.title,
+                    "type": review.type,
+                    "description": review.description,
+                    "location": review.location,
+                    "publishing_date": review.publishing_date,
+                    "link": review.link,
+                    "price": review.price,
+                    "image": review.image,
+                    "rating": review.rating,
+                    "user_id": review.user_id,
+                    "counter": review.counter,
+                    "latitude": review.latitude,
+                    "longitude": review.longitude
+                })
+
+        return jsonify(filtered_reviews)
+    except ValueError:
+        return jsonify({"error": "Invalid latitude or longitude"}), 400
+
+
+def haversine_distance(lat1, lon1, lat2, lon2):
+    # Radio de la Tierra en km
+    R = 6371.0
+
+    # Convertir las coordenadas de grados a radianes
+    lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
+
+    # Diferencias de latitud y longitud
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+
+    # Fórmula Haversine
+    a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+    distance = R * c
+
+    return distance
+
+
+@api.route('/review/<int:id>', methods=['PUT'])
+def addToCounter(id):
+    review= Review.query.get(id)
+
+    review.counter = review.counter + 1
+    db.session.commit()
+
+    return jsonify(review.serialize()),200
+
+
+# @api.route('/getFilteredReviews', methods=['GET'])
+# def get_all_reviews_filtered():
+#     all_reviews = Review.query.all()
+#     all_reviews = list(map(lambda x: x.serialize(), all_reviews))
+
+#     return jsonify(all_reviews), 200
+
 

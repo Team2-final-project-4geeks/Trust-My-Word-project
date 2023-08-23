@@ -7,6 +7,9 @@ import { Context} from "../store/appContext";
 const ActivityCard = (props)=>{
     const { store, actions } = useContext(Context);
     const navigate= useNavigate();
+    const handleReviewClick = (activityId) => {
+        actions.addToCounter(activityId)
+	  };
 
     return(
         <div className="card-body" id="activityBody">
@@ -32,6 +35,11 @@ const ActivityCard = (props)=>{
                     </div>
                     <div className="d-flex flex-column align-items-center ">
                         <h5 className="card-title text-center mt-2">{props.activity.title}</h5>
+                        <div className="rating-board">      
+                                {Array.from({ length: parseInt(props.activity.rating) }).map((_, index) => (
+                                <span key={index} style={{ color: 'gold' }}>&#9733;</span>
+                                ))}
+					    </div>
                         <div id="trip-board" className="mt-2">
                             <div id="card-description-trip">
                                 <p className="card-text"><i className="fas fa-quote-left mt-2 me-2"></i> <i> {props.activity.description}</i></p>
@@ -40,7 +48,12 @@ const ActivityCard = (props)=>{
                         </div>
                     </div>
                     <div id="activityCardViewMore">
-                        <button className="btn" type="button" id="activityCardViewMore"onClick={()=> navigate("/activity/" + props.activity.id)}> <strong>View more</strong></button>
+                        <button className="btn" 
+                                type="button" id="activityCardViewMore" 
+                                onClick={()=>{ 
+                                    navigate("/activity/" + props.activity.id)
+                                    handleReviewClick(props.activity.id)
+                                    }}> <strong>View more</strong></button>
                     </div>
                  </div>
             </div>
