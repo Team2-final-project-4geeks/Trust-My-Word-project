@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/activitycard.css";
 import { Context} from "../store/appContext";
-import ViewMore from "./viewmore.jsx";
 
 
 const ActivityCard = (props)=>{
