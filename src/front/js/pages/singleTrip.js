@@ -3,6 +3,10 @@ import { useParams } from "react-router-dom";
 import "../../styles/singletrip.css";
 import ShareComponent from "../component/shareComponent.js";
 import { Context } from "../store/appContext";
+import Carousel from "react-multi-carousel";
+import Swal from 'sweetalert2';
+import "react-multi-carousel/lib/styles.css";
+import CarouselCard from "../component/carouselcard";
 
 const SingleTrip = () =>{
     const params = useParams()
@@ -11,10 +15,33 @@ const SingleTrip = () =>{
     const [city,setCity] = useState("")
     const [image,setImage] = useState("")
     const {store,actions} = useContext(Context)
+    const [allDescriptions, setAllDescriptions] = useState([]);
+    const [description, setDescription] = useState("");
+
+    const responsive = {        
+        desktop: {
+          breakpoint: { max: 3000, min: 1024 },
+          items: 4
+        },
+        tablet: {
+          breakpoint: { max: 1024, min: 464 },
+          items: 2
+        },
+        mobile: {
+          breakpoint: { max: 464, min: 0 },
+          items: 1
+        }
+      };
+
+    const user_id=localStorage.getItem("userId")
+    const userName=store.userName;
+    const review_id= params.id;
 
     useEffect(()=>{
         get_single_trip()
         getCityFromApi()
+        fetchComments();                           
+
     },[])
 
     useEffect(() => {
@@ -76,7 +103,114 @@ const SingleTrip = () =>{
 			console.log(error);
 			console.log('Oops something went wrong'+ error);
 		})
-	}           
+	}
+    const fetchComments =() =>{        
+        const token = localStorage.getItem('jwt-token');        
+        if(token) {        
+        fetch(process.env.BACKEND_URL + 'api/comments',{
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization" : "Bearer " + token
+            }
+        })
+        .then(resp => {								
+            return resp.json();
+        })
+        .then(data=> {		
+        setAllDescriptions(data);            
+        })
+        .catch(error => {			
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!'            
+            })
+        })
+        }else{
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!'            
+            })
+        }}
+        
+        const createComment = () => {
+            const token = localStorage.getItem('jwt-token');
+            if(token) {
+            fetch(process.env.BACKEND_URL + 'api/create-comment', {
+              method: "POST",          
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization" : "Bearer " + token
+              },
+              body: JSON.stringify({description, user_id, review_id}) 
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {  
+                setDescription(data.description);
+                Swal.fire(
+                    'Good job!',
+                    'You POSTed a comment!',
+                    'success'
+                )
+                setDescription("")
+                fetchComments();            
+            })
+            .catch(err => Swal.fire({
+                icon: 'error',
+                title: 'Oops...'                        
+              }))
+            } else {       
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...'                      
+                })
+                }
+        }
+
+    const deleteComment = (commentId) => {
+        const token = localStorage.getItem('jwt-token');
+        if(token) {
+		fetch(process.env.BACKEND_URL + 'api/comment/' + commentId, {
+			method: 'DELETE',
+			headers: { 
+                "Authorization" : "Bearer " + token
+            },
+		})
+		.then(resp => {			
+			console.log(resp.ok);
+			console.log(resp.status);
+			return resp.json();
+		})
+		.then(data => {
+			Swal.fire('You have deleted a comment');					
+			fetchComments();
+		})
+		.catch(error => {
+            console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!'            
+            })
+        })		
+        } else {
+            console.log("error from delete comment")
+        }
+	}
+    const showComments = () =>{
+        return allDescriptions.map((comment, index) => {
+            return(
+                <CarouselCard key={index} description={comment.description} url={comment.imageurl} />                      
+            )
+        }			
+    )}
+
+
+
     return(
 
     <div className="container-fluid mt-5 mb-5" >
@@ -92,7 +226,8 @@ const SingleTrip = () =>{
                                 <h5 className="card-title ms-3 mt-3 mb-4 text-center" id="activityTitle">{singleTrip.title}</h5>
                                     <div className="d-flex flex-row mt-2" id="activityRow">
                                         <p className="card-text ms-2">{singleTrip.id}</p>
-                                        <p className="card-text ms-2">{weather} °C</p>                                        
+                                        <p className="card-text ms-2">{weather} °C</p>   
+                                        <p className="card-text ms-2"><i class="fas fa-heart fa-xs me-2"></i>{userName}</p>                                     
                                         <p className="card-text ms-2">{singleTrip.publishing_date}</p>
                                     </div>
                                 <p className="card-text ms-2">{singleTrip.type}</p>
@@ -117,26 +252,23 @@ const SingleTrip = () =>{
             )}
             <div>
             </div>
-           <div className="container-fluid" id="commentSection">
+            <div className="container-fluid" id="commentSectionTrip">
                 <h4 className="my-5">Comments</h4>
-                <div className="input-group mb-5">
-                    <span className="input-group-text rounded me-2" id="basic-addon1">Username</span>
-                    <input type="text" className="form-control rounded-pill" placeholder="Lorem Ipsum" aria-label="Username" aria-describedby="basic-addon1"/>
-                </div>
-                <div className="input-group mb-5">
-                    <input type="text" className="form-control rounded-pill me-2" placeholder="Lorem Ipsum Xmas Banana Happy" aria-label="Username" aria-describedby="basic-addon1"/>
-                    <span className="input-group-text rounded" id="basic-addon1">Username</span>
-                </div>
-                <div className="input-group mb-5">
-                    <span className="input-group-text rounded me-2" id="basic-addon1">Username</span>
-                    <input type="text" className="form-control rounded-pill" placeholder="Lorem Summer Coding Sad" aria-label="Username" aria-describedby="basic-addon1"/>
-                </div>
-                <div className="input-group">
+                <div className="container-fluid">
+                    <Carousel showDots={true} arrows={false} responsive={responsive} >
+                        {showComments()}
+                    </Carousel>
+                </div>               
+                <div className="input-group mt-5" id="comment">
                     <span className="input-group-text rounded me-2" id="commentWrite">Write your comment:</span>
-                    <textarea className="form-control rounded-pill" aria-label="With textarea"></textarea>
+                    <textarea className="form-control" id="commentBox" value={description} onChange={(e)=> setDescription(e.target.value)} aria-label="With textarea"></textarea>
                 </div>
-                <button type="button" className="btn btn-dark mt-5" id="sumbitButtonSingle"> Send </button>
-            </div>         
+                <button 
+                    type="button" className="btn btn-dark mt-5" 
+                    onClick={createComment}
+                    id="sumbitButtonSingle"> Send 
+                </button>                
+            </div>          
         </div>
 
     )

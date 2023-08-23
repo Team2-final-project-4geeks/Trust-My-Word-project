@@ -5,8 +5,8 @@ import ActivityCard from "../component/activitycard"
 import { ProductCard } from "../component/productcard.jsx";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
-import TriipCard from "../component/triipcard.jsx";
-import DinamicText from "../component/dinamictext.jsx";
+import TriipCard from "../component/triipcard.js";
+import DinamicText from "../component/dinamictext.js";
 import { useParams } from "react-router-dom";
 
 export const Home = () => {
@@ -48,6 +48,7 @@ export const Home = () => {
 		})
 		.then(data=> {		
 			console.log(data);
+			setFilteredReviews(data)
 		})
 		.catch(error => {			
 			console.log('Oops something went wrong'+ error);
@@ -207,8 +208,15 @@ export const Home = () => {
 			<div className="container-fluid">
 				<DinamicText  phrase={"inspire you"} phrase2={"save your time"}  phrase3={"solve your planning problems"} phrase4={" support people's opinions"} phrase1={"provide value"}/>
 			</div>
-			<div>
-				{placeName}
+			<div className="locationContainer">
+				<h2>Where am I?</h2>
+				<i class="fa-solid fa-location-dot"></i>{placeName}
+				<h3>Reviews near me</h3>	
+			</div>
+
+			<div className="nearmeReviews">
+				<h1>Less distance, more fun!</h1>
+
 			</div>
 			<div className="container-fluid">
 					<div className="general-image" id="imageContainerActivities">

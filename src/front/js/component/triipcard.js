@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/triipcard.css";
-import ViewMore from "./viewmore.jsx";
+import ViewMore from "./viewmore.js";
 import { Context} from "../store/appContext";
 
 

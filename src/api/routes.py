@@ -257,7 +257,6 @@ def modify_review(id):
     update_review.latitude= data["latitude"]
     update_review.longitude= data["longitude"]
 
-    print("-----------------------------------",update_review)
 
     db.session.commit()
 
