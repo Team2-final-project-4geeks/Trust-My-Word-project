@@ -15,7 +15,7 @@ const FilterBarActivities = () => {
     
     const handleFilterClick = (filterType) => {
         if (filterType === "all") {
-            actions.setSelectedType(""); // Set selected filter to "all" without applying type filtering
+            actions.setSelectedType(""); // Set selectedeeeee filter to "all" without applying type filtering
         } else {
             actions.setSelectedType(filterType);
         }
