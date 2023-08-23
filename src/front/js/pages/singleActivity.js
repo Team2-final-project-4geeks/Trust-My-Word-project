@@ -236,7 +236,7 @@ const SingleActivity = () => {
                     <span className="visually-hidden">Loading...</span>
                 </div>
             )}
-            <div className="container-fluid" id="commentSection">
+                <div className="container-fluid" id="commentSection">
                 <h4 className="my-5">Comments</h4>
                 <div className="container-fluid">
                     <Carousel showDots={true} arrows={false} responsive={responsive} >

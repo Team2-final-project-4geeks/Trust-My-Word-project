@@ -29,6 +29,14 @@ const getState = ({ getStore, getActions, setStore }) => {
                     alert("Activity already exists!!");
                 }
             },
+			addProducts: (product) => {
+                const store = getStore();
+                if (!store.product.includes(product)) {
+                    setStore({...store, products: product});
+                } else {
+                    alert("Product already exists!!");
+                }
+            },
 			addQuery: (city) => {
                 const store = getStore();
 				setStore({...store, query: city})                

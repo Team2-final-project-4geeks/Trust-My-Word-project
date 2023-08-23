@@ -8,12 +8,13 @@ import FilterBarProducts from "../component/filterbarproducts.js";
 export const Products = () => {
 
 	const { store, actions } = useContext(Context);
-
+	const navigate= useNavigate();
 	const [products, setProducts] = useState([])
 
 
+
 	useEffect(() =>{
-	getProduct()
+		getProduct()
 	}, [])
 
 	const getProduct = () =>{
@@ -25,50 +26,66 @@ export const Products = () => {
 		})
 		.then(res => res.json())
 		.then(data => {
-			console.log(data);
 			setProducts(data)
+			actions.addProducts(data)
 		})
 		.catch(err => console.error(err))	
 	}
 
-	const showProducts = () => {
-		{(products.length !== 0 || store.query !== "") ? (filteredProducts.map((product, index) =>{
-		return (
-			<li key={index} className= "col">
-				<div className="col">
-					<div className="card">
-						<img src={product.image} className="card-img-top" alt="..."/>
-					</div>
-					<div className="card-body">
-						<h5 className="card-title">{product.title}</h5>
-						<p className="card-text">{product.description}</p>                            
-						<p className="card-text">{product.link}</p>
-						<p className="card-text">{product.publishing_date}</p> 
-					</div>
-				</div>
-			</li>)
-            }
-        ))
-	}
-	}
+	const filteredProducts = products.filter((product)=> product.location.toLowerCase().includes(store.query) &&
+    (store.selectedType === "" || product.type === store.selectedType)) 
 		
-	const filteredProducts = products.filter((product)=> (store.selectedType === "" || product.type === store.selectedType))
-     
-	return (
-		<div className="container-fluid mt-2">
-			<FilterBarProducts/>
-            <div className="py-2" >
-                <h1 className="font-weight-light ms-5 my-5">PRODUCTS </h1>
-                <p className="mx-5 mb-5">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>                    
-                <div className="row row-cols-1 row-cols-md-3 g-4">
-                    {products.length !== 0 ? showProducts() : (
-                        <div className="spinner-border" role="status">
-                            <span className="visually-hidden">Loading...</span>
-                        </div>
-                    )}
+		return (
+			<div className="container-fluid mt-2">
+            <FilterBarProducts/>
+            <div className="card mt-4 mb-5 border-0" id="quoteProduct">                    
+                <div className="card-body d-flex">
+                    <blockquote className="blockquote mb-0">
+                    <p className="text-center mt-4" id="quote">“I've tested so many products that my house is considering requesting a review.”</p>
+                    <footer className="blockquote-footer text-center mt-4 mb-4">Someone</footer>
+                    </blockquote>
                 </div>
             </div>
-        </div>	
+            <div className="py-2" >                
+                <div className="card-group">
+                    <div className="row row-cols-1 row-cols-md-3 g-4">
+                        {(products.length !== 0 || store.query !== "") ? (filteredProducts.map((product, index) =>{            
+                            return(
+                                <li key={index}>              
+                                    <div className="col">
+                                        <div className="card">
+                                            <div className="image-container w-100">
+                                                <img src={product.image} className="card-img-top" alt="..."/>
+                                                <div className="image-overlay d-flex justify-content-end align-items-start p-2 w-100" id="imageProducts">
+                                                    <i className="fas fa-heart text-danger" onClick={() => {
+                                                        actions.addFavourite(props.product.title);
+                                                        actions.addUserFavourites(localStorage.getItem("userId"))}}>
+                                                    </i>
+                                                </div>
+                                            </div>
+                                            <div className="card-body">
+                                                <h5 className="card-title">{product.title}</h5>
+                                                <p className="card-text">{product.type}</p>
+                                                <p className="card-text">{product.location}</p>
+                                                <p className="card-text">{product.publishing_date}</p>                            
+                                                <p className="card-text">{product.description}</p>
+                                                <Link to={product.link} className="card-text">{product.link}</Link>
+                                                <div class="sharethis-inline-share-buttons"></div>
+                                            </div>
+                                            <button className="btn" type="button" id="productCardViewMore" onClick={()=> navigate("/product/" + product.id)}> <strong>View more</strong></button>
+                                        </div>
+                                    </div>
+                                </li>
+                            )
+                            }
+                            )) : (
+                                <div className="spinner-border" role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </div>
 	);
 };
