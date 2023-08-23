@@ -150,7 +150,7 @@ export const ReviewForm = () => {
                     <option value="trip" >Trips</option>
                 </select>
             <div class="row" id="row-review">
-                    <div class="col" id="left-side">
+                    <div class="col-4 bg-danger" id="left-side">
                         {imagePreview ? (
                         <img src={imagePreview} className="image-create-review" alt="Preview" />
                         ) : (
@@ -159,7 +159,7 @@ export const ReviewForm = () => {
                         <br/>
                         <input className="photo-uploader" type="file" name="imageCloud" accept="image/jpeg" onChange={handleFile} />
                     </div>
-                    <div class="col" id="middle">
+                    <div class="col-3 bg-primary" id="middle">
                     <div className="form-group" id="inputs">
                             <input 
                                 type="text" 
@@ -217,7 +217,7 @@ export const ReviewForm = () => {
                                 /> 
                         </div>
                     </div>
-                    <div class="col" id="right-side">
+                    <div class="col-5 bg-secondary" id="right-side">
                         <span className="title">Description</span>
                         <div className="form-group">
                             <textarea

@@ -32,21 +32,61 @@
 .menu {
     display:flex;
     align-self: flex-start;
-    align-items: center;
     margin-right: 25px;
     font-size: 1.5rem;
+    margin-top: 10px;
 }
 .nav-item {
     margin-left: -20px;
     font-size: 20px; 
 }
+#category{
+  background-color: transparent;
+  font-size: 20px;
+  margin-right: 5px;
+  margin-left: -15px;
+  border: transparent;
+}
+
+#all-button-content{
+  border: transparent;
+  border-color: transparent;
+}
+.token{
+  display:flex;
+  flex-direction: row;
+}
+#scroll-down{
+  background-color: transparent;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 10px;
+  margin-left: -40px;
+  border: none;
+
+}
+#scroll-down2{
+  background-color: rgba(0, 0, 0, 0.651);
+  margin-top: 5px;
+  border-radius: 10px;
+  z-index:1;
+  position: relative;
+}
+#scroll-down2:hover{
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#item-home{
+  z-index: 0;
+  position:relative;
+}
 .btn-navbar {
     background-color: transparent;
     border: 1px solid white;
+    border-radius: 10px;
     color: white;
     padding: 5px 10px;
     position: relative;
-    transition: background-color 0.3s ease; /* Agregar transición de color de fondo */
+   
   }
 .btn-navbar:hover {
     background-color: #ffc107;
@@ -56,17 +96,21 @@
    
   .dropdown-menu {
     max-height: 300px;
+    max-width: 400px;
     overflow-y: auto;
+    left: 0;
+    background-color: transparent;
+    border: none;
   }
   
-  .dropdown-item {
+  #dropdown-favourites{
     display: flex;
+    background-color: #ffc107;
+    margin-top: 5px;
+    border-radius: 10px;
     justify-content: space-between;
     align-items: center;
-    white-space: nowrap;
-    padding: 5px 10px;
     font-size: 1rem;
-    flex-direction: row-reverse;
   }
  
   @media (max-width: 800px) {
@@ -81,5 +125,5 @@
       align-items: center;
       margin-top: 10px;
     }
-  
   }
+

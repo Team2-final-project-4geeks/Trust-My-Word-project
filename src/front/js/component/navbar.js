@@ -6,7 +6,6 @@ import "../../styles/navbar.css";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
-  const [fav, setfavor] = useState([])
   const navigate = useNavigate();
   const localUserId = localStorage.getItem("userId")
   const token = localStorage.getItem("jwt-token")
@@ -19,7 +18,6 @@ export const Navbar = () => {
 		alert("You are Logged Out")
 	}
 	useEffect(() => {		
-		//el parametro tiene que venir del user_id
 		actions.getUser(localStorage.getItem("userId"))
 	}, []);
 
@@ -37,28 +35,35 @@ export const Navbar = () => {
         </Link>
       </div>
       <div className="menu">
-        <div className="nav-item">
+        <div className="nav-item" id="item-home">
           <a className="nav-link text-light" href="#" onClick={() => navigate("/")}>
             Home
           </a>
         </div>
-        <div className="nav-item">
-          <a className="nav-link text-light" href="#" onClick={() => navigate("/activities")}>
-            Activities
-          </a>
-        </div>
-        <div className="nav-item">
-          <a className="nav-link text-light" href="#" onClick={() => navigate("/products")}>
-            Products
-          </a>
-        </div>
-        <div className="nav-item">
-          <a className="nav-link text-light" href="#" onClick={() => navigate("/trips")}>
-            Trips
-          </a>
+        <div class="dropdown" id="all-button-content">
+          <button class="btn dropdown text-light" id="category" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Category
+          </button>
+          <ul class="dropdown-menu" id="scroll-down">
+            <li>
+              <a className="nav-link text-light" id="scroll-down2" href="#" onClick={() => navigate("/activities")}>
+              Activities
+              </a>
+            </li>
+            <li>
+              <a className="nav-link text-light" id="scroll-down2" href="#" onClick={() => navigate("/products")}>
+              Products
+              </a>
+            </li>
+            <li>
+              <a className="nav-link text-light" id="scroll-down2" href="#" onClick={() => navigate("/trips")}>
+              Trips
+              </a>
+            </li>
+          </ul>
         </div>
         {token ? ( 
-          <div>
+          <div className="token">
             <div className="nav-item">
               <a className="nav-link text-light" href="#" onClick={() => navigate("/user-page")}>
                 User Page
@@ -79,12 +84,14 @@ export const Navbar = () => {
                   Favourites <span className="p-1 text-secondary text-center text-white">{(store.favourite && store.favourite!=null && store.favourite!=undefined)? store.favourite.length:"0"}</span>
               </button>
               {store.favourite && store.favourite.length > 0 ? (
-                  <ul className="dropdown-menu dropdown-menu-start dropdown-menu-lg-start" aria-labelledby="dropdownMenuClickableInside">
+                  <ul className="dropdown-menu dropdown-menu-start dropdown-menu-lg-end" aria-labelledby="dropdownMenuClickableInside">
                       {store.favourite.map((fav, index) => {
                           return (
                               <li key={index}>
-                                  <a className="dropdown-item d-flex text-black justify-content-between ps-2 pe-2"  onClick={()=>{
-                                  }} href="#">
+                                  <a className="dropdown-item d-flex" id="dropdown-favourites" onClick={() => 
+                                    { console.log(fav)
+                                      navigate("/product/" + fav)
+                                    }}>
                                       {fav}
                                       <i
                                           className="fas fa-trash pt-1"
