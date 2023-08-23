@@ -15,7 +15,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userName: "",
 			email:"",
 			activities: [],
-			query:""
+			query:"",
+			selectedType:""
 		},
 		actions: {
 			addFavourite: (fav) => {
@@ -133,8 +134,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.catch(error => {
 					console.log('Oops something went wrong'+ error);
 				})
-			}
-
+			},
+			setSelectedType: (filterType) => {
+                const store = getStore();
+                setStore({ ...store, selectedType: filterType })
+			},
 		},
 		
 	};
