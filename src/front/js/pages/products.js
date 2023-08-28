@@ -1,23 +1,20 @@
 import React, { useEffect, useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; 
 import { Context } from "../store/appContext";
-import { Product } from "../component/productcard.jsx";
-import FilterBarProducts from "../component/filterbarproducts.js";
+import FilterBarProducts from "../component/filterbarproducts";
 
 
 export const Products = () => {
 
 	const { store, actions } = useContext(Context);
 	const navigate= useNavigate();
-	const [products, setProducts] = useState([])
-
-
+	const [products, setProducts] = useState([]);
 
 	useEffect(() =>{
-		getProduct()
+		getProducts()
 	}, [])
 
-	const getProduct = () =>{
+	const getProducts = () =>{
 		fetch(process.env.BACKEND_URL + 'api/review?category=product', {
 			method: "GET",
 			headers: {
@@ -37,7 +34,7 @@ export const Products = () => {
 		
 		return (
 			<div className="container-fluid mt-2">
-            <FilterBarProducts/>
+            <FilterBarProducts />
             <div className="card mt-4 mb-5 border-0" id="quoteProduct">                    
                 <div className="card-body d-flex">
                     <blockquote className="blockquote mb-0">
@@ -58,7 +55,7 @@ export const Products = () => {
                                                 <img src={product.image} className="card-img-top" alt="..."/>
                                                 <div className="image-overlay d-flex justify-content-end align-items-start p-2 w-100" id="imageProducts">
                                                     <i className="fas fa-heart text-danger" onClick={() => {
-                                                        actions.addFavourite(props.product.title);
+                                                        actions.addFavourite(product.title);
                                                         actions.addUserFavourites(localStorage.getItem("userId"))}}>
                                                     </i>
                                                 </div>

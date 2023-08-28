@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
-import ShareComponent from "../component/shareComponent";
+import React, { useEffect, useState, useContext  } from "react";
+import ShareComponent from "../component/shareComponent.js";
+import Swal from 'sweetalert2';
+import CarouselCard from "../component/carouselcard.js";
+import Carousel from "react-multi-carousel";
+import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import "react-multi-carousel/lib/styles.css";
+
 import "../../styles/singleproduct.css";
-
-import { useParams} from "react-router-dom";
-
-
 
 export const SingleProduct = () => {
     const responsive = {        
@@ -23,7 +27,6 @@ export const SingleProduct = () => {
       };
     const params = useParams()
     const [city,setCity] = useState("")
-    const [image,setImage] = useState("")
     const {store,actions} = useContext(Context)
     const [allDescriptions, setAllDescriptions] = useState([]);
     const [description, setDescription] = useState("");
@@ -36,7 +39,6 @@ export const SingleProduct = () => {
         useEffect (() => {
             getOneProduct();
             fetchComments();
-            getCityFromApi(); 
         }, [])
     
     const getOneProduct = () => {
@@ -53,7 +55,6 @@ export const SingleProduct = () => {
         .then(data => {
             console.log(data);
             setOneProduct(data);
-            setCity(data.location); 
         })
         .catch(err => Swal.fire({
             icon: 'error',
@@ -179,20 +180,21 @@ export const SingleProduct = () => {
                         </div>
                         <div className="col-md-6">
                             <div className="card h-100 border-0 px-3">
-                                <h5 className="card-title ms-3 mt-3 mb-4 text-center" id="activityTitle">{oneProduct.title}</h5>
+                                <h5 className="card-title ms-3 mt-3 mb-4 text-center" id="productTitle">{oneProduct.title}</h5>
                                     <div className="d-flex flex-row mt-2" id="productRow">
                                         <p className="card-text ms-2">{oneProduct.id}</p>
+                                        <p className="card-text">{oneProduct.type}Product</p>
                                         <p className="card-text ms-2">{oneProduct.publishing_date}</p>
-                                        <p className="card-text">{oneProduct.price}</p>
+                                        
                                     </div>
                                 <p className="card-text"><i>{oneProduct.description}</i></p>
-                                    <div className="d-flex flex-row" id="activityRow2">
+                                    <div className="d-flex flex-row" id="productRow2">
                                         <p className="card-text ms-2"><i>{oneProduct.link}</i></p>
                                         <p className="card-text">{oneProduct.price}</p>
                                         <p className="card-text ms-2 pe-3"><i class="fas fa-map-marker-alt fa-sm me-2"></i>{oneProduct.location}</p>
                                     </div>
-                                <div className="d-flex flex-row ms-4 mt-2 position-absolute bottom-0 pb-4" id="activityRow">
-                                    <Link to={activity.link} className="card-text ms-3 me-5 text-center">{activity.link}</Link>
+                                <div className="d-flex flex-row ms-4 mt-2 position-absolute bottom-0 pb-4" id="productRow">
+                                    <Link to={oneProduct.link} className="card-text ms-3 me-5 text-center">{oneProduct.link}</Link>
                                     <ShareComponent />
                                 </div>
                             </div>

@@ -89,9 +89,9 @@
    
   }
 .btn-navbar:hover {
-    background-color: #ffc107;
-    border-color: #ffc107;
-    color: #343a40; 
+    background-color: rgba(0, 0, 0, 0.5);
+    border-color: rgba(0, 0, 0, 0.5);
+    color: white;
 }
    
   .dropdown-menu {
@@ -104,13 +104,17 @@
   }
   
   #dropdown-favourites{
-    display: flex;
-    background-color: #ffc107;
+    background-color: rgba(0, 0, 0, 0.651);
     margin-top: 5px;
     border-radius: 10px;
+    z-index:1;
+    display: flex;
     justify-content: space-between;
-    align-items: center;
-    font-size: 1rem;
+    position: relative;
+    color: white;
+  }
+  #dropdown-favourites:hover{
+    background-color: rgba(0, 0, 0, 0.5);
   }
  
   @media (max-width: 800px) {

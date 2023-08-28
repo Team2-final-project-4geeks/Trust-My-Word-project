@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 import "../../styles/navbar.css";
 
@@ -9,6 +10,10 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const localUserId = localStorage.getItem("userId")
   const token = localStorage.getItem("jwt-token")
+  const fav = {
+    id:"",
+    title:""
+  }
 
 	const logOut = () => {
 		localStorage.removeItem('jwt-token');
@@ -17,6 +22,8 @@ export const Navbar = () => {
 		navigate("/");
 		alert("You are Logged Out")
 	}
+ 
+
 	useEffect(() => {		
 		actions.getUser(localStorage.getItem("userId"))
 	}, []);
@@ -26,6 +33,7 @@ export const Navbar = () => {
       actions.getUser(localUserId);
     }
   }, [localUserId]);
+
 
   return (
     <div className="navbar">
@@ -80,18 +88,17 @@ export const Navbar = () => {
               </a>
             </div>
             <div className="btn-group" id="favourites">
-              <button type="button" className="btn-navbar btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="dropdownMenuClickableInside" aria-expanded="false">
-                  Favourites <span className="p-1 text-secondary text-center text-white">{(store.favourite && store.favourite!=null && store.favourite!=undefined)? store.favourite.length:"0"}</span>
+              <button type="button" className="btn-navbar dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="dropdownMenuClickableInside" aria-expanded="false">
+                  Favourites <span className="p-1 text-center text-white">{(store.favourite && store.favourite!=null && store.favourite!=undefined)? store.favourite.length:"0"}</span>
               </button>
               {store.favourite && store.favourite.length > 0 ? (
-                  <ul className="dropdown-menu dropdown-menu-start dropdown-menu-lg-end" aria-labelledby="dropdownMenuClickableInside">
+                  <ul className="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuClickableInside">
                       {store.favourite.map((fav, index) => {
                           return (
                               <li key={index}>
                                   <a className="dropdown-item d-flex" id="dropdown-favourites" onClick={() => 
-                                    { console.log(fav)
-                                      navigate("/product/" + fav)
-                                    }}>
+                                      navigate("/activity/" + fav)
+                                    }>
                                       {fav}
                                       <i
                                           className="fas fa-trash pt-1"
@@ -106,7 +113,7 @@ export const Navbar = () => {
                       })}
                   </ul>
               ) : (
-                  ""
+                ""
               )}
           </div>
           </div>

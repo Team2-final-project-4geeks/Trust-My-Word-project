@@ -1,16 +1,15 @@
+
 import React, { useEffect, useState, useContext } from "react";
 import { Context } from "../store/appContext.js";
 import {FaStar } from 'react-icons/fa';
 import { FcElectronics } from 'react-icons/fc';
-import { BsSmartwatch } from 'react-icons/bs';
+import { BsSmartwatch, BsFillCarFrontFill } from 'react-icons/bs';
 import {TbPlayFootball} from 'react-icons/tb';
-import {IoCarSport} from 'react-icons/io';
 import { GiPerspectiveDiceSixFacesRandom, GiClothes } from 'react-icons/gi';
-import "../../styles/filterbaractivities.css";
 
 const FilterBarProducts = () => {
     const [query, setQuery] = useState("");
-    const [selectedType, setSelectedType] = useState("");
+    //const [selectedType, setSelectedType] = useState("");
     const {store, actions} = useContext(Context);
     useEffect(()=>{
         actions.addQuery(query)        
@@ -47,7 +46,7 @@ const FilterBarProducts = () => {
                     <button onClick={() => handleFilterClick("clothes")} className={store.selectedType === "clothes" ? "selected" : ""}id="iconClothes"><GiClothes className="reactIcon"/> clothes </button>
                 </div>
                 <div className="iconsPointer">
-                    <button onClick={() => handleFilterClick("accessories")} className={store.selectedType === "accessories" ? "selected" : ""}id="iconAccessories"> <BsSmartwatch className="reactIcon" /> accessories </button>
+                    <button onClick={() => handleFilterClick("accesories")} className={store.selectedType === "accesories" ? "selected" : ""}id="iconAccesories"> <BsSmartwatch className="reactIcon" /> accesories </button>
                 </div>
                 <div className="iconsPointer">
                     <button onClick={() => handleFilterClick("electronics")} className={store.selectedType === "electronics" ? "selected" : ""} id="iconElectronics"> <FcElectronics className="reactIcon" /> electronics </button>
@@ -56,7 +55,7 @@ const FilterBarProducts = () => {
                     <button onClick={() => handleFilterClick("sports")} className={store.selectedType === "sports" ? "selected" : ""} id="iconSports"> <TbPlayFootball className="reactIcon" /> sports </button>
                 </div>
                 <div className="iconsPointer">
-                    <button onClick={() => handleFilterClick("automotive")} className={store.selectedType === "automotive" ? "selected" : ""} id="iconAutomotive"> <IoCarSport className="reactIcon" /> automotive </button>
+                    <button onClick={() => handleFilterClick("automotive")} className={store.selectedType === "automotive" ? "selected" : ""} id="iconAutomotive"> <BsFillCarFrontFill className="reactIcon" /> automotive </button>
                 </div>
                 <div className="iconsPointer">
                     <button onClick={() => handleFilterClick("other")} className={store.selectedType === "other" ? "selected" : ""} id="iconOther"> <GiPerspectiveDiceSixFacesRandom className="reactIcon" /> other </button> 

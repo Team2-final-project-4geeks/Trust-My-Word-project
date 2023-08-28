@@ -10,17 +10,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			activities: [],
 			query:"",
 			selectedType:"",
-			products:[]
+			products: [],
 		},
 		actions: {
-			addFavourite: (fav) => {
-                const store = getStore();
-                if (!store.favourite.includes(fav)) {
-                    setStore({ favourite: [...store.favourite, fav] });
-                } else {
-                    alert("Favourite already exists!!");
-                }
-            },
+			addFavourite: (fav, title) => {
+				const store = getStore();
+				if (!store.favourite.includes(fav)) {
+					setStore({ favourite: [...store.favourite, fav, title] });
+					console.log("adicionado")
+					console.log(fav, title)
+				} else {
+					alert("Favourite already exists!!");
+				}
+			},
+			
 			addActivities: (activity) => {
                 const store = getStore();
                 if (!store.activities.includes(activity)) {
