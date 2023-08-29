@@ -20,32 +20,37 @@
   z-index: -1;
 }
 .logo{
-    align-self: flex-start;
-    margin-left:15px;
-    margin-top: 5px;
+  align-self: flex-start;
+  margin-left:15px;
+  margin-top: 5px;
 }
   
 .logo img {
-    max-width: 110px;
+  max-width: 110px;
 }
   
 .menu {
-    display:flex;
-    align-self: flex-start;
-    margin-right: 25px;
-    font-size: 1.5rem;
-    margin-top: 10px;
+  display:flex;
+  align-self: flex-start;
+  margin-right: 25px;
+  font-size: 1.5rem;
+  margin-top: 10px;
 }
 .nav-item {
-    margin-left: -20px;
-    font-size: 20px; 
+  margin-left: -20px;
+  font-size: 20px; 
 }
 #category{
   background-color: transparent;
   font-size: 20px;
   margin-right: 5px;
   margin-left: -15px;
-  border: transparent;
+  border: none;
+}
+#category:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-color: rgba(0, 0, 0, 0.5);
+  color: white;
 }
 
 #all-button-content{
@@ -80,54 +85,54 @@
   position:relative;
 }
 .btn-navbar {
-    background-color: transparent;
-    border: 1px solid white;
-    border-radius: 10px;
-    color: white;
-    padding: 5px 10px;
-    position: relative;
-   
-  }
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 10px;
+  color: white;
+  padding: 5px 10px;
+  position: relative;
+  
+}
 .btn-navbar:hover {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-color: rgba(0, 0, 0, 0.5);
-    color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-color: rgba(0, 0, 0, 0.5);
+  color: white;
 }
    
-  .dropdown-menu {
-    max-height: 300px;
-    max-width: 400px;
-    overflow-y: auto;
-    left: 0;
-    background-color: transparent;
-    border: none;
+.dropdown-menu {
+  max-height: 300px;
+  max-width: 400px;
+  overflow-y: auto;
+  left: 0;
+  background-color: transparent;
+  border: none;
+}
+
+#dropdown-favourites{
+  background-color: rgba(0, 0, 0, 0.651);
+  margin-top: 5px;
+  border-radius: 10px;
+  z-index:1;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  color: white;
+}
+#dropdown-favourites:hover{
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 800px) {
+  .navbar {
+    flex-direction: column;
   }
-  
-  #dropdown-favourites{
-    background-color: rgba(0, 0, 0, 0.651);
-    margin-top: 5px;
-    border-radius: 10px;
-    z-index:1;
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    color: white;
+  .logo {
+    margin:0;
   }
-  #dropdown-favourites:hover{
-    background-color: rgba(0, 0, 0, 0.5);
+  .menu {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
   }
- 
-  @media (max-width: 800px) {
-    .navbar {
-      flex-direction: column;
-    }
-    .logo {
-      margin:0;
-    }
-    .menu {
-      flex-direction: column;
-      align-items: center;
-      margin-top: 10px;
-    }
-  }
+}
 

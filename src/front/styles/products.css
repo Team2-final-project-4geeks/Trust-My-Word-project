@@ -1,7 +1,8 @@
 #quoteProduct{
     width:700px;
     height:200px;
-    margin: auto;   
+    margin: auto; 
+    display: flex;  
 }
 
 #quote{

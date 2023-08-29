@@ -10,10 +10,6 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const localUserId = localStorage.getItem("userId")
   const token = localStorage.getItem("jwt-token")
-  const fav = {
-    id:"",
-    title:""
-  }
 
 	const logOut = () => {
 		localStorage.removeItem('jwt-token');

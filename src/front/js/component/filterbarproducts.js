@@ -1,11 +1,13 @@
 
 import React, { useEffect, useState, useContext } from "react";
 import { Context } from "../store/appContext.js";
-import {FaStar } from 'react-icons/fa';
-import { FcElectronics } from 'react-icons/fc';
+import {FaStar, FaMicrochip } from 'react-icons/fa';
 import { BsSmartwatch, BsFillCarFrontFill } from 'react-icons/bs';
 import {TbPlayFootball} from 'react-icons/tb';
+import {HiChip} from 'react-icons/hi';
 import { GiPerspectiveDiceSixFacesRandom, GiClothes } from 'react-icons/gi';
+
+import "../../styles/filterbarproducts.css";
 
 const FilterBarProducts = () => {
     const [query, setQuery] = useState("");
@@ -49,7 +51,7 @@ const FilterBarProducts = () => {
                     <button onClick={() => handleFilterClick("accesories")} className={store.selectedType === "accesories" ? "selected" : ""}id="iconAccesories"> <BsSmartwatch className="reactIcon" /> accesories </button>
                 </div>
                 <div className="iconsPointer">
-                    <button onClick={() => handleFilterClick("electronics")} className={store.selectedType === "electronics" ? "selected" : ""} id="iconElectronics"> <FcElectronics className="reactIcon" /> electronics </button>
+                    <button onClick={() => handleFilterClick("electronics")} className={store.selectedType === "electronics" ? "selected" : ""} id="iconElectronics"> <HiChip className="reactIcon" /> electronics </button>
                 </div>
                 <div className="iconsPointer">
                     <button onClick={() => handleFilterClick("sports")} className={store.selectedType === "sports" ? "selected" : ""} id="iconSports"> <TbPlayFootball className="reactIcon" /> sports </button>
