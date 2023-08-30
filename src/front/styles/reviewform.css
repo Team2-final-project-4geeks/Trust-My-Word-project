@@ -130,7 +130,7 @@ span{
   height: 100%;
   width: 50%; 
 }
-#title, #type, #location, #link, #publishing_date{
+#title, #type, #location, #link, #store, #publishing_date{
   width: 100%;
   height: 100%; 
   text-align: center;
