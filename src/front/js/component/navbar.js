@@ -92,9 +92,16 @@ export const Navbar = () => {
                       {store.favourite.map((fav, index) => {
                           return (
                               <li key={index}>
-                                  <a className="dropdown-item d-flex" id="dropdown-favourites" onClick={() => 
-                                      navigate("/activity/" + fav.id)
-                                    }>
+                                  <a className="dropdown-item d-flex" id="dropdown-favourites" onClick={() => {
+
+                                      if (category === "activity") {
+                                        navigate ("/activity/" + fav.id)
+                                      } else if (category === "product") {
+                                        navigate ("/product/" + fav.id)
+                                      } else if (category === "trip") {
+                                        navigate ("/trip/" + fav.id)
+                                      }
+                                    }}>
                                       {fav.title}
                                       <i
                                           className="fas fa-trash pt-1"

@@ -13,10 +13,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			products: [],
 		},
 		actions: {
-			addFavourite: (favId, favTitle) => {
+			addFavourite: (favId, favTitle, favCategory) => {
 				const store = getStore();
 				if (!store.favourite.includes(favId) && store.favourite !== null) {
-					setStore({ favourite: [...store.favourite, {id: favId, title: favTitle}] });
+					setStore({ favourite: [...store.favourite, {id: favId, title: favTitle, category: favCategory}] });
 					console.log("adicionado")
 				} else {
 					alert("Favourite already exists!!");
