@@ -60,8 +60,8 @@ export const Home = () => {
 		.then((response) => response.json())
 		.then((data) => {
 			console.log(data);
-		  setPlaceName(data.features[0].properties.address.quarter);
-		  localStorage.setItem("myLocation",data.features[0].properties.address.quarter)
+		  setPlaceName(data.features[0].properties.address.town);
+		  localStorage.setItem("myLocation",data.features[0].properties.address.town)
 		})
 		.catch((error) => {
 		  console.error("Error al obtener el lugar:", error);
@@ -172,6 +172,7 @@ export const Home = () => {
 					key={index}
 					product={product}
 					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
+					rating={product.rating}
 				/>
 			));
 			} else {
