@@ -335,6 +335,7 @@ def get_reviews_with_comments(id):
 @api.route('/getFilteredReviews', methods=['POST'])
 def get_filtered_reviews():
     data = request.get_json()
+    print("ssssssssssssssssssssssssssssssssss",data)
     user_latitude_str = data.get('latitude')
     user_longitude_str = data.get('longitude')
 
@@ -353,9 +354,9 @@ def get_filtered_reviews():
             review_longitude = review.longitude
 
             distance = haversine_distance(user_latitude, user_longitude, review_latitude, review_longitude)
-            
+            print("dddddddddddddddddddddddddddd",distance)
 
-            if distance <=3:
+            if distance <=25:
                 filtered_reviews.append({
                     "id": review.id,
                     "title": review.title,
@@ -379,6 +380,12 @@ def get_filtered_reviews():
 
 
 def haversine_distance(lat1, lon1, lat2, lon2):
+    print("----------------------------------------",lat1)
+    print(lon1)
+
+    print(lat2)
+    print(lon2)
+
     # Radio de la Tierra en km
     R = 6371.0
 

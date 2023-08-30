@@ -23,6 +23,7 @@ const Trips = () =>{
 		.then(res => res.json())
 		.then(data => {
             setTrips(data) 
+            console.log("sssssss");
             actions.addActivities(data);
 
 		})

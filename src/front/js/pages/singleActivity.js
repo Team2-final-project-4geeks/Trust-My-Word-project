@@ -42,7 +42,7 @@ const SingleActivity = () => {
 
     useEffect(() => {
         fetchSingleActivity();
-        fetchComments();                           
+        fetchComments();
     }, []);
 
     useEffect(() => {
