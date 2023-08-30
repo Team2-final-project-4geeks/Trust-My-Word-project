@@ -69,11 +69,10 @@ const Login = () =>{
                 actions.addUsername(result.username)
                 localStorage.setItem("username",result.username)
                 actions.getUser(localStorage.getItem("userId"))
-				navigate("/")
 			}).catch((err) => {
 				console.log(err);
 			})
-			}
+		}
     }
     return(
             <div className="general-container">

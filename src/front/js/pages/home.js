@@ -32,7 +32,7 @@ export const Home = () => {
 	useEffect(() => {
 	  if (coordinatesAvailable) { 
 		getPlaceFromCoordinates();
-		fetchFilteredReviews();
+		fetchFilteredReviews()
 	  }
 	}, [coordinatesAvailable]);
   
@@ -238,7 +238,9 @@ export const Home = () => {
 				<h2>Where am I?</h2>
 				<i class="fa-solid fa-location-dot"></i>{placeName}
 				<h3>Reviews near me</h3>
-				<input placeholder="type the radio" value={radio} onChange={(e)=>setRadio(e.target.value)}/>			</div>
+				<input placeholder="type the radio" value={radio} onChange={(e)=>setRadio(e.target.value)}/>	
+				<button className="btn btn-warning" onClick={fetchFilteredReviews}>click me </button>		
+			</div>
 
 			<div className="nearmeReviews">
 				<h1>Less distance, more fun!</h1>
