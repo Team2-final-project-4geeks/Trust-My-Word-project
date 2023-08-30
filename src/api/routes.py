@@ -91,7 +91,7 @@ def update_user(id):
     if "password" in data:
         update_user.password = data["password"]
     if "favourites" in data:
-        update_user.favourites = data["favourites"]
+        update_user.favourites = [str(item) for item in data["favourites"]]
     if "imageCloud" in data:
         update_user.image = data["imageCloud"]
     db.session.commit()

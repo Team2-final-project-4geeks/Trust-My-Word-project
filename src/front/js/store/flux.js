@@ -13,12 +13,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			products: [],
 		},
 		actions: {
-			addFavourite: (fav) => {
+			addFavourite: (favId, favTitle) => {
 				const store = getStore();
-				if (!store.favourite.includes(fav)) {
-					setStore({ favourite: [...store.favourite, fav] });
+				if (!store.favourite.includes(favId) && store.favourite !== null) {
+					setStore({ favourite: [...store.favourite, {id: favId, title: favTitle}] });
 					console.log("adicionado")
-					console.log(fav)
 				} else {
 					alert("Favourite already exists!!");
 				}
@@ -94,8 +93,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return resp.json();
 				})
 				.then(data=> {
-					const store = getStore();		
-					setStore({ ...store, favourite: data.favourites });
+					const store = getStore();
+					console.log(data.favourites)
+					const jsonFavourites = data.favourites.map(item => {
+						const validString = item.replace(/'/g, '"')
+						return JSON.parse(validString)
+					})
+					console.log(jsonFavourites)		
+					setStore({ ...store, favourite: jsonFavourites });
 				})
 				.catch(error => {			
 					console.log('Oops something went wrong'+ error);

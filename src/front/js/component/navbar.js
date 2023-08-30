@@ -93,9 +93,9 @@ export const Navbar = () => {
                           return (
                               <li key={index}>
                                   <a className="dropdown-item d-flex" id="dropdown-favourites" onClick={() => 
-                                      navigate("/activity/" + fav)
+                                      navigate("/activity/" + fav.id)
                                     }>
-                                      {fav}
+                                      {fav.title}
                                       <i
                                           className="fas fa-trash pt-1"
                                           onClick={() => {
