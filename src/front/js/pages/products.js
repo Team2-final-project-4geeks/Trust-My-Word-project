@@ -68,7 +68,7 @@ export const Products = () => {
                                                 <p className="card-text">{product.location}</p>
                                                 <p className="card-text">{product.publishing_date}</p>                            
                                                 <p className="card-text">{product.description}</p>
-                                                <Link to={product.link} className="card-text">{product.link}</Link>
+                                                <Link to={product.link} target="_blank" className="card-text">{product.link}</Link>
                                                 <div class="sharethis-inline-share-buttons"></div>
                                             </div>
                                             <button className="btn" type="button" id="productCardViewMore" onClick={()=> navigate("/product/" + product.id)}> <strong>View more</strong></button>

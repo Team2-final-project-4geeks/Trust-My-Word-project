@@ -22,6 +22,12 @@ export const ReviewForm = () => {
   const user = localStorage.getItem("userId")
   const [rating, setRating] = useState(0); //
 
+  function formatPrice(input) {
+  
+    const price = input.value.replace(/\D/g, '');
+    input.value = '€' + price;
+  }
+
   const handleStarClick = (selectedRating) => {
     setRating(selectedRating);
   };
@@ -150,7 +156,7 @@ export const ReviewForm = () => {
                     <option value="trip" >Trips</option>
                 </select>
             <div class="row" id="row-review">
-                    <div class="col-4 bg-danger" id="left-side">
+                    <div class="col-4" id="left-side">
                         {imagePreview ? (
                         <img src={imagePreview} className="image-create-review" alt="Preview" />
                         ) : (
@@ -158,8 +164,35 @@ export const ReviewForm = () => {
                         )}
                         <br/>
                         <input className="photo-uploader" type="file" name="imageCloud" accept="image/jpeg" onChange={handleFile} />
+                        <span className="date-title mb-1">Date</span>
+                        <div className="form-group mt-1" id="inputs">
+                            <input 
+                                type="text" 
+                                id="publishing_date" 
+                                className="review-input"  
+                                placeholder="dd/mm/yyyy" 
+                                name="publishing_date"
+                                value={publishing_date}
+                                onChange={(e) => setPublishing_date(e.target.value)}
+                                />
+                            <p className="little-legends">You won't be able to chage that after</p> 
+                        </div>
+                        <div className="mt-3 mb-3" id="rating">
+                          <h2>Your rating</h2>
+                          <div>
+                            {[1, 2, 3, 4, 5].map((star) => (
+                              <span
+                                key={star}
+                                onClick={() => handleStarClick(star)}
+                                style={{ cursor: 'pointer', color: star <= rating ? 'gold' : 'gray' }}
+                              >
+                                &#9733;
+                              </span>
+                            ))}
+                          </div>
+                        </div>
                     </div>
-                    <div class="col-3 bg-primary" id="middle">
+                    <div class="col-8" id="middle">
                     <div className="form-group" id="inputs">
                             <input 
                                 type="text" 
@@ -206,19 +239,19 @@ export const ReviewForm = () => {
                                 />  
                         </div>
                         <div className="form-group" id="inputs">
+                          <div className="priceWhithEuro">
                             <input
                                 type="text" 
                                 id="price" 
                                 className="review-input"  
-                                placeholder=" €€€" 
                                 name="price"
                                 value={price}
-                                onChange={(e) => setPrice(e.target.value)}
-                                /> 
+                                onChange={(e) => setPrice(e.target.value )}
+                            />
+                            <div className="euro-symbol">€</div>
+                          </div>
                         </div>
-                    </div>
-                    <div class="col-5 bg-secondary" id="right-side">
-                        <span className="title">Description</span>
+                        <span className="title mt-2">Description</span>
                         <div className="form-group">
                             <textarea
                                 maxLength={375}
@@ -230,38 +263,9 @@ export const ReviewForm = () => {
                                 maxRows={6}
                             />  
                         </div>
-                        <span className="title">Date</span>
-                        <div className="form-group" id="inputs">
-                            <input 
-                                type="text" 
-                                id="publishing_date" 
-                                className="review-input"  
-                                placeholder="dd/mm/yyyy" 
-                                name="publishing_date"
-                                value={publishing_date}
-                                onChange={(e) => setPublishing_date(e.target.value)}
-                                />
-                            <p className="little-legends">You won't be able to chage that after</p> 
-                        </div>
-                        <div className="mt-3">
-                          <h2>Your rating</h2>
-                          <div>
-                            {[1, 2, 3, 4, 5].map((star) => (
-                              <span
-                                key={star}
-                                onClick={() => handleStarClick(star)}
-                                style={{ cursor: 'pointer', color: star <= rating ? 'gold' : 'gray' }}
-                              >
-                                &#9733;
-                              </span>
-                            ))}
-                          </div>
-                          <button onClick={handleUpload}>Enviar calificación</button>
-
-                        </div>
-                </div>
+                    </div>
         </div>
-            {/* <button className="finish-review" onClick={handleUpload}>Finish Review</button> */}
+            <button className="finish-review" onClick={handleUpload}>Finish Review</button>
         </div>
     );
   };
