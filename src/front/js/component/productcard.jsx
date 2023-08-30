@@ -16,7 +16,8 @@ export const ProductCard = (props) => {
                     <img src={props.product.image} alt="..."/>
                     <div className="image-overlay d-flex justify-content-end align-items-start p-2">
                         <i className="fas fa-heart text-danger" onClick={() => {
-                        actions.addFavourite(props.product.title);
+                    // ou qualquer propriedade que contenha o título
+                        actions.addFavourite(props.product.id, props.product.title, props.product.category);
                         actions.addUserFavourites(localStorage.getItem("userId"))
                         }}></i>
                     </div>

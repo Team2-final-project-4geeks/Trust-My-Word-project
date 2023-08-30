@@ -14,16 +14,15 @@ from flask_jwt_extended import (
 )
 
 api = Blueprint('api', __name__)
-# @api.route('/hello', methods=['POST', 'GET'])
-# def handle_hello():
+@api.route('/hello', methods=['POST', 'GET'])
+def handle_hello():
 
-#    populate_user();
-#    populate_reviews();
-
-#    response_body = {
-#        "message": "Helloooo! This is 4Geeks Group 2 Final Project"
-#    }
-#    return jsonify(response_body), 200#
+    populate_user();
+    populate_reviews();
+    response_body = {
+        "message": "Helloooo! This is 4Geeks Group 2 Final Project"
+    }
+    return jsonify(response_body), 200#
 
 
 #FOR USERS
@@ -92,7 +91,7 @@ def update_user(id):
     if "password" in data:
         update_user.password = data["password"]
     if "favourites" in data:
-        update_user.favourites = data["favourites"]
+        update_user.favourites = [str(item) for item in data["favourites"]]
     if "imageCloud" in data:
         update_user.image = data["imageCloud"]
     db.session.commit()

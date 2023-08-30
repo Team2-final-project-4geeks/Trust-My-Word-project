@@ -102,7 +102,6 @@ const Login = () =>{
                         <div className="row g-0 d-flex justify-content-center align-items-center mt-4">
                             {showLogin ? (
                                 <>
-                               
                                 <div class="col-md-12 d-flex justify-content-center align-items-center flex-column" id="login">
                                 <h3 className="mb-5">TRUST MY WORD</h3>
                                 <div className="input-board">
