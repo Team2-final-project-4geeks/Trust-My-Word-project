@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 import enum
 from sqlalchemy import Enum,ForeignKey,Float
+from datetime import datetime
 
 
 
@@ -39,8 +40,6 @@ class User(db.Model):
             "reviews": [review.serialize() for review in self.reviews],  # serialize each review
             "comments": [comment.serialize() for comment in self.comments], # serialize each comment
             "image": self.image
-
-
         }        
       
 class Review(db.Model):
@@ -93,6 +92,8 @@ class Comment(db.Model):
      review = db.relationship("Review", back_populates="comments")
      user_id = db.Column(db.Integer, ForeignKey('user.id'))
      userComment = db.relationship("User", back_populates="comments")
+     author=db.Column(db.String(100), nullable=True)
+     date=db.Column(db.String(50), default=datetime.utcnow, nullable=True)
 
      def __repr__(self):
         return f'<Comments {self.id}>'
@@ -103,4 +104,8 @@ class Comment(db.Model):
             "description" : self.description,
             "review_id": self.review_id,
             "user_id": self.user_id,
+            "author": self.author,
+            "test": self.userComment.username,
+            "testImage":self.userComment.image,
+            "date":self.date
         }       

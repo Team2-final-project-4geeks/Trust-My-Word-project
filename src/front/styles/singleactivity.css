@@ -3,7 +3,7 @@
 }
 #containerSingle{
     margin:auto;
-    width:1300px;
+    width:1100px;
     height:400px;
     justify-content: center;
     align-items: center;
@@ -11,14 +11,14 @@
 }
 #backgroundSingleActivity{
     background: rgb(95,191,153);
-    background: linear-gradient(to top right, rgba(95,191,153,1) 0%, rgba(253,187,45,1) 100%);
+    background: linear-gradient(to top right,black 0%, rgba(253,187,45,1) 100%);
     background-size: cover;
     background-position: center;
     border-radius: 10px; 
     overflow: hidden;
     margin:auto;
-    width:1350px;
-    height:450px;
+    width:1125px;
+    height:425px;
     display:flex;
     justify-content: center;
     align-items: center;   
@@ -59,6 +59,7 @@
     color:goldenrod;    
 }
 #sumbitButtonSingle{
+    margin:auto;
     background:black;
     color: goldenrod;
 }
@@ -66,6 +67,13 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 #comment{
-    width:900px;
-    margin:auto;
+    width:700px;    
+}
+
+.commentHeadline{
+    margin-left: 250px;
+}
+
+.my-5{
+    font-size:50px;
 }

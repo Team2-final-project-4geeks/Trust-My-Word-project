@@ -76,6 +76,7 @@ export const Home = () => {
 		console.log("Geolocation not supported");
 	  }
 	  function success(position) {
+		console.log(position.coords.latitude, position.coords.longitude)
 		setLatitude(position.coords.latitude);
 		setLongitude(position.coords.longitude);
 		setCoordinatesAvailable(true); 
@@ -175,6 +176,7 @@ export const Home = () => {
 					activity={activity}
 					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
 					img={activity.image}
+					rating={activity.rating}
 				/>
 			));
 			} else {

@@ -132,7 +132,7 @@ def user_login():
         return jsonify(response_body),400
     
     access_token = create_access_token(identity=user.id)
-    return jsonify({ "token": access_token, "user_id": user.id , "username": user.username, "email":user.email})
+    return jsonify({ "token": access_token, "user_id": user.id , "username": user.username, "email":user.email, "image":user.image})
 
 
 # FOR REVIEWS 
@@ -281,12 +281,14 @@ def get_single_review(id):
 
 # FOR COMMENTS
 
-@api.route('/comments',methods=['GET'])
+@api.route('/comments/<int:review_id>', methods=['GET'])
 @jwt_required()
-def get_all_comments():    
-    all_comments = Comment.query.all()
-    all_comments = list(map(lambda x: x.serialize(), all_comments))
-    return jsonify(all_comments), 200
+def get_comments_for_review(review_id):
+    comments = Comment.query.filter_by(review_id=review_id)
+    comments = list(map(lambda x: x.serialize(), comments))
+    [print(x) for x in comments]
+    
+    return jsonify(comments), 200
 
 @api.route('/create-comment',methods=['POST'])
 @jwt_required()
@@ -305,7 +307,7 @@ def create_comment():
         }
         return jsonify(response_body),400        
     
-    new_comment= Comment(description=data["description"], review_id=data["review_id"], user_id=data["user_id"])
+    new_comment= Comment(description=data["description"], review_id=data["review_id"], user_id=data["user_id"], author=data["author"], date=data["date"])
     db.session.add(new_comment)
     db.session.commit()
     
