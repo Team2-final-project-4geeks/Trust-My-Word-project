@@ -14,16 +14,15 @@ from flask_jwt_extended import (
 )
 
 api = Blueprint('api', __name__)
-# @api.route('/hello', methods=['POST', 'GET'])
-# def handle_hello():
+@api.route('/hello', methods=['POST', 'GET'])
+def handle_hello():
 
-#    populate_user();
-#    populate_reviews();
-
-#    response_body = {
-#        "message": "Helloooo! This is 4Geeks Group 2 Final Project"
-#    }
-#    return jsonify(response_body), 200#
+    populate_user();
+    populate_reviews();
+    response_body = {
+        "message": "Helloooo! This is 4Geeks Group 2 Final Project"
+    }
+    return jsonify(response_body), 200#
 
 
 #FOR USERS
@@ -92,7 +91,7 @@ def update_user(id):
     if "password" in data:
         update_user.password = data["password"]
     if "favourites" in data:
-        update_user.favourites = data["favourites"]
+        update_user.favourites = [str(item) for item in data["favourites"]]
     if "imageCloud" in data:
         update_user.image = data["imageCloud"]
     db.session.commit()
@@ -109,31 +108,37 @@ def delete_user(id):
 # LOGIN PART
 @api.route('/login', methods=['POST'])
 def user_login():
+
     email = request.json.get("loginEmail",None)
     password = request.json.get("loginPassword",None)
 
-    if(email is None):
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", email)
+
+    if email is None or password is None:
         response_body = {
-            "message": " email does not exist"
+            "msg": "Email and password are required"
         }
         return jsonify(response_body), 400
 
-    elif(password is None):
+    # Buscar al usuario por su email en la base de datos
+    user = User.query.filter_by(email=email).first()
+    if user is None:
         response_body = {
-            "msg": "password does not exist"
+            "msg": "User not found"
         }
-        return jsonify(response_body), 400
+        return jsonify(response_body), 404
+
+    if user and user.password == password:
     
-    user = User.query.filter_by(email=email, password=password).first()
-    if(user is None):
+        logged = "Succesfully logged"
+        access_token = create_access_token(identity=user.id)
+
+        return jsonify({"loginOK" : logged, "token": access_token, "user_id": user.id, "username": user.username, "email": user.email, "image": user.image})
+    else:
         response_body = {
-            "msg": "You typed something wrong"
+            "msg": "Incorrect password"
         }
         return jsonify(response_body),400
-    
-    access_token = create_access_token(identity=user.id)
-    return jsonify({ "token": access_token, "user_id": user.id , "username": user.username, "email":user.email})
-
 
 # FOR REVIEWS 
 
@@ -196,7 +201,6 @@ def create_review():
     new_review= Review(title = data["title"], category=data["category"], type=data["type"], location=data["location"],link=data["link"],description=data["description"], publishing_date=data["publishing_date"], price=data["price"], user_id=data["user"], image=data["imageCloud"], rating=data["rating"])
     db.session.add(new_review)
     db.session.commit()   
-
     serialized_review = new_review.serialize()  # Serialize the object
 
     return jsonify(serialized_review), 200
@@ -256,9 +260,6 @@ def modify_review(id):
     update_review.image= data["imageCloud"]
     update_review.latitude= data["latitude"]
     update_review.longitude= data["longitude"]
-
-    print("-----------------------------------",update_review)
-
     db.session.commit()
 
 
@@ -282,12 +283,14 @@ def get_single_review(id):
 
 # FOR COMMENTS
 
-@api.route('/comments',methods=['GET'])
+@api.route('/comments/<int:review_id>', methods=['GET'])
 @jwt_required()
-def get_all_comments():    
-    all_comments = Comment.query.all()
-    all_comments = list(map(lambda x: x.serialize(), all_comments))
-    return jsonify(all_comments), 200
+def get_comments_for_review(review_id):
+    comments = Comment.query.filter_by(review_id=review_id)
+    comments = list(map(lambda x: x.serialize(), comments))
+    [print(x) for x in comments]
+    
+    return jsonify(comments), 200
 
 @api.route('/create-comment',methods=['POST'])
 @jwt_required()
@@ -306,7 +309,7 @@ def create_comment():
         }
         return jsonify(response_body),400        
     
-    new_comment= Comment(description=data["description"], review_id=data["review_id"], user_id=data["user_id"])
+    new_comment= Comment(description=data["description"], review_id=data["review_id"], user_id=data["user_id"], author=data["author"], date=data["date"])
     db.session.add(new_comment)
     db.session.commit()
     
@@ -325,6 +328,7 @@ def get_reviews_with_comments(id):
     reviews = Review.query.all(id)
     review_data = []
     for review in reviews:
+
         review_data.append({
             'id': review.id,
             'reviewer': review.user.username,
@@ -333,9 +337,18 @@ def get_reviews_with_comments(id):
 
     return jsonify({'reviews': review_data.serialize()})
 
+
 @api.route('/getFilteredReviews', methods=['POST'])
 def get_filtered_reviews():
+    DEFAULT_USER_RADIO = 10
+
     data = request.get_json()
+    user_radio_str = data.get('radio')
+    if user_radio_str is not None and user_radio_str != '':
+        user_radio = int(user_radio_str)
+    else:
+        user_radio = DEFAULT_USER_RADIO 
+    
     user_latitude_str = data.get('latitude')
     user_longitude_str = data.get('longitude')
 
@@ -354,9 +367,8 @@ def get_filtered_reviews():
             review_longitude = review.longitude
 
             distance = haversine_distance(user_latitude, user_longitude, review_latitude, review_longitude)
-            
 
-            if distance <=3:
+            if distance <= user_radio:
                 filtered_reviews.append({
                     "id": review.id,
                     "title": review.title,
@@ -380,13 +392,11 @@ def get_filtered_reviews():
 
 
 def haversine_distance(lat1, lon1, lat2, lon2):
-    # Radio de la Tierra en km
+   
     R = 6371.0
 
-    # Convertir las coordenadas de grados a radianes
     lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
 
-    # Diferencias de latitud y longitud
     dlat = lat2 - lat1
     dlon = lon2 - lon1
 
@@ -406,13 +416,5 @@ def addToCounter(id):
     db.session.commit()
 
     return jsonify(review.serialize()),200
-
-
-# @api.route('/getFilteredReviews', methods=['GET'])
-# def get_all_reviews_filtered():
-#     all_reviews = Review.query.all()
-#     all_reviews = list(map(lambda x: x.serialize(), all_reviews))
-
-#     return jsonify(all_reviews), 200
 
 

@@ -1,19 +1,20 @@
-#quoteActivity{
+#quoteProduct{
     width:700px;
     height:200px;
-    margin: auto;   
+    margin: auto; 
+    display: flex;  
 }
 
 #quote{
     font-size: 1.5vw;
 }
 
-#rowActivities{
+#row{
     justify-content: space-between;
     margin-right: 15px;
 }
 
-#cardActivity{
+#cardProduct{
     height: 84.4vh;
 }
 

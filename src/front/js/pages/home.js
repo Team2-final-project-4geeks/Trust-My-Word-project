@@ -5,13 +5,11 @@ import ActivityCard from "../component/activitycard"
 import { ProductCard } from "../component/productcard.jsx";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
-import TriipCard from "../component/triipcard.jsx";
-import DinamicText from "../component/dinamictext.jsx";
-import { useParams } from "react-router-dom";
+import TriipCard from "../component/triipcard.js";
+import DinamicText from "../component/dinamictext.js";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	const navigate= useNavigate()
 	const [activities, setActivities] = useState([]);
   	const [products, setProducts] = useState([]);
 	const [trips,setTrips] = useState([])
@@ -19,7 +17,8 @@ export const Home = () => {
 	const [longitude,setLongitude] = useState("")
 	const [placeName, setPlaceName] = useState(""); 
 	const [filteredReviews, setFilteredReviews] = useState([]);
-	const [coordinatesAvailable, setCoordinatesAvailable] = useState(false); 
+	const [coordinatesAvailable, setCoordinatesAvailable] = useState(false);
+	const [radio,setRadio] = useState("") 
 
 	useEffect(() => {
 	  getActivities();
@@ -31,7 +30,7 @@ export const Home = () => {
 	useEffect(() => {
 	  if (coordinatesAvailable) { 
 		getPlaceFromCoordinates();
-		fetchFilteredReviews();
+		fetchFilteredReviews()
 	  }
 	}, [coordinatesAvailable]);
   
@@ -41,13 +40,14 @@ export const Home = () => {
       		headers: {
 				"Content-Type": "application/json"
 			},
-			body: JSON.stringify({latitude: latitude,longitude:longitude}) 
+			body: JSON.stringify({latitude: latitude,longitude:longitude, radio: radio}) 
 		})
      	.then(resp => {								
 			return resp.json();
 		})
 		.then(data=> {		
 			console.log(data);
+			setFilteredReviews(data)
 		})
 		.catch(error => {			
 			console.log('Oops something went wrong'+ error);
@@ -74,6 +74,7 @@ export const Home = () => {
 		console.log("Geolocation not supported");
 	  }
 	  function success(position) {
+		console.log(position.coords.latitude, position.coords.longitude)
 		setLatitude(position.coords.latitude);
 		setLongitude(position.coords.longitude);
 		setCoordinatesAvailable(true); 
@@ -82,6 +83,29 @@ export const Home = () => {
 		console.log("Unable to retrieve your location");
 	  }
 	};
+
+	const showNearReviews = () =>{
+		const reversedTrips = filteredReviews.slice().reverse();
+		if (reversedTrips && reversedTrips.length > 0) {
+			const firstThreeTrips = reversedTrips.slice(0, 3); 
+			return firstThreeTrips.map((trip, index) => (
+				<TriipCard
+					key={index} 
+					item={trip}
+					trip={trip}
+					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
+					img={trip.image}
+					rating={trip.rating}
+				/>
+			));
+			} else {
+				return (
+				<div className="spinner-border" role="status">
+					<span className="visually-hidden">Loading...</span>
+				</div>
+				)
+		}
+	} 
 
 	const getActivities = () => {
 		fetch(process.env.BACKEND_URL + 'api/review?category=activity' ,{
@@ -139,6 +163,8 @@ export const Home = () => {
 		})
 	}
 
+	
+
 	const showActivity = () =>{
 		const reversedActivities = activities.slice().reverse();
 		if (reversedActivities && reversedActivities.length > 0) {
@@ -170,6 +196,7 @@ export const Home = () => {
 					key={index}
 					product={product}
 					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
+					rating={product.rating}
 				/>
 			));
 			} else {
@@ -190,8 +217,9 @@ export const Home = () => {
 					key={index} 
 					item={trip}
 					trip={trip}
-					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
+					profile={trip.userImage}
 					img={trip.image}
+					author={trip.reviewOwner}
 					rating={trip.rating}
 				/>
 			));
@@ -208,8 +236,22 @@ export const Home = () => {
 			<div className="container-fluid">
 				<DinamicText  phrase={"inspire you"} phrase2={"save your time"}  phrase3={"solve your planning problems"} phrase4={" support people's opinions"} phrase1={"provide value"}/>
 			</div>
-			<div>
-				{placeName}
+			<div className="locationContainer">
+				<h2>Where am I?</h2>
+				<i class="fa-solid fa-location-dot"></i>{placeName}
+				<h3>Reviews near me</h3>
+				<input placeholder="type the radio" value={radio} onChange={(e)=>setRadio(e.target.value)}/>	
+				<button className="btn btn-warning" onClick={fetchFilteredReviews}>click me </button>		
+			</div>
+
+			<div className="nearmeReviews">
+				<h1>Less distance, more fun!</h1>
+				<div className="container-fluid mt-5">				
+					<div className="row row-cols-1 row-cols-md-5 g-4">													
+						{showNearReviews()}						
+				</div>	
+			</div>
+
 			</div>
 			<div className="container-fluid">
 					<div className="general-image" id="imageContainerActivities">
@@ -240,7 +282,7 @@ export const Home = () => {
 					<h1 id="titleTrips">TRIPS</h1>
     			</div>
 				<div className="container-fluid mt-3">			
-					<div className="row row-cols-1 row-cols-md-5 g-4">													
+					<div className="row row-cols-1 row-cols-md-5 ">													
 						{showTrips()}						
 					</div>	
 				</div>						

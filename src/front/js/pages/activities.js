@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import "../../styles/activities.css";
 
 import FilterBarActivities from "../component/filterbaractivities.js";
+
+
 const Activities = (props) =>{
     const [activities, setActivities] = useState([]);
     const { store, actions } = useContext(Context);
@@ -23,7 +25,7 @@ const Activities = (props) =>{
         .then(resp => {                             
             return resp.json();
         })
-        .then(data=> {            
+        .then(data=> {     
             setActivities(data);
             actions.addActivities(data);
         })
@@ -63,9 +65,11 @@ const Activities = (props) =>{
                                             </div>
                                             <div className="card-body">
                                                 <h5 className="card-title">{activity.title}</h5>
-                                                <p className="card-text">{activity.type}</p>
-                                                <p className="card-text">{activity.location}</p>
-                                                <p className="card-text">{activity.publishing_date}</p>                            
+                                                <div className="d-flex flex-row mt-2" id="rowActivities">
+                                                    <p className="card-text">{activity.type}</p>
+                                                    <p className="card-text">{activity.location}</p>
+                                                    <p className="card-text">{activity.publishing_date}</p>
+                                                </div>
                                                 <p className="card-text">{activity.description}</p>
                                                 <Link to={activity.link} className="card-text">{activity.link}</Link>
                                                 <div class="sharethis-inline-share-buttons"></div>

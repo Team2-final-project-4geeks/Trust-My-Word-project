@@ -1,12 +1,4 @@
 
-/* img{
-    object-fit: cover;
-}
-#containerSingle{
-    margin:auto;
-    width:800px;
-    height:400px;
-} */
 
 #singleTripPicture{
     object-fit: cover;    
@@ -45,10 +37,6 @@
 #activityRow{
     justify-content: space-between;
     margin-right: 15px;
-}
-
-#activityTitle{
-    text-decoration: underline overline;
 }
 
 #sumbitButtonSingle{

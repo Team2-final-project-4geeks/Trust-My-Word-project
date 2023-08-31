@@ -16,11 +16,30 @@ export const ReviewForm = () => {
   const [publishing_date, setPublishing_date] = useState("")
   const [link, setLink] = useState("")
   const [price, setPrice] = useState("")
+  const [shop, setShop] = useState("")
   const [image, setImage] = useState("")
   const [category, setCategory] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState("");
   const {store,actions} = useContext(Context)
   const user = localStorage.getItem("userId")
   const [rating, setRating] = useState(0); //
+
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+  };
+
+  const getImageForCategory = () => {
+    switch (selectedCategory) {
+      case "activity":
+        return "https://cdn.pixabay.com/photo/2016/08/01/20/13/girl-1561989_1280.jpg";
+      case "product":
+        return "https://cdn.pixabay.com/photo/2017/04/06/11/24/fashion-2208045_1280.jpg";
+      case "trip":
+        return "https://cdn.pixabay.com/photo/2014/11/06/10/56/airport-519020_1280.jpg";
+      default:
+        return "https://cdn.pixabay.com/photo/2020/05/22/21/44/review-5207277_1280.jpg";
+    }
+  };
 
   const handleStarClick = (selectedRating) => {
     setRating(selectedRating);
@@ -29,7 +48,7 @@ export const ReviewForm = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const navigate= useNavigate()
   
-  const reviewImage = <img src="https://fastly.picsum.photos/id/163/2000/1333.jpg?hmac=htdHeSJwlYOxS8b0TTpz2s8tD_QDlmsd3JHYa_HGrg8" class="image-create-review" alt="..." /> 
+  const reviewImage = <img src={getImageForCategory()} className="image-create-review" alt="Preview" /> 
 
   const handleFile = (e) => {
     if (!category) {
@@ -143,14 +162,17 @@ export const ReviewForm = () => {
         <div class="container text-center" id="full-content">
              <h1>Insert Your Review</h1>
             
-                <select class="form-select" onChange={(e) => setCategory(e.target.value)} aria-label="Default select example">
+                <select class="form-select" onChange={(e) => {
+                    handleCategoryChange(e);
+                    setImagePreview(null); // Limpa a imagem de pré-visualização ao mudar a categoria
+                    setCategory(e.target.value)}} aria-label="Default select example">
                     <option selected >Category</option>
                     <option value="activity" >Activities</option>
                     <option value="product" >Products</option>
                     <option value="trip" >Trips</option>
                 </select>
             <div class="row" id="row-review">
-                    <div class="col" id="left-side">
+                    <div class="col-4" id="left-side">
                         {imagePreview ? (
                         <img src={imagePreview} className="image-create-review" alt="Preview" />
                         ) : (
@@ -158,8 +180,35 @@ export const ReviewForm = () => {
                         )}
                         <br/>
                         <input className="photo-uploader" type="file" name="imageCloud" accept="image/jpeg" onChange={handleFile} />
+                        <span className="date-title mb-1">Date</span>
+                        <div className="form-group mt-1" id="inputs">
+                            <input 
+                                type="text" 
+                                id="publishing_date" 
+                                className="review-input"  
+                                placeholder="dd/mm/yyyy" 
+                                name="publishing_date"
+                                value={publishing_date}
+                                onChange={(e) => setPublishing_date(e.target.value)}
+                                />
+                            <p className="little-legends">You won't be able to chage that after</p> 
+                        </div>
+                        <div className="mt-3 mb-3" id="rating">
+                          <h2>Your rating</h2>
+                          <div>
+                            {[1, 2, 3, 4, 5].map((star) => (
+                              <span
+                                key={star}
+                                onClick={() => handleStarClick(star)}
+                                style={{ cursor: 'pointer', color: star <= rating ? 'gold' : 'gray' }}
+                              >
+                                &#9733;
+                              </span>
+                            ))}
+                          </div>
+                        </div>
                     </div>
-                    <div class="col" id="middle">
+                    <div class="col-8" id="middle">
                     <div className="form-group" id="inputs">
                             <input 
                                 type="text" 
@@ -182,18 +231,32 @@ export const ReviewForm = () => {
                                 onChange={(e) => setType(e.target.value)}
                                 /> 
                         </div>
-                        <div className="form-group mb-3" id="inputs">
+                        {category === "product" ? (
+                          <div className="form-group" id="inputs">
                             <input
-                                type="text" 
-                                id="location" 
-                                className="review-input"  
-                                placeholder="City" 
-                                name="location"
-                                value={location}
-                                onChange={(e) => setLocation(e.target.value)}
-                                />
-                            <p className="little-legends">You won't be able to chage that after</p> 
-                        </div>
+                              type="text" 
+                              id="store" 
+                              className="review-input"  
+                              placeholder="Store" 
+                              name="store"
+                              value={shop} // Use o valor do estado que você definir para a loja
+                              onChange={(e) => setStore(e.target.value)}
+                            />  
+                          </div>
+                        ) : (
+                          <div className="form-group mb-3" id="inputs">
+                            <input
+                              type="text" 
+                              id="location" 
+                              className="review-input"  
+                              placeholder="City" 
+                              name="location"
+                              value={location}
+                              onChange={(e) => setLocation(e.target.value)}
+                            />
+                            <p className="little-legends">You won't be able to change that after</p> 
+                          </div>
+                        )}
                         <div className="form-group" id="inputs">
                             <input
                                 type="text" 
@@ -206,19 +269,19 @@ export const ReviewForm = () => {
                                 />  
                         </div>
                         <div className="form-group" id="inputs">
+                          <div className="priceWhithEuro">
                             <input
                                 type="text" 
                                 id="price" 
                                 className="review-input"  
-                                placeholder=" €€€" 
                                 name="price"
                                 value={price}
-                                onChange={(e) => setPrice(e.target.value)}
-                                /> 
+                                onChange={(e) => setPrice(e.target.value )}
+                            />
+                            <div className="euro-symbol">€</div>
+                          </div>
                         </div>
-                    </div>
-                    <div class="col" id="right-side">
-                        <span className="title">Description</span>
+                        <span className="title mt-2">Description</span>
                         <div className="form-group">
                             <textarea
                                 maxLength={375}
@@ -230,38 +293,9 @@ export const ReviewForm = () => {
                                 maxRows={6}
                             />  
                         </div>
-                        <span className="title">Date</span>
-                        <div className="form-group" id="inputs">
-                            <input 
-                                type="text" 
-                                id="publishing_date" 
-                                className="review-input"  
-                                placeholder="dd/mm/yyyy" 
-                                name="publishing_date"
-                                value={publishing_date}
-                                onChange={(e) => setPublishing_date(e.target.value)}
-                                />
-                            <p className="little-legends">You won't be able to chage that after</p> 
-                        </div>
-                        <div className="mt-3">
-                          <h2>Your rating</h2>
-                          <div>
-                            {[1, 2, 3, 4, 5].map((star) => (
-                              <span
-                                key={star}
-                                onClick={() => handleStarClick(star)}
-                                style={{ cursor: 'pointer', color: star <= rating ? 'gold' : 'gray' }}
-                              >
-                                &#9733;
-                              </span>
-                            ))}
-                          </div>
-                          <button onClick={handleUpload}>Enviar calificación</button>
-
-                        </div>
-                </div>
+                    </div>
         </div>
-            {/* <button className="finish-review" onClick={handleUpload}>Finish Review</button> */}
+            <button className="finish-review" onClick={handleUpload}>Finish Review</button>
         </div>
     );
   };

@@ -5,17 +5,17 @@ li{
 #titleActivities{
     background-color: white;
     color: black;
-    font-size: 5.2vw; /* Responsive font size */
+    font-size: 5.2vw;
     font-weight: bold;
-    margin: 0 auto; /* Center the text container */
+    margin: 0 auto;
     padding: 10px;
     width: 50%;
-    text-align: center; /* Center text */
-    position: absolute; /* Position text */
-    top: 50%; /* Position text in the middle */
-    left: 50%; /* Position text in the middle */
-    transform: translate(-50%, -50%); /* Position text in the middle */
-    mix-blend-mode: screen; /* This makes the cutout text possible */
+    text-align: center;
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    mix-blend-mode: screen; 
 }
 
 #imageContainerActivities{  
@@ -61,30 +61,35 @@ li{
 #titleTrips{
     background-color: white;
     color: black;
-    font-size: 5.2vw; /* Responsive font size */
+    font-size: 5.2vw;
     font-weight: bold;
-    margin: 0 auto; /* Center the text container */
+    margin: 0 auto;
     padding: 10px;
     width: 50%;
-    text-align: center; /* Center text */
-    position: absolute; /* Position text */
-    top: 50%; /* Position text in the middle */
-    left: 50%; /* Position text in the middle */
-    transform: translate(-50%, -50%); /* Position text in the middle */
-    mix-blend-mode: screen; /* This makes the cutout text possible */
+    text-align: center; 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    mix-blend-mode: screen; 
 }
 #titleProducts{
     background-color: white;
     color: black;
-    font-size: 5.2vw; /* Responsive font size */
+    font-size: 5.2vw; 
     font-weight: bold;
-    margin: 0 auto; /* Center the text container */
+    margin: 0 auto; 
     padding: 10px;
     width: 50%;
-    text-align: center; /* Center text */
-    position: absolute; /* Position text */
-    top: 50%; /* Position text in the middle */
-    left: 50%; /* Position text in the middle */
-    transform: translate(-50%, -50%); /* Position text in the middle */
-    mix-blend-mode: screen; /* This makes the cutout text possible */
+    text-align: center; 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen; 
+}
+.locationContainer{
+    height: 150px;
+    width: 100%;
+    background-color: aqua;
 }

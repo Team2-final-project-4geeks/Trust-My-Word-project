@@ -30,7 +30,7 @@ const Login = () =>{
         } else if(password === ''){
             alert('Password is empty!')
         } else if ( username === " "){
-            alert("username empty")
+            alert("Username empty")
         } else {
             fetch(process.env.BACKEND_URL + 'api/create-user', { 
             method: "POST", 
@@ -64,15 +64,22 @@ const Login = () =>{
 			})
 			.then((res) => res.json())
 			.then((result) => {
-				localStorage.setItem("jwt-token", result.token);
-                localStorage.setItem("userId",result.user_id)
-                actions.addUsername(result.username)
-                actions.getUser(localStorage.getItem("userId"))
-				navigate("/")
+                if(result.msg){
+                    alert(result.msg)
+                }else{
+                    alert(result.loginOK)
+                    localStorage.setItem("jwt-token", result.token);
+                    localStorage.setItem("userId",result.user_id)
+                    actions.addUsername(result.username)
+                    localStorage.setItem("username",result.username)
+                    actions.getUser(localStorage.getItem("userId"))
+                    navigate("/")
+                }
+               
 			}).catch((err) => {
 				console.log(err);
 			})
-			}
+		}
     }
     return(
             <div className="general-container">
@@ -102,7 +109,6 @@ const Login = () =>{
                         <div className="row g-0 d-flex justify-content-center align-items-center mt-4">
                             {showLogin ? (
                                 <>
-                               
                                 <div class="col-md-12 d-flex justify-content-center align-items-center flex-column" id="login">
                                 <h3 className="mb-5">TRUST MY WORD</h3>
                                 <div className="input-board">

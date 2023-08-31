@@ -2,30 +2,17 @@
     object-fit: cover;    
 }
 #containerSingle{
-    margin:auto;
-    width:1300px;
-    height:400px;
+    width:80%;
+    height:450px;
     justify-content: center;
     align-items: center;
     display:flex;
-}
-#backgroundSingleActivity{
-    background: rgb(95,191,153);
-    background: linear-gradient(to top right, rgba(95,191,153,1) 0%, rgba(253,187,45,1) 100%);
-    background-size: cover;
-    background-position: center;
-    border-radius: 10px; 
-    overflow: hidden;
-    margin:auto;
-    width:1350px;
-    height:450px;
-    display:flex;
-    justify-content: center;
-    align-items: center;   
+    box-shadow: rgb(218, 165, 32) -2px -2px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 4px;
 }
 #mapSingleActivity{
     object-fit: cover;
     height: 100%;
+    width:100%;
 }
 #singleRow1{
     justify-content: space-between;
@@ -59,6 +46,7 @@
     color:goldenrod;    
 }
 #sumbitButtonSingle{
+    margin:auto;
     background:black;
     color: goldenrod;
 }
@@ -66,6 +54,13 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 #comment{
-    width:900px;
-    margin:auto;
+    width:700px;    
+}
+
+.commentHeadline{
+    margin-left: 250px;
+}
+
+.my-5{
+    font-size:50px;
 }

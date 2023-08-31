@@ -2,7 +2,6 @@ import React, {useEffect, useState, useContext} from "react";
 import { useParams } from "react-router-dom";
 import ShareComponent from "../component/shareComponent.js";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
 import Swal from 'sweetalert2';
 import CarouselCard from "../component/carouselcard.js";
 import Carousel from "react-multi-carousel";
@@ -16,33 +15,44 @@ const SingleActivity = () => {
     const [weather,setWeather] = useState();
     const [allDescriptions, setAllDescriptions] = useState([]);
     const [description, setDescription] = useState("");
+    const [date,setDate]= useState("");
     const responsive = {        
-        desktop: {
-          breakpoint: { max: 3000, min: 1024 },
-          items: 4
-        },
-        tablet: {
-          breakpoint: { max: 1024, min: 464 },
-          items: 2
-        },
-        mobile: {
-          breakpoint: { max: 464, min: 0 },
-          items: 1
-        }
+        superLargeDesktop: {
+            // the naming can be any, depends on you.
+            breakpoint: { max: 4000, min: 3000 },
+            items: 5
+          },
+          desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items: 3
+          },
+          tablet: {
+            breakpoint: { max: 1024, min: 464 },
+            items: 3
+          },
+          mobile: {
+            breakpoint: { max: 464, min: 0 },
+            items: 1
+          }
       };
 
     const params = useParams();
     const {store, actions} = useContext(Context);
 
     const user_id=localStorage.getItem("userId")
-    const userName=store.userName;
+    const image= localStorage.getItem("image")
+    const author=localStorage.getItem("username")
     const review_id= params.id;
+    const userName=store.userName;
+    const currentDate = new Date();
+    const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
 
-    const map = `https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=350x350&key=${process.env.API_KEY}`
+
+    const map = `https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=400x400&key=${process.env.API_KEY}`
 
     useEffect(() => {
         fetchSingleActivity();
-        fetchComments();                           
+        fetchComments();
     }, []);
 
     useEffect(() => {
@@ -68,12 +78,9 @@ const SingleActivity = () => {
             setActivity(data);
             setCity(data.location);                        
         })
-        .catch(err => Swal.fire({
-            icon: 'error',
-            title: 'Oops...'                        
-          }))        
+        .catch(err => console.log('single activity'+ err))        
         } else {       
-            console.log("error")
+            console.log("fetch single activity error")
         }}
 
     const fetchTemp = () => {
@@ -84,13 +91,13 @@ const SingleActivity = () => {
         .then(data => {                
             setWeather(data.main.temp);                
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log('temp'+ err))
     } 
 
     const fetchComments =() =>{        
         const token = localStorage.getItem('jwt-token');        
         if(token) {        
-        fetch(process.env.BACKEND_URL + 'api/comments',{
+        fetch(process.env.BACKEND_URL + 'api/comments/' + review_id,{
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -101,20 +108,15 @@ const SingleActivity = () => {
             return resp.json();
         })
         .then(data=> {		
-        setAllDescriptions(data);            
+        setAllDescriptions(data);
+        console.log(data);            
         })
-        .catch(error => {			
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!'            
-            })
-        })
+        .catch(err => console.log('comments' + err))
         }else{
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Something went wrong!'            
+                text: 'Access denied. Please log in!'            
             })
         }}
 
@@ -128,13 +130,14 @@ const SingleActivity = () => {
             "Content-Type": "application/json",
             "Authorization" : "Bearer " + token
           },
-          body: JSON.stringify({description, user_id, review_id}) 
+          body: JSON.stringify({description, user_id, review_id, author, date:formattedDate }) 
         })
         .then((response) => {
             return response.json();
         })
         .then((data) => {  
             setDescription(data.description);
+            setDate(data.date);
             Swal.fire(
                 'Good job!',
                 'You POSTed a comment!',
@@ -143,62 +146,38 @@ const SingleActivity = () => {
             setDescription("")
             fetchComments();            
         })
-        .catch(err => Swal.fire({
-            icon: 'error',
-            title: 'Oops...'                        
-          }))
+        .catch(err => console.log('create comment' + err))
         } else {       
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...'                      
+                title: 'Oops...',
+                text: 'Access denied. Please log in!'            
             })
             }
     }
 
-    const deleteComment = (commentId) => {
-        const token = localStorage.getItem('jwt-token');
-        if(token) {
-		fetch(process.env.BACKEND_URL + 'api/comment/' + commentId, {
-			method: 'DELETE',
-			headers: { 
-                "Authorization" : "Bearer " + token
-            },
-		})
-		.then(resp => {			
-			console.log(resp.ok);
-			console.log(resp.status);
-			return resp.json();
-		})
-		.then(data => {
-			Swal.fire('You have deleted a comment');					
-			fetchComments();
-		})
-		.catch(error => {
-            console.log(error);
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!'            
-            })
-        })		
-        } else {
-            console.log("error from delete comment")
-        }
-	}
-
     const showComments = () =>{
         return allDescriptions.map((comment, index) => {
             return(
-                <CarouselCard key={index} description={comment.description} url={comment.imageurl} />                      
+                <CarouselCard 
+                key={index} 
+                id={comment.id} 
+                description={comment.description} 
+                author={comment.author} 
+                image={comment.testImage} 
+                fetchComments={fetchComments} 
+                date={comment.date}
+                userLogged={user_id}
+                authorId={comment.user_id} 
+                />                      
             )
         }			
     )}
 
     return(
-        <div className="container-fluid mt-5 mb-5" >
-			{ activity ? (
-            <div id="backgroundSingleActivity">
-                <div className="card m-0 border-0 " id="containerSingle">                    
+        <div className="container mt-5 mb-5 border-0" >
+			{ activity ? (            
+                <div className="card m-0 border-0 mx-auto" id="containerSingle">                    
                     <div className="row g-0 h-100">
                         <div className="col-md-3">
                             <img id="singleActivityPicture"src="https://clubhipicoelpinar.es/wp-content/uploads/2016/05/IMG_8542-1024x683.jpg" className="img-fluid rounded-start h-100" alt="..."/>
@@ -218,7 +197,7 @@ const SingleActivity = () => {
                                         <p className="card-text ms-2 pe-3"><i class="fas fa-map-marker-alt fa-sm me-2"></i>{activity.location}</p> 
                                     </div>                                             
                                 <div className="d-flex flex-row ms-4 mt-2 position-absolute bottom-0 pb-4" id="activityRow">
-                                    <Link to={activity.link} className="card-text ms-3 me-5 text-center">{activity.link}</Link>
+                                    <a href={activity.link} target="_blank" rel="noopener noreferrer" className="card-text ms-3 me-5 text-center">{activity.link}</a>
                                     <ShareComponent />
                                 </div>                                                            
                             </div>
@@ -230,32 +209,34 @@ const SingleActivity = () => {
                         </div>                        
                     </div>                    
                 </div>
-            </div>
             ):(
                 <div className="spinner-border" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </div>
             )}
-            <div className="container-fluid" id="commentSection">
-                <h4 className="my-5">Comments</h4>
+            <div className="container border-0" id="commentSection">
+                <h4 className="my-5 ms-4">Comments</h4>
                 <div className="container-fluid">
-                    <Carousel showDots={true} arrows={false} responsive={responsive} >
+                    <Carousel showDots={true} arrows={false} responsive={responsive} swipeable={true}>
                         {showComments()}
                     </Carousel>
                 </div>               
-                <div className="input-group mt-5" id="comment">
+                <div className="input-group mt-5 mx-auto" id="comment">
                     <span className="input-group-text rounded me-2" id="commentWrite">Write your comment:</span>
                     <textarea className="form-control" id="commentBox" value={description} onChange={(e)=> setDescription(e.target.value)} aria-label="With textarea"></textarea>
                 </div>
-                <button 
-                    type="button" className="btn btn-dark mt-5" 
-                    onClick={createComment}
-                    id="sumbitButtonSingle"> Send 
-                </button>                
+                <div className="container-fluid d-flex justify-content-center">
+                    <button 
+                        type="button" 
+                        className="btn btn-dark mt-5" 
+                        onClick={createComment}
+                        id="sumbitButtonSingle"> Send 
+                    </button>
+                </div>                
             </div>           
         </div>
 
     )
 }
 
-export default SingleActivity
+export default SingleActivity;

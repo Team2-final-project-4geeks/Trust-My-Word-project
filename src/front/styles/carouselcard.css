@@ -23,3 +23,18 @@
     height: 35px;
     border-radius: 50%;
   }
+
+  .deleteIcon{
+    cursor: pointer;
+    color:goldenrod;
+    transition: color 0.3s, transform 0.3s;
+    font-size: 20px;
+  }
+
+  .deleteIcon:hover {
+    transform: scale(1.35);    
+  }
+
+
+  
+ 

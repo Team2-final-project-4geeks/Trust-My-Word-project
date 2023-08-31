@@ -1,9 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import "../../styles/trips.css";
-import ViewMore from "../component/viewmore.jsx";
+import { useNavigate } from "react-router-dom";
+import ViewMore from "../component/viewmore.js";
+import FilterBarTrips from "../component/filterbartrips";
+import { Context } from "../store/appContext.js";
+import TriipCard from "../component/triipcard";
 
 const Trips = () =>{
+    const { store, actions } = useContext(Context);
+    const navigate= useNavigate();
     const [trip,setTrips] = useState([])
+    useEffect(()=>{
+        get_all_trips()
+    },[])
+    
     const get_all_trips = () =>{
         fetch(process.env.BACKEND_URL + 'api/review?category=trip', {
 			method: "GET",
@@ -14,57 +24,48 @@ const Trips = () =>{
 		.then(res => res.json())
 		.then(data => {
             setTrips(data) 
+            actions.addActivities(data);
+
 		})
 		.catch(err => console.error(err))	
     }
    
-    const showTrips = () =>{
-        return trip.map((trip, index) =>{
-            return(
-                <li key={index}>                
-                <div className="col">
-                    <div className="card-trips text-center">
-                        <div className="image-container-trips">
-                            <img src={trip.image} className="card-img-top" alt="..."/>
-                        </div>
-                        <div className="card-body p-4">
-                            <h3 className="card-title">{trip.title}</h3>
-                            <div className="trip-location mt-5">
-                                <p className="card-text">{trip.location}</p>
-                                <p className="card-text">{trip.publishing_date}</p> 
-                            </div>
-                            
-                            <div className="description-trips mb-3">
-                                <p className="card-text">{trip.description}</p>
-                                <p className="card-text">{trip.price}</p>
-                            </div>                           
-                          
-                            <ViewMore item={trip.id}/>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            )
-        })
-    }
-    useEffect(()=>{
-        get_all_trips()
-        showTrips() 
-    },[])
+    const filteredtrips = trip.filter((trip)=> trip.location.toLowerCase().includes(store.query) &&
+    (store.selectedType === "" || trip.type === store.selectedType))
+
     return(
-        <div>
+        <div className="container-fluid">
+            <FilterBarTrips/>
         <div className="quote-trip text-center">
             <p className="quote">“People don't take trips, trips take people”</p> 
-            <p className="text-muted"><small>-Someone</small></p>
+            <p className="text-muted"><small id="trip-quote">-Someone</small></p>
         </div>
 
-		<div className="row row-cols-1 row-cols-md-3 g-4">
-
-			{trip.length !== 0 ? showTrips() : (
-				<div className="spinner-border" role="status">
-					<span className="visually-hidden">Loading...</span>
-				</div>
-			)}
+		<div className="container-fluid">
+            <div className="row">   
+        {(trip.length !== 0 || store.query !== "") ? (filteredtrips.map((trip, index) =>{            
+                            return(         
+                                <div key={index} className="col-4">
+                                    <TriipCard
+                                        key={index} 
+                                        item={trip}
+                                        trip={trip}
+                                        profile={trip.userImage}
+                                        img={trip.image}
+                                        author={trip.reviewOwner}
+                                        rating={trip.rating}
+                                    />
+                                </div>
+                       
+                            )
+                            }
+                        
+                            )) : (
+                                <div className="spinner-border" role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </div>
+                        )}
+            </div>
 		</div>
         </div>
     )

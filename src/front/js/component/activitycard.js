@@ -17,7 +17,7 @@ const ActivityCard = (props)=>{
                     <img src={props.img} className="card-img-top" alt="..."/>
                     <div className="image-overlay d-flex justify-content-end align-items-start p-2">
                         <i className="fas fa-heart text-danger" onClick={() => {
-                        actions.addFavourite(props.activity.title);
+                        actions.addFavourite(props.activity.id, props.activity.title) 
                         actions.addUserFavourites(localStorage.getItem("userId"))
                         }}></i>
                     </div>
