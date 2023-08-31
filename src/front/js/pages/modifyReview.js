@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { FaPencilAlt } from 'react-icons/fa';
 import { useParams } from "react-router-dom";
+import "../../styles/modifyreview.css";
+
 
 const ModifyReview = () => {
-
-
-    const [review,setReview] = useState("")
     const [title,setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [publishing_date,setPublishing_date] = useState("")
@@ -37,7 +36,6 @@ const ModifyReview = () => {
 		.then(data=> {
             console.log(data);
             setLocation(data.location)
-            setReview(data)
             setTitle(data.title)
             setDescription(data.description)
             setPublishing_date(data.publishing_date)
@@ -80,62 +78,54 @@ const ModifyReview = () => {
             }
         }
 
-  
-   
     useEffect(()=>{
         getSingleReview()
     },[])
+
     return(
-        <div className="container-fluid">            
-            <div classname="reviewsSection mt-5">
+        <div className="container-fluid" id="modify-review-container">            
+    <div className="row">
+        <div className="col-12 col-md-7">
+            <h1 className="text-center mb-4">Modify review</h1>
+            <div className="reviewsSection mt-5">
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="inputGroup-sizing-default"> Title </span>
                     <span className="input-group-text"><FaPencilAlt size={20} color="grey" id="pencil"/></span>
-                    <input type="text" className="form-control" value={title}  onChange={(e)=> setTitle(e.target.value) } aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
-                    
-                </div>
-                <div className="input-group mb-3">
-                    <span className="input-group-text" id="inputGroup-sizing-default"> Title </span>
-                    <span className="input-group-text"><FaPencilAlt size={20} color="grey" id="pencil"/></span>
-                    <input type="text" className="form-control" value={imageCloud}  onChange={(e)=> setImageCloud(e.target.value) } aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
-                    
-                </div>
-                <div className="input-group mb-3">
-                    <span className="input-group-text" id="inputGroup-sizing-default"> Type </span>
-                    <span className="input-group-text"><FaPencilAlt size={20} color="grey" id="pencil"/></span>
-                    <input type="text" readonly className="form-control" value={type}  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
-                </div>
-                <div className="input-group mb-3">
-                    <span className="input-group-text" id="inputGroup-sizing-default"> Location </span>
-                    <span className="input-group-text"><FaPencilAlt size={20} color="grey" id="pencil"/></span>
-                    <input type="text" readonly className="form-control" value={location}   aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
-                </div>
-                <div className="input-group mb-3">
-                    <span className="input-group-text" id="inputGroup-sizing-default"> Publishing Date </span>
-                    <span className="input-group-text"><FaPencilAlt size={20} color="grey" id="pencil"/></span>
-                    <input type="text" readonly className="form-control" value={publishing_date} onChange={(e)=> setPublishing_date(e.target.value) }  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                    <input type="text" className="form-control" value={title} onChange={(e)=> setTitle(e.target.value)} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                 </div>
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="inputGroup-sizing-default"> Price </span>
                     <span className="input-group-text"><FaPencilAlt size={20} color="grey" id="pencil"/></span>
-                    <input type="text" className="form-control" value={price}  onChange={(e)=> setPrice(e.target.value) }  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                    <input type="text" className="form-control" value={price} onChange={(e)=> setPrice(e.target.value)}  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                 </div>
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="inputGroup-sizing-default"> Description </span>
                     <span className="input-group-text"><FaPencilAlt size={20} color="grey" id="pencil"/></span>
-                    <input type="text" className="form-control" value={description}   onChange={(e)=> setDescription(e.target.value) } aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                    <textarea
+                        className="form-control"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default"
+                    />
                 </div>
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="inputGroup-sizing-default"> Link </span>
                     <span className="input-group-text"><FaPencilAlt size={20} color="grey" id="pencil"/></span>
-                    <input type="text" readonly className="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                    <input type="text" readOnly className="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                </div>
+                <div className="text-center">
+                    <button className="btn btn-warning mx-3 my-4" onClick={updateReview}>Submit</button>
                 </div>
             </div>
-            <div className="text-center">
-            <button className="btn btn-warning mx-3 my-4"  onClick={updateReview}>submit</button>
+        </div>
+        <div className="col-12 col-md-5 text-center mb-4">
+            <div className="modify-review-img-container">
+                <img src={imageCloud} alt="review-image" />
             </div>
-      </div>
-
+        </div>
+    </div>
+</div>
     )
 }
 

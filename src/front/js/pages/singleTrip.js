@@ -17,6 +17,11 @@ const SingleTrip = () =>{
     const {store,actions} = useContext(Context)
     const [allDescriptions, setAllDescriptions] = useState([]);
     const [description, setDescription] = useState("");
+    const [date,setDate]= useState("");
+    const author=localStorage.getItem("username")
+    const currentDate = new Date();
+    const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
+
 
     const responsive = {        
         desktop: {
@@ -104,10 +109,11 @@ const SingleTrip = () =>{
 			console.log('Oops something went wrong'+ error);
 		})
 	}
-    const fetchComments =() =>{        
+
+     const fetchComments =() =>{        
         const token = localStorage.getItem('jwt-token');        
         if(token) {        
-        fetch(process.env.BACKEND_URL + 'api/comments',{
+        fetch(process.env.BACKEND_URL + 'api/comments/' + review_id,{
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -118,15 +124,10 @@ const SingleTrip = () =>{
             return resp.json();
         })
         .then(data=> {		
-        setAllDescriptions(data);            
+        setAllDescriptions(data);
+        console.log(data);            
         })
-        .catch(error => {			
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!'            
-            })
-        })
+        .catch(err => console.log(err))
         }else{
             Swal.fire({
                 icon: 'error',
@@ -134,7 +135,7 @@ const SingleTrip = () =>{
                 text: 'Something went wrong!'            
             })
         }}
-        
+
         const createComment = () => {
             const token = localStorage.getItem('jwt-token');
             if(token) {
@@ -144,13 +145,14 @@ const SingleTrip = () =>{
                 "Content-Type": "application/json",
                 "Authorization" : "Bearer " + token
               },
-              body: JSON.stringify({description, user_id, review_id}) 
+              body: JSON.stringify({description, user_id, review_id, author, date:formattedDate }) 
             })
             .then((response) => {
                 return response.json();
             })
             .then((data) => {  
                 setDescription(data.description);
+                setDate(data.date);
                 Swal.fire(
                     'Good job!',
                     'You POSTed a comment!',
@@ -159,15 +161,9 @@ const SingleTrip = () =>{
                 setDescription("")
                 fetchComments();            
             })
-            .catch(err => Swal.fire({
-                icon: 'error',
-                title: 'Oops...'                        
-              }))
+            .catch(err => console.log(err))
             } else {       
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...'                      
-                })
+                console.log(error)
                 }
         }
 
@@ -204,7 +200,7 @@ const SingleTrip = () =>{
     const showComments = () =>{
         return allDescriptions.map((comment, index) => {
             return(
-                <CarouselCard key={index} description={comment.description} url={comment.imageurl} />                      
+                <CarouselCard key={index} id={comment.id} description={comment.description} author={comment.author} image={comment.testImage} fetchComments={fetchComments} date={comment.date}/>                      
             )
         }			
     )}
