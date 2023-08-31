@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext.js";
 import { Link } from "react-router-dom";
 import "../../styles/activities.css";
+
 import FilterBarActivities from "../component/filterbaractivities.js";
 const Activities = (props) =>{
     const [activities, setActivities] = useState([]);

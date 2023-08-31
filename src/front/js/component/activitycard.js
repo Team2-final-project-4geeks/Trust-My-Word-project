@@ -40,8 +40,8 @@ const ActivityCard = (props)=>{
                                 <span key={index} style={{ color: 'gold' }}>&#9733;</span>
                                 ))}
 					    </div>
-                        <div id="trip-board" className="mt-2">
-                            <div id="card-description-trip">
+                        <div id="activity-board" className="mt-2">
+                            <div id="card-description-activity">
                                 <p className="card-text"><i className="fas fa-quote-left mt-2 me-2"></i> <i> {props.activity.description}</i></p>
                             </div>
                             <p className="card-text mt-4">{props.activity.price}</p>

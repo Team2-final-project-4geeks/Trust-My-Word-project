@@ -140,9 +140,9 @@ export const Home = () => {
 	}
 
 	const showActivity = () =>{
-		const reservedActivities = activities.slice().reverse();
-		if (reservedActivities && reservedActivities.length > 0) {
-			const firstThreeActivities = reservedActivities.slice(0, 3); 
+		const reversedActivities = activities.slice().reverse();
+		if (reversedActivities && reversedActivities.length > 0) {
+			const firstThreeActivities = reversedActivities.slice(0, 3); 
 			return firstThreeActivities.map((activity, index) => (
 				<ActivityCard
 					key={index} 
@@ -150,6 +150,7 @@ export const Home = () => {
 					activity={activity}
 					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
 					img={activity.image}
+					rating={activity.rating}
 				/>
 			));
 			} else {
