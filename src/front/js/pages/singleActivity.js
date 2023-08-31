@@ -2,7 +2,6 @@ import React, {useEffect, useState, useContext} from "react";
 import { useParams } from "react-router-dom";
 import ShareComponent from "../component/shareComponent.js";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
 import Swal from 'sweetalert2';
 import CarouselCard from "../component/carouselcard.js";
 import Carousel from "react-multi-carousel";
@@ -79,9 +78,9 @@ const SingleActivity = () => {
             setActivity(data);
             setCity(data.location);                        
         })
-        .catch(err => console.log(err))        
+        .catch(err => console.log('single activity'+ err))        
         } else {       
-            console.log("error")
+            console.log("fetch single activity error")
         }}
 
     const fetchTemp = () => {
@@ -92,7 +91,7 @@ const SingleActivity = () => {
         .then(data => {                
             setWeather(data.main.temp);                
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log('temp'+ err))
     } 
 
     const fetchComments =() =>{        
@@ -112,12 +111,12 @@ const SingleActivity = () => {
         setAllDescriptions(data);
         console.log(data);            
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log('comments' + err))
         }else{
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Something went wrong!'            
+                text: 'Access denied. Please log in!'            
             })
         }}
 
@@ -147,9 +146,13 @@ const SingleActivity = () => {
             setDescription("")
             fetchComments();            
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log('create comment' + err))
         } else {       
-            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Access denied. Please log in!'            
+            })
             }
     }
 
