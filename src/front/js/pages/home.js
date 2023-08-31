@@ -7,11 +7,9 @@ import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
 import TriipCard from "../component/triipcard.js";
 import DinamicText from "../component/dinamictext.js";
-import { useParams } from "react-router-dom";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	const navigate= useNavigate()
 	const [activities, setActivities] = useState([]);
   	const [products, setProducts] = useState([]);
 	const [trips,setTrips] = useState([])
@@ -61,8 +59,8 @@ export const Home = () => {
 		.then((response) => response.json())
 		.then((data) => {
 			console.log(data);
-		  setPlaceName(data.features[0].properties.address.town);
-		  localStorage.setItem("myLocation",data.features[0].properties.address.town)
+		  setPlaceName(data.features[0].properties.address.quarter);
+		  localStorage.setItem("myLocation",data.features[0].properties.address.quarter)
 		})
 		.catch((error) => {
 		  console.error("Error al obtener el lugar:", error);
@@ -165,6 +163,8 @@ export const Home = () => {
 		})
 	}
 
+	
+
 	const showActivity = () =>{
 		const reservedActivities = activities.slice().reverse();
 		if (reservedActivities && reservedActivities.length > 0) {
@@ -217,8 +217,9 @@ export const Home = () => {
 					key={index} 
 					item={trip}
 					trip={trip}
-					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
+					profile={trip.userImage}
 					img={trip.image}
+					author={trip.reviewOwner}
 					rating={trip.rating}
 				/>
 			));
@@ -281,7 +282,7 @@ export const Home = () => {
 					<h1 id="titleTrips">TRIPS</h1>
     			</div>
 				<div className="container-fluid mt-3">			
-					<div className="row row-cols-1 row-cols-md-5 g-4">													
+					<div className="row row-cols-1 row-cols-md-5 ">													
 						{showTrips()}						
 					</div>	
 				</div>						

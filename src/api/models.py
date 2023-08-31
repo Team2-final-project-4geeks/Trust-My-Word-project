@@ -81,7 +81,9 @@ class Review(db.Model):
             "user_id": self.user_id,
             "counter": self.counter,
             "latitude": self.latitude,
-            "longitude": self.longitude
+            "longitude": self.longitude,
+            "reviewOwner": self.users.username,
+            "userImage": self.users.image
         }
     
 class Comment(db.Model):

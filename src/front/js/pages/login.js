@@ -30,7 +30,7 @@ const Login = () =>{
         } else if(password === ''){
             alert('Password is empty!')
         } else if ( username === " "){
-            alert("username empty")
+            alert("Username empty")
         } else {
             fetch(process.env.BACKEND_URL + 'api/create-user', { 
             method: "POST", 
@@ -64,11 +64,18 @@ const Login = () =>{
 			})
 			.then((res) => res.json())
 			.then((result) => {
-				localStorage.setItem("jwt-token", result.token);
-                localStorage.setItem("userId",result.user_id)
-                actions.addUsername(result.username)
-                localStorage.setItem("username",result.username)
-                actions.getUser(localStorage.getItem("userId"))
+                if(result.msg){
+                    alert(result.msg)
+                }else{
+                    alert(result.loginOK)
+                    localStorage.setItem("jwt-token", result.token);
+                    localStorage.setItem("userId",result.user_id)
+                    actions.addUsername(result.username)
+                    localStorage.setItem("username",result.username)
+                    actions.getUser(localStorage.getItem("userId"))
+                    navigate("/")
+                }
+               
 			}).catch((err) => {
 				console.log(err);
 			})

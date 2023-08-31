@@ -127,47 +127,18 @@ def user_login():
             "msg": "User not found"
         }
         return jsonify(response_body), 404
-    print("asdsfsdddsddddddsdddsdsddssddsdsdsdssddsdsdsdsdsdsdsdssddsds",user.password)
 
     if user and user.password == password:
+    
+        logged = "Succesfully logged"
         access_token = create_access_token(identity=user.id)
-        return jsonify({"token": access_token, "user_id": user.id, "username": user.username, "email": user.email, "image": user.image})
+
+        return jsonify({"loginOK" : logged, "token": access_token, "user_id": user.id, "username": user.username, "email": user.email, "image": user.image})
     else:
         response_body = {
-            "msg": "Incorrect credentials"
+            "msg": "Incorrect password"
         }
         return jsonify(response_body),400
-
-    # Verificar si la contraseña proporcionada coincide con la contraseña del usuario
-    # if  user.check_password(password):
-    #     response_body = {
-    #         "msg": "Incorrect password"
-    #     }
-    #     return jsonify(response_body), 401
-
-    # if(email is None):
-    #     response_body = {
-    #         "message": " email does not exist"
-    #     }
-    #     return jsonify(response_body), 400
-
-    # elif(password is None):
-    #     response_body = {
-    #         "msg": "password does not exist"
-    #     }
-    #     return jsonify(response_body), 400
-    
-    # user = User.query.filter_by(email=email, password=password).first()
-    # if(user is None):
-    #     response_body = {
-    #         "msg": "You typed something wrong"
-    #     }
-    #     return jsonify(response_body),400
-    
-    
-    # access_token = create_access_token(identity=user.id)
-    # return jsonify({ "token": access_token, "user_id": user.id , "username": user.username, "email":user.email, "image":user.image})
-
 
 # FOR REVIEWS 
 
@@ -230,7 +201,6 @@ def create_review():
     new_review= Review(title = data["title"], category=data["category"], type=data["type"], location=data["location"],link=data["link"],description=data["description"], publishing_date=data["publishing_date"], price=data["price"], user_id=data["user"], image=data["imageCloud"], rating=data["rating"])
     db.session.add(new_review)
     db.session.commit()   
-
     serialized_review = new_review.serialize()  # Serialize the object
 
     return jsonify(serialized_review), 200
@@ -290,8 +260,6 @@ def modify_review(id):
     update_review.image= data["imageCloud"]
     update_review.latitude= data["latitude"]
     update_review.longitude= data["longitude"]
-
-
     db.session.commit()
 
 
@@ -360,6 +328,7 @@ def get_reviews_with_comments(id):
     reviews = Review.query.all(id)
     review_data = []
     for review in reviews:
+
         review_data.append({
             'id': review.id,
             'reviewer': review.user.username,
@@ -368,12 +337,12 @@ def get_reviews_with_comments(id):
 
     return jsonify({'reviews': review_data.serialize()})
 
+
 @api.route('/getFilteredReviews', methods=['POST'])
 def get_filtered_reviews():
     DEFAULT_USER_RADIO = 10
 
     data = request.get_json()
-    print("ssssssssssssssssssssssssssssssssss",data)
     user_radio_str = data.get('radio')
     if user_radio_str is not None and user_radio_str != '':
         user_radio = int(user_radio_str)
@@ -398,7 +367,6 @@ def get_filtered_reviews():
             review_longitude = review.longitude
 
             distance = haversine_distance(user_latitude, user_longitude, review_latitude, review_longitude)
-            print("dddddddddddddddddddddddddddd",distance)
 
             if distance <= user_radio:
                 filtered_reviews.append({
@@ -424,19 +392,11 @@ def get_filtered_reviews():
 
 
 def haversine_distance(lat1, lon1, lat2, lon2):
-    print("----------------------------------------",lat1)
-    print(lon1)
-
-    print(lat2)
-    print(lon2)
-
-    # Radio de la Tierra en km
+   
     R = 6371.0
 
-    # Convertir las coordenadas de grados a radianes
     lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
 
-    # Diferencias de latitud y longitud
     dlat = lat2 - lat1
     dlon = lon2 - lon1
 
@@ -456,13 +416,5 @@ def addToCounter(id):
     db.session.commit()
 
     return jsonify(review.serialize()),200
-
-
-# @api.route('/getFilteredReviews', methods=['GET'])
-# def get_all_reviews_filtered():
-#     all_reviews = Review.query.all()
-#     all_reviews = list(map(lambda x: x.serialize(), all_reviews))
-
-#     return jsonify(all_reviews), 200
 
 
