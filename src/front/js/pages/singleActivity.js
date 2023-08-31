@@ -236,4 +236,4 @@ const SingleActivity = () => {
     )
 }
 
-export default SingleActivity
+export default SingleActivity;

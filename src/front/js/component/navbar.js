@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 import "../../styles/navbar.css";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
-  const [fav, setfavor] = useState([])
   const navigate = useNavigate();
   const localUserId = localStorage.getItem("userId")
   const token = localStorage.getItem("jwt-token")
@@ -18,8 +18,9 @@ export const Navbar = () => {
 		navigate("/");
 		alert("You are Logged Out")
 	}
+ 
+
 	useEffect(() => {		
-		//el parametro tiene que venir del user_id
 		actions.getUser(localStorage.getItem("userId"))
 	}, []);
 
@@ -29,6 +30,7 @@ export const Navbar = () => {
     }
   }, [localUserId]);
 
+
   return (
     <div className="navbar">
       <div className="logo">
@@ -37,28 +39,35 @@ export const Navbar = () => {
         </Link>
       </div>
       <div className="menu">
-        <div className="nav-item">
+        <div className="nav-item" id="item-home">
           <a className="nav-link text-light" href="#" onClick={() => navigate("/")}>
             Home
           </a>
         </div>
-        <div className="nav-item">
-          <a className="nav-link text-light" href="#" onClick={() => navigate("/activities")}>
-            Activities
-          </a>
-        </div>
-        <div className="nav-item">
-          <a className="nav-link text-light" href="#" onClick={() => navigate("/products")}>
-            Products
-          </a>
-        </div>
-        <div className="nav-item">
-          <a className="nav-link text-light" href="#" onClick={() => navigate("/trips")}>
-            Trips
-          </a>
+        <div class="dropdown" id="all-button-content">
+          <button class="btn dropdown text-light" id="category" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Category
+          </button>
+          <ul class="dropdown-menu" id="scroll-down">
+            <li>
+              <a className="nav-link text-light" id="scroll-down2" href="#" onClick={() => navigate("/activities")}>
+              Activities
+              </a>
+            </li>
+            <li>
+              <a className="nav-link text-light" id="scroll-down2" href="#" onClick={() => navigate("/products")}>
+              Products
+              </a>
+            </li>
+            <li>
+              <a className="nav-link text-light" id="scroll-down2" href="#" onClick={() => navigate("/trips")}>
+              Trips
+              </a>
+            </li>
+          </ul>
         </div>
         {token ? ( 
-          <div>
+          <div className="token">
             <div className="nav-item">
               <a className="nav-link text-light" href="#" onClick={() => navigate("/user-page")}>
                 User Page
@@ -75,17 +84,25 @@ export const Navbar = () => {
               </a>
             </div>
             <div className="btn-group" id="favourites">
-              <button type="button" className="btn-navbar btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="dropdownMenuClickableInside" aria-expanded="false">
-                  Favourites <span className="p-1 text-secondary text-center text-white">{(store.favourite && store.favourite!=null && store.favourite!=undefined)? store.favourite.length:"0"}</span>
+              <button type="button" className="btn-navbar dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="dropdownMenuClickableInside" aria-expanded="false">
+                  Favourites <span className="p-1 text-center text-white">{(store.favourite && store.favourite!=null && store.favourite!=undefined)? store.favourite.length:"0"}</span>
               </button>
               {store.favourite && store.favourite.length > 0 ? (
-                  <ul className="dropdown-menu dropdown-menu-start dropdown-menu-lg-start" aria-labelledby="dropdownMenuClickableInside">
+                  <ul className="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuClickableInside">
                       {store.favourite.map((fav, index) => {
                           return (
                               <li key={index}>
-                                  <a className="dropdown-item d-flex text-black justify-content-between ps-2 pe-2"  onClick={()=>{
-                                  }} href="#">
-                                      {fav}
+                                  <a className="dropdown-item d-flex" id="dropdown-favourites" onClick={() => {
+
+                                      if (category === "activity") {
+                                        navigate ("/activity/" + fav.id)
+                                      } else if (category === "product") {
+                                        navigate ("/product/" + fav.id)
+                                      } else if (category === "trip") {
+                                        navigate ("/trip/" + fav.id)
+                                      }
+                                    }}>
+                                      {fav.title}
                                       <i
                                           className="fas fa-trash pt-1"
                                           onClick={() => {
@@ -99,7 +116,7 @@ export const Navbar = () => {
                       })}
                   </ul>
               ) : (
-                  ""
+                ""
               )}
           </div>
           </div>
