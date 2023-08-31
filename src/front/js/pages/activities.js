@@ -24,7 +24,7 @@ const Activities = (props) =>{
         .then(resp => {                             
             return resp.json();
         })
-        .then(data=> {            
+        .then(data=> {     
             setActivities(data);
             actions.addActivities(data);
         })

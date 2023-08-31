@@ -41,10 +41,10 @@ const FilterBarTrips = () => {
                     <button onClick={() => handleFilterClick("all")} className={store.selectedType === "all" ? "selected" : ""} id="iconAll"><FaStar className="reactIcon" /> All results </button>
                 </div>
                 <div className="iconsPointer">
-                    <button onClick={() => handleFilterClick("family")} className={store.selectedType === "family" ? "selected" : ""}id="iconFamily"><MdFamilyRestroom className="reactIcon"/> family </button>
+                    <button onClick={() => handleFilterClick("bar")} className={store.selectedType === "bar" ? "selected" : ""}id="iconBar"><MdFamilyRestroom className="reactIcon"/> Bar </button>
                 </div>
                 <div className="iconsPointer">
-                    <button onClick={() => handleFilterClick("adventure")} className={store.selectedType === "adventure" ? "selected" : ""}id="iconAdventure"> <MdSurfing className="reactIcon" /> adventure </button>
+                    <button onClick={() => handleFilterClick("adventure")} className={store.selectedType === "restaurante" ? "selected" : ""}id="iconAdventure"> <MdSurfing className="reactIcon" /> restaurante </button>
                 </div>
                 <div className="iconsPointer">
                     <button onClick={() => handleFilterClick("romantic")} className={store.selectedType === "romantic" ? "selected" : ""} id="iconRomantic"> <FaHeart className="reactIcon" /> romantic </button>

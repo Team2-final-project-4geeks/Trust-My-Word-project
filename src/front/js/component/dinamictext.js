@@ -34,7 +34,7 @@ const DinamicText = (props)=>{
 
         </div>
        
-            <p className="mt-2 text-muted"><small>Trust my world</small></p> 
+            <p className="mt-2 text-muted"><small>Trust my word</small></p> 
           
     
 
