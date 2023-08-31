@@ -37,7 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 			addQuery: (city) => {
                 const store = getStore();
-				setStore({...store, query: city})                
+				setStore({...store, query: city.toLowerCase()})                
             },
 			deleteFavourite: (favToDelete) => {
 				const store = getStore();

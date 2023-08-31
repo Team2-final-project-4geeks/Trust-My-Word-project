@@ -178,11 +178,11 @@ const showUsersReviews =()=> {
                                 </div>
                                 <div className="">
                                     <p className="title mx-4">Favorites</p>
-                                    <p className="reviews  mx-4">{favourites.length}</p>
+                                    <p className="reviews  mx-4">{favourites && favourites.length > 0 ? favourites.length: 0}</p>
                                 </div>
                                 <div className="">
                                     <p className="title mx-4">Comments</p>
-                                    <p className="reviews  mx-4">{comments.length}</p>
+                                    <p className="reviews  mx-4">{comments.length}</p> 
                                 </div>
                             </div>
                     </div>

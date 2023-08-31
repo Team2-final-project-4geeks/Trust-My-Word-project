@@ -25,7 +25,7 @@ const SingleActivity = () => {
           },
           desktop: {
             breakpoint: { max: 3000, min: 1024 },
-            items: 4
+            items: 3
           },
           tablet: {
             breakpoint: { max: 1024, min: 464 },
@@ -49,7 +49,7 @@ const SingleActivity = () => {
     const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
 
 
-    const map = `https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=350x350&key=${process.env.API_KEY}`
+    const map = `https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=400x400&key=${process.env.API_KEY}`
 
     useEffect(() => {
         fetchSingleActivity();
@@ -156,16 +156,25 @@ const SingleActivity = () => {
     const showComments = () =>{
         return allDescriptions.map((comment, index) => {
             return(
-                <CarouselCard key={index} id={comment.id} description={comment.description} author={comment.author} image={comment.testImage} fetchComments={fetchComments} date={comment.date}/>                      
+                <CarouselCard 
+                key={index} 
+                id={comment.id} 
+                description={comment.description} 
+                author={comment.author} 
+                image={comment.testImage} 
+                fetchComments={fetchComments} 
+                date={comment.date}
+                userLogged={user_id}
+                authorId={comment.user_id} 
+                />                      
             )
         }			
     )}
 
     return(
-        <div className="container-fluid mt-5 mb-5" >
-			{ activity ? (
-            <div id="backgroundSingleActivity">
-                <div className="card m-0 border-0 " id="containerSingle">                    
+        <div className="container mt-5 mb-5 border-0" >
+			{ activity ? (            
+                <div className="card m-0 border-0 mx-auto" id="containerSingle">                    
                     <div className="row g-0 h-100">
                         <div className="col-md-3">
                             <img id="singleActivityPicture"src="https://clubhipicoelpinar.es/wp-content/uploads/2016/05/IMG_8542-1024x683.jpg" className="img-fluid rounded-start h-100" alt="..."/>
@@ -197,16 +206,15 @@ const SingleActivity = () => {
                         </div>                        
                     </div>                    
                 </div>
-            </div>
             ):(
                 <div className="spinner-border" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </div>
             )}
-            <div className="container-fluid" id="commentSection">
+            <div className="container border-0" id="commentSection">
                 <h4 className="my-5 ms-4">Comments</h4>
                 <div className="container-fluid">
-                    <Carousel showDots={true} arrows={false} responsive={responsive} >
+                    <Carousel showDots={true} arrows={false} responsive={responsive} swipeable={true}>
                         {showComments()}
                     </Carousel>
                 </div>               
