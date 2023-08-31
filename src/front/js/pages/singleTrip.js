@@ -167,36 +167,6 @@ const SingleTrip = () =>{
                 }
         }
 
-    const deleteComment = (commentId) => {
-        const token = localStorage.getItem('jwt-token');
-        if(token) {
-		fetch(process.env.BACKEND_URL + 'api/comment/' + commentId, {
-			method: 'DELETE',
-			headers: { 
-                "Authorization" : "Bearer " + token
-            },
-		})
-		.then(resp => {			
-			console.log(resp.ok);
-			console.log(resp.status);
-			return resp.json();
-		})
-		.then(data => {
-			Swal.fire('You have deleted a comment');					
-			fetchComments();
-		})
-		.catch(error => {
-            console.log(error);
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!'            
-            })
-        })		
-        } else {
-            console.log("error from delete comment")
-        }
-	}
     const showComments = () =>{
         return allDescriptions.map((comment, index) => {
             return(
