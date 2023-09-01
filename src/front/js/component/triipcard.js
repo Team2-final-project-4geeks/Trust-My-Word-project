@@ -31,7 +31,7 @@ const TriipCard = (props)=>{
                             onClick={() => {
                                 if (token) {
                                 handleFavoriteClick();
-                                actions.addFavourite(props.trip.id, props.trip.title);
+                                actions.addFavourite(props.trip.id, props.trip.title, props.trip.category);
                                 actions.addUserFavourites(localStorage.getItem("userId"));
                                 } else {
                                 Swal.fire({

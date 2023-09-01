@@ -10,6 +10,7 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const localUserId = localStorage.getItem("userId")
   const token = localStorage.getItem("jwt-token")
+  const [favouritesUpdated, setFavouritesUpdated] = useState(0);
 
 	const logOut = () => {
 		localStorage.removeItem('jwt-token');
@@ -29,6 +30,13 @@ export const Navbar = () => {
       actions.getUser(localUserId);
     }
   }, [localUserId]);
+
+  useEffect(() => {
+    // ...
+    // Após adicionar um novo favorito com sucesso
+    // Incrementar o estado `favouritesUpdated`
+    setFavouritesUpdated(favouritesUpdated + 1);
+  }, [store.favourite]); 
 
 
   return (
@@ -91,26 +99,19 @@ export const Navbar = () => {
                   <ul className="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuClickableInside">
                       {store.favourite.map((fav, index) => {
                           return (
-                              <li key={index}>
+                              <li key={index} id="favourites-list">
                                   <a className="dropdown-item d-flex" id="dropdown-favourites" onClick={() => {
-
-                                      if (category === "activity") {
-                                        navigate ("/activity/" + fav.id)
-                                      } else if (category === "product") {
-                                        navigate ("/product/" + fav.id)
-                                      } else if (category === "trip") {
-                                        navigate ("/trip/" + fav.id)
-                                      }
-                                    }}>
+                                    navigate(`/${fav.category}/${fav.id}`)
+                                  }}>
                                       {fav.title}
-                                      <i
-                                          className="fas fa-trash pt-1"
+                                  </a>
+                                  <i
+                                          className="fas fa-trash" id="delete-favourite"
                                           onClick={() => {
                                               actions.deleteFavourite(fav);
                                               actions.addUserFavourites(localUserId);
                                           }}
                                       ></i>
-                                  </a>
                               </li>
                           );
                       })}

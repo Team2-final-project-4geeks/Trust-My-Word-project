@@ -76,6 +76,7 @@ class Review(db.Model):
             "publishing_date": self.publishing_date,
             "link": self.link,
             "price": self.price,
+            "category": self.category.name if self.category else None,
             "image": self.image,
             "rating": self.rating,
             "user_id": self.user_id,
