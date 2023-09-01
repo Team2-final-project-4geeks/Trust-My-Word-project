@@ -5,6 +5,7 @@ import { FaPencilAlt } from 'react-icons/fa';
 import "../../styles/userpage.css";
 import { useNavigate } from "react-router-dom";
 
+
 const UserPage = () =>{
     const navigate= useNavigate()
     const presetKey = "ptwmh2mt";
@@ -40,7 +41,7 @@ const UserPage = () =>{
           alert('Please select an image before uploading.');
           return;
         }
-      
+        console.log("handle upolooooooooooad")
         try {
           const imageUrl = await uploadImage(image); 
           sendDataToAPI(imageUrl);
@@ -53,6 +54,8 @@ const UserPage = () =>{
       };
 
     const uploadImage = (imageFile) => {
+        console.log("handle imageeeeeeeeeee")
+
         return new Promise((resolve, reject) => {
           const formData = new FormData();
           formData.append("file", imageFile);
@@ -77,6 +80,7 @@ const UserPage = () =>{
           });
         });
       };
+
 
     const sendDataToAPI = (image) => {
         const token = localStorage.getItem('jwt-token');
@@ -201,7 +205,9 @@ const showUsersReviews =()=> {
                            <label htmlFor="fileInput">
                                 <i
                                     className="fa-solid fa-pencil mx-3"
-                                    onClick={() => fileInputRef.current.click()} 
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        fileInputRef.current.click()}} 
                                 ></i>
                             </label>
                             <input

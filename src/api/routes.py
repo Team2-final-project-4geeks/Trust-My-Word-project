@@ -54,6 +54,7 @@ def create_user():
            "msg": "username doesnt exist in the request"
        }
         return jsonify(response_body),400
+    
    
    new_user= User(email = data["email"], password= data["password"], username=data["username"])
    db.session.add(new_user)
@@ -129,7 +130,7 @@ def user_login():
         return jsonify(response_body), 404
 
     if user and user.password == password:
-    
+        
         logged = "Succesfully logged"
         access_token = create_access_token(identity=user.id)
 

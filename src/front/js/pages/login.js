@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { Context} from "../store/appContext";
 import createUser from "../../img/createUser.jpg";
 import Swal from 'sweetalert2';
+import { LoginSocialFacebook} from 'reactjs-social-login'
+import { FacebookLoginButton } from "react-social-login-buttons";
 
 
 
@@ -145,6 +147,19 @@ const Login = () =>{
                                             setLoginPassword(e.target.value)
                                         }}
                                         /><br/><br/>
+                                </div>
+
+                                <div>
+                                    <LoginSocialFacebook
+                                     appId="236664135948619"
+                                     onResolve= {(response)=>{
+                                        console.log(response);
+                                     }}
+                                     onReject = {(error)=>{console.log(error)}}
+                                    > 
+                                        <FacebookLoginButton/>
+                                    </LoginSocialFacebook>
+                                  
                                 </div>
                                 <button type="submit" className="btn btn-warning mt-4" 
                                 onClick={()=>{
