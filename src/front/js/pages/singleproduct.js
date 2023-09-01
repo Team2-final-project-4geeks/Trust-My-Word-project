@@ -64,72 +64,66 @@ export const SingleProduct = () => {
             console.log("error")
         }}
         
-    const fetchComments =() =>{        
-        const token = localStorage.getItem('jwt-token');        
-        if(token) {        
-        fetch(process.env.BACKEND_URL + 'api/comments',{
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization" : "Bearer " + token
-            }
-        })
-        .then(resp => {								
-            return resp.json();
-        })
-        .then(data=> {		
-        setAllDescriptions(data);            
-        })
-        .catch(error => {			
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!'            
+        const fetchComments =() =>{        
+            const token = localStorage.getItem('jwt-token');        
+            if(token) {        
+            fetch(process.env.BACKEND_URL + 'api/comments/' + review_id,{
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization" : "Bearer " + token
+                }
             })
-        })
-        }else{
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!'            
+            .then(resp => {								
+                return resp.json();
             })
-        }}
+            .then(data=> {		
+            setAllDescriptions(data);
+            console.log(data);            
+            })
+            .catch(err => console.log('comments' + err))
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Access denied. Please log in!'            
+                })
+            }}
     
-    const createComment = () => {
-        const token = localStorage.getItem('jwt-token');
-        if(token) {
-        fetch(process.env.BACKEND_URL + 'api/create-comment', {
-            method: "POST",          
-            headers: {
-            "Content-Type": "application/json",
-            "Authorization" : "Bearer " + token
-            },
-            body: JSON.stringify({description, user_id, review_id}) 
-        })
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {  
-            setDescription(data.description);
-            Swal.fire(
-                'Good job!',
-                'You POSTed a comment!',
-                'success'
-            )
-            setDescription("")
-            fetchComments();            
-        })
-        .catch(err => Swal.fire({
-            icon: 'error',
-            title: 'Oops...'                        
-            }))
-        } else {       
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...'                      
-            })
+            const createComment = () => {
+                const token = localStorage.getItem('jwt-token');
+                if(token) {
+                fetch(process.env.BACKEND_URL + 'api/create-comment', {
+                  method: "POST",          
+                  headers: {
+                    "Content-Type": "application/json",
+                    "Authorization" : "Bearer " + token
+                  },
+                  body: JSON.stringify({description, user_id, review_id, author, date:formattedDate }) 
+                })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {  
+                    setDescription(data.description);
+                    setDate(data.date);
+                    Swal.fire(
+                        'Good job!',
+                        'You POSTed a comment!',
+                        'success'
+                    )
+                    setDescription("")
+                    fetchComments();            
+                })
+                .catch(err => console.log('create comment' + err))
+                } else {       
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Access denied. Please log in!'            
+                    })
+                    }
             }
-    }
 
     const deleteComment = (commentId) => {
         const token = localStorage.getItem('jwt-token');
