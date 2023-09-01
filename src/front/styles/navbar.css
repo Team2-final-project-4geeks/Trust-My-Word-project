@@ -111,7 +111,7 @@
 #dropdown-favourites{
   background-color: rgba(0, 0, 0, 0.651);
   margin-top: 5px;
-  border-radius: 10px;
+  border-radius: 10px 0 0 10px;
   z-index:1;
   display: flex;
   justify-content: space-between;
@@ -122,9 +122,15 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 #delete-favourite{
-  margin-top: 14px;
-  margin-left: 3px;
-  margin-right: 2px;
+  background-color: rgba(0, 0, 0, 0.651);
+  margin-top: 5px;
+  border-radius: 0 10px 10px 0;
+  padding-top: 10px;
+  padding-inline: 5px;
+  z-index:1;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
   
 }
 #delete-favourite:hover{
