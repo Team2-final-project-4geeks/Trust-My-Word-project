@@ -6,33 +6,64 @@ import { Context} from "../store/appContext";
 
 const ActivityCard = (props)=>{
     const { store, actions } = useContext(Context);
+    const [showHeart, setShowHeart] = useState(false);
     const navigate= useNavigate();
+    
     const handleReviewClick = (activityId) => {
         actions.addToCounter(activityId)
 	  };
 
+    const handleFavoriteClick = () => {
+    setShowHeart(true);
+    setTimeout(() => {
+        setShowHeart(false);
+    }, 2000);
+    };
+
     return(
         <div className="card-body" id="activityBody">
-            <div className="image-container">
-                    <img src={props.img} className="card-img-top" alt="..."/>
-                    <div className="image-overlay d-flex justify-content-end align-items-start p-2">
-                        <i className="fas fa-heart text-danger" onClick={() => {
-                        actions.addFavourite(props.activity.id, props.activity.title) 
-                        actions.addUserFavourites(localStorage.getItem("userId"))
-                        }}></i>
+            <div id="imageBoard">
+                <img src={props.img} className="card-img-top" alt="..."/>
+                <div id="imageOverlay" className="d-flex justify-content-end align-items-start p-2">
+                        <i
+                        className="fas fa-heart text-danger fa-2x"
+                        onClick={() => {
+                            if (token) {
+                            handleFavoriteClick();
+                            actions.addFavourite(props.activity.id, props.activity.title);
+                            actions.addUserFavourites(localStorage.getItem("userId"));
+                            } else {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: "You have to login first!",
+                            });
+                            navigate("/login");
+                            }
+                        }}
+                        ></i>
                     </div>
                 </div>
-             <div className="card-body mx-3">
+
+             <div id="infoBoard" className="mt-3">
             <div className="d-flex flex-column">
                 <div className=" col-11">
                     <div className="d-flex flex-row">
-                        <img src={props.profile} className="profile-image" alt="..."/>
+                        <div id="img-container" className="col-3">
+                            <img src={props.profile} alt="..."/>
+                        </div>
+                        <div className="d-flex justify-content-between col-11  ms-3">
                             <div className="d-flex flex-column mx-3">
-                                <p className="card-text"><small className="text-muted username">{store.userName}</small></p>
-                                <hr className="mb-0"/>
-                                <p className="card-text"><small className="text-muted publishing-date">{props.activity.publishing_date}</small></p>
+                                    <p className="card-text mb-0"><small className="text-muted username">{props.author}</small></p>
+                                    <hr className="mb-1 mt-1"/>
+                                    <p className="card-text"><small className="text-muted publishing-date">{props.activity.publishing_date}</small></p>
+                            </div>
+                            <div className="d-flex align-items-center">
+                                    <p className="text-muted"> <small>Visited {props.activity.counter} <i class="fa-solid fa-eye"></i></small></p>
                             </div>     
+                        </div>     
                     </div>
+
                     <div className="d-flex flex-column align-items-center ">
                         <h5 className="card-title text-center mt-2">{props.activity.title}</h5>
                         <div className="rating-board">      
@@ -47,13 +78,19 @@ const ActivityCard = (props)=>{
                             <p className="card-text mt-4">{props.activity.price}</p>
                         </div>
                     </div>
+
                     <div id="activityCardViewMore">
-                        <button className="btn" 
-                                type="button" id="activityCardViewMore" 
-                                onClick={()=>{ 
-                                    navigate("/activity/" + props.activity.id)
-                                    handleReviewClick(props.activity.id)
-                                    }}> <strong>View more</strong></button>
+                        <button 
+                            className="btn" 
+                            type="button" id="activityCardViewMore" 
+                            onClick={()=>{ 
+                                navigate("/activity/" + props.activity.id)
+                                handleReviewClick(props.activity.id)
+                                }}> <strong>View more</strong>
+                        </button>
+                    </div>
+                    <div>
+                        {showHeart && <div className="floating-heart">&hearts;</div>}
                     </div>
                  </div>
             </div>

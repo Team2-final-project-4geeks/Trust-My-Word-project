@@ -180,13 +180,13 @@ const SingleActivity = () => {
                 <div className="card m-0 border-0 mx-auto" id="containerSingle">                    
                     <div className="row g-0 h-100">
                         <div className="col-md-3">
-                            <img id="singleActivityPicture"src="https://clubhipicoelpinar.es/wp-content/uploads/2016/05/IMG_8542-1024x683.jpg" className="img-fluid rounded-start h-100" alt="..."/>
+                            <img id="singleActivityPicture"src={activity.image} className="img-fluid rounded-start h-100" alt="..."/>
                         </div>
                         <div className="col-md-6">
                             <div className="card h-100 border-0 px-3">
                                 <h5 className="card-title fs-3 ms-3 mt-4 mb-5 text-center">{activity.title}</h5>                                
                                     <div className="d-flex flex-row mt-2" id="singleRow1">
-                                        <p className="card-text ms-2"><i class="fas fa-heart fa-xs me-2"></i>{userName}</p>
+                                        <p className="card-text ms-2"><i class="fas fa-heart fa-xs me-2"></i>{activity.author}</p>
                                         <p className="card-text text-center ms-2"><i class="fas fa-info-circle fa-sm me-2"></i>{activity.type} activity</p>
                                         <p className="card-text ms-2"><i class="fas fa-calendar-alt fa-sm me-2"></i>{activity.publishing_date}</p>   
                                     </div>
@@ -196,7 +196,7 @@ const SingleActivity = () => {
                                         <p className="card-text ms-2"><i class="fas fa-thermometer-half fa-sm me-2"></i>{weather}</p>
                                         <p className="card-text ms-2 pe-3"><i class="fas fa-map-marker-alt fa-sm me-2"></i>{activity.location}</p> 
                                     </div>                                             
-                                <div className="d-flex flex-row ms-4 mt-2 position-absolute bottom-0 pb-4" id="activityRow">
+                                <div className="card-text ms-4 mt-2 position-absolute bottom-0 pb-4" id="activityRow">
                                     <a href={activity.link} target="_blank" rel="noopener noreferrer" className="card-text ms-3 me-5 text-center">{activity.link}</a>
                                     <ShareComponent />
                                 </div>                                                            
