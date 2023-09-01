@@ -23,12 +23,15 @@
   align-self: flex-start;
   margin-left:15px;
   margin-top: 5px;
+  max-width: 18vh;
 }
   
 .logo img {
-  max-width: 110px;
+  max-width: 10vh;
 }
-  
+.HamburgerMenu{
+  display: none;
+}
 .menu {
   display:flex;
   align-self: flex-start;
@@ -68,7 +71,6 @@
   border-radius: 10px;
   margin-left: -40px;
   border: none;
-
 }
 #scroll-down2{
   background-color: rgba(0, 0, 0, 0.651);
@@ -107,7 +109,13 @@
   background-color: transparent;
   border: none;
 }
-
+#favourites-list:hover #dropdown-favourites{
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#favourites-list:hover #delete-favourite{
+  color: #ffc600;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 #dropdown-favourites{
   background-color: rgba(0, 0, 0, 0.651);
   margin-top: 5px;
@@ -117,9 +125,6 @@
   justify-content: space-between;
   position: relative;
   color: white;
-}
-#dropdown-favourites:hover{
-  background-color: rgba(0, 0, 0, 0.5);
 }
 #delete-favourite{
   background-color: rgba(0, 0, 0, 0.651);
@@ -131,26 +136,67 @@
   display: flex;
   justify-content: space-between;
   position: relative;
-  
 }
-#delete-favourite:hover{
-  color: #ffc600;
-}
+
 #favourites-list{
   display:flex;
   flex-direction: row;
   justify-content: center;
-  
 }
 
 @media (max-width: 800px) {
   .navbar {
-    flex-direction: column;
+    height: 30vh;
+    display: flex;
+    flex-direction: row;
   }
   .logo {
-    margin:0;
+    size: 4vh;
+    align-self: flex-start;
   }
   .menu {
+    display: none;
+  }
+  .menu.visible {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    text-align: center;
+    top: 100%;
+    margin-right: auto;
+    margin-left:auto;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, 0.651);
+    border-radius: 10px;
+    z-index: 2; 
+  }
+  #all-button-content{
+    text-align: center;
+    margin-left: 1.5em;
+  }
+  #scroll-down{
+    background-color: rgba(0, 0, 0, 0.651);
+    font-size: 1rem;
+    text-align: center;
+    border-radius: 10px;
+    margin-left: -40px;
+    border: none;
+    z-index: 3;
+  }
+  .HamburgerMenu{
+    display: flex;
+    color: #ffc600;
+    float:right;
+  }
+  .menu-icon {
+    cursor: pointer;
+    position: relative;
+    margin:3px;
+    font-size: 3,2px;
+    z-index: 3;
+    align-self: flex-start;
+  }
+  .token {
     flex-direction: column;
     align-items: center;
     margin-top: 10px;

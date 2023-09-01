@@ -45,7 +45,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 			deleteFavourite: (favToDelete) => {
 				const store = getStore();
+				const deleteConfirmed = confirm("Are you sure that you want to delete this Favourite?")
+				if (deleteConfirmed === true) {
 				setStore({favourite: store.favourite.filter((fav) => fav !== favToDelete)})
+					alert ("Favourite succesfully deleted")
+				} else {
+					alert ("delete cancelled")
+				}
 			},			
 			addType: (type) => {
 				const store = getStore();

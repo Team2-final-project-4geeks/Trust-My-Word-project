@@ -35,9 +35,9 @@ export const ReviewForm = () => {
       case "product":
         return "https://cdn.pixabay.com/photo/2017/04/06/11/24/fashion-2208045_1280.jpg";
       case "trip":
-        return "https://cdn.pixabay.com/photo/2014/11/06/10/56/airport-519020_1280.jpg";
+        return "https://cdn.pixabay.com/photo/2017/08/03/21/48/drinks-2578446_640.jpg";
       default:
-        return "https://cdn.pixabay.com/photo/2020/05/22/21/44/review-5207277_1280.jpg";
+        return "https://cdn.pixabay.com/photo/2020/03/11/14/35/advice-4922319_640.jpg";
     }
   };
 
@@ -209,7 +209,7 @@ export const ReviewForm = () => {
                         </div>
                     </div>
                     <div class="col-8" id="middle">
-                    <div className="form-group" id="inputs">
+                        <div className="form-group" id="inputs">
                             <input 
                                 type="text" 
                                 id="title" 
@@ -220,28 +220,43 @@ export const ReviewForm = () => {
                                 onChange={(e) => setTitle(e.target.value)}
                                 />  
                         </div>
+                        {category === "activity" ? (
                         <div className="form-group" id="inputs">
+                          <input 
+                              type="text" 
+                              id="type" 
+                              className="review-input"  
+                              name="type"
+                              placeholder="family, adventure, romantic, group, relax, other"
+                              value={type}
+                              onChange={(e) => setType(e.target.value)}
+                              />
+                        </div> 
+                        ) : ("")}
+                        {category === "trip" ? (
+                          <div className="form-group" id="inputs">
                             <input 
                                 type="text" 
                                 id="type" 
                                 className="review-input"  
                                 name="type"
-                                placeholder="Family, Adveture, Relax..."
+                                placeholder="bar, restaurant, romantic, group, relax, other"
                                 value={type}
                                 onChange={(e) => setType(e.target.value)}
-                                /> 
-                        </div>
+                                />
+                          </div> 
+                        ) : ("")}
                         {category === "product" ? (
                           <div className="form-group" id="inputs">
-                            <input
-                              type="text" 
-                              id="store" 
-                              className="review-input"  
-                              placeholder="Store" 
-                              name="store"
-                              value={shop} // Use o valor do estado que você definir para a loja
-                              onChange={(e) => setStore(e.target.value)}
-                            />  
+                            <input 
+                                type="text" 
+                                id="type" 
+                                className="review-input"  
+                                name="type"
+                                placeholder="clothes, accesories, alectronics, sports, automotive, other"
+                                value={type}
+                                onChange={(e) => setType(e.target.value)}
+                                />
                           </div>
                         ) : (
                           <div className="form-group mb-3" id="inputs">
@@ -257,6 +272,7 @@ export const ReviewForm = () => {
                             <p className="little-legends">You won't be able to change that after</p> 
                           </div>
                         )}
+                        
                         <div className="form-group" id="inputs">
                             <input
                                 type="text" 
