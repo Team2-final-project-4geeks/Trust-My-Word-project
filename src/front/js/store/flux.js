@@ -15,7 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			addFavourite: (favId, favTitle, favCategory) => {
 				const store = getStore();
-				if (!store.favourite.includes(favId) && store.favourite !== null) {
+				if (!store.favourite.some(item => item.id == favId) && store.favourite !== null) {
 					setStore({ favourite: [...store.favourite, {id: favId, title: favTitle, category: favCategory}] });
 					console.log("adicionado")
 				} else {

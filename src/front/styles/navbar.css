@@ -121,6 +121,21 @@
 #dropdown-favourites:hover{
   background-color: rgba(0, 0, 0, 0.5);
 }
+#delete-favourite{
+  margin-top: 14px;
+  margin-left: 3px;
+  margin-right: 2px;
+  
+}
+#delete-favourite:hover{
+  color: #ffc600;
+}
+#favourites-list{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  
+}
 
 @media (max-width: 800px) {
   .navbar {
