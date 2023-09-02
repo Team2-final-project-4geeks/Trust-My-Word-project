@@ -178,14 +178,14 @@ export const SingleProduct = () => {
 
     return (
 
-        <div className="container-fluid mt-5 mb-5" >
+        <div className="container-fluid mt-5 mb-5">
             {oneProduct ? (
-                    <div className="card m-0 border-0 " id="containerSingle">
+                    <div className="card border-0" id="containerSingleProduct">
                         <div className="row g-0 h-100">
-                            <div className="col-md-4">
-                                <img src={oneProduct.image} className="img-fluid rounded-start h-100" alt="..."/>
+                            <div className="col-4">
+                                <img id="singleProductPicture"src={oneProduct.image} className="img-fluid rounded-start h-100" alt="..."/>
                             </div>
-                            <div className="col-md-8">
+                            <div className="col-8">
                                 <div className="card h-100 border-0 px-3">
                                     <h3 className="card-title ms-3 mt-3 mb-4 text-center" id="productTitle">{oneProduct.title}</h3>
                                         <div className="d-flex flex-row mt-2" id="productRow">
@@ -195,11 +195,10 @@ export const SingleProduct = () => {
                                         </div>
                                     <p className="card-text"><i>" {oneProduct.description} "</i></p>
                                         <div className="d-flex flex-row" id="productRow2">
-                                            <p className="card-text ms-2"><i>{oneProduct.link}</i></p>
-                                            <p className="card-text"><i class="fas fa-money-bill-wave me-2"></i>{oneProduct.price}</p>
+                                            <p className="card-text"><i class="fas fa-money-bill-wave me-2"></i>{oneProduct.price}€</p>
                                         </div>
-                                    <div className="d-flex flex-row ms-4 mt-2 position-absolute bottom-0 pb-4" id="link-share">
                                         <Link to={oneProduct.link} className="card-text ms-3 me-5 text-center">{oneProduct.link}</Link>
+                                    <div className="d-flex flex-row ms-4 mt-2 position-absolute bottom-0 pb-4" id="link-share">
                                         <ShareComponent />
                                     </div>
                                 </div>

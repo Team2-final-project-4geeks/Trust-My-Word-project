@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import ViewMoreProduct from "./viewMoreProduct.js";
+import Swal from 'sweetalert2';
 
 import "../../styles/productcard.css";
 
@@ -9,16 +10,33 @@ import "../../styles/productcard.css";
 export const ProductCard = (props) => {
     const navigate = useNavigate ()
     const {store, actions} = useContext(Context);
+    const [showHeart, setShowHeart] = useState(false);
+
+    const handleFavoriteClick = () => {
+        setShowHeart(true);
+        setTimeout(() => {
+          setShowHeart(false);
+        }, 2000);
+      };
 
     return (
             <div className="card-body">
                 <div className="image-container-product">
                     <img src={props.product.image} alt="..."/>
-                    <div className="image-overlay d-flex justify-content-end align-items-start p-2">
-                        <i className="fas fa-heart text-danger" onClick={() => {
-                        console.log(props.product)
-                        actions.addFavourite(props.product.id, props.product.title, props.product.category);
-                        actions.addUserFavourites(localStorage.getItem("userId"))
+                    <div id="imageOverlay" className="d-flex justify-content-end align-items-start p-2">
+                        <i className="fas fa-heart text-danger fa-2x" onClick={() => {
+                        if (token) {
+                            handleFavoriteClick();
+                            actions.addFavourite(props.product.id, props.product.title, props.product.category);
+                            actions.addUserFavourites(localStorage.getItem("userId"))
+                        } else {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: "You have to login first!",
+                            });
+                            navigate("/login");
+                            }
                         }}></i>
                     </div>
                 </div>
@@ -44,11 +62,14 @@ export const ProductCard = (props) => {
                             <div id="card-description-trip">
                                 <p className="card-text"><i className="fas fa-quote-left mt-2 me-2"></i> <i> {props.product.description}</i></p>
                             </div>
-                            <p className="card-text mt-4">{props.product.price}</p>
+                            <p className="card-text mt-4">{props.product.price}€</p>
                         </div>
                     </div>
                     <div id="productCardViewMore">
                         <ViewMoreProduct item={props.product.id}/>
+                    </div>
+                    <div>
+                        {showHeart && <div className="floating-heart">&hearts;</div>}
                     </div>
                  </div>
             </div>

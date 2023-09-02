@@ -216,7 +216,9 @@ export const ReviewForm = () => {
                     <div class="col-8" id="middle">
                         <div className="form-group" id="inputs">
                             <input 
-                                type="text" 
+                                type="text"
+                                maxLength={30}
+                                maxRows={1}
                                 id="title" 
                                 className="review-input"  
                                 placeholder="Title"
@@ -258,7 +260,7 @@ export const ReviewForm = () => {
                                 id="type" 
                                 className="review-input"  
                                 name="type"
-                                placeholder="clothes, accesories, alectronics, sports, automotive, other"
+                                placeholder="clothes, accesories, electronics, sports, automotive, other"
                                 value={type}
                                 onChange={(e) => setType(e.target.value)}
                                 />
