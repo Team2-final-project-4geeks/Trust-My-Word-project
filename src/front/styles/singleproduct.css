@@ -3,58 +3,63 @@
 }
 
 #containerSingle{
-    margin:auto;
-    width:1100px;
-    height:400px;
+    height:450px;
+    margin-left: auto;
+    margin-right:auto;
     justify-content: center;
     align-items: center;
     display:flex;
+    box-shadow: rgb(218, 165, 32) -2px -2px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 4px;
 }
-
-#backgroundSingleProduct{
-    background: rgb(95,191,153);
-    background: linear-gradient(to top right, rgba(95,191,153,1) 0%, rgba(253,187,45,1) 100%);
-    background-size: cover;
-    background-position: center;
-    border-radius: 10px; 
-    overflow: hidden;
-    margin:auto;
-    width:1325px;
-    height:425px;
-    display:flex;
-    justify-content: center;
-    align-items: center;   
-}
-
-#mapSingleProduct{
-    object-fit: cover;
-    height: 100%;
-}
-
 
 #productRow{
     justify-content: space-between;
-    margin-right: 15px;
+    margin: 20px;
+    font-size: 20px;
 }
 
-#productTitle{
-    text-decoration: underline overline;
+#productRow2 {
+    justify-content: space-between;
+    margin:20px;
+}
+#link-share{
+    justify-content: space-between;
+    width: 90%;
 }
 
 #sumbitButtonSingle{
     background:black;
     color:white;
 }
+
 #commentSection{
     width: 1350px;
-    min-height: 450px;
-    margin:auto;
-    margin-bottom: 50px;
+    min-height: 450px;    
 }
-#basic-addon1, #commentWrite{
-    background: rgb(95,191,153);
+
+#commentWrite{
+    background: black;
+    color:goldenrod;    
 }
+
 #sumbitButtonSingle{
+    margin:auto;
     background:black;
-    color:white;
+    color: goldenrod;
+}
+
+#commentBox, #commentWrite{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#comment{
+    width:700px;    
+}
+
+.commentHeadline{
+    margin-left: 250px;
+}
+
+.my-5{
+    font-size:50px;
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
 import { cloudinary } from "cloudinary-core";
 import { Context } from "../store/appContext";
@@ -101,7 +102,11 @@ export const ReviewForm = () => {
     try {
       const imageUrl = await uploadImage(image); 
       sendDataToAPI(imageUrl);
-      alert('You have created a Review');
+      Swal.fire(
+        'Good job!',
+        'You have created a Review',
+        'success'
+    )
       navigate('/');
     } catch (error) {
       console.error('Error uploading:', error);
