@@ -3,9 +3,7 @@
 }
 
 #containerSingleProduct{
-    width: 90%;
     height:450px;
-    margin-left: 50px;
     display:flex;
     box-shadow: rgb(218, 165, 32) -2px -2px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 4px;
 }

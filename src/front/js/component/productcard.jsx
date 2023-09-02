@@ -49,7 +49,10 @@ export const ProductCard = (props) => {
                                 <p className="card-text"><small className="text-muted username">{store.userName}</small></p>
                                 <hr className="mb-0"/>
                                 <p className="card-text"><small className="text-muted publishing-date">{props.product.publishing_date}</small></p>
-                            </div>     
+                            </div>
+                            <div className="d-flex align-items-center">
+                                <p className="text-muted"> <small>Visited {props.product.counter} <i class="fa-solid fa-eye"></i></small></p>
+                            </div>       
                     </div>
                     <div className="d-flex flex-column align-items-center ">
                         <h5 className="card-title text-center mt-2">{props.product.title}</h5>

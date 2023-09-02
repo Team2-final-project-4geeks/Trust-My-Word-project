@@ -184,7 +184,17 @@ export const ReviewForm = () => {
                             reviewImage
                         )}
                         <br/>
-                        <input className="photo-uploader" type="file" name="imageCloud" accept="image/jpeg" onChange={handleFile} />
+                        <label for="imageUpload" class="custom-file-upload">
+                          <i class="fa-solid fa-upload"></i> Choose File
+                        </label>
+                        <input
+                          id="imageUpload"
+                          type="file"
+                          name="imageCloud"
+                          accept="image/jpeg"
+                          style={{ display: 'none' }} 
+                          onChange={handleFile}
+                        />
                         <span className="date-title mb-1">Date</span>
                         <div className="form-group mt-1" id="inputs">
                             <input 

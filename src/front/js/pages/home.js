@@ -197,6 +197,7 @@ export const Home = () => {
 					product={product}
 					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
 					rating={product.rating}
+					counter={product.counter}
 				/>
 			));
 			} else {

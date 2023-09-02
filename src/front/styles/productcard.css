@@ -73,3 +73,22 @@ transition: opacity 0.3s;
 .image-container-product:hover .image-overlay {
 opacity: 1;
 }
+.floating-heart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: red;
+  animation: floatHeart 2s ease-out;
+}
+
+@keyframes floatHeart {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+}
