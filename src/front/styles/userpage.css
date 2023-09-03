@@ -1,3 +1,7 @@
+#userPage{
+  margin: 0;
+  padding: 0;
+}
 #pencil{
     padding-top: 5px;
 }
@@ -27,9 +31,13 @@
   .user-info{
     height: 300px;
   }
+  .row{
+    margin:0;
+  }
   .userSection{
     height: auto;
     margin-top: 100px;
+
   }
   .reviews-body {
     background: #e4ebf4;
@@ -133,5 +141,49 @@
     grid-area: text;
   }
   
+
+  @media (max-width: 420px){
+    .circle{
+      width: 80px;
+      height: 80px;
+  
+    }
+    #insight{
+      width: auto;
+      height: auto;     
+    }
+    .insight{
+      display: flex;
+      flex-direction: column !important;
+      margin-top: 3;
+      padding: 0 !important;
+    }
+    #insight p {
+      font-size: 15px;
+    }
+    .title{
+      font-size: 18px;
+      font-weight: bolder;
+      margin-top: 10px;
+    }
+    #userInfo{
+      height: auto;
+    }
+    #userInfo p {
+      font-size: 15px;
+    }
+    #userInfo i{
+      font-size: 15px;
+    }
+    #imageProfile{
+      background-color: red;
+      display: flex;
+    }
+    #imageProfile button {
+      height: 20px;
+      width: 20px;
+    }
+
+  }
 
   

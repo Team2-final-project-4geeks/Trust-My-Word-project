@@ -5,6 +5,7 @@ import { FaPencilAlt } from 'react-icons/fa';
 import "../../styles/userpage.css";
 import { useNavigate } from "react-router-dom";
 
+
 const UserPage = () =>{
     const navigate= useNavigate()
     const presetKey = "ptwmh2mt";
@@ -40,7 +41,6 @@ const UserPage = () =>{
           alert('Please select an image before uploading.');
           return;
         }
-      
         try {
           const imageUrl = await uploadImage(image); 
           sendDataToAPI(imageUrl);
@@ -77,6 +77,7 @@ const UserPage = () =>{
           });
         });
       };
+
 
     const sendDataToAPI = (image) => {
         const token = localStorage.getItem('jwt-token');
@@ -167,12 +168,12 @@ const showUsersReviews =()=> {
     })
 }
     return(
-        <div className="container-fluid">
-            <div className="userSection bg-light ">
+        <div id="userPage">
+            <div className="userSection">
                 <div className="row">
-                    <div className="col-5">
-                            <div className="insight d-flex flex-row p-5">
-                                <div className="">
+                    <div className="col-5" id="insight">
+                            <div className="insight d-flex flex-row">
+                                <div className="insightInfo">
                                     <p className="title mx-4">Reviews</p>
                                     <p className="reviews  mx-4">{reviews.length}</p>
                                 </div>
@@ -187,7 +188,7 @@ const showUsersReviews =()=> {
                             </div>
                     </div>
                     <div className="col-3">
-                        <div class="circle">
+                        <div className="circle">
                            { userimage ? (
                                 <> 
                                     <img src={userimage} alt="Foto"/>
@@ -197,11 +198,13 @@ const showUsersReviews =()=> {
                                 <img src={profile} alt="Foto"/>
                             </>
                            )}
-                           <div className="d-flex flex-row align-items-center justify-content-center mt-4">
+                           <div className="d-flex flex-row align-items-center justify-content-center mt-4" id="imageProfile">
                            <label htmlFor="fileInput">
                                 <i
                                     className="fa-solid fa-pencil mx-3"
-                                    onClick={() => fileInputRef.current.click()} 
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        fileInputRef.current.click()}} 
                                 ></i>
                             </label>
                             <input
@@ -218,7 +221,7 @@ const showUsersReviews =()=> {
     
                         </div>
                     </div>
-                    <div className="col-4">
+                    <div className="col-4" id="userInfo">
                         <div className="user-info d-flex flex-column py-5">
                             <h3 className="mb-3">My details</h3>
                             <div className="email">
@@ -234,14 +237,12 @@ const showUsersReviews =()=> {
                     </div> 
                 </div>
                 <div className="row">
-                    <div className='carousel-container'>
                         <div className="reviews-body">          
                             <h1>My reviews</h1>
                             <ol class="olcards">
                                 {showUsersReviews()}
                             </ol>
                         </div>
-                    </div>          
                 </div>
             </div>
         </div>
