@@ -20,9 +20,33 @@ export const ReviewForm = () => {
   const [image, setImage] = useState("")
   const [category, setCategory] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("");
-  const {store,actions} = useContext(Context)
   const user = localStorage.getItem("userId")
-  const [rating, setRating] = useState(0); //
+  const [rating, setRating] = useState(0);
+  const [latitude,setLatitude] = useState("")
+	const [longitude,setLongitude] = useState("")
+  const [reviewLocation, setReviewLocation] = useState("")
+
+  useEffect(()=>{
+    getCoordinatesFromLocation()
+  },[reviewLocation])
+
+  const getCoordinatesFromLocation = ()=>{
+			fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${reviewLocation}`)
+			.then((response) => response.json())
+			.then((data) => {
+			  if (data.length > 0) {
+				const firstResult = data[0];
+				setLatitude(firstResult.lat)
+				setLongitude(firstResult.lon)
+				console.log(`Coordenadas para ${reviewLocation}: Latitud ${firstResult.lat}, Longitud ${firstResult.lon}`);
+			  } else {
+				console.log(`No se encontraron coordenadas para ${reviewLocation}.`);
+			  }
+			})
+			.catch((error) => {
+			  console.error("Error al obtener las coordenadas:", error);
+			});
+	}
 
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
@@ -144,11 +168,10 @@ export const ReviewForm = () => {
                 "Content-Type": "application/json",
                 "Authorization" : "Bearer " + token
             },
-            body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud:image,user,rating}) 
+            body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud:image,user,rating, latitude, longitude}) 
         })
         .then((res) => res.json())
         .then((result) => {
-          console.log("estoyyyy dentroooo");
             console.log(result);
         }).catch((err) => {
             console.log(err);
@@ -253,7 +276,8 @@ export const ReviewForm = () => {
                               name="location"
                               value={location}
                               onChange={(e) => setLocation(e.target.value)}
-                            />
+                              onBlur={() => setReviewLocation(location)}
+                              />
                             <p className="little-legends">You won't be able to change that after</p> 
                           </div>
                         )}

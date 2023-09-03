@@ -48,12 +48,12 @@ const TriipCard = (props)=>{
 
                     <div id="infoBoard" className="mt-3">
                         <div className="d-flex flex-column">
-                            <div className=" col-11">
+                            <div className=" col-12">
                                 <div className="d-flex flex-row">
                                     <div id="img-container" className="col-3">
                                         <img src={props.profile} alt="..."/>
                                     </div>
-                                    <div className="d-flex justify-content-between col-11  ms-3">
+                                    <div className="d-flex justify-content-between col-10 ms-3">
                                         <div className="d-flex flex-column mx-3">
                                                 <p className="card-text mb-0"><small className="text-muted username">{props.author}</small></p>
                                                 <hr className="mb-1 mt-1"/>
@@ -65,7 +65,7 @@ const TriipCard = (props)=>{
                                     </div>                                
                                 </div>
 
-                                <div className="d-flex flex-column align-items-center mt-2">
+                                <div className="d-flex flex-column  align-items-center justify-content-center mt-2" >
                                     <h5 className="card-title text-center mt-2">{props.trip.title}</h5>
                                     <div className="rating-board">      
                                             {Array.from({ length: parseInt(props.trip.rating) }).map((_, index) => (

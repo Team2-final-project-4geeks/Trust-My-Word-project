@@ -3,6 +3,9 @@ import "../../styles/login.css";
 import { useNavigate } from "react-router-dom";
 import { Context} from "../store/appContext";
 import createUser from "../../img/createUser.jpg";
+import Swal from 'sweetalert2';
+
+
 
 
 const Login = () =>{
@@ -41,7 +44,6 @@ const Login = () =>{
         })
         .then((res) => res.json())
         .then((result) => {
-            console.log("you create user");
             console.log(result);
         }).catch((err) => {
             console.log(err);
@@ -65,9 +67,18 @@ const Login = () =>{
 			.then((res) => res.json())
 			.then((result) => {
                 if(result.msg){
-                    alert(result.msg)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'oppss...',
+                        text: result.msg            
+                    })
+                    
                 }else{
-                    alert(result.loginOK)
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'yeahh...',
+                        text: result.loginOK           
+                    })
                     localStorage.setItem("jwt-token", result.token);
                     localStorage.setItem("userId",result.user_id)
                     actions.addUsername(result.username)
@@ -75,7 +86,6 @@ const Login = () =>{
                     actions.getUser(localStorage.getItem("userId"))
                     navigate("/")
                 }
-               
 			}).catch((err) => {
 				console.log(err);
 			})
@@ -152,58 +162,57 @@ const Login = () =>{
                                 
                             ) : (
                                 <>
-                            <div class="row g-0 d-flex justify-content-center align-items-center">
-                        <div class="col-md-10 d-flex justify-content-center align-items-center flex-column ">
-                            <h1 className="mb-3">CREATE ACCOUNT</h1>
-                            <p className="text-center">Create an account to join our comunity and share your experiences</p>
-                            <div className="input-board">
-                                <i class="fa-solid fa-user me-3"></i>
-                                <input 
-                                    type="text" 
-                                    id="username" 
-                                    className="p-3 col-10 register-input" 
-                                    placeholder="Username" 
-                                    name="username"
-                                    value={username}
-                                    onChange={(e)=>{setUsername(e.target.value)}}
-                                    /><br/><br/>
-                            </div>
-                            <div className="input-board mt-3">
-                                <i class="fa-solid fa-at me-3"></i>
-                                <input 
-                                    type="text" 
-                                    id="email" 
-                                    className="p-3 col-10 register-input"  
-                                    placeholder="Email" 
-                                    name="email"
-                                    value={email}
-                                    onChange={(e)=>{setEmail(e.target.value)}}
-                                    /><br/><br/>
-                            </div>
-                            <div className="input-board mt-3">
-                                <i class="fa-solid fa-key me-3"></i>
-                                <input 
-                                    type="password" 
-                                    id="password" 
-                                    className="p-3 col-10 register-input"  
-                                    placeholder="Password" 
-                                    name="password"
-                                    value={password}
-                                    onChange={(e)=>{setPassword(e.target.value)}}
-                                    /><br/><br/>
-                            </div>
-                            <div id="btn-container-login" className="d-flex flex-row ">
-                                <button 
-                                    type="submit" 
-                                    className="btn btn-warning mt-4" 
-                                    onClick={()=>{ create_user()
-                                        handleLoginClick()
-                                    }}
-                                >SUBMIT</button>
-                            </div>
-                            
-                        </div>
-                    </div>     
+                                <div class="row g-0 d-flex justify-content-center align-items-center">
+                                    <div class="col-md-10 d-flex justify-content-center align-items-center flex-column ">
+                                        <h1 className="mb-3">CREATE ACCOUNT</h1>
+                                        <p className="text-center">Create an account to join our comunity and share your experiences</p>
+                                        <div className="input-board">
+                                            <i class="fa-solid fa-user me-3"></i>
+                                            <input 
+                                                type="text" 
+                                                id="username" 
+                                                className="p-3 col-10 register-input" 
+                                                placeholder="Username" 
+                                                name="username"
+                                                value={username}
+                                                onChange={(e)=>{setUsername(e.target.value)}}
+                                                /><br/><br/>
+                                        </div>
+                                        <div className="input-board mt-3">
+                                            <i class="fa-solid fa-at me-3"></i>
+                                            <input 
+                                                type="text" 
+                                                id="email" 
+                                                className="p-3 col-10 register-input"  
+                                                placeholder="Email" 
+                                                name="email"
+                                                value={email}
+                                                onChange={(e)=>{setEmail(e.target.value)}}
+                                                /><br/><br/>
+                                        </div>
+                                        <div className="input-board mt-3">
+                                            <i class="fa-solid fa-key me-3"></i>
+                                            <input 
+                                                type="password" 
+                                                id="password" 
+                                                className="p-3 col-10 register-input"  
+                                                placeholder="Password" 
+                                                name="password"
+                                                value={password}
+                                                onChange={(e)=>{setPassword(e.target.value)}}
+                                                /><br/><br/>
+                                        </div>
+                                        <div id="btn-container-login" className="d-flex flex-row ">
+                                            <button 
+                                                type="submit" 
+                                                className="btn btn-warning mt-4" 
+                                                onClick={()=>{ create_user()
+                                                    handleLoginClick()
+                                                }}
+                                            >SUBMIT</button>
+                                        </div>
+                                    </div>
+                                </div>     
                                 </>
                             )}
                         </div>

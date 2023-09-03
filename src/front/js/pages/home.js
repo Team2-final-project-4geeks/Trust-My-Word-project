@@ -19,6 +19,9 @@ export const Home = () => {
 	const [filteredReviews, setFilteredReviews] = useState([]);
 	const [coordinatesAvailable, setCoordinatesAvailable] = useState(false);
 	const [radio,setRadio] = useState("") 
+	// const [reviewLocation, setReviewLocation] = useState([])
+	// const [reviewLatitude,setReviewLatitude] = useState("")
+	// const [reviewLongitude,setReviewLongitude] = useState("")
 
 	useEffect(() => {
 	  getActivities();
@@ -26,11 +29,16 @@ export const Home = () => {
 	  getTrips();
 	  geo();
 	}, []);
-  
+
+	// useEffect(()=>{
+	// 	holaaaa1123344()
+	// },[reviewLocation])
+
 	useEffect(() => {
 	  if (coordinatesAvailable) { 
 		getPlaceFromCoordinates();
 		fetchFilteredReviews()
+
 	  }
 	}, [coordinatesAvailable]);
   
@@ -58,7 +66,6 @@ export const Home = () => {
 	  fetch(`https://nominatim.openstreetmap.org/reverse?format=geojson&lat=${latitude}&lon=${longitude}`)
 		.then((response) => response.json())
 		.then((data) => {
-			console.log(data);
 		  setPlaceName(data.features[0].properties.address.quarter);
 		  localStorage.setItem("myLocation",data.features[0].properties.address.quarter)
 		})
@@ -93,8 +100,9 @@ export const Home = () => {
 					key={index} 
 					item={trip}
 					trip={trip}
-					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
+					profile={trip.userImage}
 					img={trip.image}
+					author={trip.reviewOwner}
 					rating={trip.rating}
 				/>
 			));
@@ -155,15 +163,12 @@ export const Home = () => {
 			return resp.json();
 		})
 		.then(data=> {
-			console.log(data);
-			setTrips(data);			
+			setTrips(data);		
 		})
 		.catch(error => {
 			console.log('Oops something went wrong'+ error);
 		})
 	}
-
-	
 
 	const showActivity = () =>{
 		const reversedActivities = activities.slice().reverse();
