@@ -111,3 +111,7 @@ text-decoration: underline;
 .publishing-date{ /* checked */
   font-size: 11px;
 }
+
+#photoData{
+  justify-content: space-around;
+}

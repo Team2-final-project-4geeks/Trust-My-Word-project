@@ -174,9 +174,9 @@ export const Home = () => {
 					key={index} 
 					item={activity}
 					activity={activity}
-					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
 					img={activity.image}
 					rating={activity.rating}
+					userImage={activity.userImage}
 				/>
 			));
 			} else {

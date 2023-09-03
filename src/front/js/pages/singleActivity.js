@@ -184,9 +184,9 @@ const SingleActivity = () => {
                         </div>
                         <div className="col-md-6">
                             <div className="card h-100 border-0 px-3">
-                                <h5 className="card-title fs-3 ms-3 mt-4 mb-5 text-center">{activity.title}</h5>                                
+                                <h4 className="card-title fs-3 ms-3 mt-4 mb-5 text-center">{activity.title}</h4>                                
                                     <div className="d-flex flex-row mt-2" id="singleRow1">
-                                        <p className="card-text ms-2"><i class="fas fa-heart fa-xs me-2"></i>{activity.author}</p>
+                                        <p className="card-text ms-2"><i class="fas fa-heart fa-xs me-2"></i>{activity.reviewOwner}</p>
                                         <p className="card-text text-center ms-2"><i class="fas fa-info-circle fa-sm me-2"></i>{activity.type} activity</p>
                                         <p className="card-text ms-2"><i class="fas fa-calendar-alt fa-sm me-2"></i>{activity.publishing_date}</p>   
                                     </div>
@@ -196,8 +196,8 @@ const SingleActivity = () => {
                                         <p className="card-text ms-2"><i class="fas fa-thermometer-half fa-sm me-2"></i>{weather}</p>
                                         <p className="card-text ms-2 pe-3"><i class="fas fa-map-marker-alt fa-sm me-2"></i>{activity.location}</p> 
                                     </div>                                             
-                                <div className="card-text ms-4 mt-2 position-absolute bottom-0 pb-4" id="activityRow">
-                                    <a href={activity.link} target="_blank" rel="noopener noreferrer" className="card-text ms-3 me-5 text-center">{activity.link}</a>
+                                <div className="card-text mt-1 position-absolute bottom-0 pb-5 w-100" id="activityRow">
+                                    <a href={activity.link} target="_blank" rel="noopener noreferrer" className="card-text ms-2 me-3 pb-3 d-flex justify-content-center"><small>{activity.link}</small></a>
                                     <ShareComponent />
                                 </div>                                                            
                             </div>
@@ -214,25 +214,28 @@ const SingleActivity = () => {
                     <span className="visually-hidden">Loading...</span>
                 </div>
             )}
-            <div className="container border-0" id="commentSection">
-                <h4 className="my-5 ms-4">Comments</h4>
-                <div className="container-fluid">
-                    <Carousel showDots={true} arrows={false} responsive={responsive} swipeable={true}>
-                        {showComments()}
-                    </Carousel>
-                </div>               
-                <div className="input-group mt-5 mx-auto" id="comment">
-                    <span className="input-group-text rounded me-2" id="commentWrite">Write your comment:</span>
-                    <textarea className="form-control" id="commentBox" value={description} onChange={(e)=> setDescription(e.target.value)} aria-label="With textarea"></textarea>
+
+            <div className="row justify-content-center">                
+                <div className="container border-0" id="commentSection">
+                    <h4 className="my-5 ms-4">Comments</h4>
+                    <div className="container-fluid">
+                        <Carousel showDots={true} arrows={false} responsive={responsive} swipeable={true}>
+                            {showComments()}
+                        </Carousel>
+                    </div>               
+                    <div className="input-group mt-5 mx-auto" id="comment">
+                        <span className="input-group-text rounded me-2" id="commentWrite">Write your comment:</span>
+                        <textarea className="form-control" id="commentBox" value={description} onChange={(e)=> setDescription(e.target.value)} aria-label="With textarea"></textarea>
+                    </div>
+                    <div className="container-fluid d-flex justify-content-center">
+                        <button 
+                            type="button" 
+                            className="btn btn-dark mt-5" 
+                            onClick={createComment}
+                            id="sumbitButtonSingle"> Send 
+                        </button>
+                    </div>                
                 </div>
-                <div className="container-fluid d-flex justify-content-center">
-                    <button 
-                        type="button" 
-                        className="btn btn-dark mt-5" 
-                        onClick={createComment}
-                        id="sumbitButtonSingle"> Send 
-                    </button>
-                </div>                
             </div>           
         </div>
 

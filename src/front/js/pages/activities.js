@@ -27,6 +27,7 @@ const Activities = (props) =>{
         })
         .then(data=> {     
             setActivities(data);
+            console.log(data)
             actions.addActivities(data);
         })
         .catch(error => {           
@@ -57,10 +58,11 @@ const Activities = (props) =>{
                                         key={index} 
                                         item={activity}
                                         activity={activity}
-                                        profile={activity.userImage}
+                                        userImage={activity.userImage}
                                         img={activity.image}
                                         author={activity.reviewOwner}
                                         rating={activity.rating}
+                                        
                                     />
                                 </div>
                             )

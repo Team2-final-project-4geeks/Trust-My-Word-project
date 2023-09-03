@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/activitycard.css";
 import { Context} from "../store/appContext";
+import Swal from 'sweetalert2';
 
 
 const ActivityCard = (props)=>{
@@ -49,17 +50,18 @@ const ActivityCard = (props)=>{
             <div className="d-flex flex-column">
                 <div className=" col-11">
                     <div className="d-flex flex-row">
-                        <div id="img-container" className="col-3">
-                            <img src={props.profile} alt="..."/>
+                        <div id="img-container" className="col-3 ms-1">
+                            <img src={props.userImage} alt="..."/>
                         </div>
-                        <div className="d-flex justify-content-between col-11  ms-3">
-                            <div className="d-flex flex-column mx-3">
-                                    <p className="card-text mb-0"><small className="text-muted username">{props.author}</small></p>
+                        <div className="d-flex col-11  ms-2" id="photoData">
+                            <div className="d-flex flex-column mx-1">
+                                    <p className="card-text mb-0"><small className="text-muted username">{props.activity.reviewOwner}</small></p>
                                     <hr className="mb-1 mt-1"/>
                                     <p className="card-text"><small className="text-muted publishing-date">{props.activity.publishing_date}</small></p>
                             </div>
-                            <div className="d-flex align-items-center">
-                                    <p className="text-muted"> <small>Visited {props.activity.counter} <i class="fa-solid fa-eye"></i></small></p>
+                            <div className="d-flex flex-column">
+                                    <p className="text-muted mb-0"> <small>Visited {props.activity.counter} <i class="fa-solid fa-eye"></i></small></p>
+                                    <p className="card-text"><small className="text-muted">{props.activity.location}</small></p>
                             </div>     
                         </div>     
                     </div>
