@@ -199,7 +199,7 @@ def create_review():
        }
         return jsonify(response_body),400
     
-    new_review= Review(title = data["title"], category=data["category"], type=data["type"], location=data["location"],link=data["link"],description=data["description"], publishing_date=data["publishing_date"], price=data["price"], user_id=data["user"], image=data["imageCloud"], rating=data["rating"])
+    new_review= Review(title = data["title"], category=data["category"], type=data["type"], location=data["location"],link=data["link"],description=data["description"], publishing_date=data["publishing_date"], price=data["price"], user_id=data["user"], image=data["imageCloud"], rating=data["rating"], latitude =data["latitude"], longitude=data["longitude"])
     db.session.add(new_review)
     db.session.commit()   
     serialized_review = new_review.serialize()  # Serialize the object
@@ -344,6 +344,7 @@ def get_filtered_reviews():
     DEFAULT_USER_RADIO = 10
 
     data = request.get_json()
+    
     user_radio_str = data.get('radio')
     if user_radio_str is not None and user_radio_str != '':
         user_radio = int(user_radio_str)
@@ -360,8 +361,6 @@ def get_filtered_reviews():
         filtered_reviews = []
 
         all_reviews =  Review.query.filter(not_(Review.category == 'product')).all()
-
-        print(all_reviews)
         
         for review in all_reviews:
             review_latitude = review.latitude
@@ -384,7 +383,9 @@ def get_filtered_reviews():
                     "user_id": review.user_id,
                     "counter": review.counter,
                     "latitude": review.latitude,
-                    "longitude": review.longitude
+                    "longitude": review.longitude,
+                    "userImage" : review.users.image,
+                    "reviewOwner" : review.users.username,
                 })
 
         return jsonify(filtered_reviews)
@@ -417,5 +418,21 @@ def addToCounter(id):
     db.session.commit()
 
     return jsonify(review.serialize()),200
+
+# @api.route('/api/review/<int:review_id>', methods=['PUT'])
+# def update_review_coordinates(review_id):
+#     review = Review.query.get(review_id)
+#     if not review:
+#         return jsonify({'message': 'Revisión no encontrada'}), 404
+
+#     data = request.get_json()
+#     if 'latitude' in data:
+#         review.latitude = data['latitude']
+#     if 'longitude' in data:
+#         review.longitude = data['longitude']
+
+#     db.session.commit()
+
+#     return jsonify({'message': 'Coordenadas actualizadas con éxito'}), 200
 
 
