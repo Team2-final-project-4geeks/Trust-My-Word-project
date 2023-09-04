@@ -11,6 +11,7 @@ const DinamicText = (props)=>{
     const [showName, setShowName] = useState(true);
   
     useEffect(() => {
+
       const interval = setInterval(() => {
         setShowName(false);
         setTimeout(() => {
@@ -25,25 +26,16 @@ const DinamicText = (props)=>{
     },[]);
   
   return (
-    <div className="container-fluid d-flex align-items-center justify-content-center animatedText flex-column my-4" style={{ height: '250px'}}>
-        <div className="d-flex align-items-center justify-content-center animatedText flex-row">
-            <h4 className="mt-2 mx-3 titulo">We are here to </h4>
-            <div className="animated-text-board">
-                    <h4 id="text" className={`text-dark ${showName ? 'fade-in' : 'fade-out'}`}>{names[nameIndex]}</h4> 
+    <div className="container-fluid d-flex align-items-center justify-content-center flex-column my-4"  style={{ height: '250px'}}>
+        <div className="d-flex align-items-center justify-content-center flex-row" id="dinamicBoard">
+            <div>
+                <h4 className="mt-2 mx-3 titulo">We are here to </h4>
             </div>
-
+            <div className="animated-text-board">
+                <h4 id="text" className={`text-dark ${showName ? 'fade-in' : 'fade-out'}`}>{names[nameIndex]}</h4> 
+            </div>
         </div>
-       
-            <p className="mt-2 text-muted"><small>Trust my word</small></p> 
-          
-    
-
-
-
-
-
-
-        
+            <p className="mt-2 text-muted" ><small>Trust my word</small></p>     
     </div>
   );
    

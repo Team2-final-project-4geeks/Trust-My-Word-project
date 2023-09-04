@@ -52,8 +52,6 @@
     display: flex;
     justify-content: center;
   }
-
-
 #card-description-trip {
     font-size: clamp(14px, 1rem, 18px); 
     overflow: hidden;
@@ -90,4 +88,11 @@
     transform: translateY(-50px);
     opacity: 0;
   }
+}
+
+
+@media (max-width: 420px){
+ #visitBoard{
+  padding-right: 20px !important;
+ }
 }

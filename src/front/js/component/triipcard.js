@@ -59,7 +59,7 @@ const TriipCard = (props)=>{
                                                 <hr className="mb-1 mt-1"/>
                                                 <p className="card-text"><small className="text-muted publishing-date">{props.trip.publishing_date}</small></p>
                                         </div>
-                                        <div className="d-flex align-items-center">
+                                        <div className="d-flex align-items-center" id="visitBoard">
                                                 <p className="text-muted"> <small>Visited {props.trip.counter} <i class="fa-solid fa-eye"></i></small></p>
                                         </div>     
                                     </div>                                
