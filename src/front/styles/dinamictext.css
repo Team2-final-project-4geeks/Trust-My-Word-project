@@ -10,7 +10,7 @@
     font-size: 70px;
 }
 
-@media (max-width: 420px){
+@media (max-width: 470px){
     #dinamicBoard h4.titulo {
         font-size: 3.5vw;
         margin-bottom: 20px;
