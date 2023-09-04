@@ -1,14 +1,29 @@
 .animated-text-board{
     background-color: #ffc600;
-    padding-left: 15px;
-    padding-right: 15px;
     opacity: 0.9;
     border-radius: 8px;
 }
 .titulo{
     font-size: 50px;
 }
-h4{
+#dinamicBoard h4{
     font-size: 70px;
 }
+
+@media (max-width: 420px){
+    #dinamicBoard h4.titulo {
+        font-size: 3.5vw;
+        margin-bottom: 20px;
+    }
+    #dinamicBoard h4#text {
+        font-size: 6vw;
+        text-align: center;
+    }
+    #dinamicBoard{
+        display: flex;
+        flex-direction: column !important;
+    }
+}
+
+
 

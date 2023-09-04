@@ -45,16 +45,13 @@ text-decoration: underline;
 }
 
 .image-container {
+  height: 250px;
+  width: auto;
   position: relative;
-  display: inline-block;
-  background-color: red;
-  height: 257px;
-  width: 430px;
   overflow: hidden;
 }
 
 .image-container img {
-  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover; /* Ajusta la imagen para que quepa completamente en el contenedor */

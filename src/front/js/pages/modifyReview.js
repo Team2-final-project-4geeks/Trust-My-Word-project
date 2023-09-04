@@ -34,7 +34,6 @@ const ModifyReview = () => {
 			return resp.json();
 		})
 		.then(data=> {
-            console.log(data);
             setLocation(data.location)
             setTitle(data.title)
             setDescription(data.description)

@@ -406,7 +406,6 @@ def haversine_distance(lat1, lon1, lat2, lon2):
     a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
     c = 2 * atan2(sqrt(a), sqrt(1 - a))
     distance = R * c
-
     return distance
 
 
@@ -418,21 +417,5 @@ def addToCounter(id):
     db.session.commit()
 
     return jsonify(review.serialize()),200
-
-# @api.route('/api/review/<int:review_id>', methods=['PUT'])
-# def update_review_coordinates(review_id):
-#     review = Review.query.get(review_id)
-#     if not review:
-#         return jsonify({'message': 'Revisión no encontrada'}), 404
-
-#     data = request.get_json()
-#     if 'latitude' in data:
-#         review.latitude = data['latitude']
-#     if 'longitude' in data:
-#         review.longitude = data['longitude']
-
-#     db.session.commit()
-
-#     return jsonify({'message': 'Coordenadas actualizadas con éxito'}), 200
 
 

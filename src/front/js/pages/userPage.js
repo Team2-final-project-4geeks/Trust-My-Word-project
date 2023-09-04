@@ -222,16 +222,16 @@ const showUsersReviews =()=> {
                         </div>
                     </div>
                     <div className="col-4" id="userInfo">
-                        <div className="user-info d-flex flex-column py-5">
+                        <div className="user-info d-flex flex-column">
                             <h3 className="mb-3">My details</h3>
                             <div className="email">
-                                <p><i class="fas fa-at"></i>: {email}</p>       
+                                <p className="email"><i className="fas fa-at"></i> {email}</p>       
                             </div>
                             <div className="username">
-                                <p><i class="fas fa-user "></i>: {username}</p>
+                                <p className="username"><i className="fas fa-user "></i> {username}</p>
                             </div>
-                            <div className="ps-2">
-                                <p><i class="fa-solid fa-location-pin fa-xl"></i>: {localStorage.getItem("myLocation")}</p>
+                            <div className="location">
+                                <p><i className="fa-solid fa-location-pin fa-xl ps-2"></i> {localStorage.getItem("myLocation")}</p>
                             </div>
                         </div>
                     </div> 

@@ -1,11 +1,12 @@
 .modify-review-img-container{
-    height: auto;
+    height: 400px;
     width: auto;
 }
 .modify-review-img-container img{
     object-fit: cover;
     height: 100%;
     width: 100%;
+    overflow: hidden;
 }
 #modify-review-container{
     font-family: Arial, Helvetica, sans-serif;
