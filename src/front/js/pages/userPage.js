@@ -4,6 +4,8 @@ import profile from "../../img/profile.png";
 import { FaPencilAlt } from 'react-icons/fa';
 import "../../styles/userpage.css";
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
+
 
 
 const UserPage = () =>{
@@ -44,7 +46,10 @@ const UserPage = () =>{
         try {
           const imageUrl = await uploadImage(image); 
           sendDataToAPI(imageUrl);
-          alert('Profile photo updated');
+          Swal.fire({
+            icon: 'success',
+            text: "Profile image updated!"            
+        })
           window.location.reload();
         } catch (error) {
           console.error('Error uploading:', error);
@@ -189,9 +194,9 @@ const showUsersReviews =()=> {
                     </div>
                     <div className="col-3">
                         <div className="circle">
-                           { userimage ? (
+                           { userimage != "image" ? (
                                 <> 
-                                    <img src={userimage} alt="Foto"/>
+                                    <img src={userimage} alt="profile-img"/>
                                 </>
                            ):(
                             <>

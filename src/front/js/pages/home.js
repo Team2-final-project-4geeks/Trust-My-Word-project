@@ -9,6 +9,7 @@ import TriipCard from "../component/triipcard.js";
 import DinamicText from "../component/dinamictext.js";
 
 export const Home = () => {
+	const navigate = useNavigate()
 	const { store, actions } = useContext(Context);
 	const [activities, setActivities] = useState([]);
   	const [products, setProducts] = useState([]);
@@ -283,7 +284,7 @@ export const Home = () => {
 			</div>	
 
 			<div className="container-fluid mt-5">
-				<div id="imageContainerTrips">
+				<div id="imageContainerTrips" onClick={()=> navigate("/trips")}>
 					<h1 id="titleTrips">TRIPS</h1>
     			</div>
 				<div className="container-fluid mt-3">			

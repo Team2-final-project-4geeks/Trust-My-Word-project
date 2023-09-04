@@ -96,7 +96,7 @@ const Login = () =>{
             <div className="row">
                 <div className={showLogin ? "col-md-6" : "col-md-6 order-md-2"}>
                     {showLogin ? (
-                        <div className="half-content bg-danger">
+                        <div className="half-content">
                             <img
                                 src="https://cdn.pixabay.com/photo/2019/09/11/00/15/mountain-4467569_960_720.png"
                                 alt=" Login image"
