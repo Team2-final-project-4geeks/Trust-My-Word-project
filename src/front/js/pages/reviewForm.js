@@ -60,9 +60,9 @@ export const ReviewForm = () => {
       case "product":
         return "https://cdn.pixabay.com/photo/2017/04/06/11/24/fashion-2208045_1280.jpg";
       case "trip":
-        return "https://cdn.pixabay.com/photo/2017/08/03/21/48/drinks-2578446_640.jpg";
+        return "https://cdn.pixabay.com/photo/2017/01/15/18/54/bahamas-1982413_1280.jpg";
       default:
-        return "https://cdn.pixabay.com/photo/2020/03/11/14/35/advice-4922319_640.jpg";
+        return "https://i.ibb.co/tpVm5zD/create-review-default.jpg";
     }
   };
 
@@ -199,8 +199,8 @@ export const ReviewForm = () => {
                     <option value="product" >Products</option>
                     <option value="trip" >Trips</option>
                 </select>
-            <div class="row" id="row-review">
-                    <div class="col-4" id="left-side">
+            <div class="big-review" id="row-review-big">
+                    <div class="left-side" id="left-side">
                         {imagePreview ? (
                         <img src={imagePreview} className="image-create-review" alt="Preview" />
                         ) : (
@@ -246,7 +246,7 @@ export const ReviewForm = () => {
                           </div>
                         </div>
                     </div>
-                    <div class="col-8" id="middle">
+                    <div class="middle" id="middle">
                         <div className="form-group" id="inputs">
                             <input 
                                 type="text"
