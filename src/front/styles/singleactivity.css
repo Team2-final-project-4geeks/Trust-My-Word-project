@@ -1,9 +1,14 @@
+#imageContainer{
+    max-width:100%;
+}
+
 #singleActivityPicture{
-    object-fit: cover;    
+    object-fit: cover;
+    width:100%;
 }
 #containerSingle{
-    width:80%;
-    height:450px;
+    width:95%;
+    min-height:450px;
     justify-content: center;
     align-items: center;
     display:flex;
@@ -16,7 +21,6 @@
 }
 #singleRow1{
     justify-content: space-between;
-    margin-right: 15px;
 }
 #singleRow2{
     justify-content: space-between;
