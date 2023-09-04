@@ -54,6 +54,7 @@ def create_user():
            "msg": "username doesnt exist in the request"
        }
         return jsonify(response_body),400
+    
    
    new_user= User(email = data["email"], password= data["password"], username=data["username"])
    db.session.add(new_user)
@@ -129,7 +130,7 @@ def user_login():
         return jsonify(response_body), 404
 
     if user and user.password == password:
-    
+        
         logged = "Succesfully logged"
         access_token = create_access_token(identity=user.id)
 
@@ -198,7 +199,7 @@ def create_review():
        }
         return jsonify(response_body),400
     
-    new_review= Review(title = data["title"], category=data["category"], type=data["type"], location=data["location"],link=data["link"],description=data["description"], publishing_date=data["publishing_date"], price=data["price"], user_id=data["user"], image=data["imageCloud"], rating=data["rating"])
+    new_review= Review(title = data["title"], category=data["category"], type=data["type"], location=data["location"],link=data["link"],description=data["description"], publishing_date=data["publishing_date"], price=data["price"], user_id=data["user"], image=data["imageCloud"], rating=data["rating"], latitude =data["latitude"], longitude=data["longitude"])
     db.session.add(new_review)
     db.session.commit()   
     serialized_review = new_review.serialize()  # Serialize the object
@@ -343,6 +344,7 @@ def get_filtered_reviews():
     DEFAULT_USER_RADIO = 10
 
     data = request.get_json()
+    
     user_radio_str = data.get('radio')
     if user_radio_str is not None and user_radio_str != '':
         user_radio = int(user_radio_str)
@@ -359,8 +361,6 @@ def get_filtered_reviews():
         filtered_reviews = []
 
         all_reviews =  Review.query.filter(not_(Review.category == 'product')).all()
-
-        print(all_reviews)
         
         for review in all_reviews:
             review_latitude = review.latitude
@@ -383,7 +383,9 @@ def get_filtered_reviews():
                     "user_id": review.user_id,
                     "counter": review.counter,
                     "latitude": review.latitude,
-                    "longitude": review.longitude
+                    "longitude": review.longitude,
+                    "userImage" : review.users.image,
+                    "reviewOwner" : review.users.username,
                 })
 
         return jsonify(filtered_reviews)
@@ -404,7 +406,6 @@ def haversine_distance(lat1, lon1, lat2, lon2):
     a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
     c = 2 * atan2(sqrt(a), sqrt(1 - a))
     distance = R * c
-
     return distance
 
 

@@ -13,24 +13,19 @@
 .reactIcon{
    font-size: 30px;
 }
-#iconAll:focus {
+#iconAll:focus,#iconFamily:focus,#iconAdventure:focus, #iconRomantic:focus,#iconGroup:focus,#iconRelax:focus,#iconOther:focus {
     border-color:  #FFC600;
 }
-#iconFamily:focus {
-    border-color:  #FFC600;
-}
-#iconAdventure:focus {
-    border-color:  #FFC600;
-}
-#iconRomantic:focus {
-    border-color:  #FFC600;
-}
-#iconGroup:focus {
-    border-color:  #FFC600;
-}
-#iconRelax:focus {
-    border-color:  #FFC600;
-}
-#iconOther:focus {
-    border-color:  #FFC600;
+
+@media (max-width: 470px){
+
+    #filterTripsBtnGroup button{
+    height: 50px;
+    width: 65px;
+    font-size: 0px;
+    }
+   .reactIcon{
+    font-size: 15px;
+    padding: 0 !important;
+   }
 }

@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Context } from "../store/appContext.js";
-import { FaHeart, FaStar, FaSpa} from 'react-icons/fa';
-import { MdSurfing, MdGroup, MdFamilyRestroom } from 'react-icons/md';
+import { FaStar} from 'react-icons/fa';
 import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
+import { GrRestaurant } from 'react-icons/gr';
+import { BiBeer } from 'react-icons/bi';
+import { LiaCocktailSolid } from 'react-icons/lia';
 import "../../styles/filterbartrips.css";
 
 const FilterBarTrips = () => {
     const [query, setQuery] = useState("");
-    //const [selectedType, setSelectedType] = useState("");
     const {store, actions} = useContext(Context);
     useEffect(()=>{
         actions.addQuery(query)        
@@ -36,24 +37,18 @@ const FilterBarTrips = () => {
                     </div>
                 </div>
             </div>
-            <div className="d-flex flex-row justify-content-around">
+            <div className="d-flex flex-row justify-content-around " id="filterTripsBtnGroup">
                 <div className="iconsPointer">
                     <button onClick={() => handleFilterClick("all")} className={store.selectedType === "all" ? "selected" : ""} id="iconAll"><FaStar className="reactIcon" /> All results </button>
                 </div>
                 <div className="iconsPointer">
-                    <button onClick={() => handleFilterClick("bar")} className={store.selectedType === "bar" ? "selected" : ""}id="iconBar"><MdFamilyRestroom className="reactIcon"/> Bar </button>
+                    <button onClick={() => handleFilterClick("pub")} className={store.selectedType === "pub" ? "selected" : ""}id="iconFamily"><BiBeer className="reactIcon"/> Pub </button>
                 </div>
                 <div className="iconsPointer">
-                    <button onClick={() => handleFilterClick("adventure")} className={store.selectedType === "restaurante" ? "selected" : ""}id="iconAdventure"> <MdSurfing className="reactIcon" /> restaurante </button>
+                    <button onClick={() => handleFilterClick("restaurant")} className={store.selectedType === "restaurant" ? "selected" : ""}id="iconAdventure"> <GrRestaurant className="reactIcon" /> Restaurant </button>
                 </div>
                 <div className="iconsPointer">
-                    <button onClick={() => handleFilterClick("romantic")} className={store.selectedType === "romantic" ? "selected" : ""} id="iconRomantic"> <FaHeart className="reactIcon" /> romantic </button>
-                </div>
-                <div className="iconsPointer">
-                    <button onClick={() => handleFilterClick("group")} className={store.selectedType === "group" ? "selected" : ""} id="iconGroup"> <MdGroup className="reactIcon" /> group </button>
-                </div>
-                <div className="iconsPointer">
-                    <button onClick={() => handleFilterClick("relax")} className={store.selectedType === "relax" ? "selected" : ""} id="iconRelax"> <FaSpa className="reactIcon" /> relax </button>
+                    <button onClick={() => handleFilterClick("cocktail")} className={store.selectedType === "cocktail" ? "selected" : ""} id="iconRomantic"> <LiaCocktailSolid className="reactIcon" /> Cocktail Bar </button>
                 </div>
                 <div className="iconsPointer">
                     <button onClick={() => handleFilterClick("other")} className={store.selectedType === "other" ? "selected" : ""} id="iconOther"> <GiPerspectiveDiceSixFacesRandom className="reactIcon" /> other </button> 

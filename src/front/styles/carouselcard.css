@@ -35,6 +35,11 @@
     transform: scale(1.35);    
   }
 
+  .react-multi-carousel-dot button{
+    width:18px;
+    height:18px;
+  }
+
 
   
  

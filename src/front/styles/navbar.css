@@ -3,8 +3,10 @@
   justify-content: space-between;
   color: white;
   height: 50vh;
-  width: 100%;
+  width:100%;
   position: relative;
+  overflow: hidden; /* Añade esta línea para ocultar cualquier desbordamiento */
+
 }
 
 .navbar::before {

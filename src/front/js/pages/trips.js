@@ -45,7 +45,7 @@ const Trips = () =>{
             <div className="row">   
         {(trip.length !== 0 || store.query !== "") ? (filteredtrips.map((trip, index) =>{            
                             return(         
-                                <div key={index} className="col-4">
+                                <div key={index} className="col-md-4 col-ms-12">
                                     <TriipCard
                                         key={index} 
                                         item={trip}
@@ -59,7 +59,6 @@ const Trips = () =>{
                        
                             )
                             }
-                        
                             )) : (
                                 <div className="spinner-border" role="status">
                                     <span className="visually-hidden">Loading...</span>
@@ -70,6 +69,5 @@ const Trips = () =>{
         </div>
     )
 }
-
 export default Trips
 

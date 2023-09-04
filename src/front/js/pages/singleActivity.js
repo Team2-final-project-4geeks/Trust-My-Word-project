@@ -23,15 +23,15 @@ const SingleActivity = () => {
             items: 5
           },
           desktop: {
-            breakpoint: { max: 3000, min: 1024 },
+            breakpoint: { max: 2999, min: 1024 },
             items: 3
           },
           tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 3
+            breakpoint: { max: 1023, min: 464 },
+            items: 2
           },
           mobile: {
-            breakpoint: { max: 464, min: 0 },
+            breakpoint: { max: 463, min: 0 },
             items: 1
           }
       };
@@ -176,63 +176,88 @@ const SingleActivity = () => {
 
     return(
         <div className="container mt-5 mb-5 border-0" >
-			{ activity ? (            
-                <div className="card m-0 border-0 mx-auto" id="containerSingle">                    
-                    <div className="row g-0 h-100">
-                        <div className="col-md-3">
-                            <img id="singleActivityPicture"src="https://clubhipicoelpinar.es/wp-content/uploads/2016/05/IMG_8542-1024x683.jpg" className="img-fluid rounded-start h-100" alt="..."/>
-                        </div>
-                        <div className="col-md-6">
-                            <div className="card h-100 border-0 px-3">
-                                <h5 className="card-title fs-3 ms-3 mt-4 mb-5 text-center">{activity.title}</h5>                                
-                                    <div className="d-flex flex-row mt-2" id="singleRow1">
-                                        <p className="card-text ms-2"><i class="fas fa-heart fa-xs me-2"></i>{userName}</p>
-                                        <p className="card-text text-center ms-2"><i class="fas fa-info-circle fa-sm me-2"></i>{activity.type} activity</p>
-                                        <p className="card-text ms-2"><i class="fas fa-calendar-alt fa-sm me-2"></i>{activity.publishing_date}</p>   
+            <div className="row">
+			    { activity ? (                            
+                    <div className="card m-0 border-0 mx-auto p-0" id="containerSingle">                    
+                        <div className="row g-0 h-100 w-100">
+                            <div className="col-sm-12 col-md-3" id="imageContainer">
+                                <img id="singleActivityPicture"src={activity.image} className="rounded-start h-100 w-100 col-sm-12" alt="picture chosen by the user"/>
+                            </div>
+                            <div className="col-sm-12 col-md-6">
+                                <div className="card h-100 border-0 px-3">
+                                    <h4 className="card-title fs-3 ms-3 mt-4 mb-4 text-center">{activity.title}</h4>                                
+                                        <div className="d-flex flex-row mt-2 justify-content-center" id="singleRow1">
+                                            <p className="col-sm-3 card-text ms-2"><i class="fas fa-heart fa-xs me-2"></i>{activity.reviewOwner}</p>
+                                            <p className="col-sm-4 card-text text-center ms-2"><i class="fas fa-info-circle fa-sm me-2"></i>{activity.type} activity</p>
+                                            <p className="col-sm-4 card-text text-center ms-2"><i class="fas fa-calendar-alt fa-sm me-2"></i>{activity.publishing_date}</p>   
+                                        </div>
+                                    <div className="row">
+                                        <p className="col-sm-12 card-text ms-2 my-2"><i>" {activity.description} " </i></p>
                                     </div>
-                                <p className="card-text ms-2 my-2"><i>" {activity.description} " </i></p>
-                                    <div className="d-flex flex-row mt-3" id="singleRow2">                                        
-                                        <p className="card-text ms-2 mb-0"><i class="fas fa-money-bill-wave me-2"></i>{activity.price}</p>
-                                        <p className="card-text ms-2"><i class="fas fa-thermometer-half fa-sm me-2"></i>{weather}</p>
-                                        <p className="card-text ms-2 pe-3"><i class="fas fa-map-marker-alt fa-sm me-2"></i>{activity.location}</p> 
-                                    </div>                                             
-                                <div className="d-flex flex-row ms-4 mt-2 position-absolute bottom-0 pb-4" id="activityRow">
-                                    <a href={activity.link} target="_blank" rel="noopener noreferrer" className="card-text ms-3 me-5 text-center">{activity.link}</a>
-                                    <ShareComponent />
-                                </div>                                                            
+                                        <div className="d-flex flex-row mt-3 justify-content-center" id="singleRow2">                                        
+                                            <p className="col-sm-3 card-text ms-2"><i class="fas fa-money-bill-wave me-2"></i>{activity.price}</p>
+                                            <p className="col-sm-4 card-text ms-2 text-center"><i class="fas fa-thermometer-half fa-sm me-2"></i>{weather}</p>
+                                            <p className="col-sm-4 card-text ms-2 text-center"><i class="fas fa-map-marker-alt fa-sm me-2"></i>{activity.location}</p> 
+                                        </div>                                             
+                                    <div className="card-text mt-1 bottom-0 pb-5" id="activityRow">
+                                        <div className="row">
+                                            <div className="col-sm-12">
+                                                <a
+                                                href={activity.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="card-link ms-2 me-3 pb-3 d-flex justify-content-center"
+                                                >
+                                                    <small className="text-center w-100">{activity.link}</small>
+                                                </a>
+                                            </div>
+                                            <div className="col-sm-12">
+                                                <ShareComponent />
+                                            </div>
+                                        </div>
+                                    </div>                                                            
+                                </div>
                             </div>
+                            <div className="col-sm-12 col-md-3 border-0">
+                                <div className="container-fluid h-100">
+                                    <img className="img-fluid rounded-start" id="mapSingleActivity" src={map}/>
+                                </div>
+                            </div>                        
+                        </div>                    
+                    </div>                
+                ):(
+                    <div className="spinner-border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                )}
+            </div>
+            <div className="container border-0">
+                <div className="row justify-content-center">                
+                    <div className="col border-0" id="commentSection">
+                        <h4 className="my-5 ms-4" style={{ fontSize: '6vw' }}>Comments</h4>
+                        <div className="container-fluid">
+                            <Carousel showDots={true} arrows={false} responsive={responsive} swipeable={true}>
+                                {showComments()}
+                            </Carousel>
                         </div>
-                        <div className="col-md-3 border-0 h-100">
-                            <div className="container-fluid h-100">
-                                <img className="img-fluid rounded-start" id="mapSingleActivity" src={map}/>
-                            </div>
-                        </div>                        
-                    </div>                    
+                    </div>
+                </div> 
+                <div className="row">                 
+                    <div className="input-group mt-5 mx-auto justify-content-center" id="comment">
+                        <span className="col-sm-2 col-md-3 input-group-text rounded me-2 text-center" id="commentWrite">Post a comment:</span>
+                        <textarea className="col-sm-12 col-md-7 form-control" id="commentBox" value={description} onChange={(e)=> setDescription(e.target.value)} aria-label="With textarea"></textarea>
+                    </div>
                 </div>
-            ):(
-                <div className="spinner-border" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                </div>
-            )}
-            <div className="container border-0" id="commentSection">
-                <h4 className="my-5 ms-4">Comments</h4>
-                <div className="container-fluid">
-                    <Carousel showDots={true} arrows={false} responsive={responsive} swipeable={true}>
-                        {showComments()}
-                    </Carousel>
+                <div className="row">
+                    <div className="container-fluid d-flex justify-content-center">
+                        <button 
+                            type="button" 
+                            className="btn btn-dark mt-5" 
+                            onClick={createComment}
+                            id="sumbitButtonSingle"> Send 
+                        </button>
+                    </div> 
                 </div>               
-                <div className="input-group mt-5 mx-auto" id="comment">
-                    <span className="input-group-text rounded me-2" id="commentWrite">Write your comment:</span>
-                    <textarea className="form-control" id="commentBox" value={description} onChange={(e)=> setDescription(e.target.value)} aria-label="With textarea"></textarea>
-                </div>
-                <div className="container-fluid d-flex justify-content-center">
-                    <button 
-                        type="button" 
-                        className="btn btn-dark mt-5" 
-                        onClick={createComment}
-                        id="sumbitButtonSingle"> Send 
-                    </button>
-                </div>                
             </div>           
         </div>
 

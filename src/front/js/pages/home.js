@@ -9,6 +9,7 @@ import TriipCard from "../component/triipcard.js";
 import DinamicText from "../component/dinamictext.js";
 
 export const Home = () => {
+	const navigate = useNavigate()
 	const { store, actions } = useContext(Context);
 	const [activities, setActivities] = useState([]);
   	const [products, setProducts] = useState([]);
@@ -19,6 +20,9 @@ export const Home = () => {
 	const [filteredReviews, setFilteredReviews] = useState([]);
 	const [coordinatesAvailable, setCoordinatesAvailable] = useState(false);
 	const [radio,setRadio] = useState("") 
+	// const [reviewLocation, setReviewLocation] = useState([])
+	// const [reviewLatitude,setReviewLatitude] = useState("")
+	// const [reviewLongitude,setReviewLongitude] = useState("")
 
 	useEffect(() => {
 	  getActivities();
@@ -26,11 +30,16 @@ export const Home = () => {
 	  getTrips();
 	  geo();
 	}, []);
-  
+
+	// useEffect(()=>{
+	// 	holaaaa1123344()
+	// },[reviewLocation])
+
 	useEffect(() => {
 	  if (coordinatesAvailable) { 
 		getPlaceFromCoordinates();
 		fetchFilteredReviews()
+
 	  }
 	}, [coordinatesAvailable]);
   
@@ -58,7 +67,6 @@ export const Home = () => {
 	  fetch(`https://nominatim.openstreetmap.org/reverse?format=geojson&lat=${latitude}&lon=${longitude}`)
 		.then((response) => response.json())
 		.then((data) => {
-			console.log(data);
 		  setPlaceName(data.features[0].properties.address.quarter);
 		  localStorage.setItem("myLocation",data.features[0].properties.address.quarter)
 		})
@@ -93,8 +101,9 @@ export const Home = () => {
 					key={index} 
 					item={trip}
 					trip={trip}
-					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
+					profile={trip.userImage}
 					img={trip.image}
+					author={trip.reviewOwner}
 					rating={trip.rating}
 				/>
 			));
@@ -155,28 +164,25 @@ export const Home = () => {
 			return resp.json();
 		})
 		.then(data=> {
-			console.log(data);
-			setTrips(data);			
+			setTrips(data);		
 		})
 		.catch(error => {
 			console.log('Oops something went wrong'+ error);
 		})
 	}
 
-	
-
 	const showActivity = () =>{
-		const reservedActivities = activities.slice().reverse();
-		if (reservedActivities && reservedActivities.length > 0) {
-			const firstThreeActivities = reservedActivities.slice(0, 3); 
+		const reversedActivities = activities.slice().reverse();
+		if (reversedActivities && reversedActivities.length > 0) {
+			const firstThreeActivities = reversedActivities.slice(0, 3); 
 			return firstThreeActivities.map((activity, index) => (
 				<ActivityCard
 					key={index} 
 					item={activity}
 					activity={activity}
-					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
 					img={activity.image}
 					rating={activity.rating}
+					userImage={activity.userImage}
 				/>
 			));
 			} else {
@@ -279,7 +285,7 @@ export const Home = () => {
 			</div>	
 
 			<div className="container-fluid mt-5">
-				<div id="imageContainerTrips">
+				<div id="imageContainerTrips" onClick={()=> navigate("/trips")}>
 					<h1 id="titleTrips">TRIPS</h1>
     			</div>
 				<div className="container-fluid mt-3">			

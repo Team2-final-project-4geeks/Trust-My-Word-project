@@ -4,6 +4,9 @@ import profile from "../../img/profile.png";
 import { FaPencilAlt } from 'react-icons/fa';
 import "../../styles/userpage.css";
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
+
+
 
 const UserPage = () =>{
     const navigate= useNavigate()
@@ -40,11 +43,13 @@ const UserPage = () =>{
           alert('Please select an image before uploading.');
           return;
         }
-      
         try {
           const imageUrl = await uploadImage(image); 
           sendDataToAPI(imageUrl);
-          alert('Profile photo updated');
+          Swal.fire({
+            icon: 'success',
+            text: "Profile image updated!"            
+        })
           window.location.reload();
         } catch (error) {
           console.error('Error uploading:', error);
@@ -77,6 +82,7 @@ const UserPage = () =>{
           });
         });
       };
+
 
     const sendDataToAPI = (image) => {
         const token = localStorage.getItem('jwt-token');
@@ -167,12 +173,12 @@ const showUsersReviews =()=> {
     })
 }
     return(
-        <div className="container-fluid">
-            <div className="userSection bg-light ">
+        <div id="userPage">
+            <div className="userSection">
                 <div className="row">
-                    <div className="col-5">
-                            <div className="insight d-flex flex-row p-5">
-                                <div className="">
+                    <div className="col-5" id="insight">
+                            <div className="insight d-flex flex-row">
+                                <div className="insightInfo">
                                     <p className="title mx-4">Reviews</p>
                                     <p className="reviews  mx-4">{reviews.length}</p>
                                 </div>
@@ -187,21 +193,23 @@ const showUsersReviews =()=> {
                             </div>
                     </div>
                     <div className="col-3">
-                        <div class="circle">
-                           { userimage ? (
+                        <div className="circle">
+                           { userimage != "image" ? (
                                 <> 
-                                    <img src={userimage} alt="Foto"/>
+                                    <img src={userimage} alt="profile-img"/>
                                 </>
                            ):(
                             <>
                                 <img src={profile} alt="Foto"/>
                             </>
                            )}
-                           <div className="d-flex flex-row align-items-center justify-content-center mt-4">
+                           <div className="d-flex flex-row align-items-center justify-content-center mt-4" id="imageProfile">
                            <label htmlFor="fileInput">
                                 <i
                                     className="fa-solid fa-pencil mx-3"
-                                    onClick={() => fileInputRef.current.click()} 
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        fileInputRef.current.click()}} 
                                 ></i>
                             </label>
                             <input
@@ -218,30 +226,28 @@ const showUsersReviews =()=> {
     
                         </div>
                     </div>
-                    <div className="col-4">
-                        <div className="user-info d-flex flex-column py-5">
+                    <div className="col-4" id="userInfo">
+                        <div className="user-info d-flex flex-column">
                             <h3 className="mb-3">My details</h3>
                             <div className="email">
-                                <p><i class="fas fa-at"></i>: {email}</p>       
+                                <p className="email"><i className="fas fa-at"></i> {email}</p>       
                             </div>
                             <div className="username">
-                                <p><i class="fas fa-user "></i>: {username}</p>
+                                <p className="username"><i className="fas fa-user "></i> {username}</p>
                             </div>
-                            <div className="ps-2">
-                                <p><i class="fa-solid fa-location-pin fa-xl"></i>: {localStorage.getItem("myLocation")}</p>
+                            <div className="location">
+                                <p><i className="fa-solid fa-location-pin fa-xl ps-2"></i> {localStorage.getItem("myLocation")}</p>
                             </div>
                         </div>
                     </div> 
                 </div>
                 <div className="row">
-                    <div className='carousel-container'>
                         <div className="reviews-body">          
                             <h1>My reviews</h1>
                             <ol class="olcards">
                                 {showUsersReviews()}
                             </ol>
                         </div>
-                    </div>          
                 </div>
             </div>
         </div>

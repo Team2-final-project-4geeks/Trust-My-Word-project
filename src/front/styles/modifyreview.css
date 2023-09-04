@@ -1,25 +1,25 @@
 .modify-review-img-container{
-    height: auto;
+    height: 400px;
     width: auto;
 }
 .modify-review-img-container img{
     object-fit: cover;
     height: 100%;
     width: 100%;
+    overflow: hidden;
 }
 #modify-review-container{
     font-family: Arial, Helvetica, sans-serif;
+    margin-top: 30px;
     padding: 50px;
 }
 
-@media (max-width: 420px){
+@media (max-width: 470px){
     #modify-review-container{
         padding: 10px;
+
     }
-    #modify-review-container textarea, #modify-review-container span {
-        font-size: 3vw;
-    }
-    #modify-review-container input{
+    #modify-review-container textarea, #modify-review-container span, #modify-review-container input {
         font-size: 3.5vw;
     }
 }

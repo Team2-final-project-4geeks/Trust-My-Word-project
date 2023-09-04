@@ -1,13 +1,18 @@
-#profileActivityCard{
-  width: 2.6vw;
-  height: 5vh;
-  border-radius: 50%;
+#imageBoard{ /* checked */
+  height: 250px;
+  width: auto;
+  position: relative;
 }
-#publishingDateActivityCard{
-  font-size: 11px;
+#imageBoard img{ /* checked */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#imageBoard:hover img { /* checked */
+  filter: brightness(80%);
 }
 
-#activityCardViewMore{
+#activityCardViewMore{  /* checked */
   position: absolute;
   bottom: 10px;
   width: 100%;
@@ -15,21 +20,30 @@
   justify-content: center;
 }  
 
-#activityBody{
+#activityBody{ /* checked */
   position: relative;
   min-height: 36vh;
 }
 
-#description {
-  font-size: clamp(14px, 1rem, 18px);
+#activity-board{ /* checked */
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+#card-description-activity { /* checked */
+  font-size: clamp(14px, 1rem, 18px); 
+  overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2; 
   -webkit-box-orient: vertical;
   word-wrap: break-word;
-  text-overflow: ellipsis;   
+  text-overflow: ellipsis; 
 }
 
-#activityCardViewMore{
+#activityCardViewMore{ /* checked */
 background-color: transparent;
 border: none;
 color: black;
@@ -38,37 +52,66 @@ cursor: pointer;
 transition: color 0.3s, transform 0.3s;
 }
 
-#activityCardViewMore:hover {
+#activityCardViewMore:hover { /* checked */
 transform: scale(1.15);
 color: #404040;
 text-decoration: underline;
 }
 
-.image-container {
-  position: relative;
-  display: inline-block;
-  background-color: red;
-  height: 257px;
-  width: 430px;
-  overflow: hidden;
+#imageOverlay { /* checked */
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
-.image-container img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ajusta la imagen para que quepa completamente en el contenedor */
-  transition: filter 0.3s;
+#imageBoard:hover #imageOverlay { /* checked */
+  opacity: 1;
+} 
+#infoBoard{ /* checked */
+  height: 330px;
 }
 
-.image-container:hover img {
-filter: brightness(80%);
+#img-container{ /* checked */
+  width: 50px;
+  height: 50px;
 }
 
-.image-container:hover .image-overlay {
-opacity: 1;
+#img-container img { /* checked */
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
 }
-.image-overlay i {
-font-size: 36px; 
-color: white; 
+
+.floating-heart { /* checked */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: red;
+  animation: floatHeart 2s ease-out;
+}
+
+@keyframes floatHeart { /* checked */
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+}
+
+.publishing-date{ /* checked */
+  font-size: 11px;
+}
+
+#photoData{
+  justify-content: space-around;
 }
