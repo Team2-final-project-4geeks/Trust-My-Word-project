@@ -1,4 +1,4 @@
-.profile-image{
+/*.profile-image{
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -15,13 +15,12 @@
   justify-content: center;
 }
 
-/* Asegúrate de que el botón no se salga del contenedor */
 .card-body {
   position: relative;
-  min-height: 350px; /* Puedes ajustar esta altura mínima según tus necesidades */
+  min-height: 350px;
 }
 
-#card-description-trip {
+#card-description-product {
   font-size: clamp(14px, 1rem, 18px); 
   overflow: hidden;
   display: -webkit-box;
@@ -31,7 +30,7 @@
   text-overflow: ellipsis; 
 }
 
-#trip-board{
+#product-board{
 background-color: #f9f9f9;
 padding: 10px;
 border-radius: 5px;
@@ -43,14 +42,14 @@ width: 300px;
   position: relative;
   display: inline-block;
   height: 270px;
-  overflow: hidden; /* Evita que la imagen se desborde del contenedor */
+  overflow: hidden;
 }
 
 .image-container-product img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ajusta la imagen para que quepa completamente en el contenedor */
+  object-fit: cover; 
   transition: filter 0.3s;
 }
 
@@ -90,4 +89,110 @@ opacity: 1;
     transform: translateY(-50px);
     opacity: 0;
   }
+}
+
+@media (max-width: 470px){
+ #visitBoard{
+  padding-right: 20px !important;
+ }
+}
+*/
+
+#imageBoard{
+  height: 250px;
+  width: auto;
+  position: relative;
+}
+#imageBoard img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#imageBoard:hover img {
+  filter: brightness(80%);
+}
+
+#imageOverlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+#imageBoard:hover #imageOverlay {
+  opacity: 1;
+} 
+#infoBoard{
+  height: 330px;
+}
+
+ #img-container{
+  width: 50px;
+  height: 50px;
+}
+
+#img-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.publishing-date{
+    font-size: 11px;
+}
+
+.btn-container-product {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+#card-description-product {
+    font-size: clamp(14px, 1rem, 18px); 
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    text-overflow: ellipsis; 
+  }
+  
+#product-board{
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.floating-heart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: red;
+  animation: floatHeart 2s ease-out;
+}
+
+@keyframes floatHeart {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+}
+
+
+@media (max-width: 470px){
+ #visitBoard{
+  padding-right: 20px !important;
+ }
 }
