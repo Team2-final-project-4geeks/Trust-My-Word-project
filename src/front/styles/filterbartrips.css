@@ -17,12 +17,12 @@
     border-color:  #FFC600;
 }
 
-@media (max-width: 420px){
+@media (max-width: 470px){
 
     #filterTripsBtnGroup button{
     height: 50px;
     width: 65px;
-    font-size: 12px;
+    font-size: 0px;
     }
    .reactIcon{
     font-size: 15px;

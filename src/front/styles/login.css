@@ -39,9 +39,7 @@ a{
     border: 1px solid black;
     border-radius: 5px;
 }
-
 .general-container{
-    height: 400px;  
     margin-bottom: 80px; 
     margin-top: 80px;
     margin-left: 15px; 
@@ -50,4 +48,8 @@ a{
 #login{
     width: 500px;
 }
+@media (max-width: 470px){
+}
+
+
 

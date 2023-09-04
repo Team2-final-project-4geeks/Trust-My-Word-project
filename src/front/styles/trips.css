@@ -1,21 +1,3 @@
-/* .image-container-trips{
-    position: relative;
-    display: inline-block;
-    background-color: red;
-    height: 270px;
-    overflow: hidden;
-}
-.card-trips {
-    position: relative;
-    min-height: 350px; 
-}
-
-.image-container-trips img{
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-} */
 
 .quote-trip{
     height: 300px;
