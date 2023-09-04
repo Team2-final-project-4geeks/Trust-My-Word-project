@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 const ActivityCard = (props)=>{
     const { store, actions } = useContext(Context);
     const [showHeart, setShowHeart] = useState(false);
+    const token = localStorage.getItem("jwt-token");
     const navigate= useNavigate();
     
     const handleReviewClick = (activityId) => {
@@ -50,7 +51,7 @@ const ActivityCard = (props)=>{
             <div className="d-flex flex-column">
                 <div className=" col-11">
                     <div className="d-flex flex-row">
-                        <div id="img-container" className="col-3 ms-1">
+                        <div id="img-container" className="col-3 ms-2">
                             <img src={props.userImage} alt="..."/>
                         </div>
                         <div className="d-flex col-11  ms-2" id="photoData">
