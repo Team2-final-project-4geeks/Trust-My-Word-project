@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
 import { cloudinary } from "cloudinary-core";
 import { Context } from "../store/appContext";
@@ -59,9 +60,9 @@ export const ReviewForm = () => {
       case "product":
         return "https://cdn.pixabay.com/photo/2017/04/06/11/24/fashion-2208045_1280.jpg";
       case "trip":
-        return "https://cdn.pixabay.com/photo/2014/11/06/10/56/airport-519020_1280.jpg";
+        return "https://cdn.pixabay.com/photo/2017/01/15/18/54/bahamas-1982413_1280.jpg";
       default:
-        return "https://cdn.pixabay.com/photo/2020/05/22/21/44/review-5207277_1280.jpg";
+        return "https://i.ibb.co/tpVm5zD/create-review-default.jpg";
     }
   };
 
@@ -125,7 +126,11 @@ export const ReviewForm = () => {
     try {
       const imageUrl = await uploadImage(image); 
       sendDataToAPI(imageUrl);
-      alert('You have created a Review');
+      Swal.fire(
+        'Good job!',
+        'You have created a Review',
+        'success'
+    )
       navigate('/');
     } catch (error) {
       console.error('Error uploading:', error);
@@ -194,15 +199,25 @@ export const ReviewForm = () => {
                     <option value="product" >Products</option>
                     <option value="trip" >Trips</option>
                 </select>
-            <div class="row" id="row-review">
-                    <div class="col-4" id="left-side">
+            <div class="big-review" id="row-review-big">
+                    <div class="left-side" id="left-side">
                         {imagePreview ? (
                         <img src={imagePreview} className="image-create-review" alt="Preview" />
                         ) : (
                             reviewImage
                         )}
                         <br/>
-                        <input className="photo-uploader" type="file" name="imageCloud" accept="image/jpeg" onChange={handleFile} />
+                        <label for="imageUpload" class="custom-file-upload">
+                          <i class="fa-solid fa-upload"></i> Choose File
+                        </label>
+                        <input
+                          id="imageUpload"
+                          type="file"
+                          name="imageCloud"
+                          accept="image/jpeg"
+                          style={{ display: 'none' }} 
+                          onChange={handleFile}
+                        />
                         <span className="date-title mb-1">Date</span>
                         <div className="form-group mt-1" id="inputs">
                             <input 
@@ -231,10 +246,12 @@ export const ReviewForm = () => {
                           </div>
                         </div>
                     </div>
-                    <div class="col-8" id="middle">
-                    <div className="form-group" id="inputs">
+                    <div class="middle" id="middle">
+                        <div className="form-group" id="inputs">
                             <input 
-                                type="text" 
+                                type="text"
+                                maxLength={30}
+                                maxRows={1}
                                 id="title" 
                                 className="review-input"  
                                 placeholder="Title"
@@ -243,28 +260,43 @@ export const ReviewForm = () => {
                                 onChange={(e) => setTitle(e.target.value)}
                                 />  
                         </div>
+                        {category === "activity" ? (
                         <div className="form-group" id="inputs">
+                          <input 
+                              type="text" 
+                              id="type" 
+                              className="review-input"  
+                              name="type"
+                              placeholder="family, adventure, romantic, group, relax, other"
+                              value={type}
+                              onChange={(e) => setType(e.target.value)}
+                              />
+                        </div> 
+                        ) : ("")}
+                        {category === "trip" ? (
+                          <div className="form-group" id="inputs">
                             <input 
                                 type="text" 
                                 id="type" 
                                 className="review-input"  
                                 name="type"
-                                placeholder="Family, Adveture, Relax..."
+                                placeholder="bar, restaurant, romantic, group, relax, other"
                                 value={type}
                                 onChange={(e) => setType(e.target.value)}
-                                /> 
-                        </div>
+                                />
+                          </div> 
+                        ) : ("")}
                         {category === "product" ? (
                           <div className="form-group" id="inputs">
-                            <input
-                              type="text" 
-                              id="store" 
-                              className="review-input"  
-                              placeholder="Store" 
-                              name="store"
-                              value={shop} // Use o valor do estado que você definir para a loja
-                              onChange={(e) => setStore(e.target.value)}
-                            />  
+                            <input 
+                                type="text" 
+                                id="type" 
+                                className="review-input"  
+                                name="type"
+                                placeholder="clothes, accesories, electronics, sports, automotive, other"
+                                value={type}
+                                onChange={(e) => setType(e.target.value)}
+                                />
                           </div>
                         ) : (
                           <div className="form-group mb-3" id="inputs">
@@ -281,6 +313,7 @@ export const ReviewForm = () => {
                             <p className="little-legends">You won't be able to change that after</p> 
                           </div>
                         )}
+                        
                         <div className="form-group" id="inputs">
                             <input
                                 type="text" 

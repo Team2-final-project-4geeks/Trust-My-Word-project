@@ -180,7 +180,7 @@ export const SingleProduct = () => {
 
         <div className="container-fluid mt-5 mb-5 d-flex flex-column align-items-center">
             {oneProduct ? (
-                    <div className="col-11 card border-0 " id="containerSingleProduct">
+                    <div className="col-11 card border-0" id="containerSingleProduct">
                         <div className="row g-0 h-100">
                             <div className="col-4">
                                 <img id="singleProductPicture"src={oneProduct.image} className="img-fluid rounded-start h-100" alt="..."/>

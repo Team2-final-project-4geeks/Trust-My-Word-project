@@ -200,9 +200,12 @@ export const Home = () => {
 			return reversedProducts.slice(0, 3).map((product, index) => (
 				<ProductCard
 					key={index}
+					item={product}
 					product={product}
-					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
+					profile={product.userImage}
 					rating={product.rating}
+					author={product.reviewOwner}
+					counter={product.counter}
 				/>
 			));
 			} else {

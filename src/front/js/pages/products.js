@@ -31,8 +31,7 @@ export const Products = () => {
 		.catch(err => console.error(err))	
 	}
 
-	const filteredProducts = products.filter((product)=> product.location.toLowerCase().includes(store.query) &&
-    (store.selectedType === "" || product.type === store.selectedType)) 
+	const filteredProducts = products.filter((product)=>store.selectedType === "" || product.type === store.selectedType)
 		
 		return (
 			<div className="container-fluid mt-2">
