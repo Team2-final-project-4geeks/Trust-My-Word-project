@@ -26,7 +26,6 @@ export const Navbar = () => {
 		alert("You are Logged Out")
 	}
  
-
 	useEffect(() => {		
 		actions.getUser(localStorage.getItem("userId"))
 	}, []);
@@ -49,10 +48,10 @@ export const Navbar = () => {
             <img className="logo-link" src="https://i.ibb.co/8m2mpN3/0d3b546942f94de196812ac8af0bf4d9-fotor-bg-remover-20230809143940.png" alt="0d3b546942f94de196812ac8af0bf4d9" border="0" />
           </Link>
         </div>
-          <div className="menu-icon" onClick={toggleMenu}>
+        <div className="menu-icon" onClick={toggleMenu}>
               <GiHamburgerMenu class="HamburgerMenu" />
-          </div>
-          <div className={`menu ${menuVisible ? "visible" : ""}`}>
+        </div>
+        <div className={`menu ${menuVisible ? "visible" : ""}`}>
             <div className="nav-item" id="item-home">
               <a className="nav-link text-light" href="#" onClick={() => navigate("/")}>
                 Home
