@@ -258,14 +258,14 @@ export const Home = () => {
 				<div className="container-fluid mt-5">				
 					<div className="row row-cols-1 row-cols-md-5 g-4">													
 						{showNearReviews()}						
-				</div>	
+					</div>	
+				</div>
 			</div>
 
-			</div>
 			<div className="container-fluid">
-					<div className="general-image" id="imageContainerActivities">
-						<h1 id="titleActivities">ACTIVITIES</h1>
-					</div>
+				<div className="general-image" id="imageContainerActivities">
+					<h1 id="titleActivities">ACTIVITIES</h1>
+				</div>
 			</div>
 			<div className="container-fluid mt-5">				
 				<div className="container-fluid mt-5">			
@@ -274,16 +274,16 @@ export const Home = () => {
 					</div>	
 				</div>						
 			</div>
+
 			<div className="container-fluid mt-5">
-					<div class="general-image" id="imageContainerProducts">
-						<h1 id="titleProducts">PRODUCTS</h1>
+				<div class="general-image" id="imageContainerProducts">
+					<h1 id="titleProducts">PRODUCTS</h1>
+				</div>    	
+				<div className="container-fluid mt-4" >
+					<div className="row row-cols-1 row-cols-md-4 g-3">
+						{showProducts()}
 					</div>
-    	
-					<div className="container-fluid mt-4" >
-						<div className="row row-cols-1 row-cols-md-4 g-3">
-							{showProducts()}
-						</div>
-					</div>
+				</div>
 			</div>	
 
 			<div className="container-fluid mt-5">
