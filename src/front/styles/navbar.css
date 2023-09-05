@@ -5,8 +5,7 @@
   height: 50vh;
   width:100%;
   position: relative;
-  overflow: hidden; /* Añade esta línea para ocultar cualquier desbordamiento */
-
+  overflow: hidden;
 }
 
 .navbar::before {
@@ -31,10 +30,8 @@
 .logo img {
   max-width: 10vh;
 }
-.HamburgerMenu{
-  display: none;
-}
-.menu {
+
+.navbarNav {
   display:flex;
   align-self: flex-start;
   margin-right: 25px;
@@ -161,38 +158,6 @@
   .logo img {
     max-width: 10vh;
   }
-  .menu {
-    display: none;
-  }
-  .menu.visible {
-    display: flex;
-    background-color: red;
-    flex-direction: column;
-    top: 10%;
-    font-size: 1rem;
-    border-radius: 10px;
-    z-index: 1; 
-  
-  }
-  .menu.visible menu.icon{
-    display:none;
-  }
- 
-  .HamburgerMenu{
-    display:flex;
-    color: #ffc600;
-    width: 7vh;
-  }
-  .menu-icon {
-    cursor: pointer;
-    align-self: inline-end;
-    background-color: blue;
-    float: right;
-    z-index: 1;
-    width: 8vh;
-    margin-right: 30px;
-    margin-top: 10px;
-  }
-  
+
 }
 

@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState  } from "react";
 import { Context} from "../store/appContext";
 import ActivityCard from "../component/activitycard"
-import { ProductCard } from "../component/productcard.jsx";
+import { ProductCard } from "../component/productcard.js";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
 import TriipCard from "../component/triipcard.js";
@@ -30,10 +30,6 @@ export const Home = () => {
 	  getTrips();
 	  geo();
 	}, []);
-
-	// useEffect(()=>{
-	// 	holaaaa1123344()
-	// },[reviewLocation])
 
 	useEffect(() => {
 	  if (coordinatesAvailable) { 
