@@ -17,7 +17,6 @@ export const ReviewForm = () => {
   const [publishing_date, setPublishing_date] = useState("")
   const [link, setLink] = useState("")
   const [price, setPrice] = useState("")
-  const [shop, setShop] = useState("")
   const [image, setImage] = useState("")
   const [category, setCategory] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -192,7 +191,7 @@ export const ReviewForm = () => {
             
                 <select class="form-select" onChange={(e) => {
                     handleCategoryChange(e);
-                    setImagePreview(null); // Limpa a imagem de pré-visualização ao mudar a categoria
+                    setImagePreview(null);
                     setCategory(e.target.value)}} aria-label="Default select example">
                     <option selected >Category</option>
                     <option value="activity" >Activities</option>
@@ -298,7 +297,7 @@ export const ReviewForm = () => {
                                 onChange={(e) => setType(e.target.value)}
                                 />
                           </div>
-                        ) : (
+                        ) : ("")}
                           <div className="form-group mb-3" id="inputs">
                             <input
                               type="text" 
@@ -312,8 +311,6 @@ export const ReviewForm = () => {
                               />
                             <p className="little-legends">You won't be able to change that after</p> 
                           </div>
-                        )}
-                        
                         <div className="form-group" id="inputs">
                             <input
                                 type="text" 
