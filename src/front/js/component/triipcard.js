@@ -76,7 +76,7 @@ const TriipCard = (props)=>{
                                         <div id="card-description-trip">
                                             <p className="card-text"><i className="fas fa-quote-left mt-2 me-2"></i> <i> {props.trip.description}</i></p>
                                         </div>
-                                        <p className="card-text mt-4">{props.trip.price}</p>
+                                        <p className="card-text mt-4">{props.trip.price}€</p>
                                     </div>
                                 </div>
 

@@ -78,7 +78,7 @@ const ActivityCard = (props)=>{
                             <div id="card-description-activity">
                                 <p className="card-text"><i className="fas fa-quote-left mt-2 me-2"></i> <i> {props.activity.description}</i></p>
                             </div>
-                            <p className="card-text mt-4">{props.activity.price}</p>
+                            <p className="card-text mt-4">{props.activity.price}€</p>
                         </div>
                     </div>
 

@@ -74,6 +74,13 @@ export const ReviewForm = () => {
   
   const reviewImage = <img src={getImageForCategory()} className="image-create-review" alt="Preview" /> 
 
+  const handlePriceChange = (inputValue) => {
+    if (inputValue.includes('€')) {
+        inputValue = inputValue.replace('€', '');
+    }
+    setPrice(inputValue);
+  }
+  
   const handleFile = (e) => {
     if (!category) {
       alert('Please select a category before creating a review.');
@@ -330,7 +337,7 @@ export const ReviewForm = () => {
                                 className="review-input"  
                                 name="price"
                                 value={price}
-                                onChange={(e) => setPrice(e.target.value )}
+                                onChange={(e) => handlePriceChange(e.target.value)}
                             />
                             <div className="euro-symbol">€</div>
                           </div>

@@ -7,7 +7,9 @@
   position: relative;
   overflow: hidden;
 }
-
+#navbarContainer{
+  margin-top: -25px;
+}
 .navbar::before {
   content: "";
   position: absolute;
@@ -23,21 +25,21 @@
 .logo{
   align-self: flex-start;
   margin-left:15px;
-  margin-top: 5px;
   max-width: 18vh;
+  margin-bottom: 175px;
 }
   
 .logo img {
   max-width: 10vh;
 }
 
-.navbarNav {
-  display:flex;
-  align-self: flex-start;
-  margin-right: 25px;
+#navbarItems{
+  justify-content: end;
   font-size: 1.5rem;
-  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 175px;
 }
+
 .nav-item {
   margin-left: -20px;
   font-size: 20px; 
@@ -146,18 +148,36 @@
 @media (max-width: 800px) {
   .navbar {
     height: 40vh;
-    display: flex;
-    flex-direction: row;
-
   }
   .logo {
-    align-self: flex-start;
-    float: left;
-
+    justify-content: flex-end;
+    position: absolute;
   }
   .logo img {
     max-width: 10vh;
   }
+ 
+  #navbarItems{
+    display: flex;
+    justify-content: start;
+    font-size: 0.75rem;
+    margin-left: 10px;
+  }
+  .token{
+    display:flex;
+    margin-right: px;
+    margin-left: 10px;
+    flex-direction: column;
+  }
+  #all-button-content{
+    border: transparent;
+    border-color: transparent;
+    display: flex;
+    flex-direction: column;
+  }
+ 
+ 
+}
+@media (max-width: 800px) {
 
 }
-
