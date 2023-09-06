@@ -45,9 +45,9 @@
     font-size: 11px;
 }
 
-.btn-container-trip {
-    position: absolute;
+#btn-container-trip {
     bottom: 10px;
+    margin-top: 20px;
     width: 100%;
     display: flex;
     justify-content: center;
