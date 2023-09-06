@@ -5,6 +5,9 @@ import { FaPencilAlt } from 'react-icons/fa';
 import "../../styles/userpage.css";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
+import CaraouselReview from "../component/carouselreviews";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 
 
@@ -21,6 +24,27 @@ const UserPage = () =>{
     const [image,setImage] = useState("")
     const [userimage, setUserimage] = useState("")
     const fileInputRef = useRef(null);
+
+    const responsive = {        
+        superLargeDesktop: {
+            // the naming can be any, depends on you.
+            breakpoint: { max: 4000, min: 3000 },
+            items: 5
+          },
+          desktop: {
+            breakpoint: { max: 2999, min: 1024 },
+            items: 4
+          },
+          tablet: {
+            breakpoint: { max: 1023, min: 464 },
+            items: 2
+          },
+          mobile: {
+            breakpoint: { max: 463, min: 0 },
+            items: 1
+          }
+      };
+
 
 
     useEffect(() => {		
@@ -156,19 +180,13 @@ const UserPage = () =>{
     alert(' You are not logged in!')
     }
 }
+
 const showUsersReviews =()=> {
-    return reviews.map((review, index) =>{
+    const orderedArray = reviews.sort((a, b) => b.counter - a.counter);
+
+    return orderedArray.map((review, index) =>{
         return(
-                <li style={{ '--cardColor': '#ffc600' }} key={index}>
-                <div class="content">
-                    <div class="icon"> <span className="input-group-text"><FaPencilAlt 
-                      onClick={()=>{
-                         navigate("/modify-review/" + review.id)
-                        }} size={45} color="grey" id="pencil"/></span></div>
-                    <div class="title">{review.title}</div>
-                    <div class="text">{review.description}</div>
-                </div>
-            </li>
+            <CaraouselReview  image={review.userImage} category={review.category} id={review.id} title={review.title} author={review.reviewOwner} description={review.description} counter={review.counter}/>
         )
     })
 }
@@ -222,12 +240,11 @@ const showUsersReviews =()=> {
                             />
                             <button className="btn btn-warning"  onClick={handleUpload}>Submit</button> 
                            </div>
-                          
-    
+                        
                         </div>
                     </div>
                     <div className="col-4" id="userInfo">
-                        <div className="user-info d-flex flex-column">
+                        <div className="user-info d-flex flex-column justify-content-around">
                             <h3 className="mb-3">My details</h3>
                             <div className="email">
                                 <p className="email"><i className="fas fa-at"></i> {email}</p>       
@@ -244,9 +261,11 @@ const showUsersReviews =()=> {
                 <div className="row">
                         <div className="reviews-body">          
                             <h1>My reviews</h1>
-                            <ol class="olcards">
+                            <div className="container-fluid">
+                            <Carousel showDots={true} responsive={responsive} arrows={false} swipeable={true} >
                                 {showUsersReviews()}
-                            </ol>
+                            </Carousel>
+                        </div>
                         </div>
                 </div>
             </div>
