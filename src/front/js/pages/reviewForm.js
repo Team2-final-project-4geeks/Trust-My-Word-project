@@ -173,25 +173,43 @@ export const ReviewForm = () => {
   const sendDataToAPI = (image) => {
     const token = localStorage.getItem('jwt-token');
 		if(token) {
-    fetch(process.env.BACKEND_URL + `api/create-review`, { 
-            method: "POST", 
-            headers: { 
-                "Content-Type": "application/json",
-                "Authorization" : "Bearer " + token
-            },
-            body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud:image,user,rating, latitude, longitude}) 
-        })
-        .then((res) => res.json())
-        .then((result) => {
-            console.log(result);
-        }).catch((err) => {
-            console.log(err);
-        })
-        }else  {
-          alert(' You are not logged in!')
-        }
-      };
+     if( selectedCategory== "product"){
+      fetch(process.env.BACKEND_URL + `api/create-review`, { 
+        method: "POST", 
+        headers: { 
+            "Content-Type": "application/json",
+            "Authorization" : "Bearer " + token
+        },
+        body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud:image,user,rating, latitude: null, longitude:null}) 
+    })
+    .then((res) => res.json())
+    .then((result) => {
+        console.log(result);
+    }).catch((err) => {
+        console.log(err);
+    })
 
+
+     }
+     else {
+        fetch(process.env.BACKEND_URL + `api/create-review`, { 
+          method: "POST", 
+          headers: { 
+              "Content-Type": "application/json",
+              "Authorization" : "Bearer " + token
+          },
+          body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud:image,user,rating, latitude, longitude}) 
+      })
+      .then((res) => res.json())
+      .then((result) => {
+          console.log(result);
+      }).catch((err) => {
+          console.log(err);
+      })
+      }
+     }
+   
+    };
     return (
         <div class="container text-center" id="full-content">
              <h1>Insert Your Review</h1>
@@ -304,20 +322,21 @@ export const ReviewForm = () => {
                                 onChange={(e) => setType(e.target.value)}
                                 />
                           </div>
-                        ) : ("")}
-                          <div className="form-group mb-3" id="inputs">
-                            <input
-                              type="text" 
-                              id="location" 
-                              className="review-input"  
-                              placeholder="City" 
-                              name="location"
-                              value={location}
-                              onChange={(e) => setLocation(e.target.value)}
-                              onBlur={() => setReviewLocation(location)}
-                              />
-                            <p className="little-legends">You won't be able to change that after</p> 
-                          </div>
+                        ) : (
+                        <div className="form-group mb-3" id="inputs">
+                          <input
+                            type="text" 
+                            id="location" 
+                            className="review-input"  
+                            placeholder="City" 
+                            name="location"
+                            value={location}
+                            onChange={(e) => setLocation(e.target.value)}
+                            onBlur={() => setReviewLocation(location)}
+                            />
+                        <p className="little-legends">You won't be able to change that after</p> 
+                        </div>
+                        )}
                         <div className="form-group" id="inputs">
                             <input
                                 type="text" 

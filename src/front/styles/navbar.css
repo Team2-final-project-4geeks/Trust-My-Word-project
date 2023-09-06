@@ -1,5 +1,6 @@
 .navbar {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   color: white;
   height: 50vh;
@@ -7,9 +8,7 @@
   position: relative;
   overflow: hidden;
 }
-#navbarContainer{
-  margin-top: -25px;
-}
+
 .navbar::before {
   content: "";
   position: absolute;
@@ -21,20 +20,11 @@
   background-size: cover;
   background-position: center;
   z-index: -1;
-}
-.logo-link{
-  align-self: flex-start;
-  margin-left:15px;
-  max-width: 18vh;
-  margin-bottom: 175px;
+}*/
+#imageBrand{
+  width: 50px;
 }
 
-.logo img {
-  max-width: 10vh;
-}
-.navbar-brand{
-  z-index: 1;
-}
 /*
 #navbarItems{
   justify-content: end;
