@@ -4,7 +4,6 @@
 
 #singleActivityPicture{
     object-fit: cover;
-    width:100%;
 }
 #containerSingle{
     width:95%;
@@ -34,6 +33,9 @@
     min-height: 450px;
     margin:auto;
 }
+#commentsTitle{
+    font-size: 5.5vw;
+}
 #basic-addon1, #commentWrite{
     background: rgb(95,191,153);
 }
@@ -47,7 +49,8 @@
 }
 #commentWrite{
     background: black;
-    color:goldenrod;    
+    color:goldenrod;
+    font-size: 18px;   
 }
 #sumbitButtonSingle{
     margin:auto;

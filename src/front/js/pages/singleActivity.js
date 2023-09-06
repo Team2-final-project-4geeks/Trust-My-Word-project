@@ -1,7 +1,6 @@
 import React, {useEffect, useState, useContext} from "react";
 import { useParams } from "react-router-dom";
 import ShareComponent from "../component/shareComponent.js";
-import { Context } from "../store/appContext";
 import Swal from 'sweetalert2';
 import CarouselCard from "../component/carouselcard.js";
 import Carousel from "react-multi-carousel";
@@ -16,6 +15,12 @@ const SingleActivity = () => {
     const [allDescriptions, setAllDescriptions] = useState([]);
     const [description, setDescription] = useState("");
     const [date,setDate]= useState("");
+    const params = useParams();
+    const user_id=localStorage.getItem("userId")    
+    const author=localStorage.getItem("username")
+    const review_id= params.id;    
+    const currentDate = new Date();
+    const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
     const responsive = {        
         superLargeDesktop: {
             // the naming can be any, depends on you.
@@ -24,7 +29,7 @@ const SingleActivity = () => {
           },
           desktop: {
             breakpoint: { max: 2999, min: 1024 },
-            items: 3
+            items: 4
           },
           tablet: {
             breakpoint: { max: 1023, min: 464 },
@@ -35,18 +40,6 @@ const SingleActivity = () => {
             items: 1
           }
       };
-
-    const params = useParams();
-    const {store, actions} = useContext(Context);
-
-    const user_id=localStorage.getItem("userId")
-    const image= localStorage.getItem("image")
-    const author=localStorage.getItem("username")
-    const review_id= params.id;
-    const userName=store.userName;
-    const currentDate = new Date();
-    const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
-
 
     const map = `https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=400x400&key=${process.env.API_KEY}`
 
@@ -74,7 +67,6 @@ const SingleActivity = () => {
             return resp.json();
         })
         .then(data=>{
-            console.log(data);
             setActivity(data);
             setCity(data.location);                        
         })
@@ -108,8 +100,7 @@ const SingleActivity = () => {
             return resp.json();
         })
         .then(data=> {		
-        setAllDescriptions(data);
-        console.log(data);            
+        setAllDescriptions(data);                   
         })
         .catch(err => console.log('comments' + err))
         }else{
@@ -122,6 +113,7 @@ const SingleActivity = () => {
 
     
     const createComment = () => {
+
         const token = localStorage.getItem('jwt-token');
         if(token) {
         fetch(process.env.BACKEND_URL + 'api/create-comment', {
@@ -186,7 +178,7 @@ const SingleActivity = () => {
                             </div>
                             <div className="col-sm-12 col-md-6">
                                 <div className="card h-100 border-0 px-3">
-                                    <h4 className="card-title fs-3 ms-3 mt-4 mb-4 text-center">{activity.title}</h4>                                
+                                    <h4 className="card-title fs-3 ms-3 mt-5 mb-4 text-center">{activity.title}</h4>                                
                                         <div className="d-flex flex-row mt-2 justify-content-center" id="singleRow1">
                                             <p className="col-sm-3 card-text ms-2"><i class="fas fa-heart fa-xs me-2"></i>{activity.reviewOwner}</p>
                                             <p className="col-sm-4 card-text text-center ms-2"><i class="fas fa-info-circle fa-sm me-2"></i>{activity.type} activity</p>
@@ -232,27 +224,39 @@ const SingleActivity = () => {
                     </div>
                 )}
             </div>
+
             <div className="container border-0">
                 <div className="row justify-content-center">                
                     <div className="col border-0" id="commentSection">
-                        <h4 className="my-5 ms-4" style={{ fontSize: '6vw' }}>Comments</h4>
-                        <div className="container-fluid">
-                            <Carousel showDots={true} arrows={false} responsive={responsive} swipeable={true}>
-                                {showComments()}
-                            </Carousel>
+                        <h4 className="my-5 ms-4" id="commentsTitle">Comments</h4>
+                        <div className="container border-0">
+                            <div className="row">
+                                <Carousel showDots={true} arrows={false} responsive={responsive} swipeable={true}>
+                                    {showComments()}
+                                </Carousel>
+                            </div>
                         </div>
                     </div>
-                </div> 
+                </div>
+
                 <div className="row">                 
                     <div className="input-group mt-5 mx-auto justify-content-center" id="comment">
-                        <span className="col-sm-2 col-md-3 input-group-text rounded me-2 text-center" id="commentWrite">Post a comment:</span>
-                        <textarea className="col-sm-12 col-md-7 form-control" id="commentBox" value={description} onChange={(e)=> setDescription(e.target.value)} aria-label="With textarea"></textarea>
+                        <span className="col-sm-3 input-group-text rounded me-2 text-wrap" id="commentWrite">Post a comment:</span>
+                        <textarea 
+                            className="col-sm-9 col-lg-5 form-control" 
+                            id="commentBox" 
+                            maxLength={125} 
+                            value={description} 
+                            onChange={(e)=> setDescription(e.target.value)} 
+                            aria-label="With textarea">                                
+                        </textarea>
                     </div>
                 </div>
+
                 <div className="row">
                     <div className="container-fluid d-flex justify-content-center">
                         <button 
-                            type="button" 
+                            type="button"                            
                             className="btn btn-dark mt-5" 
                             onClick={createComment}
                             id="sumbitButtonSingle"> Send 
