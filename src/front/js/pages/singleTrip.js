@@ -193,36 +193,53 @@ const SingleTrip = () =>{
 
     <div className="container-fluid mt-5 mb-5" >
 			{ singleTrip ? (
-            <div id="backgroundSingleTrip">
-                <div className="card m-0 border-0 " id="containerSingleTrip">                    
-                    <div className="row g-0 h-100">
-                        <div className="col-md-3">
-                            <img id="singleTripPicture"src={image} className="img-fluid rounded-start h-100" alt="..."/>
-                        </div>
-                        <div className="col-md-6">
-                            <div className="card h-100 border-0 px-3">
-                                <h5 className="card-title ms-3 mt-3 mb-4 text-center" id="activityTitle">{singleTrip.title}</h5>
-                                    <div className="d-flex flex-row mt-2" id="activityRow">
-                                        <p className="card-text ms-2">{singleTrip.id}</p>
-                                        <p className="card-text ms-2">{weather} °C</p>   
-                                        <p className="card-text ms-2"><i class="fas fa-heart fa-xs me-2"></i>{userName}</p>                                     
-                                        <p className="card-text ms-2">{singleTrip.publishing_date}</p>
-                                    </div>
-                                <p className="card-text ms-2">{singleTrip.type}</p>
-                                <p className="card-text ms-2">{singleTrip.location}</p>
-                                <p className="card-text ms-2"><i>"{singleTrip.description}"</i></p>
-                                <p className="card-text ms-2">{singleTrip.price}</p>
-                                <ShareComponent/>
-                            </div>
-                        </div>
-                        <div className="col-md-3 border-0 h-100">
-                            <div className="container-fluid h-100">
-                                <img className="img-fluid rounded-start" id="mapSingleActivity" src={map}/>
-                            </div>
-                        </div>                        
-                    </div>                    
-                </div>
-            </div>
+           <div className="card m-0 border-0 mx-auto p-0"   id="containerSingle">                    
+           <div className="row g-0 h-100 w-100">
+               <div className="col-sm-12 col-md-3" id="imageContainer">
+                   <img id="singleActivityPicture"src={singleTrip.image} className="rounded-start h-100 w-100 col-sm-12" alt="picture chosen by the user"/>
+               </div>
+               <div className="col-sm-12 col-md-6">
+                   <div className="card h-100 border-0 px-3">
+                       <h4 className="card-title fs-3 ms-3 mt-4 mb-4 text-center">{singleTrip.title}</h4>                                
+                           <div className="d-flex flex-row mt-2 justify-content-center" id="singleRow1">
+                               <p className="col-sm-3 card-text ms-2"><i class="fas fa-heart fa-xs me-2"></i>{singleTrip.reviewOwner}</p>
+                               <p className="col-sm-4 card-text text-center ms-2"><i class="fas fa-info-circle fa-sm me-2"></i>{singleTrip.type} activity</p>
+                               <p className="col-sm-4 card-text text-center ms-2"><i class="fas fa-calendar-alt fa-sm me-2"></i>{singleTrip.publishing_date}</p>   
+                           </div>
+                       <div className="row">
+                           <p className="col-sm-12 card-text ms-2 my-2"><i>" {singleTrip.description} " </i></p>
+                       </div>
+                           <div className="d-flex flex-row mt-3 justify-content-center" id="singleRow2">                                        
+                               <p className="col-sm-3 card-text ms-2"><i class="fas fa-money-bill-wave me-2"></i>{singleTrip.price}</p>
+                               <p className="col-sm-4 card-text ms-2 text-center"><i class="fas fa-thermometer-half fa-sm me-2"></i>{weather}</p>
+                               <p className="col-sm-4 card-text ms-2 text-center"><i class="fas fa-map-marker-alt fa-sm me-2"></i>{singleTrip.location}</p> 
+                           </div>                                             
+                       <div className="card-text mt-1 bottom-0 pb-5" id="activityRow">
+                           <div className="row">
+                               {/* <div className="col-sm-12">
+                                   <a
+                                   href={singleTrip.link}
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   className="card-link ms-2 me-3 pb-3 d-flex justify-content-center"
+                                   >
+                                       <small className="text-center w-100">{activity.link}</small>
+                                   </a>
+                               </div> */}
+                               <div className="col-sm-12">
+                                   <ShareComponent />
+                               </div>
+                           </div>
+                       </div>                                                            
+                   </div>
+               </div>
+               <div className="col-sm-12 col-md-3 border-0">
+                   <div className="container-fluid h-100">
+                       <img className="img-fluid rounded-start" id="mapSingleActivity" src={map}/>
+                   </div>
+               </div>                        
+           </div>                    
+       </div>  
             ):(
                 <div className="spinner-border" role="status">
                     <span className="visually-hidden">Loading...</span>

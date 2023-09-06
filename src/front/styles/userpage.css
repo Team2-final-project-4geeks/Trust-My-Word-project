@@ -14,138 +14,45 @@
 .container {
     border: solid 1px black
   }
-  .circle {
+.circle {
     transform: translateY(-25%);
     width: 200px; 
     height: 200px;  
   }
-  .circle img {
+.circle img {
     width: 100%;
     height: 100%;
     border-radius: 50%; 
     object-fit: cover;
-  }
-  .right{
+}
+.right{
+    height: 300px;
+}
+.user-info{
     height: 300px;
   }
-  .user-info{
-    height: 300px;
-  }
-  .row{
+.row{
     margin:0;
   }
-  .userSection{
+.userSection{
     height: auto;
     margin-top: 100px;
 
   }
-  .reviews-body {
+.reviews-body {
     background: #e4ebf4;
     padding: 2rem;
   }
   h1 {
     font-family: sans-serif;
   }
-  .olcards,
-  .olcards * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
   
-  .olcards {
-    list-style: none;
-    counter-reset: cardCount;
-    font-family: sans-serif;
-    display: flex;
-    flex-direction: column;
-    --cardsGap: 1rem;
-    gap: var(--cardsGap);
-    padding-bottom: var(--cardsGap);
-  }
-  .olcards li {
-    counter-increment: cardCount;
-    display: flex;
-    color: rgb(0, 0, 0);
-    --labelOffset: 1rem;
-    --arrowClipSize: 1.5rem;
-    margin-top: var(--labelOffset);
-  }
-  
-  .olcards li::before {
-    content: counter(cardCount, decimal-leading-zero);
-    background: white;
-    color: var(--cardColor);
-    font-size: 2em;
-    font-weight: 700;
-    transform: translateY(calc(-1 * var(--labelOffset)));
-    margin-right: calc(-1 * var(--labelOffset));
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-inline: 0.5em;
-  }
-  
-  .olcards li .content {
-    background-color: var(--cardColor);
-    --inlinePadding: 1em;
-    --boxPadding: 0.5em;
-    display: grid;
-    padding: var(--boxPadding) calc(var(--inlinePadding) + var(--arrowClipSize))
-      var(--boxPadding) calc(var(--inlinePadding) + var(--labelOffset));
-    grid-template-areas:
-      "icon title"
-      "icon text";
-    gap: 0.25em 1em;
-    clip-path: polygon(
-      0 0,
-      calc(100% - var(--arrowClipSize)) 0,
-      100% 50%,
-      calc(100% - var(--arrowClipSize)) 100%,
-      calc(100% - var(--arrowClipSize)) calc(100% + var(--cardsGap)),
-      0 calc(100% + var(--cardsGap))
-    );
-    position: relative;
-  }
-  .olcards li .content::before {
-    content: "";
-    position: absolute;
-    width: var(--labelOffset);
-    height: var(--labelOffset);
-    background: var(--cardColor);
-    left: 0;
-    bottom: 0;
-    clip-path: polygon(0 0, 100% 0, 0 100%);
-    filter: brightness(0.75);
-  }
-  .olcards li .content::after {
-    content: "";
-    position: absolute;
-    height: var(--cardsGap);
-    width: var(--cardsGap);
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.25), transparent 50%);
-    left: 0;
-    top: 100%;
-  }
-  .olcards li .icon {
-    grid-area: icon;
-    align-self: center;
-    font-size: 2em;
-  }
-  .olcards li .content .title {
-    grid-area: title;
-    font-size: 1.25em;
-  }
-  .olcards li .content .text {
-    grid-area: text;
-  }
-  
+
 
   @media (max-width: 470px){
     .circle{
-      width: 80px;
-      height: 80px;
+      width: 90px;
+      height: 90px;
     }
     #insight{
       width: auto;
@@ -168,7 +75,7 @@
     }
     #userInfo{
       height: auto;
-      margin-top: 30px;
+      margin-top: 19px;
     }
     #userInfo p {
       font-size: 15px;
@@ -177,7 +84,7 @@
       font-size: 15px;
     }
     #userInfo h3 {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: bolder;
     }
     #imageProfile{
@@ -197,6 +104,12 @@
     .location i {
       margin-bottom: 10px;
      
+    }
+    .olcards li .content .title {
+      font-size: 3vw;
+    }
+    .olcards li .content .text {
+      font-size: 2.8vw;
     }
   }
 

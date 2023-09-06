@@ -1,5 +1,4 @@
-
-
+/* 
 #singleTripPicture{
     object-fit: cover;    
 }
@@ -56,4 +55,76 @@
 #sumbitButtonSingle{
     background:black;
     color:white;
+} */
+
+
+#imageContainer{
+    max-width:100%;
+}
+
+#singleActivityPicture{
+    object-fit: cover;
+    width:100%;
+}
+#containerSingle{
+    width:95%;
+    min-height:450px;
+    justify-content: center;
+    align-items: center;
+    display:flex;
+    box-shadow: rgb(218, 165, 32) -2px -2px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 4px;
+}
+#mapSingleActivity{
+    object-fit: cover;
+    height: 100%;
+    width:100%;
+}
+#singleRow1{
+    justify-content: space-between;
+}
+#singleRow2{
+    justify-content: space-between;
+}
+
+#activityRow{
+    justify-content: space-between;
+}
+#commentSection{
+    width: 1350px;
+    min-height: 450px;
+    margin:auto;
+}
+#basic-addon1, #commentWrite{
+    background: rgb(95,191,153);
+}
+#sumbitButtonSingle{
+    background:black;
+    color:white;
+}
+#commentSection{
+    width: 1350px;
+    min-height: 450px;    
+}
+#commentWrite{
+    background: black;
+    color:goldenrod;    
+}
+#sumbitButtonSingle{
+    margin:auto;
+    background:black;
+    color: goldenrod;
+}
+#commentBox, #commentWrite{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+#comment{
+    width:700px;    
+}
+
+.commentHeadline{
+    margin-left: 250px;
+}
+
+.my-5{
+    font-size:50px;
 }

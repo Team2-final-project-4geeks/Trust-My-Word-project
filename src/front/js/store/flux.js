@@ -75,7 +75,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return resp.json();
 				})
 				.then(data => {            
-					console.log(data);
 					actions.getUser(id);
 				})
 				.catch(error => {			
@@ -100,12 +99,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				.then(data=> {
 					const store = getStore();
-					console.log(data.favourites)
 					const jsonFavourites = data.favourites.map(item => {
 						const validString = item.replace(/'/g, '"')
 						return JSON.parse(validString)
 					})
-					console.log(jsonFavourites)		
 					setStore({ ...store, favourite: jsonFavourites });
 				})
 				.catch(error => {			

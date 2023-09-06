@@ -169,7 +169,8 @@ const SingleActivity = () => {
                 date={comment.date}
                 userLogged={user_id}
                 authorId={comment.user_id} 
-                />                      
+                />  
+                                    
             )
         }			
     )}

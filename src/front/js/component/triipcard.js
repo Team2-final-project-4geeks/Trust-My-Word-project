@@ -50,7 +50,7 @@ const TriipCard = (props)=>{
                         <div className="d-flex flex-column">
                             <div className=" col-12">
                                 <div className="d-flex flex-row">
-                                    <div id="img-container" className="col-3">
+                                    <div id="img-container" className="col-3" alt="review-img">
                                         <img src={props.profile} alt="..."/>
                                     </div>
                                     <div className="d-flex justify-content-between col-10 ms-3">
@@ -60,7 +60,7 @@ const TriipCard = (props)=>{
                                                 <p className="card-text"><small className="text-muted publishing-date">{props.trip.publishing_date}</small></p>
                                         </div>
                                         <div className="d-flex align-items-center" id="visitBoard">
-                                                <p className="text-muted"> <small>Visited {props.trip.counter} <i class="fa-solid fa-eye"></i></small></p>
+                                                <p className="text-muted"> <small>Visited {props.trip.counter} <i className="fa-solid fa-eye"></i></small></p>
                                         </div>     
                                     </div>                                
                                 </div>
@@ -80,7 +80,7 @@ const TriipCard = (props)=>{
                                     </div>
                                 </div>
 
-                                <div className="btn-container-trip">
+                                <div id="btn-container-trip">
                                     <ViewMore item={props.item.id}/>
                                 </div>
                                 <div>
