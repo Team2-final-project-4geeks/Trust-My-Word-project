@@ -252,7 +252,6 @@ const SingleActivity = () => {
                         </textarea>
                     </div>
                 </div>
-
                 <div className="row">
                     <div className="container-fluid d-flex justify-content-center">
                         <button 

@@ -24,6 +24,7 @@ const UserPage = () =>{
     const [image,setImage] = useState("")
     const [userimage, setUserimage] = useState("")
     const fileInputRef = useRef(null);
+    const currentUserId = localStorage.getItem("userId")
 
     const responsive = {        
         superLargeDesktop: {
@@ -49,7 +50,7 @@ const UserPage = () =>{
 
     useEffect(() => {		
 		getReviews();
-        getUserItems()
+    getUserItems()
 	}, []);
 
     const handleFile = (e) => {
@@ -142,7 +143,6 @@ const UserPage = () =>{
                 })
                 .then((res) => res.json())
                 .then((result) => {
-                    console.log(result);
                     setUserimage(result.image)
                 }).catch((err) => {
                     console.log(err);
@@ -166,7 +166,8 @@ const UserPage = () =>{
      .then(resp => {								
         return resp.json();
     })
-    .then(data=> {	
+    .then(data=> {
+      console.log(data);
         setComments(data.comments)
         setFavourites(data.favourites)	
         setReviews(data.reviews);
@@ -181,15 +182,32 @@ const UserPage = () =>{
     }
 }
 
-const showUsersReviews =()=> {
-    const orderedArray = reviews.sort((a, b) => b.counter - a.counter);
+    const showUsersReviews =()=> {
+        const orderedArray = reviews.sort((a, b) => b.counter - a.counter);
+        return orderedArray.map((review, index) =>{
+            return(
+                <CaraouselReview  image={review.userImage}  
+                                  reviewUserId={review.user_id}  
+                                  userId={currentUserId} 
+                                  category={review.category} 
+                                  id={review.id} 
+                                  title={review.title} 
+                                  author={review.reviewOwner} 
+                                  description={review.description} 
+                                  counter={review.counter}
+                                  fetchReviews={getReviews} 
+                />
+            )
+        })
+    }
 
-    return orderedArray.map((review, index) =>{
+  const showUsersFavorites =()=> {
+    return favourites.map((favourite, index) =>{
         return(
-            <CaraouselReview  image={review.userImage} category={review.category} id={review.id} title={review.title} author={review.reviewOwner} description={review.description} counter={review.counter}/>
+            <CaraouselReview   category={favourite.category} id={favourite.id} title={favourite.title}  description={favourite.description} />
         )
     })
-}
+  }
     return(
         <div id="userPage">
             <div className="userSection">
@@ -268,9 +286,18 @@ const showUsersReviews =()=> {
                         </div>
                         </div>
                 </div>
+                <div className="row">
+                        <div className="reviews-body">          
+                            <h1>My favourites</h1>
+                            <div className="container-fluid">
+                            <Carousel showDots={true} responsive={responsive} arrows={false} swipeable={true} >
+                                {showUsersFavorites()}
+                            </Carousel>
+                        </div>
+                        </div>
+                </div>
             </div>
         </div>
     )
 }
-
 export default UserPage

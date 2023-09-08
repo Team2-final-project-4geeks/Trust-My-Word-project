@@ -113,15 +113,12 @@ def user_login():
     email = request.json.get("loginEmail",None)
     password = request.json.get("loginPassword",None)
 
-    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", email)
-
     if email is None or password is None:
         response_body = {
             "msg": "Email and password are required"
         }
         return jsonify(response_body), 400
 
-    # Buscar al usuario por su email en la base de datos
     user = User.query.filter_by(email=email).first()
     if user is None:
         response_body = {
@@ -273,6 +270,8 @@ def delete_review(id):
     review_to_delete = Review.query.get(id)
     db.session.delete(review_to_delete)
     db.session.commit()
+    return jsonify({"message":"Review deleted"}), 200
+
 
 @api.route('/review/<int:id>',methods=["GET"])
 @jwt_required()

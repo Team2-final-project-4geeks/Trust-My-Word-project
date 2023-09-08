@@ -20,15 +20,13 @@ export const Home = () => {
 	const [filteredReviews, setFilteredReviews] = useState([]);
 	const [coordinatesAvailable, setCoordinatesAvailable] = useState(false);
 	const [radio,setRadio] = useState("") 
-	// const [reviewLocation, setReviewLocation] = useState([])
-	// const [reviewLatitude,setReviewLatitude] = useState("")
-	// const [reviewLongitude,setReviewLongitude] = useState("")
+	
 
 	useEffect(() => {
 	  getActivities();
 	  getProduct();
 	  getTrips();
-	  geo();
+	  geo();	  
 	}, []);
 
 	// useEffect(()=>{
@@ -62,6 +60,7 @@ export const Home = () => {
 			console.log('Oops something went wrong'+ error);
 		})
 	};
+
   
 	const getPlaceFromCoordinates = () => {
 	  fetch(`https://nominatim.openstreetmap.org/reverse?format=geojson&lat=${latitude}&lon=${longitude}`)
@@ -230,6 +229,8 @@ export const Home = () => {
 					img={trip.image}
 					author={trip.reviewOwner}
 					rating={trip.rating}
+					description = {trip.description}
+
 				/>
 			));
 			} else {
@@ -240,6 +241,31 @@ export const Home = () => {
 				)
 		}
 	} 
+	// const translator = () => {
+	// 	fetch("https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=es", {
+	// 	  method: 'POST',
+	// 	  headers: {
+	// 		'Content-Type': 'application/json',
+	// 		'Ocp-Apim-Subscription-Key': 'aaaff2dc85024a69a048388cfdbbd3b2', 
+	// 		'Ocp-Apim-Subscription-Region': 'northeurope'
+	// 	  },
+	// 	  body: JSON.stringify(
+	// 		[
+	// 			{
+	// 				"Text":`${data}`,	
+	// 			}
+	// 		]
+	// 	  )
+	// 	})
+	// 	.then(response => response.json())
+	// 	.then(data => {
+	// 	  console.log(data);
+	// 	})
+	// 	.catch(error => {
+	// 	  console.error('Error:', error);
+	// 	});
+	//   }
+	  
 	return (
 		<div className="">
 			<div className="container-fluid">
@@ -252,7 +278,6 @@ export const Home = () => {
 				<input placeholder="type the radio" value={radio} onChange={(e)=>setRadio(e.target.value)}/>	
 				<button className="btn btn-warning" onClick={fetchFilteredReviews}>click me </button>		
 			</div>
-
 			<div className="nearmeReviews">
 				<h1>Less distance, more fun!</h1>
 				<div className="container-fluid mt-5">				

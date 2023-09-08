@@ -1,3 +1,7 @@
+#tripBody{
+  position: relative;
+  min-height: 36vh;
+}
 #imageBoard{
   height: 250px;
   width: auto;
@@ -11,7 +15,6 @@
 #imageBoard:hover img {
   filter: brightness(80%);
 }
-
 #imageOverlay {
   position: absolute;
   top: 0;
@@ -78,6 +81,7 @@
   color: red;
   animation: floatHeart 2s ease-out;
 }
+
 
 @keyframes floatHeart {
   0% {

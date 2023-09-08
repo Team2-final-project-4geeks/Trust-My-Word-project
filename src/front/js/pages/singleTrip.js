@@ -198,7 +198,7 @@ const SingleTrip = () =>{
                <div className="col-sm-12 col-md-3" id="imageContainer">
                    <img id="singleActivityPicture"src={singleTrip.image} className="rounded-start h-100 w-100 col-sm-12" alt="picture chosen by the user"/>
                </div>
-               <div className="col-sm-12 col-md-6">
+               <div className="col-sm-12 col-md-6" id="singleReviewInfo">
                    <div className="card h-100 border-0 px-3">
                        <h4 className="card-title fs-3 ms-3 mt-4 mb-4 text-center">{singleTrip.title}</h4>                                
                            <div className="d-flex flex-row mt-2 justify-content-center" id="singleRow1">
@@ -226,6 +226,7 @@ const SingleTrip = () =>{
                                        <small className="text-center w-100">{activity.link}</small>
                                    </a>
                                </div> */}
+
                                <div className="col-sm-12">
                                    <ShareComponent />
                                </div>
@@ -254,15 +255,29 @@ const SingleTrip = () =>{
                         {showComments()}
                     </Carousel>
                 </div>               
-                <div className="input-group mt-5" id="comment">
-                    <span className="input-group-text rounded me-2" id="commentWrite">Write your comment:</span>
-                    <textarea className="form-control" id="commentBox" value={description} onChange={(e)=> setDescription(e.target.value)} aria-label="With textarea"></textarea>
+                <div className="row">                 
+                    <div className="input-group mt-5 mx-auto justify-content-center" id="comment">
+                        <span className="col-sm-3 input-group-text rounded me-2 text-wrap" id="commentWrite">Post a comment:</span>
+                        <textarea 
+                            className="col-sm-9 col-lg-5 form-control" 
+                            id="commentBox" 
+                            maxLength={125} 
+                            value={description} 
+                            onChange={(e)=> setDescription(e.target.value)} 
+                            aria-label="With textarea">                                
+                        </textarea>
+                    </div>
                 </div>
-                <button 
-                    type="button" className="btn btn-dark mt-5" 
-                    onClick={createComment}
-                    id="sumbitButtonSingle"> Send 
-                </button>                
+                <div className="row">
+                    <div className="container-fluid d-flex justify-content-center">
+                        <button 
+                            type="button"                            
+                            className="btn btn-dark mt-5" 
+                            onClick={createComment}
+                            id="sumbitButtonSingle"> Send 
+                        </button>
+                    </div> 
+                </div>                
             </div>          
         </div>
 
