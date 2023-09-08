@@ -102,14 +102,7 @@
         display: block;
     }
     .location i {
-      margin-bottom: 10px;
-     
-    }
-    .olcards li .content .title {
-      font-size: 3vw;
-    }
-    .olcards li .content .text {
-      font-size: 2.8vw;
+      margin-bottom: 10px; 
     }
   }
 

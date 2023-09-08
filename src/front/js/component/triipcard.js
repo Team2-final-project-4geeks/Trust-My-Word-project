@@ -12,6 +12,9 @@ const TriipCard = (props)=>{
     const navigate = useNavigate()
     const token = localStorage.getItem("jwt-token")
     const [showHeart, setShowHeart] = useState(false);
+    const[ translatedDescription, setTranslatedDescription] = useState(null)
+    const [isTranslated, setIsTranslated] = useState(false);
+
 
     const handleFavoriteClick = () => {
       setShowHeart(true);
@@ -19,10 +22,44 @@ const TriipCard = (props)=>{
         setShowHeart(false);
       }, 2000);
     };
+
+    const translator = () => {
+        if (isTranslated) {
+          setTranslatedDescription(props.trip.description)
+        } else {
+          fetch("https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=es", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Ocp-Apim-Subscription-Key': 'aaaff2dc85024a69a048388cfdbbd3b2',
+              'Ocp-Apim-Subscription-Region': 'northeurope'
+            },
+            body: JSON.stringify([
+              {
+                "Text": `${props.trip.description}`,
+              }
+            ])
+          })
+            .then(response => response.json())
+            .then(data => {
+              console.log(data);
+              const spanishTranslation = data[0].translations.find(translation => translation.to === "es");
+              if (spanishTranslation) {
+                setTranslatedDescription(spanishTranslation.text);
+              } else {
+                console.error('No se encontró la traducción al español en la respuesta de la API.');
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+        } 
+        setIsTranslated(!isTranslated);
+      }
   
 
     return(
-            <div className="card-body mt-5">
+            <div className="card-body mt-5 mb-4" id="tripBody">
                     <div id="imageBoard">
                         <img src={props.img} className="card-img-top" alt="..." />
                         <div id="imageOverlay" className="d-flex justify-content-end align-items-start p-2">
@@ -31,7 +68,7 @@ const TriipCard = (props)=>{
                             onClick={() => {
                                 if (token) {
                                 handleFavoriteClick();
-                                actions.addFavourite(props.trip.id, props.trip.title, props.trip.category);
+                                actions.addFavourite(props.trip.id, props.trip.title, props.trip.category)
                                 actions.addUserFavourites(localStorage.getItem("userId"));
                                 } else {
                                 Swal.fire({
@@ -49,7 +86,7 @@ const TriipCard = (props)=>{
                     <div id="infoBoard" className="mt-3">
                         <div className="d-flex flex-column">
                             <div className=" col-12">
-                                <div className="d-flex flex-row">
+                                <div className="d-flex flex-row" id="tripInfoBoard">
                                     <div id="img-container" className="col-3" alt="review-img">
                                         <img src={props.profile} alt="..."/>
                                     </div>
@@ -59,14 +96,16 @@ const TriipCard = (props)=>{
                                                 <hr className="mb-1 mt-1"/>
                                                 <p className="card-text"><small className="text-muted publishing-date">{props.trip.publishing_date}</small></p>
                                         </div>
-                                        <div className="d-flex align-items-center" id="visitBoard">
-                                                <p className="text-muted"> <small>Visited {props.trip.counter} <i className="fa-solid fa-eye"></i></small></p>
+                                        <div className="d-flex flex-column" id="visitBoard">
+                                                <p className="text-muted  mb-0"> <small>Visited {props.trip.counter} <i className="fa-solid fa-eye"></i></small></p>
+                                                <p className="card-text"><small className="text-muted">{props.trip.location}</small></p>
                                         </div>     
                                     </div>                                
                                 </div>
 
                                 <div className="d-flex flex-column  align-items-center justify-content-center mt-2" >
                                     <h5 className="card-title text-center mt-2">{props.trip.title}</h5>
+
                                     <div className="rating-board">      
                                             {Array.from({ length: parseInt(props.trip.rating) }).map((_, index) => (
                                             <span key={index} style={{ color: 'gold' }}>&#9733;</span>
@@ -74,17 +113,25 @@ const TriipCard = (props)=>{
                                     </div>
                                     <div id="trip-board" className="mt-2">
                                         <div id="card-description-trip">
-                                            <p className="card-text"><i className="fas fa-quote-left mt-2 me-2"></i> <i> {props.trip.description}</i></p>
+                                            <p className="card-text">
+                                            <i className="fas fa-quote-left mt-2 me-2"></i>
+                                            <i>{translatedDescription || props.trip.description}</i>
+                                            </p>
                                         </div>
-                                        <p className="card-text mt-4">{props.trip.price}€</p>
+                                        <div className="d-flex flex-row justify-content-between">
+                                          <p className="card-text mt-4">{props.trip.price}</p>
+                                            {isTranslated ? <i class="fa-solid fa-globe mt-4" id="original" onClick={translator} style={{ color: "#ffc600"}} ></i>  :<i class="fa-solid fa-globe mt-4"  onClick={translator} ></i> }
+                                        </div>
+                                         
                                     </div>
                                 </div>
 
                                 <div id="btn-container-trip">
                                     <ViewMore item={props.item.id}/>
+
                                 </div>
                                 <div>
-                                {showHeart && <div className="floating-heart">&hearts;</div>}
+                                {showHeart && <div id="floating-heart">&hearts;</div>}
                                 </div>
                             </div>
                         </div>

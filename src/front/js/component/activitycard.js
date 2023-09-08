@@ -85,13 +85,14 @@ const ActivityCard = (props)=>{
                     <div id="activityCardViewMore">
                         <button 
                             className="btn" 
-                            type="button" id="activityCardViewMore" 
+                            type="button" id="activityCardViewMoreBtn" 
                             onClick={()=>{ 
                                 navigate("/activity/" + props.activity.id)
                                 handleReviewClick(props.activity.id)
                                 }}> <strong>View more</strong>
                         </button>
                     </div>
+                    
                     <div>
                         {showHeart && <div className="floating-heart">&hearts;</div>}
                     </div>

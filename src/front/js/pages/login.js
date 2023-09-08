@@ -76,7 +76,6 @@ const Login = () =>{
                 }else{
                     Swal.fire({
                         icon: 'success',
-                        title: 'yeahh...',
                         text: result.loginOK           
                     })
                     localStorage.setItem("jwt-token", result.token);

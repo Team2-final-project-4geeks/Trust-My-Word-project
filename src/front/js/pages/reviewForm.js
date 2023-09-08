@@ -173,43 +173,25 @@ export const ReviewForm = () => {
   const sendDataToAPI = (image) => {
     const token = localStorage.getItem('jwt-token');
 		if(token) {
-     if( selectedCategory== "product"){
-      fetch(process.env.BACKEND_URL + `api/create-review`, { 
-        method: "POST", 
-        headers: { 
-            "Content-Type": "application/json",
-            "Authorization" : "Bearer " + token
-        },
-        body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud:image,user,rating, latitude: null, longitude:null}) 
-    })
-    .then((res) => res.json())
-    .then((result) => {
-        console.log(result);
-    }).catch((err) => {
-        console.log(err);
-    })
+    fetch(process.env.BACKEND_URL + `api/create-review`, { 
+            method: "POST", 
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization" : "Bearer " + token
+            },
+            body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud:image,user,rating, latitude, longitude}) 
+        })
+        .then((res) => res.json())
+        .then((result) => {
+            console.log(result);
+        }).catch((err) => {
+            console.log(err);
+        })
+        }else  {
+          alert(' You are not logged in!')
+        }
+      };
 
-
-     }
-     else {
-        fetch(process.env.BACKEND_URL + `api/create-review`, { 
-          method: "POST", 
-          headers: { 
-              "Content-Type": "application/json",
-              "Authorization" : "Bearer " + token
-          },
-          body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud:image,user,rating, latitude, longitude}) 
-      })
-      .then((res) => res.json())
-      .then((result) => {
-          console.log(result);
-      }).catch((err) => {
-          console.log(err);
-      })
-      }
-     }
-   
-    };
     return (
         <div class="container text-center" id="full-content">
              <h1>Insert Your Review</h1>
@@ -231,7 +213,7 @@ export const ReviewForm = () => {
                             reviewImage
                         )}
                         <br/>
-                        <label for="imageUpload" class="custom-file-upload">
+                        <label for="imageUpload" id="labelImageUpload" class="custom-file-upload">
                           <i class="fa-solid fa-upload"></i> Choose File
                         </label>
                         <input
@@ -242,7 +224,7 @@ export const ReviewForm = () => {
                           style={{ display: 'none' }} 
                           onChange={handleFile}
                         />
-                        <span className="date-title mb-1">Date</span>
+                        <span className="date-title mb-1" id="date">Date</span>
                         <div className="form-group mt-1" id="inputs">
                             <input 
                                 type="text" 
@@ -361,7 +343,7 @@ export const ReviewForm = () => {
                             <div className="euro-symbol">€</div>
                           </div>
                         </div>
-                        <span className="title mt-2">Description</span>
+                        <span className="title mt-2 " id="description" >Description</span>
                         <div className="form-group">
                             <textarea
                                 maxLength={375}

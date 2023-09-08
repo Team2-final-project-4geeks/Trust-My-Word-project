@@ -80,7 +80,7 @@ export const ProductCard = (props) => {
                                     <ViewMoreProduct item={props.product.id}/>
                                 </div>
                                 <div>
-                                    {showHeart && <div className="floating-heart">&hearts;</div>}
+                                    {showHeart && <div id="#floating-heartProduct">&hearts;</div>}
                                 </div>
                             </div>
                         </div>
