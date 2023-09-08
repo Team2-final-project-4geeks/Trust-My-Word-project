@@ -44,6 +44,19 @@ li{
     position: relative;
     height: 31vh;
 }
+#imageContainerNearme {
+    background-image: url('https://cdn.pixabay.com/photo/2019/06/14/15/34/friendship-4273865_1280.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 41vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    position: relative;
+    height: 31vh;
+}
     
 #imageContainerProducts{
     background-image: url('https://cdn.pixabay.com/photo/2018/03/21/09/00/mall-3245949_1280.jpg');
@@ -88,7 +101,27 @@ li{
     transform: translate(-50%, -50%);
     mix-blend-mode: screen; 
 }
-.locationContainer{
-    height: 150px;
+
+#filterByLocation{
+    height: 160px;
+    width: auto;
+    display: flex;
+    align-items: center;
+}
+#locationNearme{
     width: 100%;
+    height: 30px;
+    text-align: center;
+  
+}
+#filterByLocation input {
+    border: 1px solid black;
+}
+@media (max-width: 500px) {
+    #filterByLocation input{
+        width: 200px;
+    }
+    #filterByLocation button{
+        width: 100px;
+    }
 }

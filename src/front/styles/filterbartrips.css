@@ -11,10 +11,14 @@
    border-radius: 25%;
 }
 .reactIcon{
-   font-size: 30px;
+   font-size: 25px;
 }
 #iconAll:focus,#iconFamily:focus,#iconAdventure:focus, #iconRomantic:focus,#iconGroup:focus,#iconRelax:focus,#iconOther:focus {
     border-color:  #FFC600;
+}
+#filterTripsBtnGroup button{
+    height: 70px;
+    width: 110px;
 }
 
 @media (max-width: 470px){

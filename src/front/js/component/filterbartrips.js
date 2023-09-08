@@ -39,19 +39,19 @@ const FilterBarTrips = () => {
             </div>
             <div className="d-flex flex-row justify-content-around " id="filterTripsBtnGroup">
                 <div className="iconsPointer">
-                    <button onClick={() => handleFilterClick("all")} className={store.selectedType === "all" ? "selected" : ""} id="iconAll"><FaStar className="reactIcon" /> All results </button>
+                    <button onClick={() => handleFilterClick("all")} className={store.selectedType === "all" ? "selected" : ""} id="iconAll"> <FaStar className="reactIcon" /> <br/> All results </button>
                 </div>
                 <div className="iconsPointer">
-                    <button onClick={() => handleFilterClick("pub")} className={store.selectedType === "pub" ? "selected" : ""}id="iconFamily"><BiBeer className="reactIcon"/> Pub </button>
+                    <button onClick={() => handleFilterClick("pub")} className={store.selectedType === "pub" ? "selected" : ""}id="iconFamily"><BiBeer className="reactIcon"/><br/> Pub </button>
                 </div>
                 <div className="iconsPointer">
-                    <button onClick={() => handleFilterClick("restaurant")} className={store.selectedType === "restaurant" ? "selected" : ""}id="iconAdventure"> <GrRestaurant className="reactIcon" /> Restaurant </button>
+                    <button onClick={() => handleFilterClick("restaurant")} className={store.selectedType === "restaurant" ? "selected" : ""}id="iconAdventure"><GrRestaurant className="reactIcon" /> <br/> Restaurant </button>
                 </div>
                 <div className="iconsPointer">
-                    <button onClick={() => handleFilterClick("cocktail")} className={store.selectedType === "cocktail" ? "selected" : ""} id="iconRomantic"> <LiaCocktailSolid className="reactIcon" /> Cocktail Bar </button>
+                    <button onClick={() => handleFilterClick("cocktail")} className={store.selectedType === "cocktail" ? "selected" : ""} id="iconRomantic"><LiaCocktailSolid className="reactIcon" /><br/> Cocktail Bar </button>
                 </div>
                 <div className="iconsPointer">
-                    <button onClick={() => handleFilterClick("other")} className={store.selectedType === "other" ? "selected" : ""} id="iconOther"> <GiPerspectiveDiceSixFacesRandom className="reactIcon" /> other </button> 
+                    <button onClick={() => handleFilterClick("other")} className={store.selectedType === "other" ? "selected" : ""} id="iconOther"><GiPerspectiveDiceSixFacesRandom className="reactIcon" /> <br/> other </button> 
                 </div>
             </div>
         </div>

@@ -241,52 +241,30 @@ export const Home = () => {
 				)
 		}
 	} 
-	// const translator = () => {
-	// 	fetch("https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=es", {
-	// 	  method: 'POST',
-	// 	  headers: {
-	// 		'Content-Type': 'application/json',
-	// 		'Ocp-Apim-Subscription-Key': 'aaaff2dc85024a69a048388cfdbbd3b2', 
-	// 		'Ocp-Apim-Subscription-Region': 'northeurope'
-	// 	  },
-	// 	  body: JSON.stringify(
-	// 		[
-	// 			{
-	// 				"Text":`${data}`,	
-	// 			}
-	// 		]
-	// 	  )
-	// 	})
-	// 	.then(response => response.json())
-	// 	.then(data => {
-	// 	  console.log(data);
-	// 	})
-	// 	.catch(error => {
-	// 	  console.error('Error:', error);
-	// 	});
-	//   }
-	  
+
 	return (
 		<div className="">
 			<div className="container-fluid">
 				<DinamicText  phrase={"inspire you"} phrase2={"save your time"}  phrase3={"solve your planning problems"} phrase4={" support people's opinions"} phrase1={"provide value"}/>
 			</div>
-			<div className="locationContainer">
-				<h2>Where am I?</h2>
-				<i class="fa-solid fa-location-dot"></i>{placeName}
-				<h3>Reviews near me</h3>
-				<input placeholder="type the radio" value={radio} onChange={(e)=>setRadio(e.target.value)}/>	
-				<button className="btn btn-warning" onClick={fetchFilteredReviews}>click me </button>		
-			</div>
-			<div className="nearmeReviews">
-				<h1>Less distance, more fun!</h1>
-				<div className="container-fluid mt-5">				
-					<div className="row row-cols-1 row-cols-md-5 g-4">													
+			<div className="container-fluid mt-5">
+				<div id="imageContainerNearme">
+					<h1 id="titleTrips">Reviews near me</h1>
+    			</div>
+				<div id="container-fluid">
+					<div className="row d-flex flex-column mt-3" id="filterByLocation">
+						<div id="locationNearme">
+							<i className="fa-solid fa-location-dot me-3"></i>  {placeName}
+						</div>
+						<input placeholder="Filter by kms" className="col-3 mt-2" value={radio} onChange={(e)=>setRadio(e.target.value)}/>	
+						<button className="btn btn-warning col-1 mt-3" onClick={fetchFilteredReviews}>Find </button>	
+					</div>			
+					<div className="row row-cols-1 row-cols-md-5 ">													
 						{showNearReviews()}						
 					</div>	
-				</div>
+				</div>						
 			</div>
-
+		
 			<div className="container-fluid">
 				<div className="general-image" id="imageContainerActivities">
 					<h1 id="titleActivities">ACTIVITIES</h1>

@@ -59,7 +59,7 @@ const TriipCard = (props)=>{
   
 
     return(
-            <div className="card-body mt-5" id="tripBody">
+            <div className="card-body mt-5 mb-4" id="tripBody">
                     <div id="imageBoard">
                         <img src={props.img} className="card-img-top" alt="..." />
                         <div id="imageOverlay" className="d-flex justify-content-end align-items-start p-2">
@@ -96,8 +96,9 @@ const TriipCard = (props)=>{
                                                 <hr className="mb-1 mt-1"/>
                                                 <p className="card-text"><small className="text-muted publishing-date">{props.trip.publishing_date}</small></p>
                                         </div>
-                                        <div className="d-flex align-items-center" id="visitBoard">
-                                                <p className="text-muted"> <small>Visited {props.trip.counter} <i className="fa-solid fa-eye"></i></small></p>
+                                        <div className="d-flex flex-column" id="visitBoard">
+                                                <p className="text-muted  mb-0"> <small>Visited {props.trip.counter} <i className="fa-solid fa-eye"></i></small></p>
+                                                <p className="card-text"><small className="text-muted">{props.trip.location}</small></p>
                                         </div>     
                                     </div>                                
                                 </div>
@@ -117,13 +118,11 @@ const TriipCard = (props)=>{
                                             <i>{translatedDescription || props.trip.description}</i>
                                             </p>
                                         </div>
-                                        <p className="card-text mt-4">{props.trip.price}</p>
-                                        <button
-                                        type="button"
-                                        onClick={translator}
-                                        >
-                                        {isTranslated ? <i class="fa-solid fa-globe" id="original"></i>  :<i class="fa-solid fa-globe" style={{ color: "#ffeb0a"}}></i> }
-                                        </button>
+                                        <div className="d-flex flex-row justify-content-between">
+                                          <p className="card-text mt-4">{props.trip.price}</p>
+                                            {isTranslated ? <i class="fa-solid fa-globe mt-4" id="original" onClick={translator} style={{ color: "#ffc600"}} ></i>  :<i class="fa-solid fa-globe mt-4"  onClick={translator} ></i> }
+                                        </div>
+                                         
                                     </div>
                                 </div>
 

@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from 'react-icons/gi';
 import Swal from 'sweetalert2';
 import ThemeSwitcher from "./themechanger";
-
 import "../../styles/navbar.css";
 
 export const Navbar = () => {
@@ -27,7 +26,6 @@ export const Navbar = () => {
 		alert("You are Logged Out")
 	}
  
-
 	useEffect(() => {		
 		actions.getUser(localStorage.getItem("userId"))
 	}, []);
@@ -59,7 +57,7 @@ export const Navbar = () => {
                 Home
               </a>
             </div>
-            <div className="nav-item mx-5">
+            <div className="nav-item mx-4">
               <ThemeSwitcher/>
             </div>
             <div class="dropdown" id="all-button-content">

@@ -10,7 +10,10 @@
 .dark-theme small  {
     color: #fff !important;
   }
-.dark-theme #trip-board, .dark-theme #activity-board , .dark-theme #product-board, .dark-theme #carouselBodyReview, .dark-theme #containerSingle {
+.dark-theme #trip-quote{
+    color: #ffc600 !important;
+}
+.dark-theme #trip-board, .dark-theme #activity-board , .dark-theme #product-board, .dark-theme #carouselBodyReview, .dark-theme #containerSingle, .dark-theme #carouselBody {
     background-color: #444 ; 
     color: #fff; 
 }
@@ -18,7 +21,7 @@
     background-color: #000000 !important; 
     color: #fff !important; 
 }
-.dark-theme #viewMore{
+.dark-theme #viewMore , .dark-theme #quoteActivity, .dark-theme #quoteProduct{
     background-color: #000000 !important; 
     color: #fff !important; 
 }
@@ -30,8 +33,10 @@
     color: #fff;
 }
 .dark-theme #singleReviewInfo{
-    background-color: #444 !important;
-    color: #fff !important;
+    color: #ffffff !important;
+}
+.dark-theme #cardTrip , .dark-theme #activityCard{
+    background-color: #858484 !important;
 }
 .dark-theme .navbar::before{
     filter: brightness(75%) !important;
