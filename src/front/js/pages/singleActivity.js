@@ -177,7 +177,7 @@ const SingleActivity = () => {
                                 <img id="singleActivityPicture"src={activity.image} className="rounded-start h-100 w-100 col-sm-12" alt="picture chosen by the user"/>
                             </div>
                             <div className="col-sm-12 col-md-6">
-                                <div className="card h-100 border-0 px-3">
+                                <div className="card h-100 border-0 px-3" id="activityCard">
                                     <h4 className="card-title fs-3 ms-3 mt-5 mb-4 text-center">{activity.title}</h4>                                
                                         <div className="d-flex flex-row mt-2 justify-content-center" id="singleRow1">
                                             <p className="col-sm-3 card-text ms-2"><i class="fas fa-heart fa-xs me-2"></i>{activity.reviewOwner}</p>
@@ -252,7 +252,6 @@ const SingleActivity = () => {
                         </textarea>
                     </div>
                 </div>
-
                 <div className="row">
                     <div className="container-fluid d-flex justify-content-center">
                         <button 

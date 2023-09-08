@@ -1,7 +1,7 @@
 #carouselBodyReview{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     width: 300px;
-    height:420px;
+    height:510px;
     margin: auto 1rem;
     text-align: center;
     font-family: arial;
@@ -21,14 +21,14 @@
   }
 
   #fotoCarouselCardReview{
-    width: 35px;
-    height: 35px;
+    width: 65px;
+    height: 65px;
     border-radius: 50%;
   }
   #btn-review{
     display: flex;
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: flex-end; /* Colocar en la parte inferior */
+    justify-content: center; 
+    align-items: flex-end;
     height: 100%; 
 }
   .react-multi-carousel-dot button{
@@ -40,13 +40,13 @@
     #carouselBodyReview p{
         font-size:3vw ;
     }
-    #carouselBodyReview h5{
+    #carouselBodyReview h6{
         font-size:4vw ;
     }
     #btn-review{
         display: flex;
-        justify-content: center; /* Centrar horizontalmente */
-        align-items: flex-end; /* Colocar en la parte inferior */
+        justify-content: center;
+        align-items: flex-end;
         height: 100%; 
     }
   }

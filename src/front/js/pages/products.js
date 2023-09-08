@@ -36,7 +36,7 @@ export const Products = () => {
 		return (
 			<div className="container-fluid mt-2">
             <FilterBarProducts />
-            <div className="card mt-4 mb-5 border-0" id="quoteProduct">                    
+            <div className="card mt-4 mb-5 border-0  custom-quote-product " id="quoteProduct">                    
                 <div className="card-body d-flex" id="blockquoteSpace">
                     <blockquote className="blockquote mb-0" id="blockquoteProduct">
                         <p className="text-center mt-4" id="quote">“I've tested so many products that my house is considering requesting a review.”</p>
