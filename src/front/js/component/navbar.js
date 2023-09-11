@@ -1,10 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
-import { Link, useNavigate } from "react-router-dom";
-import { GiHamburgerMenu } from 'react-icons/gi';
+import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import ThemeSwitcher from "./themechanger";
-import "../../styles/navbar.css";
 
 import "../../styles/navbar.css";
 
@@ -20,7 +18,9 @@ export const Navbar = () => {
 		localStorage.removeItem('userId')
     actions.setLoggedIn(false)
 		navigate("/");
-		alert("You are Logged Out")
+		Swal.fire(
+    'You are now logged out'         
+    )
 	}
  
 	useEffect(() => {		
