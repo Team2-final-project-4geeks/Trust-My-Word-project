@@ -81,8 +81,26 @@
   color: red;
   animation: floatHeart 2s ease-out;
 }
+.dropdown-item {
+  width: 25px;
+  height: 25px;
+  color: red !important;
+}
 
-
+.dropdown-item img{
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+#dropdownTranslator{
+  border: 1px solid black;
+  width: 125px;
+  height: 40px;
+}
+#dropdownTranslator a{
+  color: transparent !important;
+  border: none;
+}
 @keyframes floatHeart {
   0% {
     transform: translateY(0);
