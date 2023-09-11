@@ -4,58 +4,60 @@ import "../../styles/triipcard.css";
 import ViewMore from "./viewmore.js";
 import { Context} from "../store/appContext";
 import Swal from 'sweetalert2';
-
+import { BsTranslate } from 'react-icons/bs';
 
 
 const TriipCard = (props)=>{
     const { store, actions } = useContext(Context);
-    const navigate = useNavigate()
-    const token = localStorage.getItem("jwt-token")
+    const navigate = useNavigate();
+    const token = localStorage.getItem("jwt-token");
     const [showHeart, setShowHeart] = useState(false);
-    const[ translatedDescription, setTranslatedDescription] = useState(null)
+    const [translatedDescription, setTranslatedDescription] = useState(props.trip.description);
     const [isTranslated, setIsTranslated] = useState(false);
-
-
+  
     const handleFavoriteClick = () => {
       setShowHeart(true);
       setTimeout(() => {
         setShowHeart(false);
       }, 2000);
     };
-
-    const translator = () => {
-        if (isTranslated) {
-          setTranslatedDescription(props.trip.description)
-        } else {
-          fetch("https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=es", {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Ocp-Apim-Subscription-Key': 'aaaff2dc85024a69a048388cfdbbd3b2',
-              'Ocp-Apim-Subscription-Region': 'northeurope'
-            },
-            body: JSON.stringify([
-              {
-                "Text": `${props.trip.description}`,
-              }
-            ])
+  
+    const translator = (language) => {
+      if (isTranslated) {
+        setTranslatedDescription(props.trip.description); // Restaurar el texto original
+      } else {
+        fetch(`https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=${language}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Ocp-Apim-Subscription-Key': 'aaaff2dc85024a69a048388cfdbbd3b2',
+            'Ocp-Apim-Subscription-Region': 'northeurope'
+          },
+          body: JSON.stringify([
+            {
+              "Text": `${props.trip.description}`,
+            }
+          ])
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            const spanishTranslation = data[0].translations.find(translation => translation.to === language);
+            if (spanishTranslation) {
+              setTranslatedDescription(spanishTranslation.text);
+            } else {
+              console.error('No se encontró la traducción al español en la respuesta de la API.');
+            }
           })
-            .then(response => response.json())
-            .then(data => {
-              console.log(data);
-              const spanishTranslation = data[0].translations.find(translation => translation.to === "es");
-              if (spanishTranslation) {
-                setTranslatedDescription(spanishTranslation.text);
-              } else {
-                console.error('No se encontró la traducción al español en la respuesta de la API.');
-              }
-            })
-            .catch(error => {
-              console.error('Error:', error);
-            });
-        } 
-        setIsTranslated(!isTranslated);
+          .catch(error => {
+            console.error('Error:', error);
+          });
       }
+  
+      // Alternar el estado isTranslated
+      setIsTranslated(!isTranslated);
+    }
+  
   
 
     return(
@@ -120,9 +122,19 @@ const TriipCard = (props)=>{
                                         </div>
                                         <div className="d-flex flex-row justify-content-between">
                                           <p className="card-text mt-4">{props.trip.price}</p>
-                                            {isTranslated ? <i class="fa-solid fa-globe mt-4" id="original" onClick={translator} style={{ color: "#ffc600"}} ></i>  :<i class="fa-solid fa-globe mt-4"  onClick={translator} ></i> }
-                                        </div>
-                                         
+
+                                          <div class="dropdown">
+                                            <BsTranslate className="dropdown-toggle mt-4"   data-bs-toggle="dropdown" aria-expanded="false"/>                                      
+                                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                              <div className="d-flex" id="dropdownTranslator">
+                                              <a className="dropdown-item" onClick={()=>{translator("es")}} > <img src="https://img.asmedia.epimg.net/resizer/LQyBk5T2TfVttC_yVM8n5HuEYpM=/1472x828/cloudfront-eu-central-1.images.arcpublishing.com/diarioas/53YSJXSIZFHNTBV52Z4AMKISUM.png" /></a>
+                                              <a className="dropdown-item" onClick={()=>{translator("en")}} > <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png" /></a>
+                                              <a className="dropdown-item" onClick={()=>{translator("de")}} > <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/640px-Flag_of_Germany.svg.png" /></a>
+                                              </div>
+                                            </ul>
+                                          </div>
+                                            {/* {isTranslated ? <BsTranslate onClick={translator} className="mt-4" style={{ color: "#ffc600"}} />  : <BsTranslate className="mt-4" onClick={translator}/> } */}
+                                        </div>      
                                     </div>
                                 </div>
 
