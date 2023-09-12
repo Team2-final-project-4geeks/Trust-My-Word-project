@@ -24,19 +24,19 @@ const SingleActivity = () => {
     const responsive = {        
         superLargeDesktop: {
             // the naming can be any, depends on you.
-            breakpoint: { max: 4000, min: 3000 },
+            breakpoint: { max: 4000, min: 1025 },
             items: 5
           },
           desktop: {
-            breakpoint: { max: 2999, min: 1024 },
-            items: 4
+            breakpoint: { max: 1024, min: 769 },
+            items: 3
           },
           tablet: {
-            breakpoint: { max: 1023, min: 464 },
+            breakpoint: { max: 768, min: 481 },
             items: 2
           },
           mobile: {
-            breakpoint: { max: 463, min: 0 },
+            breakpoint: { max: 480, min: 0 },
             items: 1
           }
       };
@@ -166,6 +166,7 @@ const SingleActivity = () => {
             )
         }			
     )}
+    
 
     return(
         <div className="container mt-5 mb-5 border-0" >
@@ -229,7 +230,7 @@ const SingleActivity = () => {
                 <div className="row justify-content-center">                
                     <div className="col border-0" id="commentSection">
                         <h4 className="my-5 ms-4" id="commentsTitle">Comments</h4>
-                        <div className="container border-0">
+                        <div className="container border-0" id="cardArea">
                             <div className="row">
                                 <Carousel showDots={true} arrows={false} responsive={responsive} swipeable={true}>
                                     {showComments()}
@@ -256,7 +257,7 @@ const SingleActivity = () => {
                     <div className="container-fluid d-flex justify-content-center">
                         <button 
                             type="button"                            
-                            className="btn btn-dark mt-5" 
+                            className="confetti-button btn btn-dark mt-5" 
                             onClick={createComment}
                             id="sumbitButtonSingle"> Send 
                         </button>
