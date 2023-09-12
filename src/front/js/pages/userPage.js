@@ -201,13 +201,13 @@ const UserPage = () =>{
         })
     }
 
-  const showUsersFavorites =()=> {
-    return favourites.map((favourite, index) =>{
-        return(
-            <CaraouselReview   category={favourite.category} id={favourite.id} title={favourite.title}  description={favourite.description} />
-        )
-    })
-  }
+  // const showUsersFavorites =()=> {
+  //   return favourites.map((favourite, index) =>{
+  //       return(
+  //           <CaraouselReview   category={favourite.category} id={favourite.id} title={favourite.title}  description={favourite.description} />
+  //       )
+  //   })
+  // }
     return(
         <div id="userPage">
             <div className="userSection">
@@ -286,7 +286,7 @@ const UserPage = () =>{
                         </div>
                         </div>
                 </div>
-                <div className="row">
+                {/* <div className="row">
                         <div className="reviews-body">          
                             <h1>My favourites</h1>
                             <div className="container-fluid">
@@ -295,7 +295,7 @@ const UserPage = () =>{
                             </Carousel>
                         </div>
                         </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )

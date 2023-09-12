@@ -56,7 +56,7 @@ def create_user():
         return jsonify(response_body),400
     
    
-   new_user= User(email = data["email"], password= data["password"], username=data["username"])
+   new_user= User(email = data["email"], password= data["password"], username=data["username"], image=data["image"])
    db.session.add(new_user)
    db.session.commit() 
 

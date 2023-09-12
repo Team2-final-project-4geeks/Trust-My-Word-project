@@ -84,7 +84,8 @@
 .dropdown-item {
   width: 25px;
   height: 25px;
-  color: red !important;
+  cursor: pointer;
+  background-color: transparent !important;
 }
 
 .dropdown-item img{
@@ -93,14 +94,16 @@
   border-radius: 50%;
 }
 #dropdownTranslator{
-  border: 1px solid black;
+  background-color: rgb(240, 240, 240);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
   width: 125px;
+  border-radius: 5px;
   height: 40px;
 }
-#dropdownTranslator a{
-  color: transparent !important;
-  border: none;
+ul.dropdown-menu.show{
+  inset: 0px -90px auto auto !important
 }
+
 @keyframes floatHeart {
   0% {
     transform: translateY(0);
@@ -117,4 +120,21 @@
  #visitBoard{
   padding-right: 20px !important;
  }
+ .dropdown-item {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  background-color: transparent !important;
+}
+
+.dropdown-item img{
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+#dropdownTranslator{
+  width: 125px;
+  height: 40px;
+}
 }
