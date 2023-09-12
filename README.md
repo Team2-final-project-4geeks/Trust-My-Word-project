@@ -5,8 +5,10 @@
 
 - 📫 How to reach me **edijavier10@gmail.com, victor_miguel@msn.com, lucia.mackova87@gmail.com**
 
-<h3 align="left">Connect with me: 
-  <small>https://www.linkedin.com/in/edison-ca%C3%B1izares-4a65b228b/; https://www.linkedin.com/in/lucia-mackova/; https://www.linkedin.com/in/magalhaes-victor-64381ba8/ </small></h3>
+<h3 align="left">Connect with me: </h3>
+  <p> https://www.linkedin.com/in/edison-cañizares-4a65b228b/</p> 
+  <p> https://www.linkedin.com/in/lucia-mackova/ </p> 
+  <p> https://www.linkedin.com/in/magalhaes-victor-64381ba8/ </p>
 <p align="left">
 </p>
 
