@@ -14,6 +14,7 @@ const TriipCard = (props)=>{
     const [showHeart, setShowHeart] = useState(false);
     const [translatedDescription, setTranslatedDescription] = useState(props.trip.description);
     const [isTranslated, setIsTranslated] = useState(false);
+    const [currentLanguage, setCurrentLanguage] = useState(null)
   
     const handleFavoriteClick = () => {
       setShowHeart(true);
@@ -23,9 +24,6 @@ const TriipCard = (props)=>{
     };
   
     const translator = (language) => {
-      if (isTranslated) {
-        setTranslatedDescription(props.trip.description); // Restaurar el texto original
-      } else {
         fetch(`https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=${language}`, {
           method: 'POST',
           headers: {
@@ -41,10 +39,10 @@ const TriipCard = (props)=>{
         })
           .then(response => response.json())
           .then(data => {
-            console.log(data);
-            const spanishTranslation = data[0].translations.find(translation => translation.to === language);
-            if (spanishTranslation) {
-              setTranslatedDescription(spanishTranslation.text);
+            setCurrentLanguage(language)
+            const translatedText = data[0].translations.find(translation => translation.to === language);
+            if (translatedText) {
+              setTranslatedDescription(translatedText.text);
             } else {
               console.error('No se encontró la traducción al español en la respuesta de la API.');
             }
@@ -52,9 +50,7 @@ const TriipCard = (props)=>{
           .catch(error => {
             console.error('Error:', error);
           });
-      }
   
-      // Alternar el estado isTranslated
       setIsTranslated(!isTranslated);
     }
   
@@ -124,16 +120,27 @@ const TriipCard = (props)=>{
                                           <p className="card-text mt-4">{props.trip.price}</p>
 
                                           <div class="dropdown">
-                                            <BsTranslate className="dropdown-toggle mt-4"   data-bs-toggle="dropdown" aria-expanded="false"/>                                      
+                                          <BsTranslate className={`dropdown-toggle mt-4 ${ currentLanguage === null || currentLanguage === "en" ? "text-dark" : "text-warning"}`} data-bs-toggle="dropdown" aria-expanded="false" /> 
                                             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                               <div className="d-flex" id="dropdownTranslator">
-                                              <a className="dropdown-item" onClick={()=>{translator("es")}} > <img src="https://img.asmedia.epimg.net/resizer/LQyBk5T2TfVttC_yVM8n5HuEYpM=/1472x828/cloudfront-eu-central-1.images.arcpublishing.com/diarioas/53YSJXSIZFHNTBV52Z4AMKISUM.png" /></a>
-                                              <a className="dropdown-item" onClick={()=>{translator("en")}} > <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png" /></a>
-                                              <a className="dropdown-item" onClick={()=>{translator("de")}} > <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/640px-Flag_of_Germany.svg.png" /></a>
+                                              <a className="dropdown-item" 
+                                                 onClick={(e)=>{
+                                                  e.preventDefault()
+                                                  translator("es")}} 
+                                                 > <img src="https://img.asmedia.epimg.net/resizer/LQyBk5T2TfVttC_yVM8n5HuEYpM=/1472x828/cloudfront-eu-central-1.images.arcpublishing.com/diarioas/53YSJXSIZFHNTBV52Z4AMKISUM.png" /></a>
+                                              <a className="dropdown-item" 
+                                                 onClick={(e)=>{
+                                                  e.preventDefault()
+                                                  translator("en")}} 
+                                                 > <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png" /></a>
+                                              <a className="dropdown-item" 
+                                                 onClick={(e)=>{
+                                                  e.preventDefault()
+                                                  translator("de")}} 
+                                                 > <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/640px-Flag_of_Germany.svg.png" /></a>
                                               </div>
                                             </ul>
                                           </div>
-                                            {/* {isTranslated ? <BsTranslate onClick={translator} className="mt-4" style={{ color: "#ffc600"}} />  : <BsTranslate className="mt-4" onClick={translator}/> } */}
                                         </div>      
                                     </div>
                                 </div>
