@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { Context} from "../store/appContext";
 import createUser from "../../img/createUser.jpg";
 import Swal from 'sweetalert2';
+import profile from "../../img/profile.png";
+
 
 
 
@@ -17,6 +19,7 @@ const Login = () =>{
     const [email,setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [username,setUsername] = useState("") 
+    const image = profile 
     
 
     const handleLoginClick = () => {
@@ -40,7 +43,7 @@ const Login = () =>{
             headers: { 
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ email, password, username }) 
+            body: JSON.stringify({ email, password, username, image }) 
         })
         .then((res) => res.json())
         .then((result) => {

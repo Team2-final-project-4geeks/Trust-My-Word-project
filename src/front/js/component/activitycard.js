@@ -32,7 +32,7 @@ const ActivityCard = (props)=>{
                         onClick={() => {
                             if (token) {
                             handleFavoriteClick();
-                            actions.addFavourite(props.activity.id, props.activity.title);
+                            actions.addFavourite(props.activity.id, props.activity.title, props.activity.category);
                             actions.addUserFavourites(localStorage.getItem("userId"));
                             } else {
                             Swal.fire({
@@ -87,8 +87,13 @@ const ActivityCard = (props)=>{
                             className="btn" 
                             type="button" id="activityCardViewMoreBtn" 
                             onClick={()=>{ 
-                                navigate("/activity/" + props.activity.id)
-                                handleReviewClick(props.activity.id)
+                                if(token){
+                                    navigate("/activity/" + props.activity.id)
+                                    handleReviewClick(props.activity.id)
+                                }else{
+                                    navigate("/login")
+                                }
+                               
                                 }}> <strong>View more</strong>
                         </button>
                     </div>
