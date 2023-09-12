@@ -45,7 +45,7 @@ const SingleTrip = () =>{
     useEffect(()=>{
         get_single_trip()
         getCityFromApi()
-        fetchComments();                           
+        fetchComments();   
 
     },[])
 
@@ -53,17 +53,6 @@ const SingleTrip = () =>{
         getWeather()
     },[city])
 
-
-//   const getCoordinatesFromLocation = ()=>{
-//     fetch(`https://nominatim.openstreetmap.org/ui/search.html?q=${city}`)
-//     .then((response) => response.json())
-//     .then((data) => {
-//       console.log(data);
-//     })
-//     .catch((error) => {
-//       console.error("Error al obtener las coordenadas:", error);
-//     });
-// }
 
     const map = `https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=300x300&key=${process.env.API_KEY}`
 

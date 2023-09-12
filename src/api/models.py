@@ -6,6 +6,7 @@ from datetime import datetime
 
 
 
+
 class myEnum(enum.Enum):
     activity = "activity"
     product = "product"
@@ -20,7 +21,7 @@ class User(db.Model):
     username = db.Column(db.String(120), nullable=False)
     favourites= db.Column(db.ARRAY(db.String(120)))
     password = db.Column(db.String(80), unique=False, nullable=False)
-    image = db.Column(db.String(200), nullable=True,default="image")
+    image = db.Column(db.String(200), nullable=True)
 
     # 1 - N with Reviews
     reviews = db.relationship("Review", back_populates="users")

@@ -1,9 +1,10 @@
-.navbar {
+
+ .navbar {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   color: white;
-  height: 50vh;
+  /* height: 50vh; */
   width:100%;
   position: relative;
   overflow-y: visible;
@@ -24,8 +25,30 @@
 .navbar-brand{
   width: 80px;
 }
-#imageBrand{
-  width: 78px;
+.nav-item {
+  margin-left: -20px;
+  font-size: 20px; 
+}
+#category{
+  background-color: transparent;
+  font-size: 20px;
+  margin-right: 5px;
+  margin-left: -15px;
+  border: none;
+}
+#category:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-color: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+#all-button-content{
+  border: transparent;
+  border-color: transparent;
+}
+.token{
+  display:flex;
+  flex-direction: row;
 }
 #scroll-down{
   width:70px;

@@ -33,10 +33,10 @@ export const Home = () => {
 	  if (coordinatesAvailable) { 
 		getPlaceFromCoordinates();
 		fetchFilteredReviews()
-
 	  }
 	}, [coordinatesAvailable]);
-  
+
+
 	const fetchFilteredReviews = () => {
 		fetch(process.env.BACKEND_URL + '/api/getFilteredReviews' ,{
 			method: 'POST',
@@ -62,14 +62,22 @@ export const Home = () => {
 	  fetch(`https://nominatim.openstreetmap.org/reverse?format=geojson&lat=${latitude}&lon=${longitude}`)
 		.then((response) => response.json())
 		.then((data) => {
-		  setPlaceName(data.features[0].properties.address.quarter);
-		  localStorage.setItem("myLocation",data.features[0].properties.address.quarter)
+			const address = data.features[0].properties.address;
+			const addressKeys = ['quarter', 'suburb', 'village', 'county', 'road', 'state', 'town'];
+	  
+			for (const key of addressKeys) {
+			  if (address[key]) {
+				setPlaceName(address[key]);
+				localStorage.setItem('myLocation', address[key]);
+				break;
+			  }
+			}
 		})
 		.catch((error) => {
 		  console.error("Error al obtener el lugar:", error);
 		});
 	};
-  
+
 	const geo = () => {
 	  if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(success, error);
@@ -77,7 +85,6 @@ export const Home = () => {
 		console.log("Geolocation not supported");
 	  }
 	  function success(position) {
-		console.log(position.coords.latitude, position.coords.longitude)
 		setLatitude(position.coords.latitude);
 		setLongitude(position.coords.longitude);
 		setCoordinatesAvailable(true); 

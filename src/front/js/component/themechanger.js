@@ -1,8 +1,7 @@
 import React, { useState,useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import "../../styles/themechanger.css";
-
+import { BsFillMoonFill} from 'react-icons/bs';
+import { MdLightMode} from 'react-icons/md';
 
 
 const ThemeSwitcher = ()=> {
@@ -34,7 +33,7 @@ const ThemeSwitcher = ()=> {
   
     return (
       <div id={`app ${theme === 'dark' ? 'dark-theme' : 'light-theme'}`}>
-          <FontAwesomeIcon onClick={toggleTheme} icon={theme === 'light' ? faSun : faMoon} />
+        {theme === 'light' ? <BsFillMoonFill  onClick={toggleTheme} /> : <MdLightMode  onClick={toggleTheme}/>} 
       </div>
     );
   }

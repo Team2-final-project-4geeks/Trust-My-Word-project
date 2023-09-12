@@ -27,6 +27,9 @@ input{
 a{
     text-decoration: none;
 }
+#createAcount{
+    cursor: pointer !important;
+}
 .fa-user,.fa-key,.fa-at{
     font-size: 22px;
     margin-left: 8px;
