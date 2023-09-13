@@ -51,6 +51,9 @@ a{
 #login{
     width: 500px;
 }
+.emptySpace{
+    height: 160px;
+}
 @media (max-width: 470px){
 }
 

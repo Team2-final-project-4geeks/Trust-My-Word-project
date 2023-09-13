@@ -61,10 +61,10 @@ export const Navbar = () => {
                   <li className="nav-item">
                     <a className="nav-link active text-warning" aria-current="page" href="/">Home</a>
                   </li>
-                  <li className="nav-item text-warning mx-4">
+                  <li className="nav-item text-warning mx-4 p-1">
                     <ThemeSwitcher/>
                   </li>
-                  <li className="nav-item" id="category-dropdown">
+                  <li className="nav-item dropdown" id="category-dropdown">
                     <button className="btn dropdown text-warning" id="category" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Category
                     </button>
@@ -104,7 +104,7 @@ export const Navbar = () => {
                               Logout
                             </a>
                           </div>
-                          <div className="btn-group" id="favourites">
+                          <div className="btn-group dropdown" id="favourites">
                             <button type="button" className="btn-navbar dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="dropdownMenuClickableInside" aria-expanded="false">
                                 Favourites <span className="p-1 text-center text-warning">{(store.favourite && store.favourite!=null && store.favourite!=undefined)? store.favourite.length:"0"}</span>
                             </button>

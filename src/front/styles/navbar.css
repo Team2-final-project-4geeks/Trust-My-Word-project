@@ -143,15 +143,17 @@
     font-size: 20px;
     margin-right: 5px;
     margin-left: -15px;
-    outline: none !important; 
   }
-
-  #category:hover, .nav-link:hover {
+  #category-dropdown{
+    display: flex;
+    flex-direction: column;
+  }
+  #category:hover, .nav-link:hover, .mx-4:hover, #scroll-down2:hover{
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     border-radius: 10px;
   }
-  #nav-link{
+  #nav-link, .mx-4{
     border-radius: 10px;
   }
   .token{
@@ -165,7 +167,6 @@
     border-radius: 10px;
     margin-left: -40px;
     border: none;
-    z-index:2;
   }
   #scroll-down2{
     background-color: rgba(0, 0, 0, 0.651);
@@ -173,12 +174,9 @@
     border-radius: 10px;
     width: 150px;
     text-align: center;
-    z-index:2;
     position: relative;
   }
-  #scroll-down2:hover{
-    background-color: rgba(0, 0, 0, 0.5);
-  }
+
   #item-home{
     z-index: 0;
     position:relative;
@@ -197,21 +195,18 @@
     color: white;
   }
   .dropdown-menu {
-    max-height: 200px;
+    max-height: 300px;
     max-width: 300px;
     background-color: transparent;
     border: none;
     z-index:1;
     overflow-x: visible;
+    position: relative;
   }
-  #dropdown-favourites:hover {
+  #dropdown-favourites:hover, #delete-favourite:hover{
     background-color: rgba(0, 0, 0, 0.5);
     color: #ffc600;
     font-size: 1.2em;
-  }
-  #delete-favourite:hover {
-    color: #ffc600;
-    background-color: rgba(0, 0, 0, 0.5);
   }
   #dropdown-favourites{
     background-color: rgba(0, 0, 0, 0.651);
