@@ -267,45 +267,216 @@ export const ReviewForm = () => {
                                 />  
                         </div>
                         {category === "activity" ? (
-                        <div className="form-group" id="inputs">
-                          <input 
-                              type="text" 
-                              id="type" 
-                              className="review-input"  
-                              name="type"
-                              placeholder="family, adventure, romantic, group, relax, other"
-                              value={type}
-                              onChange={(e) => setType(e.target.value)}
-                              />
-                        </div> 
+                        <div className="typeTitle mt-3">Type
+                          <div className="form-group d-flex flex-row justify-content-space-around mt-2" id="radioInputs">
+                            <div className="left-container d-flex flex-column justify-content-start mr-2">
+                              <div className="columnOfRadios">
+                                <input 
+                                  type="radio"
+                                  id="type"
+                                  name="type"
+                                  value="family"
+                                  checked={type === "family"}
+                                  onChange={(e) => setType(e.target.value)}
+                                />
+                                <label htmlFor="family">Family</label>
+                              </div>
+                              <div className="columnOfRadios">
+                                <input 
+                                    type="radio"
+                                    id="type"
+                                    name="type"
+                                    value="adventure"
+                                    checked={type === "adventure"}
+                                    onChange={(e) => setType(e.target.value)}
+                                />
+                                <label htmlFor="adventure">Adventure</label>
+                              </div>
+                            </div>
+                            <div className="middle-container d-flex flex-column justify-content-start mr-2">
+                              <div className="columnOfRadios">
+                                <input 
+                                    type="radio"
+                                    id="type"
+                                    name="type"
+                                    value="romantic"
+                                    checked={type === "romantic"}
+                                    onChange={(e) => setType(e.target.value)}
+                                />
+                                <label htmlFor="romantic">Romantic</label>
+                              </div>
+                              <div className="columnOfRadios">
+                                <input 
+                                    type="radio"
+                                    id="type"
+                                    name="type"
+                                    value="group"
+                                    checked={type === "group"}
+                                    onChange={(e) => setType(e.target.value)}
+                                />
+                                <label htmlFor="group">Group</label>
+                              </div>
+                            </div>
+                            <div className="right-container d-flex flex-column justify-content-start">
+                              <div className="columnOfRadios">
+                                <input 
+                                    type="radio"
+                                    id="type"
+                                    name="type"
+                                    value="relax"
+                                    checked={type === "relax"}
+                                    onChange={(e) => setType(e.target.value)}
+                                />
+                                <label htmlFor="relax">Relax</label>
+                              </div>
+                              <div className="columnOfRadios">
+                                <input 
+                                    type="radio"
+                                    id="type"
+                                    name="type"
+                                    value="other"
+                                    checked={type === "other"}
+                                    onChange={(e) => setType(e.target.value)}
+                                />
+                                <label htmlFor="other">Other</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                         ) : ("")}
                         {category === "trip" ? (
-                          <div className="form-group" id="inputs">
-                            <input 
-                                type="text" 
-                                id="type" 
-                                className="review-input"  
-                                name="type"
-                                placeholder="bar, restaurant, romantic, group, relax, other"
-                                value={type}
-                                onChange={(e) => setType(e.target.value)}
+                        <div className="typeTitle mt-3">Type
+                          <div className="form-group d-flex flex-row justify-content-space-around mt-1" id="radioInputs">
+                            <div className="middle-container d-flex flex-column justify-content-space-around mr-2">
+                              <div className="columnOfRadios">
+                                <input 
+                                    type="radio"
+                                    id="type"
+                                    name="type"
+                                    value="pub"
+                                    checked={type === "pub"}
+                                    onChange={(e) => setType(e.target.value)}
                                 />
-                          </div> 
+                                <label htmlFor="pub">Pub</label>
+                              </div>
+                              <div className="columnOfRadios">
+                                <input 
+                                    type="radio"
+                                    id="type"
+                                    name="type"
+                                    value="restaurant"
+                                    checked={type === "restaurant"}
+                                    onChange={(e) => setType(e.target.value)}
+                                />
+                                <label htmlFor="restaurant">Restaurant</label>
+                              </div>
+                            </div>
+                            <div className="right-container d-flex flex-column justify-content-start">
+                              <div className="columnOfRadios">
+                                <input 
+                                    type="radio"
+                                    id="type"
+                                    name="type"
+                                    value="cocktail bar"
+                                    checked={type === "cocktail bar"}
+                                    onChange={(e) => setType(e.target.value)}
+                                />
+                                <label htmlFor="cocktail bar">Cocktail Bar</label>
+                              </div>
+                              <div className="columnOfRadios">
+                                <input 
+                                    type="radio"
+                                    id="type"
+                                    name="type"
+                                    value="other"
+                                    checked={type === "other"}
+                                    onChange={(e) => setType(e.target.value)}
+                                />
+                                <label htmlFor="other">Other</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div> 
                         ) : ("")}
                         {category === "product" ? (
-                          <div className="form-group" id="inputs">
-                            <input 
-                                type="text" 
-                                id="type" 
-                                className="review-input"  
-                                name="type"
-                                placeholder="clothes, accesories, electronics, sports, automotive, other"
-                                value={type}
-                                onChange={(e) => setType(e.target.value)}
-                                />
-                          </div>
+                         <div className="typeTitle mt-3">Type
+                         <div className="form-group d-flex flex-row justify-content-space-around mt-1" id="radioInputs">
+                           <div className="left-container d-flex flex-column justify-content-start mr-2">
+                             <div className="columnOfRadios">
+                               <input 
+                                 type="radio"
+                                 id="type"
+                                 name="type"
+                                 value="clothes"
+                                 checked={type === "clothes"}
+                                 onChange={(e) => setType(e.target.value)}
+                               />
+                               <label htmlFor="clothes">Clothes</label>
+                             </div>
+                             <div className="columnOfRadios">
+                               <input 
+                                   type="radio"
+                                   id="type"
+                                   name="type"
+                                   value="accesories"
+                                   checked={type === "accesories"}
+                                   onChange={(e) => setType(e.target.value)}
+                               />
+                               <label htmlFor="accesories">Accesories</label>
+                             </div>
+                           </div>
+                           <div className="middle-container d-flex flex-column justify-content-start mr-2">
+                             <div className="columnOfRadios">
+                               <input 
+                                   type="radio"
+                                   id="type"
+                                   name="type"
+                                   value="electronics"
+                                   checked={type === "electronics"}
+                                   onChange={(e) => setType(e.target.value)}
+                               />
+                               <label htmlFor="electronics">Electronics</label>
+                             </div>
+                             <div className="columnOfRadios">
+                               <input 
+                                   type="radio"
+                                   id="type"
+                                   name="type"
+                                   value="sports"
+                                   checked={type === "sports"}
+                                   onChange={(e) => setType(e.target.value)}
+                               />
+                               <label htmlFor="sports">Sports</label>
+                             </div>
+                           </div>
+                           <div className="right-container d-flex flex-column justify-content-start">
+                             <div className="columnOfRadios">
+                               <input 
+                                   type="radio"
+                                   id="type"
+                                   name="type"
+                                   value="automotive"
+                                   checked={type === "automotive"}
+                                   onChange={(e) => setType(e.target.value)}
+                               />
+                               <label htmlFor="automotive">Automotive</label>
+                             </div>
+                             <div className="columnOfRadios">
+                               <input 
+                                   type="radio"
+                                   id="type"
+                                   name="type"
+                                   value="other"
+                                   checked={type === "other"}
+                                   onChange={(e) => setType(e.target.value)}
+                               />
+                               <label htmlFor="other">Other</label>
+                             </div>
+                           </div>
+                         </div>
+                       </div>
                         ) : (
-                        <div className="form-group mb-3" id="inputs">
+                        <div className="form-group mb-3 mt-1" id="inputs">
                           <input
                             type="text" 
                             id="location" 

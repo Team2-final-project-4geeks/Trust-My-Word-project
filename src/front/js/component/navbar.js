@@ -65,7 +65,7 @@ export const Navbar = () => {
                     <ThemeSwitcher/>
                   </li>
                   <li className="nav-item dropdown" id="category-dropdown">
-                    <button className="btn dropdown text-warning" id="category" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button className="btn dropdown text-warning toggle" id="category" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Category
                     </button>
                       <ul className="dropdown-menu" id="scroll-down">
@@ -109,7 +109,7 @@ export const Navbar = () => {
                                 Favourites <span className="p-1 text-center text-warning">{(store.favourite && store.favourite!=null && store.favourite!=undefined)? store.favourite.length:"0"}</span>
                             </button>
                             {store.favourite && store.favourite.length > 0 ? (
-                                <ul className="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuClickableInside">
+                                <ul className="dropdown-menu dropdown-menu-lg-end" id="favouritesDropdown" aria-labelledby="dropdownMenuClickableInside">
                                     {store.favourite.map((fav, index) => {
                                         return (
                                             <li key={index} id="favourites-list">

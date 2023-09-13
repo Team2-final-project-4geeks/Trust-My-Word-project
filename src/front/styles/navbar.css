@@ -107,7 +107,6 @@
   justify-content: center;
 }
 .navbar-toggler {
-  outline: none !important; 
   color:#ffc600;
 }
 
@@ -123,6 +122,7 @@
     display: flex;
     flex-direction: row;
     justify-content: end;
+    position:relative;
   }
 
   #navbarItems{
@@ -160,19 +160,31 @@
     display:flex;
     flex-direction: row;
   }
+  #favouritesDropdown{
+    height: 200px;
+    max-width: 300px;
+    background-color: transparent;
+    border: none;
+    z-index:1;
+  }
   #scroll-down{
     background-color: transparent;
     font-size: 20px;
     text-align: center;
     border-radius: 10px;
     margin-left: -40px;
+    max-height: 200px;
+    max-width: 150px;
     border: none;
+    z-index:1;
+    overflow-x: visible;
   }
   #scroll-down2{
     background-color: rgba(0, 0, 0, 0.651);
     margin-top: 5px;
     border-radius: 10px;
     width: 150px;
+    z-index:2;
     text-align: center;
     position: relative;
   }
@@ -184,6 +196,7 @@
   .btn-navbar {
     background-color: transparent;
     border: 1px solid white;
+    margin-left:5px;
     border-radius: 10px;
     color: white;
     padding: 5px 10px;
@@ -194,34 +207,22 @@
     border-color: rgba(0, 0, 0, 0.5);
     color: white;
   }
-  .dropdown-menu {
-    max-height: 300px;
-    max-width: 300px;
-    background-color: transparent;
-    border: none;
-    z-index:1;
-    overflow-x: visible;
-    position: relative;
-  }
-  #dropdown-favourites:hover, #delete-favourite:hover{
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #ffc600;
-    font-size: 1.2em;
-  }
   #dropdown-favourites{
-    background-color: rgba(0, 0, 0, 0.651);
-    margin-top: 5px;
-    border-radius: 10px 0 0 10px;
-    overflow-x: visible;
-    width:250px;
-    padding-right: 5px;
-    flex-direction: row;
-    justify-content: center;
-    color: white;
+    background-color: rgba(0, 0, 0, 0.651) !important;
+    margin-top: 5px !important;
+    border-radius: 10px 0 0 10px !important;
+    overflow-x: visible !important;
+    padding-right: 5px !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    color: white !important;
+    margin-left: -50px! important;
+    width: 100%;
   }
   #delete-favourite{
     background-color: rgba(0, 0, 0, 0.651);
     margin-top: 5px;
+    margin-right: 50px;
     border-radius: 0 10px 10px 0;
     padding-top: 10px;
     padding-inline: 5px;
@@ -230,6 +231,12 @@
     color:white;
     justify-content: center;
     position: relative;
+    width: 10px;
+  }
+  #dropdown-favourites:hover, #delete-favourite:hover{
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffc600;
+    font-size: 1.2em;
   }
   .text-warning{
     color: white !important;;
@@ -239,6 +246,9 @@
     flex-direction: row;
     justify-content: space-between;
     width:250px;
-    overflow-x: visible;
+    margin-left: -100px;
+    padding-right: 2px;
+    margin-right: 10px;
+    position:relative;
   }
 }
