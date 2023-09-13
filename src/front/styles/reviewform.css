@@ -34,7 +34,9 @@ h1{
   flex-direction: column;
   justify-content: center;
   padding:0px;
-  
+}
+#left-side img{
+  object-fit: cover;
 }
 .image-create-review{
   height: 250px;

@@ -1,54 +1,29 @@
-
- .navbar {
+.navbar {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: white;
-  /* height: 50vh; */
+  color: black;
   width:100%;
   position: relative;
   overflow-y: visible;
+  background-color: black;
+  overflow: visible;
 }
-
-.navbar::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("https://cdn.pixabay.com/photo/2017/10/10/21/47/laptop-2838921_1280.jpg");
-  background-size: cover;
-  background-position: center;
-  z-index: -1;
+.navbar-home{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+    background-image: url("https://cdn.pixabay.com/photo/2017/10/10/21/47/laptop-2838921_1280.jpg");
+    width:100%;
+    position: relative;
+    overflow-y: visible;
 }
 .navbar-brand{
   width: 80px;
 }
-.nav-item {
-  margin-left: -20px;
-  font-size: 20px; 
-}
-#category{
-  background-color: transparent;
-  font-size: 20px;
-  margin-right: 5px;
-  margin-left: -15px;
-  border: none;
-}
-#category:hover {
-  background-color: rgba(0, 0, 0, 0.5);
-  border-color: rgba(0, 0, 0, 0.5);
-  color: white;
-}
-
-#all-button-content{
-  border: transparent;
-  border-color: transparent;
-}
-.token{
-  display:flex;
-  flex-direction: row;
+#imageBrand{
+  width: 78px;
 }
 #scroll-down{
   width:70px;
@@ -67,6 +42,7 @@
   background-color: black;
   color:#ffc600;
 }
+
 .btn-navbar {
   background-color: transparent;
   border: 1px solid white;
@@ -82,6 +58,7 @@
 }
 #category{
   margin-left: -10px;
+  outline: none;
 }
 .dropdown-menu {
   max-height: 200px;
@@ -129,17 +106,9 @@
   width: 145px;
   justify-content: center;
 }
-.navbar-toggler{
-  display: flex;
-  flex-direction: column;
-}
-
-.bar1, .bar2, .bar3 {
-  width: 35px;
-  height: 5px;
-  background-color: black;
-  margin-bottom: 3px;
-  margin-right: 3px;
+.navbar-toggler {
+  outline: none !important; 
+  color:#ffc600;
 }
 
 @media (min-width: 800px) {
@@ -155,7 +124,7 @@
     flex-direction: row;
     justify-content: end;
   }
- 
+
   #navbarItems{
     justify-content: end;
     font-size: 1.5rem;
@@ -168,19 +137,23 @@
     display: inline-block;
     position: relative;
   }
+
   #category{
     background-color: transparent;
     font-size: 20px;
     margin-right: 5px;
     margin-left: -15px;
+    outline: none !important; 
   }
 
-  #category:hover {
+  #category:hover, .nav-link:hover {
     background-color: rgba(0, 0, 0, 0.5);
-    border-color: rgba(0, 0, 0, 0.5);
     color: white;
+    border-radius: 10px;
   }
-
+  #nav-link{
+    border-radius: 10px;
+  }
   .token{
     display:flex;
     flex-direction: row;

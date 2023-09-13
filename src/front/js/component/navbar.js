@@ -2,9 +2,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import ThemeSwitcher from "./themechanger";
+import {GiHamburgerMenu } from 'react-icons/gi';
 
 import "../../styles/navbar.css";
 
@@ -14,6 +14,7 @@ export const Navbar = () => {
   const localUserId = localStorage.getItem("userId")
   const token = localStorage.getItem("jwt-token")
   const [favouritesUpdated, setFavouritesUpdated] = useState(0);
+
 
 	const logOut = () => {
 		localStorage.removeItem('jwt-token');
@@ -39,31 +40,35 @@ export const Navbar = () => {
     setFavouritesUpdated(favouritesUpdated + 1);
   }, [store.favourite]); 
 
+  const isHome = window.location.pathname === '/';
 
   return (
-      <nav class="navbar navbar-expand-lg">
-          <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation" >
-              <span class="navbar-toggler-icon" id="hamburguer">
-                <div class="bar1"></div>
-                <div class="bar2"></div>
-                <div class="bar3"></div>
+      <nav 
+      className={`navbar navbar-expand-lg ${isHome ? 'home-navbar' : ''}`} 
+      style={isHome ? { background: 'url("https://cdn.pixabay.com/photo/2017/10/10/21/47/laptop-2838921_1280.jpg")', 
+      color: 'white', minHeight: '400px', backgroundSize: 'cover', backgroundPosition: 'center'
+      } : null}
+      >
+          <div className="container-fluid">
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation" >
+              <span className="navbar-toggler-icon" >
+              <GiHamburgerMenu className="reactIcon" size="30px" />
               </span>
             </button>
-            <a class="navbar-brand" href="/"><img src="https://i.ibb.co/8m2mpN3/0d3b546942f94de196812ac8af0bf4d9-fotor-bg-remover-20230809143940.png" alt="0d3b546942f94de196812ac8af0bf4d9" border="0" id="imageBrand" /></a>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <ul class="navbar-nav me-auto mt-0 mb-2 mb-lg-0" id="navbarContent">
-                  <li class="nav-item">
-                    <a class="nav-link active text-warning" aria-current="page" href="/">Home</a>
+            <a className="navbar-brand" href="/"><img src="https://i.ibb.co/8m2mpN3/0d3b546942f94de196812ac8af0bf4d9-fotor-bg-remover-20230809143940.png" alt="0d3b546942f94de196812ac8af0bf4d9" border="0" id="imageBrand" /></a>
+            <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul className="navbar-nav me-auto mt-0 mb-2 mb-lg-0" id="navbarContent">
+                  <li className="nav-item">
+                    <a className="nav-link active text-warning" aria-current="page" href="/">Home</a>
                   </li>
-                  <li class="nav-item text-warning mx-4">
+                  <li className="nav-item text-warning mx-4">
                     <ThemeSwitcher/>
                   </li>
-                  <li class="nav-item" id="category-dropdown">
-                    <button class="btn dropdown text-warning" id="category" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <li className="nav-item" id="category-dropdown">
+                    <button className="btn dropdown text-warning" id="category" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Category
                     </button>
-                      <ul class="dropdown-menu" id="scroll-down">
+                      <ul className="dropdown-menu" id="scroll-down">
                         <li>
                           <a className="nav-link text-warning" id="scroll-down2" href="#" onClick={() => navigate("/activities")}>
                           Activities
