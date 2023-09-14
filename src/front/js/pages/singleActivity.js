@@ -114,6 +114,18 @@ const SingleActivity = () => {
     
     const createComment = () => {
 
+        if (description.trim() === '') {
+            // Show an alert to the user
+            Swal.fire({
+                title: 'Oops!',
+                text: 'You cannot post a comment without text',
+                imageUrl: 'https://cdn.pixabay.com/photo/2015/08/05/15/04/mistake-876597_1280.jpg',
+                imageWidth: 400,
+                imageHeight: 200,
+                imageAlt: 'Custom image',
+              })
+            return; // Do not proceed with creating the comment
+        }else{
         const token = localStorage.getItem('jwt-token');
         if(token) {
         fetch(process.env.BACKEND_URL + 'api/create-comment', {
@@ -145,7 +157,7 @@ const SingleActivity = () => {
                 title: 'Oops...',
                 text: 'Access denied. Please log in!'            
             })
-            }
+            }}
     }
 
     const showComments = () =>{

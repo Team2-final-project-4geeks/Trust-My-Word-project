@@ -47,7 +47,7 @@ const ActivityCard = (props)=>{
             if (translatedText) {
               setTranslatedDescription(translatedText.text);
             } else {
-              console.error('No se encontró la traducción al español en la respuesta de la API.');
+              console.error('The translation to the chosen language could not be performed');
             }
           })
           .catch(error => {
@@ -114,7 +114,7 @@ const ActivityCard = (props)=>{
                             <div id="card-description-activity">
                                 <p className="card-text">
                                     <i className="fas fa-quote-left mt-2 me-2"></i> 
-                                    <i> {props.activity.description}</i>
+                                    <i> {translatedDescription || props.activity.description}</i>
                                 </p>
                             </div>
                             <div className="d-flex flex-row justify-content-between">
@@ -124,21 +124,21 @@ const ActivityCard = (props)=>{
                                     <BsTranslate className={`dropdown-toggle mt-4 ${ currentLanguage === null || currentLanguage === "en" ? "text-dark" : "text-warning"}`} data-bs-toggle="dropdown" aria-expanded="false" /> 
                                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                             <div className="d-flex" id="dropdownTranslator">
-                                            <a className="dropdown-item" 
-                                                onClick={(e)=>{
-                                                e.preventDefault()
-                                                translator("es")}} 
-                                                > <img src="https://img.asmedia.epimg.net/resizer/LQyBk5T2TfVttC_yVM8n5HuEYpM=/1472x828/cloudfront-eu-central-1.images.arcpublishing.com/diarioas/53YSJXSIZFHNTBV52Z4AMKISUM.png" /></a>
-                                            <a className="dropdown-item" 
-                                                onClick={(e)=>{
-                                                e.preventDefault()
-                                                translator("en")}} 
-                                                > <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png" /></a>
-                                            <a className="dropdown-item" 
-                                                onClick={(e)=>{
-                                                e.preventDefault()
-                                                translator("de")}} 
-                                                > <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/640px-Flag_of_Germany.svg.png" /></a>
+                                                <a className="dropdown-item" 
+                                                    onClick={(e)=>{
+                                                    e.preventDefault()
+                                                    translator("es")}} 
+                                                    > <img src="https://img.asmedia.epimg.net/resizer/LQyBk5T2TfVttC_yVM8n5HuEYpM=/1472x828/cloudfront-eu-central-1.images.arcpublishing.com/diarioas/53YSJXSIZFHNTBV52Z4AMKISUM.png" /></a>
+                                                <a className="dropdown-item" 
+                                                    onClick={(e)=>{
+                                                    e.preventDefault()
+                                                    translator("en")}} 
+                                                    > <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png" /></a>
+                                                <a className="dropdown-item" 
+                                                    onClick={(e)=>{
+                                                    e.preventDefault()
+                                                    translator("de")}} 
+                                                    > <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/640px-Flag_of_Germany.svg.png" /></a>
                                             </div>
                                         </ul>
                                 </div>
