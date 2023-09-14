@@ -213,7 +213,7 @@ export const ReviewForm = () => {
                             reviewImage
                         )}
                         <br/>
-                        <label for="imageUpload" id="labelImageUpload" class="custom-file-upload">
+                        <label for="imageUpload" id="labelImageUpload" class="custom-file-upload mt-0 mb-2">
                           <i class="fa-solid fa-upload"></i> Choose File
                         </label>
                         <input
@@ -224,8 +224,8 @@ export const ReviewForm = () => {
                           style={{ display: 'none' }} 
                           onChange={handleFile}
                         />
-                        <span className="date-title mb-1" id="date">Date</span>
-                        <div className="form-group mt-1" id="inputs">
+                        <span className="date-title mt-2" id="date">Date</span>
+                        <div className="form-group" id="inputs">
                             <input 
                                 type="text" 
                                 id="publishing_date" 
@@ -268,7 +268,7 @@ export const ReviewForm = () => {
                         </div>
                         {category === "activity" ? (
                         <div className="typeTitle mt-3">Type
-                          <div className="form-group d-flex flex-row justify-content-space-around mt-2" id="radioInputs">
+                          <div className="form-group d-flex flex-row justify-content-center mt-2" id="radioInputs">
                             <div className="left-container d-flex flex-column justify-content-start mr-2">
                               <div className="columnOfRadios">
                                 <input 
@@ -346,7 +346,7 @@ export const ReviewForm = () => {
                         ) : ("")}
                         {category === "trip" ? (
                         <div className="typeTitle mt-3">Type
-                          <div className="form-group d-flex flex-row justify-content-space-around mt-1" id="radioInputs">
+                          <div className="form-group d-flex flex-row justify-content-center mt-1" id="radioInputsTrips">
                             <div className="middle-container d-flex flex-column justify-content-space-around mr-2">
                               <div className="columnOfRadios">
                                 <input 
@@ -381,7 +381,7 @@ export const ReviewForm = () => {
                                     checked={type === "cocktail bar"}
                                     onChange={(e) => setType(e.target.value)}
                                 />
-                                <label htmlFor="cocktail bar">Cocktail Bar</label>
+                                <label htmlFor="cocktail bar" className="cocktailLabel">Cocktail Bar</label>
                               </div>
                               <div className="columnOfRadios">
                                 <input 
@@ -392,7 +392,7 @@ export const ReviewForm = () => {
                                     checked={type === "other"}
                                     onChange={(e) => setType(e.target.value)}
                                 />
-                                <label htmlFor="other">Other</label>
+                                <label htmlFor="other" className="otherTripLabel">Other</label>
                               </div>
                             </div>
                           </div>
@@ -400,7 +400,7 @@ export const ReviewForm = () => {
                         ) : ("")}
                         {category === "product" ? (
                          <div className="typeTitle mt-3">Type
-                         <div className="form-group d-flex flex-row justify-content-space-around mt-1" id="radioInputs">
+                         <div className="form-group d-flex flex-row justify-content-center mt-1" id="radioInputs">
                            <div className="left-container d-flex flex-column justify-content-start mr-2">
                              <div className="columnOfRadios">
                                <input 
