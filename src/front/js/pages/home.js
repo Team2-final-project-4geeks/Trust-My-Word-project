@@ -2,11 +2,12 @@
 import React, { useContext, useEffect, useState  } from "react";
 import { Context} from "../store/appContext";
 import ActivityCard from "../component/activitycard"
-import { ProductCard } from "../component/productcard.jsx";
+import { ProductCard } from "../component/productcard.js";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
 import TriipCard from "../component/triipcard.js";
 import DinamicText from "../component/dinamictext.js";
+import { Navbar } from "../component/navbar";
 
 export const Home = () => {
 	const navigate = useNavigate()
@@ -28,10 +29,6 @@ export const Home = () => {
 	  getTrips();
 	  geo();	  
 	}, []);
-
-	// useEffect(()=>{
-	// 	holaaaa1123344()
-	// },[reviewLocation])
 
 	useEffect(() => {
 	  if (coordinatesAvailable) { 

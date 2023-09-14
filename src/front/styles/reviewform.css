@@ -34,7 +34,9 @@ h1{
   flex-direction: column;
   justify-content: center;
   padding:0px;
-  
+}
+#left-side img{
+  object-fit: cover;
 }
 .image-create-review{
   height: 250px;
@@ -48,11 +50,49 @@ h1{
   margin-left: auto;
   margin-right: auto; 
 }
+
+.left-container {
+  margin-right: 5px;
+}
+.middle-container{
+  margin-right: 0px;
+  margin-left: 0px;
+}
+.right-container {
+  margin-left: 5px;
+}
+#labelImageUpload{
+  justify-content: center !important;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+label{
+  width: 70px;
+  font-size: 14px;
+  justify-content: center;
+}
+.cocktailLabel, .otherTripLabel{
+  width: 80px;
+}
+
+.form-group input[type="radio"] {
+  width: 15px;
+  height:15px;
+  padding-top: 5px;
+  margin-left: 0px;
+}
+.middle-container input[type="radio"],
+.left-container input[type="radio"],
+.right-container input[type="radio"] {
+  margin-right: 5px;
+}
 #middle{
   max-width: 100%;
   width: 59%;
   display:flex;
   flex-direction: column;
+  margin-top: 20px;
 }
 #little-letters{
   font-size: 9px;
@@ -95,15 +135,10 @@ span{
   color: rgba(0,0,0,.87);
   border-bottom-color: rgba(0,0,0,.42);
   font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: .009375em;
-  text-decoration: inherit;
-  text-transform: inherit;
   align-self: flex-end;
   box-sizing: border-box;
   width: 100%;
   padding: 20px 16px 6px;
-  transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
   border: none;
   border-bottom: 1px solid;
   border-radius: 4px 4px 0 0;
@@ -114,7 +149,6 @@ span{
   background-color: white;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 20px;
   width: 70%;
 }
 .euro-symbol {
@@ -134,7 +168,7 @@ span{
   height: 100%;
   width: 50%; 
 }
-#title, #type, #location, #link, #store, #publishing_date{
+#title, #location, #link, #store, #publishing_date{
   width: 100%;
   height: 100%; 
   text-align: center;

@@ -73,7 +73,7 @@ export const ProductCard = (props) => {
                                         <div id="card-description-product">
                                             <p className="card-text"><i className="fas fa-quote-left mt-2 me-2"></i> <i> {props.product.description}</i></p>
                                         </div>
-                                        <p className="card-text mt-4">{props.product.price}</p>
+                                        <p className="card-text mt-4">{props.product.price}€</p>
                                     </div>
                                 </div>
                                 <div id="productCardViewMore">

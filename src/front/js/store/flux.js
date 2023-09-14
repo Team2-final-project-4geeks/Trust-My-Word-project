@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2';
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -48,9 +50,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const deleteConfirmed = confirm("Are you sure that you want to delete this Favourite?")
 				if (deleteConfirmed === true) {
 				setStore({favourite: store.favourite.filter((fav) => fav !== favToDelete)})
-					alert ("Favourite succesfully deleted")
+					Swal.fire(
+						'Favourite succesfully deleted',
+						'success')
 				} else {
-					alert ("delete cancelled")
+					Swal.fire(
+						'Delete Cancelled'
+					  )
 				}
 			},			
 			addType: (type) => {

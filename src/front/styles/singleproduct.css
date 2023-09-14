@@ -59,3 +59,53 @@
 .my-5{
     font-size:50px;
 }
+
+@media (max-width: 800px) {
+    #containerSingleProduct {
+        height: auto; 
+    }
+
+    #singleProductPicture {
+        width: 100%; 
+        height: auto; 
+    }
+
+ 
+    #productRow {
+        flex-direction: column; 
+        justify-content: center;
+        margin: 10px;
+        font-size: 16px;
+    }
+
+    #productRow2 {
+        flex-direction: column; 
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    #link-share {
+        justify-content: center;
+        width: 100%; 
+        margin-top: 20px !important;
+        position: relative;
+    }
+
+    #commentSection {
+        width: 100%; 
+    }
+
+    #commentWrite {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #sumbitButtonSingle {
+        width: 100%; 
+    }
+
+    .commentHeadline {
+        margin-left: 0; 
+    }
+
+}

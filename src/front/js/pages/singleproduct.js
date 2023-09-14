@@ -181,25 +181,29 @@ export const SingleProduct = () => {
         <div className="container-fluid mt-5 mb-5 d-flex flex-column align-items-center">
             {oneProduct ? (
                     <div className="col-11 card border-0" id="containerSingleProduct">
-                        <div className="row g-0 h-100">
-                            <div className="col-4">
+                        <div className="row g-0 h-100" >
+                            <div className="col-sm-12 col-md-4">
                                 <img id="singleProductPicture"src={oneProduct.image} className="img-fluid rounded-start h-100" alt="..."/>
                             </div>
-                            <div className="col-8">
-                                <div className="card h-100 border-0 px-3">
-                                    <h3 className="card-title ms-3 mt-3 mb-4 text-center" id="productTitle">{oneProduct.title}</h3>
-                                        <div className="d-flex flex-row mt-2" id="productRow">
-                                            <p className="card-text ms-2"><i class="fas fa-heart fa-xs me-2"></i>{userName}</p>
+                            <div className="col-sm-12 col-md-8">
+                                <div className="card h-100 border-0 px-3" id="cardProduct">
+                                    <h3 className="card-title ms-3 mt-4 mb-4 text-center" id="productTitle">{oneProduct.title}</h3>
+                                        <div className="d-flex flex-row mt-3" id="productRow">
+                                            <p className="card-text ms-2"><i class="fas fa-heart fa-xs me-2"></i>{oneProduct.reviewOwner}</p>
                                             <p className="card-text"><i class="fas fa-info-circle fa-sm me-2"></i>{oneProduct.type}</p>
                                             <p className="card-text ms-2"><i class="fas fa-calendar-alt fa-sm me-2"></i>{oneProduct.publishing_date}</p>
                                         </div>
-                                    <p className="card-text"><i>" {oneProduct.description} "</i></p>
-                                        <div className="d-flex flex-row" id="productRow2">
+                                    <div className="row">
+                                        <p className="card-text ms-2 my-2"><i>" {oneProduct.description} " </i></p>
+                                    </div>
+                                        <div className="d-flex flex-row justify-content-center" id="productRow2">
                                             <p className="card-text"><i class="fas fa-money-bill-wave me-2"></i>{oneProduct.price}€</p>
+                                            <Link to={oneProduct.link} className="card-text ms-3 me-5 mb- 3 text-center">{oneProduct.link}</Link>
                                         </div>
-                                        <Link to={oneProduct.link} className="card-text ms-3 me-5 text-center">{oneProduct.link}</Link>
-                                    <div className="d-flex flex-row ms-4 mt-2 position-absolute bottom-0 pb-4" id="link-share">
+                                    <div>
+                                        <div className="d-flex flex-row ms-4 mt-2 position-absolute bottom-0 pb-4" id="link-share">
                                         <ShareComponent />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -210,23 +214,44 @@ export const SingleProduct = () => {
                     <span className="visually-hidden">Loading...</span>
                 </div>
                 )}
-                    <div className="container-fluid" id="commentSection">
-                    <h4 className="my-5">Comments</h4>
-                    <div className="container-fluid">
-                        <Carousel showDots={true} arrows={false} responsive={responsive} >
-                            {showComments()}
-                        </Carousel>
+                    <div className="container border-0">
+                    <div className="row justify-content-center">                
+                        <div className="col border-0" id="commentSection">
+                            <h4 className="my-5 ms-4" id="commentsTitle">Comments</h4>
+                            <div className="container border-0">
+                                <div className="row justify-content-center">
+                                    <Carousel showDots={true} arrows={false} responsive={responsive} swipeable={true}>
+                                        {showComments()}
+                                    </Carousel>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="input-group mt-5" id="comment">
-                        <span className="input-group-text rounded me-2" id="commentWrite">Write your comment:</span>
-                        <textarea className="form-control" id="commentBox" value={description} onChange={(e)=> setDescription(e.target.value)} aria-label="With textarea"></textarea>
+    
+                    <div className="row">                 
+                        <div className="input-group mt-5 mx-auto justify-content-center" id="comment">
+                            <span className="col-sm-3 input-group-text rounded me-2 text-wrap" id="commentWrite">Post a comment:</span>
+                            <textarea 
+                                className="col-sm-9 col-lg-5 form-control" 
+                                id="commentBox" 
+                                maxLength={125} 
+                                value={description} 
+                                onChange={(e)=> setDescription(e.target.value)} 
+                                aria-label="With textarea">                                
+                            </textarea>
+                        </div>
                     </div>
-                    <button 
-                        type="button" className="btn btn-dark mt-5" 
-                        onClick={createComment}
-                        id="sumbitButtonSingle"> Send 
-                    </button>
-                    </div>           
+                    <div className="row">
+                        <div className="container-fluid d-flex justify-content-center">
+                            <button 
+                                type="button"                            
+                                className="btn btn-dark mt-5" 
+                                onClick={createComment}
+                                id="sumbitButtonSingle"> Send 
+                            </button>
+                        </div> 
+                    </div>               
+                </div>           
             </div>
 
         )
