@@ -43,8 +43,8 @@ export const Products = () => {
                     <div className="card-body d-flex">
                         <div className="row">
                             <blockquote className="blockquote mb-0">
-                                <p className=" col-sm-12 text-center mt-4" id="quote">“I've tested so many products that my house is considering requesting a review.”</p>
-                                <footer className="col-sm-12 blockquote-footer text-center mt-4 mb-4" id="author">Unknown author</footer>
+                                <p className=" col-sm-12 text-center mt-4" id="quoteProductLine">“I've tested so many products that my house is considering requesting a review.”</p>
+                                <footer className="col-sm-12 blockquote-footer text-center mt-4 mb-4" id="authorProduct">Unknown author</footer>
                             </blockquote>
                         </div>    
                     </div>
@@ -59,7 +59,7 @@ export const Products = () => {
                                         key={index} 
                                         item={product}
                                         product={product}
-                                        userImage={product.userImage}
+                                        profile={product.userImage}
                                         img={product.image}
                                         author={product.reviewOwner}
                                         rating={product.rating}                                        

@@ -64,7 +64,7 @@ export const ProductCard = (props) => {
         <div className="card-body mt-5 mb-4" id="ProductBody">
             <div id="imageBoard">
                 <img src={props.product.image} className="card-img-top" alt="image chosen by the user"/>
-                <div id="imageOverlay" className="d-flex justify-content-end align-items-start p-2">
+                    <div id="imageOverlay" className="d-flex justify-content-end align-items-start p-2">
                         <i
                         className="fas fa-heart text-danger fa-2x"
                         onClick={() => {
@@ -83,7 +83,7 @@ export const ProductCard = (props) => {
                         }}
                         ></i>
                     </div>
-                </div>
+            </div>
 
             <div id="infoBoard" className="mt-3">
             <div className="d-flex flex-column">
@@ -147,16 +147,13 @@ export const ProductCard = (props) => {
                             </div>
                         </div>
                     </div>
-
-                    
                     <div id="productCardViewMore">
                         <ViewMoreProduct item={props.product.id}/>
                     </div>
-
                     <div>
                         {showHeart && <div className="floating-heart">&hearts;</div>}
                     </div>
-                 </div>
+                </div>
             </div>
         </div>
         </div>

@@ -75,7 +75,6 @@ label{
 .cocktailLabel, .otherTripLabel{
   width: 80px;
 }
-
 .form-group input[type="radio"] {
   width: 15px;
   height:15px;
@@ -98,7 +97,6 @@ label{
   font-size: 9px;
   color:rgb(29, 28, 28)
 }
-
 .finish-review{
   display: inline-block;
   margin-left: auto;
@@ -125,7 +123,6 @@ label{
       box-shadow: rgb(246, 84, 174) -2px -2px 0px 2px, rgb(255, 198, 0) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
       transform: scale(1.01);
 }
-
 span{
   font-style: italic;
   font-weight: bold;
@@ -172,7 +169,6 @@ span{
   width: 100%;
   height: 100%; 
   text-align: center;
-
 }
 .little-legends{
   font-size: 10px;
@@ -238,5 +234,4 @@ span{
     margin-bottom: 50px;
     border: none;
   }
-
 }

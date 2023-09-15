@@ -11,12 +11,11 @@
 #imageBoard:hover img {
   filter: brightness(80%);
 }
-
 #productCardViewMore{
-  position: absolute;
   bottom: 10px;
+  position: relative;
   width: 100%;
-  display: flex;
+  display:flex;
   justify-content: center;
 }  
 

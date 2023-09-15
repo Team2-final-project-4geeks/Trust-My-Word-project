@@ -79,10 +79,10 @@ const ActivityCard = (props)=>{
                             }
                         }}
                         ></i>
-                    </div>
                 </div>
+            </div>
 
-             <div id="infoBoard" className="mt-3">
+            <div id="infoBoard" className="mt-3">
             <div className="d-flex flex-column">
                 <div className=" col-12">
                     <div className="d-flex flex-row" id="activityInfoBoard">

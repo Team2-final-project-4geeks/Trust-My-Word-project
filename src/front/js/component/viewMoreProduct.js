@@ -15,8 +15,9 @@ const ViewMoreProduct = (props) =>{
     const navigate = useNavigate()
 
     return(
-        <button className="btn" 
-                type="button"  
+        <button id="viewMoreProduct" 
+                type="button"
+                style={{border:"none"}} 
                 onClick={()=>{ 
                     if(token){
                         navigate("/product/" + props.item)
