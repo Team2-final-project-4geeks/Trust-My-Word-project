@@ -9,8 +9,8 @@ const ViewMoreProduct = (props) =>{
     const {store, actions} = useContext(Context);
     const token = localStorage.getItem("jwt-token")
 
-    const handleReviewClick = (activityId) => {
-        actions.addToCounter(activityId)
+    const handleReviewClick = (productId) => {
+        actions.addToCounter(productId)
 	  };
     const navigate = useNavigate()
 

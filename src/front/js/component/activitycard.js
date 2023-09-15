@@ -118,7 +118,7 @@ const ActivityCard = (props)=>{
                                 </p>
                             </div>
                             <div className="d-flex flex-row justify-content-between">
-                                <p className="card-text mt-4">{props.activity.price}</p>
+                                <p className="card-text mt-4">{props.activity.price}€</p>
 
                                 <div class="dropdown">
                                     <BsTranslate className={`dropdown-toggle mt-4 ${ currentLanguage === null || currentLanguage === "en" ? "text-dark" : "text-warning"}`} data-bs-toggle="dropdown" aria-expanded="false" /> 

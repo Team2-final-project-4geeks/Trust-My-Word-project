@@ -132,11 +132,10 @@ export const ReviewForm = () => {
     try {
       const imageUrl = await uploadImage(image); 
       sendDataToAPI(imageUrl);
-      Swal.fire(
-        'Good job!',
-        'You have created a Review',
-        'success'
-    )
+      Swal.fire({
+        icon: 'success',
+        text: 'Good job! You have created a Review'
+      })
       navigate('/');
     } catch (error) {
       console.error('Error uploading:', error);
