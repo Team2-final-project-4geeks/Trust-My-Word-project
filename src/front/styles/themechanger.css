@@ -21,7 +21,7 @@
     background-color: #000000 !important; 
     color: #fff !important; 
 }
-.dark-theme #viewMore , .dark-theme #quoteActivity, .dark-theme #quoteProduct{
+.dark-theme #viewMore , .dark-theme #viewMoreProduct, .dark-theme #quoteActivity, .dark-theme #quoteProduct{
     background-color: #000000 !important; 
     color: #fff !important; 
 }
@@ -35,7 +35,7 @@
 .dark-theme #singleReviewInfo{
     color: #ffffff !important;
 }
-.dark-theme #cardTrip , .dark-theme #activityCard{
+.dark-theme #cardTrip , .dark-theme #activityCard, .dark-theme #productCard{
     background-color: #858484 !important;
 }
 .dark-theme .navbar::before{

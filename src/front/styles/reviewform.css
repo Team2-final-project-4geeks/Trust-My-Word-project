@@ -75,7 +75,6 @@ label{
 .cocktailLabel, .otherTripLabel{
   width: 80px;
 }
-
 .form-group input[type="radio"] {
   width: 15px;
   height:15px;
@@ -87,6 +86,17 @@ label{
 .right-container input[type="radio"] {
   margin-right: 5px;
 }
+#radioInputs{
+  box-shadow: rgb(255, 198, 0) -2px -2px 0px 2px, rgb(246, 84, 174) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  width: 80%;
+  border-width: 2px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #middle{
   max-width: 100%;
   width: 59%;
@@ -98,7 +108,6 @@ label{
   font-size: 9px;
   color:rgb(29, 28, 28)
 }
-
 .finish-review{
   display: inline-block;
   margin-left: auto;
@@ -125,7 +134,6 @@ label{
       box-shadow: rgb(246, 84, 174) -2px -2px 0px 2px, rgb(255, 198, 0) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
       transform: scale(1.01);
 }
-
 span{
   font-style: italic;
   font-weight: bold;
@@ -172,7 +180,6 @@ span{
   width: 100%;
   height: 100%; 
   text-align: center;
-
 }
 .little-legends{
   font-size: 10px;
@@ -193,14 +200,15 @@ span{
   justify-items: center;
   z-index: 1;
   }
-
+  .form-select, .selectOption{
+    max-width: 50%;
+  }
   #left-side{
     display:flex;
     width: 100%;
     flex-direction: column;
     justify-content: center;
     padding:0px;
-    
   }
   #middle{
     width: 100%;
@@ -238,5 +246,4 @@ span{
     margin-bottom: 50px;
     border: none;
   }
-
 }

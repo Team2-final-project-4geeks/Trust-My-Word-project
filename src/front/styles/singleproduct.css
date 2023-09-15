@@ -1,61 +1,44 @@
 #singleProductPicture{
     object-fit: cover;    
 }
-
 #containerSingleProduct{
     height:450px;
     display:flex;
     box-shadow: rgb(218, 165, 32) -2px -2px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 4px;
 }
-
 #productRow{
-    justify-content: space-between;
     margin: 20px;
     font-size: 20px;
 }
-
 #productRow2 {
-    justify-content: space-between;
     margin:20px;
 }
-#link-share{
-    justify-content:flex-end;
-    width: 90%;
-}
-
 #sumbitButtonSingle{
     background:black;
     color:white;
 }
-
 #commentSection{
     width: 1350px;
     min-height: 450px;    
 }
-
 #commentWrite{
     background: black;
     color:goldenrod;    
 }
-
 #sumbitButtonSingle{
     margin:auto;
     background:black;
     color: goldenrod;
 }
-
 #commentBox, #commentWrite{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
-
 #comment{
     width:700px;    
 }
-
 .commentHeadline{
     margin-left: 250px;
 }
-
 .my-5{
     font-size:50px;
 }
@@ -64,48 +47,52 @@
     #containerSingleProduct {
         height: auto; 
     }
-
     #singleProductPicture {
         width: 100%; 
         height: auto; 
     }
-
- 
-    #productRow {
-        flex-direction: column; 
-        justify-content: center;
-        margin: 10px;
-        font-size: 16px;
+    #cardArea{
+        padding-left: 0;
     }
-
-    #productRow2 {
-        flex-direction: column; 
-        justify-content: center;
+    #shareProduct{
         margin-bottom: 20px;
     }
-
-    #link-share {
-        justify-content: center;
-        width: 100%; 
-        margin-top: 20px !important;
-        position: relative;
-    }
-
     #commentSection {
         width: 100%; 
     }
-
     #commentWrite {
         width: 100%;
         margin-bottom: 10px;
     }
-
     #sumbitButtonSingle {
         width: 100%; 
     }
-
     .commentHeadline {
         margin-left: 0; 
     }
+}
 
+@keyframes 
+topBubbles {  0% {
+ background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%;
+}
+ 50% {
+ background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 90% 30%;
+}
+ 100% {
+ background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%, 90% 20%;
+ background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+}
+}
+@keyframes 
+bottomBubbles {  0% {
+ background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%;
+}
+ 50% {
+ background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%;
+}
+ 100% {
+ background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%;
+ background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+}
 }

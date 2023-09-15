@@ -2,11 +2,14 @@
     width:700px;
     height:200px;
     margin: auto; 
-    display: flex;  
+    display: flex;
 }
 
-#quote{
-    font-size: 1.5vw;
+#quoteProductLine{
+    font-size: 1,7vw;
+}
+#authorProduct{
+    font-size: 1.2vw;
 }
 
 #row{

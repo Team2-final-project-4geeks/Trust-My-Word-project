@@ -21,9 +21,10 @@ export const Navbar = () => {
 		localStorage.removeItem('userId')
     actions.setLoggedIn(false)
 		navigate("/");
-		Swal.fire(
-    'You are now logged out'         
-    )
+		Swal.fire({
+      icon: 'success',
+      text: 'You are now logged out'         
+    })
 	}
  
 	useEffect(() => {		

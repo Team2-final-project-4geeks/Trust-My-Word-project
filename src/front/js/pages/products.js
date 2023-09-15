@@ -1,9 +1,11 @@
 import React, { useEffect, useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom"; 
 import { Context } from "../store/appContext";
 import FilterBarProducts from "../component/filterbarproducts";
+import { ProductCard } from "../component/productcard";
 
 import "../../styles/products.css";
+
 
 
 export const Products = () => {
@@ -35,55 +37,43 @@ export const Products = () => {
 		
 		return (
 			<div className="container-fluid mt-2">
-            <FilterBarProducts />
-            <div className="card mt-4 mb-5 border-0  custom-quote-product " id="quoteProduct">                    
-                <div className="card-body d-flex" id="blockquoteSpace">
-                    <blockquote className="blockquote mb-0" id="blockquoteProduct">
-                        <p className="text-center mt-4" id="quote">“I've tested so many products that my house is considering requesting a review.”</p>
-                        <footer className="blockquote-footer text-center mt-4 mb-4">Someone</footer>
-                    </blockquote>
+                <FilterBarProducts/>
+
+                <div className="card mt-4 mb-5 border-0" id="quoteProduct">
+                    <div className="card-body d-flex">
+                        <div className="row">
+                            <blockquote className="blockquote mb-0">
+                                <p className=" col-sm-12 text-center mt-4" id="quoteProductLine">“I've tested so many products that my house is considering requesting a review.”</p>
+                                <footer className="col-sm-12 blockquote-footer text-center mt-4 mb-4" id="authorProduct">Unknown author</footer>
+                            </blockquote>
+                        </div>    
+                    </div>
                 </div>
-            </div>
-            <div className="py-2" >                
-                <div className="card-group">
+
+                <div className="container-fluid" >                
                     <div className="row row-cols-1 row-cols-md-3 g-4">
-                        {(products.length !== 0 || store.query !== "") ? (filteredProducts.map((product, index) =>{            
+                        {(products.length !== 0 || store.query !== "") ? (filteredProducts.map((product, index) =>{           
                             return(
-                                <li key={index}>              
-                                    <div className="col">
-                                        <div className="card">
-                                            <div className="image-container w-100">
-                                                <img src={product.image} className="card-img-top" alt="..."/>
-                                                <div className="image-overlay d-flex justify-content-end align-items-start p-2 w-100" id="imageProducts">
-                                                    <i className="fas fa-heart text-danger" onClick={() => {
-                                                        actions.addFavourite(product.title);
-                                                        actions.addUserFavourites(localStorage.getItem("userId"))}}>
-                                                    </i>
-                                                </div>
-                                            </div>
-                                            <div className="card-body">
-                                                <h5 className="card-title">{product.title}</h5>
-                                                <p className="card-text">{product.type}</p>
-                                                <p className="card-text">{product.location}</p>
-                                                <p className="card-text">{product.publishing_date}</p>                            
-                                                <p className="card-text">{product.description}</p>
-                                                <Link to={product.link} target="_blank" className="card-text">{product.link}</Link>
-                                                <div class="sharethis-inline-share-buttons"></div>
-                                            </div>
-                                            <button className="btn" type="button" id="productCardViewMore" onClick={()=> navigate("/product/" + product.id)}> <strong>View more</strong></button>
-                                        </div>
-                                    </div>
-                                </li>
+                                <div key={index} className="col-md-4 col-ms-12">
+                                    <ProductCard
+                                        key={index} 
+                                        item={product}
+                                        product={product}
+                                        profile={product.userImage}
+                                        img={product.image}
+                                        author={product.reviewOwner}
+                                        rating={product.rating}                                        
+                                    />
+                                </div>
                             )
                             }
                             )) : (
-                                <div className="spinner-border" role="status">
-                                    <span className="visually-hidden">Loading...</span>
-                                </div>
+                            <div className="spinner-border" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </div>
                         )}
                     </div>
                 </div>
             </div>
-        </div>
-	);
-};
+	)
+}

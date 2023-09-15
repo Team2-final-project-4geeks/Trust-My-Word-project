@@ -132,11 +132,10 @@ export const ReviewForm = () => {
     try {
       const imageUrl = await uploadImage(image); 
       sendDataToAPI(imageUrl);
-      Swal.fire(
-        'Good job!',
-        'You have created a Review',
-        'success'
-    )
+      Swal.fire({
+        icon: 'success',
+        text: 'Good job! You have created a Review'
+      })
       navigate('/');
     } catch (error) {
       console.error('Error uploading:', error);
@@ -173,7 +172,26 @@ export const ReviewForm = () => {
   const sendDataToAPI = (image) => {
     const token = localStorage.getItem('jwt-token');
 		if(token) {
-    fetch(process.env.BACKEND_URL + `api/create-review`, { 
+      if( selectedCategory== "product"){
+        fetch(process.env.BACKEND_URL + `api/create-review`, { 
+          method: "POST", 
+          headers: { 
+              "Content-Type": "application/json",
+              "Authorization" : "Bearer " + token
+          },
+          body: JSON.stringify({title, type, description, location, publishing_date, link, price, category, imageCloud:image,user,rating, latitude: null, longitude:null}) 
+      })
+      .then((res) => res.json())
+      .then((result) => {
+          console.log(result);
+      }).catch((err) => {
+          console.log(err);
+      })
+  
+  
+       }
+       else {
+          fetch(process.env.BACKEND_URL + `api/create-review`, { 
             method: "POST", 
             headers: { 
                 "Content-Type": "application/json",
@@ -187,34 +205,35 @@ export const ReviewForm = () => {
         }).catch((err) => {
             console.log(err);
         })
-        }else  {
-          alert(' You are not logged in!')
         }
-      };
+       }
+     
+        };
+  
 
     return (
-        <div class="container text-center" id="full-content">
+        <div className="container text-center mt-5 mb-3" id="full-content">
              <h1>Insert Your Review</h1>
             
-                <select class="form-select" onChange={(e) => {
+                <select className="form-select" onChange={(e) => {
                     handleCategoryChange(e);
                     setImagePreview(null);
                     setCategory(e.target.value)}} aria-label="Default select example">
                     <option selected >Category</option>
-                    <option value="activity" >Activities</option>
-                    <option value="product" >Products</option>
-                    <option value="trip" >Trips</option>
+                    <option value="activity">Activities</option>
+                    <option value="product">Products</option>
+                    <option value="trip">Trips</option>
                 </select>
-            <div class="big-review" id="row-review-big">
-                    <div class="left-side" id="left-side">
+            <div className="big-review" id="row-review-big">
+                    <div className="left-side" id="left-side">
                         {imagePreview ? (
                         <img src={imagePreview} className="image-create-review" alt="Preview" />
                         ) : (
                             reviewImage
                         )}
                         <br/>
-                        <label for="imageUpload" id="labelImageUpload" class="custom-file-upload mt-0 mb-2">
-                          <i class="fa-solid fa-upload"></i> Choose File
+                        <label for="imageUpload" id="labelImageUpload" className="custom-file-upload mt-0 mb-2">
+                          <i className="fa-solid fa-upload"></i> Choose File
                         </label>
                         <input
                           id="imageUpload"
@@ -252,7 +271,7 @@ export const ReviewForm = () => {
                           </div>
                         </div>
                     </div>
-                    <div class="middle" id="middle">
+                    <div className="middle" id="middle">
                         <div className="form-group" id="inputs">
                             <input 
                                 type="text"
@@ -400,7 +419,7 @@ export const ReviewForm = () => {
                         ) : ("")}
                         {category === "product" ? (
                          <div className="typeTitle mt-3">Type
-                         <div className="form-group d-flex flex-row justify-content-center mt-1" id="radioInputs">
+                         <div className="form-group d-flex flex-row flex-wrap justify-content-center mt-1" id="radioInputs">
                            <div className="left-container d-flex flex-column justify-content-start mr-2">
                              <div className="columnOfRadios">
                                <input 
