@@ -17,7 +17,14 @@
   width: 100%;
   display:flex;
   justify-content: center;
-}  
+  margin-top:20px;
+  background-color: transparent;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: color 0.3s, transform 0.3s;
+  }
 
 #productBody{ 
   position: relative;
@@ -40,15 +47,6 @@
   -webkit-box-orient: vertical;
   word-wrap: break-word;
   text-overflow: ellipsis; 
-}
-
-#productCardViewMore{ 
-background-color: transparent;
-border: none;
-color: black;
-padding: 10px 20px;
-cursor: pointer;
-transition: color 0.3s, transform 0.3s;
 }
 
 #productCardViewMore:hover { 

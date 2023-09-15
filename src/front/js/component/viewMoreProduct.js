@@ -17,7 +17,7 @@ const ViewMoreProduct = (props) =>{
     return(
         <button id="viewMoreProduct" 
                 type="button"
-                style={{border:"none"}} 
+                style={{border:"none", backgroundColor: "white"}} 
                 onClick={()=>{ 
                     if(token){
                         navigate("/product/" + props.item)

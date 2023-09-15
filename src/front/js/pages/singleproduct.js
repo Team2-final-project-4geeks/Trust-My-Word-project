@@ -204,9 +204,9 @@ export const SingleProduct = () => {
                                     <div className="card h-100 border-0 px-3" id="cardProduct">
                                         <h3 className="card-title ms-3 mt-4 mb-4 text-center" id="productTitle">{oneProduct.title}</h3>
                                             <div className="d-flex flex-row flex-wrap justify-content-center mt-3" id="productRow">
-                                                <p className="col-sm-3 card-text  ms-2 me-2"><i class="fas fa-heart fa-xs me-2"></i>{oneProduct.reviewOwner}</p>
-                                                <p className="col-sm-4 card-text  ms-2"><i class="fas fa-info-circle fa-sm me-2"></i>{oneProduct.type}</p>
-                                                <p className="col-sm-4 card-text  ms-2"><i class="fas fa-calendar-alt fa-sm me-2"></i>{oneProduct.publishing_date}</p>
+                                                <p className="col-sm-3 card-text text-start ms-2 me-2"><i class="fas fa-heart fa-xs me-2"></i>{oneProduct.reviewOwner}</p>
+                                                <p className="col-sm-4 card-text text-center ms-2"><i class="fas fa-info-circle fa-sm me-2"></i>{oneProduct.type}</p>
+                                                <p className="col-sm-4 card-text text-end ms-2"><i class="fas fa-calendar-alt fa-sm me-2"></i>{oneProduct.publishing_date}</p>
                                             </div>
                                         <div className="row">
                                             <p className="card-text ms-2 my-2"><i>" {oneProduct.description} " </i></p>
