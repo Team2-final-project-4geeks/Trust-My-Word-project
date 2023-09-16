@@ -186,6 +186,7 @@ export const Home = () => {
 					img={activity.image}
 					rating={activity.rating}
 					userImage={activity.userImage}
+					counter={activity.counter}
 				/>
 			));
 			} else {
