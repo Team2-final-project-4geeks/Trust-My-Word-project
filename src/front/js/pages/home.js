@@ -270,7 +270,7 @@ export const Home = () => {
 			</div>
 		
 			<div className="container-fluid">
-				<div className="general-image" id="imageContainerActivities">
+				<div className="general-image" id="imageContainerActivities"  onClick={()=> navigate("/activity")}>
 					<h1 id="titleActivities">ACTIVITIES</h1>
 				</div>
 			</div>
@@ -283,7 +283,7 @@ export const Home = () => {
 			</div>
 
 			<div className="container-fluid mt-5">
-				<div class="general-image" id="imageContainerProducts">
+				<div class="general-image" id="imageContainerProducts"  onClick={()=> navigate("/product")}>
 					<h1 id="titleProducts">PRODUCTS</h1>
 				</div>    	
 				<div className="container-fluid mt-4" >
