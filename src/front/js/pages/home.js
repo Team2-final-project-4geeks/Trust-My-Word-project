@@ -2,16 +2,16 @@
 import React, { useContext, useEffect, useState  } from "react";
 import { Context} from "../store/appContext";
 import ActivityCard from "../component/activitycard"
-import { ProductCard } from "../component/productcard.jsx";
+import { ProductCard } from "../component/productcard.js";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
-import TriipCard from "../component/triipcard.jsx";
-import DinamicText from "../component/dinamictext.jsx";
-import { useParams } from "react-router-dom";
+import TriipCard from "../component/triipcard.js";
+import DinamicText from "../component/dinamictext.js";
+import { Navbar } from "../component/navbar";
 
 export const Home = () => {
+	const navigate = useNavigate()
 	const { store, actions } = useContext(Context);
-	const navigate= useNavigate()
 	const [activities, setActivities] = useState([]);
   	const [products, setProducts] = useState([]);
 	const [trips,setTrips] = useState([])
@@ -19,54 +19,66 @@ export const Home = () => {
 	const [longitude,setLongitude] = useState("")
 	const [placeName, setPlaceName] = useState(""); 
 	const [filteredReviews, setFilteredReviews] = useState([]);
-	const [coordinatesAvailable, setCoordinatesAvailable] = useState(false); 
+	const [coordinatesAvailable, setCoordinatesAvailable] = useState(false);
+	const [radio,setRadio] = useState("") 
+	
 
 	useEffect(() => {
 	  getActivities();
 	  getProduct();
 	  getTrips();
-	  geo();
+	  geo();	  
 	}, []);
-  
+
 	useEffect(() => {
 	  if (coordinatesAvailable) { 
 		getPlaceFromCoordinates();
-		fetchFilteredReviews();
+		fetchFilteredReviews()
 	  }
 	}, [coordinatesAvailable]);
-  
+
+
 	const fetchFilteredReviews = () => {
 		fetch(process.env.BACKEND_URL + '/api/getFilteredReviews' ,{
 			method: 'POST',
       		headers: {
 				"Content-Type": "application/json"
 			},
-			body: JSON.stringify({latitude: latitude,longitude:longitude}) 
+			body: JSON.stringify({latitude: latitude,longitude:longitude, radio: radio}) 
 		})
      	.then(resp => {								
 			return resp.json();
 		})
 		.then(data=> {		
 			console.log(data);
+			setFilteredReviews(data)
 		})
 		.catch(error => {			
 			console.log('Oops something went wrong'+ error);
 		})
 	};
+
   
 	const getPlaceFromCoordinates = () => {
 	  fetch(`https://nominatim.openstreetmap.org/reverse?format=geojson&lat=${latitude}&lon=${longitude}`)
 		.then((response) => response.json())
 		.then((data) => {
-			console.log(data);
-		  setPlaceName(data.features[0].properties.address.quarter);
-		  localStorage.setItem("myLocation",data.features[0].properties.address.quarter)
+			const address = data.features[0].properties.address;
+			const addressKeys = ['quarter', 'suburb', 'village', 'county', 'road', 'state', 'town'];
+	  
+			for (const key of addressKeys) {
+			  if (address[key]) {
+				setPlaceName(address[key]);
+				localStorage.setItem('myLocation', address[key]);
+				break;
+			  }
+			}
 		})
 		.catch((error) => {
 		  console.error("Error al obtener el lugar:", error);
 		});
 	};
-  
+
 	const geo = () => {
 	  if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(success, error);
@@ -82,6 +94,30 @@ export const Home = () => {
 		console.log("Unable to retrieve your location");
 	  }
 	};
+
+	const showNearReviews = () =>{
+		const reversedTrips = filteredReviews.slice().reverse();
+		if (reversedTrips && reversedTrips.length > 0) {
+			const firstThreeTrips = reversedTrips.slice(0, 3); 
+			return firstThreeTrips.map((trip, index) => (
+				<TriipCard
+					key={index} 
+					item={trip}
+					trip={trip}
+					profile={trip.userImage}
+					img={trip.image}
+					author={trip.reviewOwner}
+					rating={trip.rating}
+				/>
+			));
+			} else {
+				return (
+				<div className="spinner-border" role="status">
+					<span className="visually-hidden">Loading...</span>
+				</div>
+				)
+		}
+	} 
 
 	const getActivities = () => {
 		fetch(process.env.BACKEND_URL + 'api/review?category=activity' ,{
@@ -131,8 +167,7 @@ export const Home = () => {
 			return resp.json();
 		})
 		.then(data=> {
-			console.log(data);
-			setTrips(data);			
+			setTrips(data);		
 		})
 		.catch(error => {
 			console.log('Oops something went wrong'+ error);
@@ -140,16 +175,18 @@ export const Home = () => {
 	}
 
 	const showActivity = () =>{
-		const reservedActivities = activities.slice().reverse();
-		if (reservedActivities && reservedActivities.length > 0) {
-			const firstThreeActivities = reservedActivities.slice(0, 3); 
+		const reversedActivities = activities.slice().reverse();
+		if (reversedActivities && reversedActivities.length > 0) {
+			const firstThreeActivities = reversedActivities.slice(0, 3); 
 			return firstThreeActivities.map((activity, index) => (
 				<ActivityCard
 					key={index} 
 					item={activity}
 					activity={activity}
-					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
 					img={activity.image}
+					rating={activity.rating}
+					userImage={activity.userImage}
+					counter={activity.counter}
 				/>
 			));
 			} else {
@@ -167,8 +204,12 @@ export const Home = () => {
 			return reversedProducts.slice(0, 3).map((product, index) => (
 				<ProductCard
 					key={index}
+					item={product}
 					product={product}
-					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
+					profile={product.userImage}
+					rating={product.rating}
+					author={product.reviewOwner}
+					counter={product.counter}
 				/>
 			));
 			} else {
@@ -189,9 +230,12 @@ export const Home = () => {
 					key={index} 
 					item={trip}
 					trip={trip}
-					profile="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_1280.jpg"
+					profile={trip.userImage}
 					img={trip.image}
+					author={trip.reviewOwner}
 					rating={trip.rating}
+					description = {trip.description}
+
 				/>
 			));
 			} else {
@@ -202,18 +246,34 @@ export const Home = () => {
 				)
 		}
 	} 
+
 	return (
 		<div className="">
 			<div className="container-fluid">
 				<DinamicText  phrase={"inspire you"} phrase2={"save your time"}  phrase3={"solve your planning problems"} phrase4={" support people's opinions"} phrase1={"provide value"}/>
 			</div>
-			<div>
-				{placeName}
+			<div className="container-fluid mt-5">
+				<div id="imageContainerNearme">
+					<h1 id="titleTrips">Reviews near me</h1>
+    			</div>
+				<div id="container-fluid">
+					<div className="row d-flex flex-column mt-3" id="filterByLocation">
+						<div id="locationNearme">
+							<i className="fa-solid fa-location-dot me-3"></i>  {placeName}
+						</div>
+						<input placeholder="Filter by kms" className="col-3 mt-2" value={radio} onChange={(e)=>setRadio(e.target.value)}/>	
+						<button className="btn btn-warning col-1 mt-3" onClick={fetchFilteredReviews}>Find </button>	
+					</div>			
+					<div className="row row-cols-1 row-cols-md-5 ">													
+						{showNearReviews()}						
+					</div>	
+				</div>						
 			</div>
+		
 			<div className="container-fluid">
-					<div className="general-image" id="imageContainerActivities">
-						<h1 id="titleActivities">ACTIVITIES</h1>
-					</div>
+				<div className="general-image" id="imageContainerActivities"  onClick={()=> navigate("/activity")}>
+					<h1 id="titleActivities">ACTIVITIES</h1>
+				</div>
 			</div>
 			<div className="container-fluid mt-5">				
 				<div className="container-fluid mt-5">			
@@ -222,24 +282,24 @@ export const Home = () => {
 					</div>	
 				</div>						
 			</div>
+
 			<div className="container-fluid mt-5">
-					<div class="general-image" id="imageContainerProducts">
-						<h1 id="titleProducts">PRODUCTS</h1>
+				<div class="general-image" id="imageContainerProducts"  onClick={()=> navigate("/product")}>
+					<h1 id="titleProducts">PRODUCTS</h1>
+				</div>    	
+				<div className="container-fluid mt-4" >
+					<div className="row row-cols-1 row-cols-md-4 g-3">
+						{showProducts()}
 					</div>
-    	
-					<div className="container-fluid mt-4" >
-						<div className="row row-cols-1 row-cols-md-4 g-3">
-							{showProducts()}
-						</div>
-					</div>
+				</div>
 			</div>	
 
 			<div className="container-fluid mt-5">
-				<div id="imageContainerTrips">
+				<div id="imageContainerTrips" onClick={()=> navigate("/trips")}>
 					<h1 id="titleTrips">TRIPS</h1>
     			</div>
 				<div className="container-fluid mt-3">			
-					<div className="row row-cols-1 row-cols-md-5 g-4">													
+					<div className="row row-cols-1 row-cols-md-5 ">													
 						{showTrips()}						
 					</div>	
 				</div>						

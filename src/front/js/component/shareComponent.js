@@ -9,13 +9,13 @@ import {
     WhatsappShareButton,
   } from "react-share";
   import React from "react";
-  import "../../styles/sharecomponent.css"
+
 
   const ShareComponent = () =>{
     
     const shareUrl = window.location.href; 
     return(
-        <div>            
+        <div className="mt-2 d-flex justify-content-center" id="socialNetworks">            
             < FacebookShareButton config={{color: 'white'}} url={shareUrl} className="mx-2" >
                 <FacebookIcon round={true} size={20}/> 
             </FacebookShareButton>

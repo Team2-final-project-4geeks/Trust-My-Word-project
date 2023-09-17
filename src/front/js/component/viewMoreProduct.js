@@ -7,17 +7,24 @@ import { useContext } from "react";
 
 const ViewMoreProduct = (props) =>{
     const {store, actions} = useContext(Context);
-    const handleReviewClick = (activityId) => {
-        actions.addToCounter(activityId)
+    const token = localStorage.getItem("jwt-token")
+
+    const handleReviewClick = (productId) => {
+        actions.addToCounter(productId)
 	  };
     const navigate = useNavigate()
 
     return(
-        <button className="btn" 
-                type="button"  
+        <button id="viewMoreProduct" 
+                type="button"
+                style={{border:"none", backgroundColor: "white"}} 
                 onClick={()=>{ 
-                    navigate("/product/" + props.item)
-                    handleReviewClick(props.item)
+                    if(token){
+                        navigate("/product/" + props.item)
+                        handleReviewClick(props.item)
+                        }else{
+                            navigate("/login")
+                        }
                 }}> <strong>View more</strong></button>
     )
 }

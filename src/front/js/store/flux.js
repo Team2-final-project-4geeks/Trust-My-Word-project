@@ -1,14 +1,9 @@
+import Swal from 'sweetalert2';
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			loggedIn: false,
-			product: {
-				id: "",
-				title: "",
-				price: "",
-				description: "",
-				image: "",		
-			},
 			favourite: [],
 			storeTypes: {},						
 			userId: null,
@@ -16,17 +11,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			email:"",
 			activities: [],
 			query:"",
-			selectedType:""
+			selectedType:"",
+			products: [],
 		},
 		actions: {
-			addFavourite: (fav) => {
-                const store = getStore();
-                if (!store.favourite.includes(fav)) {
-                    setStore({ favourite: [...store.favourite, fav] });
-                } else {
-                    alert("Favourite already exists!!");
-                }
-            },
+			addFavourite: (favId, favTitle, favCategory) => {
+				const store = getStore();
+				if (!store.favourite.some(item => item.id == favId) && store.favourite !== null) {
+					setStore({ favourite: [...store.favourite, {id: favId, title: favTitle, category: favCategory}] });
+					console.log("adicionado")
+				} else {
+					alert("Favourite already exists!!");
+				}
+			},
+			
 			addActivities: (activity) => {
                 const store = getStore();
                 if (!store.activities.includes(activity)) {
@@ -35,13 +33,31 @@ const getState = ({ getStore, getActions, setStore }) => {
                     alert("Activity already exists!!");
                 }
             },
+			addProducts: (product) => {
+                const store = getStore();
+                if (!store.product.includes(product)) {
+                    setStore({...store, products: product});
+                } else {
+                    alert("Product already exists!!");
+                }
+            },
 			addQuery: (city) => {
                 const store = getStore();
-				setStore({...store, query: city})                
+				setStore({...store, query: city.toLowerCase()})                
             },
 			deleteFavourite: (favToDelete) => {
 				const store = getStore();
+				const deleteConfirmed = confirm("Are you sure that you want to delete this Favourite?")
+				if (deleteConfirmed === true) {
 				setStore({favourite: store.favourite.filter((fav) => fav !== favToDelete)})
+					Swal.fire(
+						'Favourite succesfully deleted',
+						'success')
+				} else {
+					Swal.fire(
+						'Delete Cancelled'
+					  )
+				}
 			},			
 			addType: (type) => {
 				const store = getStore();
@@ -65,7 +81,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return resp.json();
 				})
 				.then(data => {            
-					console.log(data);
 					actions.getUser(id);
 				})
 				.catch(error => {			
@@ -89,8 +104,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return resp.json();
 				})
 				.then(data=> {
-					const store = getStore();		
-					setStore({ ...store, favourite: data.favourites });
+					const store = getStore();
+					const jsonFavourites = data.favourites.map(item => {
+						const validString = item.replace(/'/g, '"')
+						return JSON.parse(validString)
+					})
+					setStore({ ...store, favourite: jsonFavourites });
 				})
 				.catch(error => {			
 					console.log('Oops something went wrong'+ error);

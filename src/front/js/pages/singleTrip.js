@@ -3,6 +3,10 @@ import { useParams } from "react-router-dom";
 import "../../styles/singletrip.css";
 import ShareComponent from "../component/shareComponent.js";
 import { Context } from "../store/appContext";
+import Carousel from "react-multi-carousel";
+import Swal from 'sweetalert2';
+import "react-multi-carousel/lib/styles.css";
+import CarouselCard from "../component/carouselcard";
 
 const SingleTrip = () =>{
     const params = useParams()
@@ -11,15 +15,44 @@ const SingleTrip = () =>{
     const [city,setCity] = useState("")
     const [image,setImage] = useState("")
     const {store,actions} = useContext(Context)
+    const [allDescriptions, setAllDescriptions] = useState([]);
+    const [description, setDescription] = useState("");
+    const [date,setDate]= useState("");
+    const author=localStorage.getItem("username")
+    const currentDate = new Date();
+    const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
+
+
+    const responsive = {        
+        desktop: {
+          breakpoint: { max: 3000, min: 1024 },
+          items: 4
+        },
+        tablet: {
+          breakpoint: { max: 1024, min: 464 },
+          items: 2
+        },
+        mobile: {
+          breakpoint: { max: 464, min: 0 },
+          items: 1
+        }
+      };
+
+    const user_id=localStorage.getItem("userId")
+    const userName=store.userName;
+    const review_id= params.id;
 
     useEffect(()=>{
         get_single_trip()
         getCityFromApi()
+        fetchComments();   
+
     },[])
 
     useEffect(() => {
         getWeather()
     },[city])
+
 
     const map = `https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=300x300&key=${process.env.API_KEY}`
 
@@ -76,40 +109,127 @@ const SingleTrip = () =>{
 			console.log(error);
 			console.log('Oops something went wrong'+ error);
 		})
-	}           
+	}
+
+     const fetchComments =() =>{        
+        const token = localStorage.getItem('jwt-token');        
+        if(token) {        
+        fetch(process.env.BACKEND_URL + 'api/comments/' + review_id,{
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization" : "Bearer " + token
+            }
+        })
+        .then(resp => {								
+            return resp.json();
+        })
+        .then(data=> {		
+        setAllDescriptions(data);
+        console.log(data);            
+        })
+        .catch(err => console.log(err))
+        }else{
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!'            
+            })
+        }}
+
+        const createComment = () => {
+            const token = localStorage.getItem('jwt-token');
+            if(token) {
+            fetch(process.env.BACKEND_URL + 'api/create-comment', {
+              method: "POST",          
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization" : "Bearer " + token
+              },
+              body: JSON.stringify({description, user_id, review_id, author, date:formattedDate }) 
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {  
+                setDescription(data.description);
+                setDate(data.date);
+                Swal.fire(
+                    'Good job!',
+                    'You POSTed a comment!',
+                    'success'
+                )
+                setDescription("")
+                fetchComments();            
+            })
+            .catch(err => console.log(err))
+            } else {       
+                console.log(error)
+                }
+        }
+
+    const showComments = () =>{
+        return allDescriptions.map((comment, index) => {
+            return(
+                <CarouselCard key={index} id={comment.id} description={comment.description} author={comment.author} image={comment.testImage} fetchComments={fetchComments} date={comment.date}/>                      
+            )
+        }			
+    )}
+
+
+
     return(
 
     <div className="container-fluid mt-5 mb-5" >
 			{ singleTrip ? (
-            <div id="backgroundSingleTrip">
-                <div className="card m-0 border-0 " id="containerSingleTrip">                    
-                    <div className="row g-0 h-100">
-                        <div className="col-md-3">
-                            <img id="singleTripPicture"src={image} className="img-fluid rounded-start h-100" alt="..."/>
-                        </div>
-                        <div className="col-md-6">
-                            <div className="card h-100 border-0 px-3">
-                                <h5 className="card-title ms-3 mt-3 mb-4 text-center" id="activityTitle">{singleTrip.title}</h5>
-                                    <div className="d-flex flex-row mt-2" id="activityRow">
-                                        <p className="card-text ms-2">{singleTrip.id}</p>
-                                        <p className="card-text ms-2">{weather} °C</p>                                        
-                                        <p className="card-text ms-2">{singleTrip.publishing_date}</p>
-                                    </div>
-                                <p className="card-text ms-2">{singleTrip.type}</p>
-                                <p className="card-text ms-2">{singleTrip.location}</p>
-                                <p className="card-text ms-2"><i>"{singleTrip.description}"</i></p>
-                                <p className="card-text ms-2">{singleTrip.price}</p>
-                                <ShareComponent/>
-                            </div>
-                        </div>
-                        <div className="col-md-3 border-0 h-100">
-                            <div className="container-fluid h-100">
-                                <img className="img-fluid rounded-start" id="mapSingleActivity" src={map}/>
-                            </div>
-                        </div>                        
-                    </div>                    
-                </div>
-            </div>
+           <div className="card m-0 border-0 mx-auto p-0"   id="containerSingle">                    
+           <div className="row g-0 h-100 w-100">
+               <div className="col-sm-12 col-md-3" id="imageContainer">
+                   <img id="singleActivityPicture"src={singleTrip.image} className="rounded-start h-100 w-100 col-sm-12" alt="picture chosen by the user"/>
+               </div>
+               <div className="col-sm-12 col-md-6" id="singleReviewInfo">
+                   <div className="card h-100 border-0 px-3" id="cardTrip">
+                       <h4 className="card-title fs-3 ms-3 mt-4 mb-4 text-center">{singleTrip.title}</h4>                                
+                           <div className="d-flex flex-row mt-2 justify-content-center" id="singleRow1">
+                               <p className="col-sm-3 card-text ms-2"><i class="fas fa-heart fa-xs me-2"></i>{singleTrip.reviewOwner}</p>
+                               <p className="col-sm-4 card-text text-center ms-2"><i class="fas fa-info-circle fa-sm me-2"></i>{singleTrip.type} activity</p>
+                               <p className="col-sm-4 card-text text-center ms-2"><i class="fas fa-calendar-alt fa-sm me-2"></i>{singleTrip.publishing_date}</p>   
+                           </div>
+                       <div className="row">
+                           <p className="col-sm-12 card-text ms-2 my-2"><i>" {singleTrip.description} " </i></p>
+                       </div>
+                           <div className="d-flex flex-row mt-3 justify-content-center" id="singleRow2">                                        
+                               <p className="col-sm-3 card-text ms-2"><i class="fas fa-money-bill-wave me-2"></i>{singleTrip.price}</p>
+                               <p className="col-sm-4 card-text ms-2 text-center"><i class="fas fa-thermometer-half fa-sm me-2"></i>{weather}</p>
+                               <p className="col-sm-4 card-text ms-2 text-center"><i class="fas fa-map-marker-alt fa-sm me-2"></i>{singleTrip.location}</p> 
+                           </div>                                             
+                       <div className="card-text mt-1 bottom-0 pb-5" id="activityRow">
+                           <div className="row">
+                               {/* <div className="col-sm-12">
+                                   <a
+                                   href={singleTrip.link}
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   className="card-link ms-2 me-3 pb-3 d-flex justify-content-center"
+                                   >
+                                       <small className="text-center w-100">{activity.link}</small>
+                                   </a>
+                               </div> */}
+
+                               <div className="col-sm-12">
+                                   <ShareComponent />
+                               </div>
+                           </div>
+                       </div>                                                            
+                   </div>
+               </div>
+               <div className="col-sm-12 col-md-3 border-0">
+                   <div className="container-fluid h-100">
+                       <img className="img-fluid rounded-start" id="mapSingleActivity" src={map}/>
+                   </div>
+               </div>                        
+           </div>                    
+       </div>  
             ):(
                 <div className="spinner-border" role="status">
                     <span className="visually-hidden">Loading...</span>
@@ -117,26 +237,37 @@ const SingleTrip = () =>{
             )}
             <div>
             </div>
-           <div className="container-fluid" id="commentSection">
+            <div className="container-fluid" id="commentSectionTrip">
                 <h4 className="my-5">Comments</h4>
-                <div className="input-group mb-5">
-                    <span className="input-group-text rounded me-2" id="basic-addon1">Username</span>
-                    <input type="text" className="form-control rounded-pill" placeholder="Lorem Ipsum" aria-label="Username" aria-describedby="basic-addon1"/>
+                <div className="container-fluid">
+                    <Carousel showDots={true} arrows={false} responsive={responsive} >
+                        {showComments()}
+                    </Carousel>
+                </div>               
+                <div className="row">                 
+                    <div className="input-group mt-5 mx-auto justify-content-center" id="comment">
+                        <span className="col-sm-3 input-group-text rounded me-2 text-wrap" id="commentWrite">Post a comment:</span>
+                        <textarea 
+                            className="col-sm-9 col-lg-5 form-control" 
+                            id="commentBox" 
+                            maxLength={125} 
+                            value={description} 
+                            onChange={(e)=> setDescription(e.target.value)} 
+                            aria-label="With textarea">                                
+                        </textarea>
+                    </div>
                 </div>
-                <div className="input-group mb-5">
-                    <input type="text" className="form-control rounded-pill me-2" placeholder="Lorem Ipsum Xmas Banana Happy" aria-label="Username" aria-describedby="basic-addon1"/>
-                    <span className="input-group-text rounded" id="basic-addon1">Username</span>
-                </div>
-                <div className="input-group mb-5">
-                    <span className="input-group-text rounded me-2" id="basic-addon1">Username</span>
-                    <input type="text" className="form-control rounded-pill" placeholder="Lorem Summer Coding Sad" aria-label="Username" aria-describedby="basic-addon1"/>
-                </div>
-                <div className="input-group">
-                    <span className="input-group-text rounded me-2" id="commentWrite">Write your comment:</span>
-                    <textarea className="form-control rounded-pill" aria-label="With textarea"></textarea>
-                </div>
-                <button type="button" className="btn btn-dark mt-5" id="sumbitButtonSingle"> Send </button>
-            </div>         
+                <div className="row">
+                    <div className="container-fluid d-flex justify-content-center">
+                        <button 
+                            type="button"                            
+                            className="btn btn-dark mt-5" 
+                            onClick={createComment}
+                            id="sumbitButtonSingle"> Send 
+                        </button>
+                    </div> 
+                </div>                
+            </div>          
         </div>
 
     )

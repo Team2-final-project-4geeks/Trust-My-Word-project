@@ -1,0 +1,57 @@
+#carouselBodyReview{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 300px;
+    height:510px;
+    margin: auto 1rem;
+    text-align: center;
+    font-family: arial;
+    margin-top: 15px !important;
+  }
+ 
+  #carouselBodyReview button{
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;  
+  }
+
+  #fotoCarouselCardReview{
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+  }
+  #btn-review{
+    display: flex;
+    justify-content: center; 
+    align-items: flex-end;
+    height: 100%; 
+}
+  .react-multi-carousel-dot button{
+    width:18px;
+    height:18px;
+  }
+
+  @media (max-width: 470px){
+    #carouselBodyReview p{
+        font-size:3vw ;
+    }
+    #carouselBodyReview h6{
+        font-size:4vw ;
+    }
+    #btn-review{
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        height: 100%; 
+    }
+  }
+
+
+ 
+ 
+

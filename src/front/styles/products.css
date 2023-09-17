@@ -1,0 +1,49 @@
+#quoteProduct{
+    width:700px;
+    height:200px;
+    margin: auto; 
+    display: flex;
+}
+
+#quoteProductLine{
+    font-size: 1,7vw;
+}
+#authorProduct{
+    font-size: 1.2vw;
+}
+
+#row{
+    justify-content: space-between;
+    margin-right: 15px;
+}
+
+#cardProduct{
+    height: 84.4vh;
+}
+
+.blockquote-footer{
+    color: #ffc600;
+}
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.image-container img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    transition: filter 0.3s;
+}
+  
+.image-container:hover img {
+    filter: brightness(80%);
+}
+  
+.image-container:hover .image-overlay {
+    opacity: 1;
+}
+.image-overlay i {
+    font-size: 36px; 
+    color: white; 
+}

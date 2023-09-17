@@ -1,35 +1,25 @@
+#imageContainer{
+    max-width:100%;
+}
+
 #singleActivityPicture{
-    object-fit: cover;    
+    object-fit: cover;
 }
 #containerSingle{
-    margin:auto;
-    width:1300px;
-    height:400px;
+    width:95%;
+    min-height:450px;
     justify-content: center;
     align-items: center;
     display:flex;
-}
-#backgroundSingleActivity{
-    background: rgb(95,191,153);
-    background: linear-gradient(to top right, rgba(95,191,153,1) 0%, rgba(253,187,45,1) 100%);
-    background-size: cover;
-    background-position: center;
-    border-radius: 10px; 
-    overflow: hidden;
-    margin:auto;
-    width:1350px;
-    height:450px;
-    display:flex;
-    justify-content: center;
-    align-items: center;   
+    box-shadow: rgb(218, 165, 32) -2px -2px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 4px;
 }
 #mapSingleActivity{
     object-fit: cover;
     height: 100%;
+    width:100%;
 }
 #singleRow1{
     justify-content: space-between;
-    margin-right: 15px;
 }
 #singleRow2{
     justify-content: space-between;
@@ -42,6 +32,13 @@
     width: 1350px;
     min-height: 450px;
     margin:auto;
+    padding-left: 0;
+}
+#commentsTitle{
+    font-size: 5.5vw;
+}
+#cardArea{
+    padding-left: 0;
 }
 #basic-addon1, #commentWrite{
     background: rgb(95,191,153);
@@ -56,9 +53,11 @@
 }
 #commentWrite{
     background: black;
-    color:goldenrod;    
+    color:goldenrod;
+    font-size: 18px;   
 }
 #sumbitButtonSingle{
+    margin:auto;
     background:black;
     color: goldenrod;
 }
@@ -66,6 +65,46 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 #comment{
-    width:900px;
-    margin:auto;
+    width:700px;    
 }
+
+.commentHeadline{
+    margin-left: 250px;
+}
+
+.my-5{
+    font-size:50px;
+}
+
+.confetti-button.animate:before {
+    display: block;
+    animation: topBubbles ease-in-out 0.75s forwards;
+  }
+  .confetti-button.animate:after {
+    display: block;
+    animation: bottomBubbles ease-in-out 0.75s forwards;
+  }
+  @keyframes 
+  topBubbles {  0% {
+   background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%;
+  }
+   50% {
+   background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 90% 30%;
+  }
+   100% {
+   background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%, 90% 20%;
+   background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+  }
+  @keyframes 
+  bottomBubbles {  0% {
+   background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%;
+  }
+   50% {
+   background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%;
+  }
+   100% {
+   background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%;
+   background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+  }

@@ -1,45 +1,16 @@
 #quoteActivity{
-    width:700px;
-    height:200px;
+    width: 37.45vw;
+    height:21.48vh;
     margin: auto;   
 }
-
 #quote{
-    font-size: 1.5vw;
+    font-size: 1.7vw;
+    font-style: italic;
 }
 
-#row{
-    justify-content: space-between;
-    margin-right: 15px;
+#author{
+    font-size: 1.2vw;
 }
-
-#cardActivity{
-    height: 84.4vh;
-}
-
 .blockquote-footer{
     color: #ffc600;
-}
-.image-container {
-    position: relative;
-    display: inline-block;
-}
-
-.image-container img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    transition: filter 0.3s;
-}
-  
-.image-container:hover img {
-    filter: brightness(80%);
-}
-  
-.image-container:hover .image-overlay {
-    opacity: 1;
-}
-.image-overlay i {
-    font-size: 36px; 
-    color: white; 
 }

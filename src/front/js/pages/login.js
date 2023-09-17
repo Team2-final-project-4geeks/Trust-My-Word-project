@@ -3,6 +3,11 @@ import "../../styles/login.css";
 import { useNavigate } from "react-router-dom";
 import { Context} from "../store/appContext";
 import createUser from "../../img/createUser.jpg";
+import Swal from 'sweetalert2';
+import profile from "../../img/profile.png";
+
+
+
 
 
 const Login = () =>{
@@ -14,6 +19,7 @@ const Login = () =>{
     const [email,setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [username,setUsername] = useState("") 
+    const image = profile 
     
 
     const handleLoginClick = () => {
@@ -30,18 +36,17 @@ const Login = () =>{
         } else if(password === ''){
             alert('Password is empty!')
         } else if ( username === " "){
-            alert("username empty")
+            alert("Username empty")
         } else {
             fetch(process.env.BACKEND_URL + 'api/create-user', { 
             method: "POST", 
             headers: { 
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ email, password, username }) 
+            body: JSON.stringify({ email, password, username, image }) 
         })
         .then((res) => res.json())
         .then((result) => {
-            console.log("you create user");
             console.log(result);
         }).catch((err) => {
             console.log(err);
@@ -64,22 +69,36 @@ const Login = () =>{
 			})
 			.then((res) => res.json())
 			.then((result) => {
-				localStorage.setItem("jwt-token", result.token);
-                localStorage.setItem("userId",result.user_id)
-                actions.addUsername(result.username)
-                actions.getUser(localStorage.getItem("userId"))
-				navigate("/")
+                if(result.msg){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'oppss...',
+                        text: result.msg            
+                    })
+                    
+                }else{
+                    Swal.fire({
+                        icon: 'success',
+                        text: result.loginOK           
+                    })
+                    localStorage.setItem("jwt-token", result.token);
+                    localStorage.setItem("userId",result.user_id)
+                    actions.addUsername(result.username)
+                    localStorage.setItem("username",result.username)
+                    actions.getUser(localStorage.getItem("userId"))
+                    navigate("/")
+                }
 			}).catch((err) => {
 				console.log(err);
 			})
-			}
+		}
     }
     return(
             <div className="general-container">
             <div className="row">
                 <div className={showLogin ? "col-md-6" : "col-md-6 order-md-2"}>
                     {showLogin ? (
-                        <div className="half-content bg-danger">
+                        <div className="half-content">
                             <img
                                 src="https://cdn.pixabay.com/photo/2019/09/11/00/15/mountain-4467569_960_720.png"
                                 alt=" Login image"
@@ -102,7 +121,6 @@ const Login = () =>{
                         <div className="row g-0 d-flex justify-content-center align-items-center mt-4">
                             {showLogin ? (
                                 <>
-                               
                                 <div class="col-md-12 d-flex justify-content-center align-items-center flex-column" id="login">
                                 <h3 className="mb-5">TRUST MY WORD</h3>
                                 <div className="input-board">
@@ -146,66 +164,65 @@ const Login = () =>{
                                 
                             ) : (
                                 <>
-                            <div class="row g-0 d-flex justify-content-center align-items-center">
-                        <div class="col-md-10 d-flex justify-content-center align-items-center flex-column ">
-                            <h1 className="mb-3">CREATE ACCOUNT</h1>
-                            <p className="text-center">Create an account to join our comunity and share your experiences</p>
-                            <div className="input-board">
-                                <i class="fa-solid fa-user me-3"></i>
-                                <input 
-                                    type="text" 
-                                    id="username" 
-                                    className="p-3 col-10 register-input" 
-                                    placeholder="Username" 
-                                    name="username"
-                                    value={username}
-                                    onChange={(e)=>{setUsername(e.target.value)}}
-                                    /><br/><br/>
-                            </div>
-                            <div className="input-board mt-3">
-                                <i class="fa-solid fa-at me-3"></i>
-                                <input 
-                                    type="text" 
-                                    id="email" 
-                                    className="p-3 col-10 register-input"  
-                                    placeholder="Email" 
-                                    name="email"
-                                    value={email}
-                                    onChange={(e)=>{setEmail(e.target.value)}}
-                                    /><br/><br/>
-                            </div>
-                            <div className="input-board mt-3">
-                                <i class="fa-solid fa-key me-3"></i>
-                                <input 
-                                    type="password" 
-                                    id="password" 
-                                    className="p-3 col-10 register-input"  
-                                    placeholder="Password" 
-                                    name="password"
-                                    value={password}
-                                    onChange={(e)=>{setPassword(e.target.value)}}
-                                    /><br/><br/>
-                            </div>
-                            <div id="btn-container-login" className="d-flex flex-row ">
-                                <button 
-                                    type="submit" 
-                                    className="btn btn-warning mt-4" 
-                                    onClick={()=>{ create_user()
-                                        handleLoginClick()
-                                    }}
-                                >SUBMIT</button>
-                            </div>
-                            
-                        </div>
-                    </div>     
+                                <div class="row g-0 d-flex justify-content-center align-items-center">
+                                    <div class="col-md-10 d-flex justify-content-center align-items-center flex-column ">
+                                        <h1 className="mb-3">CREATE ACCOUNT</h1>
+                                        <p className="text-center">Create an account to join our comunity and share your experiences</p>
+                                        <div className="input-board">
+                                            <i class="fa-solid fa-user me-3"></i>
+                                            <input 
+                                                type="text" 
+                                                id="username" 
+                                                className="p-3 col-10 register-input" 
+                                                placeholder="Username" 
+                                                name="username"
+                                                value={username}
+                                                onChange={(e)=>{setUsername(e.target.value)}}
+                                                /><br/><br/>
+                                        </div>
+                                        <div className="input-board mt-3">
+                                            <i class="fa-solid fa-at me-3"></i>
+                                            <input 
+                                                type="text" 
+                                                id="email" 
+                                                className="p-3 col-10 register-input"  
+                                                placeholder="Email" 
+                                                name="email"
+                                                value={email}
+                                                onChange={(e)=>{setEmail(e.target.value)}}
+                                                /><br/><br/>
+                                        </div>
+                                        <div className="input-board mt-3">
+                                            <i class="fa-solid fa-key me-3"></i>
+                                            <input 
+                                                type="password" 
+                                                id="password" 
+                                                className="p-3 col-10 register-input"  
+                                                placeholder="Password" 
+                                                name="password"
+                                                value={password}
+                                                onChange={(e)=>{setPassword(e.target.value)}}
+                                                /><br/><br/>
+                                        </div>
+                                        <div id="btn-container-login" className="d-flex flex-row ">
+                                            <button 
+                                                type="submit" 
+                                                className="btn btn-warning mt-4" 
+                                                onClick={()=>{ create_user()
+                                                    handleLoginClick()
+                                                }}
+                                            >SUBMIT</button>
+                                        </div>
+                                    </div>
+                                </div>     
                                 </>
                             )}
                         </div>
                     </div>
                 </div>
             </div>
+            <div className="emptySpace"></div>
         </div>
-    
     )
 }
 

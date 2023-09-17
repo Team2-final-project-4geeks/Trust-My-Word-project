@@ -4,6 +4,12 @@ import profile from "../../img/profile.png";
 import { FaPencilAlt } from 'react-icons/fa';
 import "../../styles/userpage.css";
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
+import CaraouselReview from "../component/carouselreviews";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
+
 
 const UserPage = () =>{
     const navigate= useNavigate()
@@ -18,11 +24,33 @@ const UserPage = () =>{
     const [image,setImage] = useState("")
     const [userimage, setUserimage] = useState("")
     const fileInputRef = useRef(null);
+    const currentUserId = localStorage.getItem("userId")
+
+    const responsive = {        
+        superLargeDesktop: {
+            // the naming can be any, depends on you.
+            breakpoint: { max: 4000, min: 3000 },
+            items: 5
+          },
+          desktop: {
+            breakpoint: { max: 2999, min: 1024 },
+            items: 4
+          },
+          tablet: {
+            breakpoint: { max: 1023, min: 464 },
+            items: 2
+          },
+          mobile: {
+            breakpoint: { max: 463, min: 0 },
+            items: 1
+          }
+      };
+
 
 
     useEffect(() => {		
 		getReviews();
-        getUserItems()
+    getUserItems()
 	}, []);
 
     const handleFile = (e) => {
@@ -40,11 +68,13 @@ const UserPage = () =>{
           alert('Please select an image before uploading.');
           return;
         }
-      
         try {
           const imageUrl = await uploadImage(image); 
           sendDataToAPI(imageUrl);
-          alert('Profile photo updated');
+          Swal.fire({
+            icon: 'success',
+            text: "Profile image updated!"            
+        })
           window.location.reload();
         } catch (error) {
           console.error('Error uploading:', error);
@@ -77,6 +107,7 @@ const UserPage = () =>{
           });
         });
       };
+
 
     const sendDataToAPI = (image) => {
         const token = localStorage.getItem('jwt-token');
@@ -112,7 +143,6 @@ const UserPage = () =>{
                 })
                 .then((res) => res.json())
                 .then((result) => {
-                    console.log(result);
                     setUserimage(result.image)
                 }).catch((err) => {
                     console.log(err);
@@ -136,7 +166,8 @@ const UserPage = () =>{
      .then(resp => {								
         return resp.json();
     })
-    .then(data=> {	
+    .then(data=> {
+      console.log(data);
         setComments(data.comments)
         setFavourites(data.favourites)	
         setReviews(data.reviews);
@@ -150,58 +181,71 @@ const UserPage = () =>{
     alert(' You are not logged in!')
     }
 }
-const showUsersReviews =()=> {
-    return reviews.map((review, index) =>{
-        return(
-                <li style={{ '--cardColor': '#ffc600' }} key={index}>
-                <div class="content">
-                    <div class="icon"> <span className="input-group-text"><FaPencilAlt 
-                      onClick={()=>{
-                         navigate("/modify-review/" + review.id)
-                        }} size={45} color="grey" id="pencil"/></span></div>
-                    <div class="title">{review.title}</div>
-                    <div class="text">{review.description}</div>
-                </div>
-            </li>
-        )
-    })
-}
+
+    const showUsersReviews =()=> {
+        const orderedArray = reviews.sort((a, b) => b.counter - a.counter);
+        return orderedArray.map((review, index) =>{
+            return(
+                <CaraouselReview  image={review.userImage}  
+                                  reviewUserId={review.user_id}  
+                                  userId={currentUserId} 
+                                  category={review.category} 
+                                  id={review.id} 
+                                  title={review.title} 
+                                  author={review.reviewOwner} 
+                                  description={review.description} 
+                                  counter={review.counter}
+                                  fetchReviews={getReviews} 
+                />
+            )
+        })
+    }
+
+  // const showUsersFavorites =()=> {
+  //   return favourites.map((favourite, index) =>{
+  //       return(
+  //           <CaraouselReview   category={favourite.category} id={favourite.id} title={favourite.title}  description={favourite.description} />
+  //       )
+  //   })
+  // }
     return(
-        <div className="container-fluid">
-            <div className="userSection bg-light ">
+        <div id="userPage">
+            <div className="userSection">
                 <div className="row">
-                    <div className="col-5">
-                            <div className="insight d-flex flex-row p-5">
-                                <div className="">
+                    <div className="col-5" id="insight">
+                            <div className="insight d-flex flex-row">
+                                <div className="insightInfo">
                                     <p className="title mx-4">Reviews</p>
                                     <p className="reviews  mx-4">{reviews.length}</p>
                                 </div>
                                 <div className="">
                                     <p className="title mx-4">Favorites</p>
-                                    <p className="reviews  mx-4">{favourites.length}</p>
+                                    <p className="reviews  mx-4">{favourites && favourites.length > 0 ? favourites.length: 0}</p>
                                 </div>
                                 <div className="">
                                     <p className="title mx-4">Comments</p>
-                                    <p className="reviews  mx-4">{comments.length}</p>
+                                    <p className="reviews  mx-4">{comments.length}</p> 
                                 </div>
                             </div>
                     </div>
                     <div className="col-3">
-                        <div class="circle">
-                           { userimage ? (
+                        <div className="circle">
+                           { userimage != "image" ? (
                                 <> 
-                                    <img src={userimage} alt="Foto"/>
+                                    <img src={userimage} alt="profile-img"/>
                                 </>
                            ):(
                             <>
                                 <img src={profile} alt="Foto"/>
                             </>
                            )}
-                           <div className="d-flex flex-row align-items-center justify-content-center mt-4">
+                           <div className="d-flex flex-row align-items-center justify-content-center mt-4" id="imageProfile">
                            <label htmlFor="fileInput">
                                 <i
                                     className="fa-solid fa-pencil mx-3"
-                                    onClick={() => fileInputRef.current.click()} 
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        fileInputRef.current.click()}} 
                                 ></i>
                             </label>
                             <input
@@ -214,38 +258,46 @@ const showUsersReviews =()=> {
                             />
                             <button className="btn btn-warning"  onClick={handleUpload}>Submit</button> 
                            </div>
-                          
-    
+                        
                         </div>
                     </div>
-                    <div className="col-4">
-                        <div className="user-info d-flex flex-column py-5">
+                    <div className="col-4" id="userInfo">
+                        <div className="user-info d-flex flex-column justify-content-around">
                             <h3 className="mb-3">My details</h3>
                             <div className="email">
-                                <p><i class="fas fa-at"></i>: {email}</p>       
+                                <p className="email"><i className="fas fa-at"></i> {email}</p>       
                             </div>
                             <div className="username">
-                                <p><i class="fas fa-user "></i>: {username}</p>
+                                <p className="username"><i className="fas fa-user "></i> {username}</p>
                             </div>
-                            <div className="ps-2">
-                                <p><i class="fa-solid fa-location-pin fa-xl"></i>: {localStorage.getItem("myLocation")}</p>
+                            <div className="location">
+                                <p><i className="fa-solid fa-location-pin fa-xl ps-2"></i> {localStorage.getItem("myLocation")}</p>
                             </div>
                         </div>
                     </div> 
                 </div>
                 <div className="row">
-                    <div className='carousel-container'>
                         <div className="reviews-body">          
                             <h1>My reviews</h1>
-                            <ol class="olcards">
+                            <div className="container-fluid">
+                            <Carousel showDots={true} responsive={responsive} arrows={false} swipeable={true} >
                                 {showUsersReviews()}
-                            </ol>
+                            </Carousel>
                         </div>
-                    </div>          
+                        </div>
                 </div>
+                {/* <div className="row">
+                        <div className="reviews-body">          
+                            <h1>My favourites</h1>
+                            <div className="container-fluid">
+                            <Carousel showDots={true} responsive={responsive} arrows={false} swipeable={true} >
+                                {showUsersFavorites()}
+                            </Carousel>
+                        </div>
+                        </div>
+                </div> */}
             </div>
         </div>
     )
 }
-
 export default UserPage

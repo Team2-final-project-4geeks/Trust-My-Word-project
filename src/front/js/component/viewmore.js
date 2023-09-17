@@ -6,6 +6,7 @@ import { Context } from "../store/appContext";
 
 
 const ViewMore = (props) =>{
+    const token = localStorage.getItem("jwt-token")
     const { store, actions } = useContext(Context);
 
     const handleReviewClick = (tripId) => {
@@ -17,8 +18,12 @@ const ViewMore = (props) =>{
         <button id="viewMore"
                 type="button"  
                 onClick={()=> {
+                    if(token){
                     navigate("/trip/" + props.item)
                     handleReviewClick(props.item)
+                    }else{
+                        navigate("/login")
+                    }  
                 }}> <strong>View more</strong></button>
     )
 }
