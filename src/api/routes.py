@@ -5,7 +5,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from math import radians, sin, cos, sqrt, atan2
 from sqlalchemy import not_  # Importar la función not_ de SQLAlchemy
 
-from api.models import db, User,Review,Comment
+from api.models import db, User,Review,Comment, InappropriateComment
 from api.utils import generate_sitemap, APIException
 from api.data import populate_user, populate_reviews
 from flask_jwt_extended import (
@@ -295,7 +295,7 @@ def get_comments_for_review(review_id):
     return jsonify(comments), 200
 
 @api.route('/create-comment',methods=['POST'])
-#@jwt_required()
+@jwt_required()
 def create_comment():
     data =request.get_json()
 
@@ -317,6 +317,10 @@ def create_comment():
         db.session.add(new_comment)
         db.session.commit()
         return jsonify(new_comment.serialize()), 200
+            
+    new_comment= InappropriateComment(description=data["description"], review_id=data["review_id"], user_id=data["user_id"])
+    db.session.add(new_comment)
+    db.session.commit()
     response_body = {
         "msg": "Comment rejected due to inappropriateness"
     }
