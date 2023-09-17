@@ -21,6 +21,7 @@ const SingleTrip = () =>{
     const author=localStorage.getItem("username")
     const currentDate = new Date();
     const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
+    const [map,setMap] = useState("")
 
 
     const responsive = {        
@@ -51,10 +52,12 @@ const SingleTrip = () =>{
 
     useEffect(() => {
         getWeather()
+        showMap()
     },[city])
 
-
-    const map = `https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=300x300&key=${process.env.API_KEY}`
+    const showMap = () =>{
+         setMap(`https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=300x300&key=${process.env.API_KEY}`) 
+    }
 
     const get_single_trip = () =>{
         const token = localStorage.getItem('jwt-token');
