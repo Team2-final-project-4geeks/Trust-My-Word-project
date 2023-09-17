@@ -28,6 +28,8 @@ class User(db.Model):
     # 1 - N with Comments
     comments = db.relationship("Comment", back_populates="userComment")
     # 1 - N with Reviews
+    inappropriate_comments = db.relationship("InappropriateComment", back_populates="userComment")
+    # 1 - N with Reviews
 
     def __repr__(self):
         return f'<User {self.username}>'
@@ -55,6 +57,7 @@ class Review(db.Model):
     price = db.Column(db.String(200), nullable=False, default="0.0")
     category = db.Column(Enum(myEnum))
     comments = db.relationship("Comment", back_populates="review")
+    inappropriate_comments = db.relationship("InappropriateComment", back_populates="review")
     user_id = db.Column(db.Integer, ForeignKey('user.id'))
     users = db.relationship("User", back_populates="reviews")
     image = db.Column(db.String(200), nullable=False,default="google.com")
@@ -101,6 +104,33 @@ class Comment(db.Model):
 
      def __repr__(self):
         return f'<Comments {self.id}>'
+
+     def serialize(self):
+        return {
+            "id": self.id,
+            "description" : self.description,
+            "review_id": self.review_id,
+            "user_id": self.user_id,
+            "author": self.author,
+            "test": self.userComment.username,
+            "testImage":self.userComment.image,
+            "date":self.date
+        }       
+
+    
+class InappropriateComment(db.Model):
+     __tablename__ = "InappropriateComment"
+     id = db.Column(db.Integer, primary_key=True, nullable=False)
+     description = db.Column(db.String(1000), nullable=False)
+     review_id = db.Column(db.Integer, ForeignKey('review.id'))
+     review = db.relationship("Review", back_populates="inappropriate_comments")
+     user_id = db.Column(db.Integer, ForeignKey('user.id'))
+     userComment = db.relationship("User", back_populates="inappropriate_comments")
+     author=db.Column(db.String(100), nullable=True)
+     date=db.Column(db.String(50), default=datetime.utcnow, nullable=True)
+
+     def __repr__(self):
+        return f'<InappropriateComment {self.id}>'
 
      def serialize(self):
         return {

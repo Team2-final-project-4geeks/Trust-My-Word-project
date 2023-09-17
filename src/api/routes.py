@@ -5,13 +5,15 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from math import radians, sin, cos, sqrt, atan2
 from sqlalchemy import not_  # Importar la función not_ de SQLAlchemy
 
-from api.models import db, User,Review,Comment
+from api.models import db, User,Review,Comment, InappropriateComment
 from api.utils import generate_sitemap, APIException
 from api.data import populate_user, populate_reviews
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
 )
+from api.application.ai_message_validator import AIMessageValidator
+import os
 
 api = Blueprint('api', __name__)
 @api.route('/hello', methods=['POST', 'GET'])
@@ -307,13 +309,22 @@ def create_comment():
         response_body= {
             "msg" : "description should be passed with request"
         }
-        return jsonify(response_body),400        
-    
-    new_comment= Comment(description=data["description"], review_id=data["review_id"], user_id=data["user_id"], author=data["author"], date=data["date"])
+        return jsonify(response_body),400   
+
+    message_validator = AIMessageValidator(os.getenv('OPENAPIKEY'))    
+    if message_validator.validate(data["description"]):         
+        new_comment= Comment(description=data["description"], review_id=data["review_id"], user_id=data["user_id"], author=data["author"], date=data["date"])
+        db.session.add(new_comment)
+        db.session.commit()
+        return jsonify(new_comment.serialize()), 200
+            
+    new_comment= InappropriateComment(description=data["description"], review_id=data["review_id"], user_id=data["user_id"], author=data["author"], date=data["date"])
     db.session.add(new_comment)
     db.session.commit()
-    
-    return jsonify(new_comment.serialize()), 200
+    response_body = {
+        "msg": "Comment rejected due to inappropriateness"
+    }
+    return jsonify(response_body),400
 
 @api.route('/comment/<int:id>',methods=['DELETE'])
 @jwt_required()

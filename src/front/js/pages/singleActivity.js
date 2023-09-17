@@ -25,7 +25,7 @@ const SingleActivity = () => {
         superLargeDesktop: {
             // the naming can be any, depends on you.
             breakpoint: { max: 4000, min: 1025 },
-            items: 4,
+            items: 4
           },
           desktop: {
             breakpoint: { max: 1024, min: 769 },
@@ -140,16 +140,30 @@ const SingleActivity = () => {
             return response.json();
         })
         .then((data) => {  
-            console.log(data);
-            setDescription(data.description);
-            setDate(data.date);
-            Swal.fire(
-                'Good job!',
-                'You POSTed a comment!',
-                'success'
-            )
-            setDescription("")
-            fetchComments();            
+            
+            if (data.description) {
+                setDescription(data.description);
+                setDate(data.date);
+                Swal.fire(
+                  'Good job!',
+                  'You POSTed a comment!',
+                  'success'
+                );
+                setDescription('');
+                fetchComments();
+              } else {
+                // Handle the 400 Bad Request response data here
+                console.log('Error in request:', data.msg);
+                // You can display an error message to the user if needed
+                Swal.fire({
+                    icon : 'error',
+                    text :'Sorrt,but your comment was not appropriate!',
+                    title : 'Comment BLOCKED',
+                    footer : ''}
+                  );
+                  setDescription('');
+              }         
+
         })
         .catch(err => console.log('create comment' + err))
         } else {       
