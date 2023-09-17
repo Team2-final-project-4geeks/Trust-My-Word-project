@@ -155,11 +155,10 @@ const Login = () =>{
                                 }}>Login</button>
                                 <div className="d-flex flex-row mt-3">
                                     <a href="/" className="me-5 text-muted"><small>Forgot password?</small></a>
-                                    <a onClick={handleCreateClick} className="me-5 text-muted"><small>Create Account</small></a>
+                                    <a onClick={handleCreateClick} id="createAcount" className="me-5 text-muted"><small>Create Account</small></a>
                                 </div>
                                 <br/>
                             </div>
-                              
                             </>
                                 
                             ) : (
