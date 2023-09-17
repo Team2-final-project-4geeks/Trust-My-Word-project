@@ -15,6 +15,7 @@
 #imageBoard:hover img {
   filter: brightness(80%);
 }
+
 #imageOverlay {
   position: absolute;
   top: 0;

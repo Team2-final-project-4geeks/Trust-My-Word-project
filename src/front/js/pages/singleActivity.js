@@ -25,11 +25,11 @@ const SingleActivity = () => {
         superLargeDesktop: {
             // the naming can be any, depends on you.
             breakpoint: { max: 4000, min: 1025 },
-            items: 5
+            items: 4,
           },
           desktop: {
             breakpoint: { max: 1024, min: 769 },
-            items: 3
+            items: 3,
           },
           tablet: {
             breakpoint: { max: 768, min: 481 },
@@ -140,6 +140,7 @@ const SingleActivity = () => {
             return response.json();
         })
         .then((data) => {  
+            console.log(data);
             setDescription(data.description);
             setDate(data.date);
             Swal.fire(

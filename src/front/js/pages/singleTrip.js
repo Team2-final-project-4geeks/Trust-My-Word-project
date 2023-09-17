@@ -184,8 +184,8 @@ const SingleTrip = () =>{
 			{ singleTrip ? (
            <div className="card m-0 border-0 mx-auto p-0"   id="containerSingle">                    
            <div className="row g-0 h-100 w-100">
-               <div className="col-sm-12 col-md-3" id="imageContainer">
-                   <img id="singleActivityPicture"src={singleTrip.image} className="rounded-start h-100 w-100 col-sm-12" alt="picture chosen by the user"/>
+               <div className="col-sm-12 col-md-3 bg-danger" id="imageContainertrip">
+                   <img id="singleTripPicture"src={singleTrip.image} className="rounded-start " alt="picture chosen by the user"/>
                </div>
                <div className="col-sm-12 col-md-6" id="singleReviewInfo">
                    <div className="card h-100 border-0 px-3" id="cardTrip">
@@ -224,8 +224,8 @@ const SingleTrip = () =>{
                    </div>
                </div>
                <div className="col-sm-12 col-md-3 border-0">
-                   <div className="container-fluid h-100">
-                       <img className="img-fluid rounded-start" id="mapSingleActivity" src={map}/>
+                   <div id="mapTrip">
+                       <img className="img-fluid rounded-start"  src={map}/>
                    </div>
                </div>                        
            </div>                    
