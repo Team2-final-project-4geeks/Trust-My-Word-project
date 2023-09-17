@@ -21,6 +21,7 @@ const SingleTrip = () =>{
     const author=localStorage.getItem("username")
     const currentDate = new Date();
     const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
+    const [map,setMap] = useState("")
 
 
     const responsive = {        
@@ -51,10 +52,12 @@ const SingleTrip = () =>{
 
     useEffect(() => {
         getWeather()
+        showMap()
     },[city])
 
-
-    const map = `https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=300x300&key=${process.env.API_KEY}`
+    const showMap = () =>{
+         setMap(`https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=300x300&key=${process.env.API_KEY}`) 
+    }
 
     const get_single_trip = () =>{
         const token = localStorage.getItem('jwt-token');
@@ -184,8 +187,8 @@ const SingleTrip = () =>{
 			{ singleTrip ? (
            <div className="card m-0 border-0 mx-auto p-0"   id="containerSingle">                    
            <div className="row g-0 h-100 w-100">
-               <div className="col-sm-12 col-md-3" id="imageContainer">
-                   <img id="singleActivityPicture"src={singleTrip.image} className="rounded-start h-100 w-100 col-sm-12" alt="picture chosen by the user"/>
+               <div className="col-sm-12 col-md-3 bg-danger" id="imageContainertrip">
+                   <img id="singleTripPicture"src={singleTrip.image} className="rounded-start " alt="picture chosen by the user"/>
                </div>
                <div className="col-sm-12 col-md-6" id="singleReviewInfo">
                    <div className="card h-100 border-0 px-3" id="cardTrip">
@@ -224,8 +227,8 @@ const SingleTrip = () =>{
                    </div>
                </div>
                <div className="col-sm-12 col-md-3 border-0">
-                   <div className="container-fluid h-100">
-                       <img className="img-fluid rounded-start" id="mapSingleActivity" src={map}/>
+                   <div id="mapTrip">
+                       <img className="img-fluid rounded-start"  src={map}/>
                    </div>
                </div>                        
            </div>                    

@@ -34,7 +34,7 @@ const UserPage = () =>{
           },
           desktop: {
             breakpoint: { max: 2999, min: 1024 },
-            items: 4
+            items: 3
           },
           tablet: {
             breakpoint: { max: 1023, min: 464 },

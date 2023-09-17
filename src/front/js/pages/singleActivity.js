@@ -29,7 +29,7 @@ const SingleActivity = () => {
           },
           desktop: {
             breakpoint: { max: 1024, min: 769 },
-            items: 3
+            items: 3,
           },
           tablet: {
             breakpoint: { max: 768, min: 481 },
@@ -163,6 +163,7 @@ const SingleActivity = () => {
                   );
                   setDescription('');
               }         
+
         })
         .catch(err => console.log('create comment' + err))
         } else {       
