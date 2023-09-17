@@ -292,7 +292,7 @@ def get_all_comments():
     return jsonify(all_comments), 200
 
 @api.route('/create-comment',methods=['POST'])
-@jwt_required()
+#@jwt_required()
 def create_comment():
     data =request.get_json()
 
@@ -313,8 +313,10 @@ def create_comment():
         new_comment= Comment(description=data["description"], review_id=data["review_id"], user_id=data["user_id"])
         db.session.add(new_comment)
         db.session.commit()
-        return jsonify(new_comment.serialize()), 200    
-    
+        return jsonify(new_comment.serialize()), 200
+    response_body = {
+        "msg": "Comment rejected due to inappropriateness"
+    }
     return jsonify(response_body),400
 
 @api.route('/comment/<int:id>',methods=['DELETE'])
