@@ -12,6 +12,8 @@ from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
 )
+from api.application.ai_message_validator import AIMessageValidator
+import os
 
 api = Blueprint('api', __name__)
 # @api.route('/hello', methods=['POST', 'GET'])
@@ -304,13 +306,16 @@ def create_comment():
         response_body= {
             "msg" : "description should be passed with request"
         }
-        return jsonify(response_body),400        
+        return jsonify(response_body),400   
+
+    message_validator = AIMessageValidator(os.getenv('OPENAPIKEY'))    
+    if message_validator.validate(data["description"]):         
+        new_comment= Comment(description=data["description"], review_id=data["review_id"], user_id=data["user_id"])
+        db.session.add(new_comment)
+        db.session.commit()
+        return jsonify(new_comment.serialize()), 200    
     
-    new_comment= Comment(description=data["description"], review_id=data["review_id"], user_id=data["user_id"])
-    db.session.add(new_comment)
-    db.session.commit()
-    
-    return jsonify(new_comment.serialize()), 200
+    return jsonify(response_body),400
 
 @api.route('/comment/<int:id>',methods=['DELETE'])
 @jwt_required()
