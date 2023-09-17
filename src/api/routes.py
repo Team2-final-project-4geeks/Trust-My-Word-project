@@ -313,12 +313,12 @@ def create_comment():
 
     message_validator = AIMessageValidator(os.getenv('OPENAPIKEY'))    
     if message_validator.validate(data["description"]):         
-        new_comment= Comment(description=data["description"], review_id=data["review_id"], user_id=data["user_id"])
+        new_comment= Comment(description=data["description"], review_id=data["review_id"], user_id=data["user_id"], author=data["author"], date=data["date"])
         db.session.add(new_comment)
         db.session.commit()
         return jsonify(new_comment.serialize()), 200
             
-    new_comment= InappropriateComment(description=data["description"], review_id=data["review_id"], user_id=data["user_id"])
+    new_comment= InappropriateComment(description=data["description"], review_id=data["review_id"], user_id=data["user_id"], author=data["author"], date=data["date"])
     db.session.add(new_comment)
     db.session.commit()
     response_body = {

@@ -140,15 +140,29 @@ const SingleActivity = () => {
             return response.json();
         })
         .then((data) => {  
-            setDescription(data.description);
-            setDate(data.date);
-            Swal.fire(
-                'Good job!',
-                'You POSTed a comment!',
-                'success'
-            )
-            setDescription("")
-            fetchComments();            
+            
+            if (data.description) {
+                setDescription(data.description);
+                setDate(data.date);
+                Swal.fire(
+                  'Good job!',
+                  'You POSTed a comment!',
+                  'success'
+                );
+                setDescription('');
+                fetchComments();
+              } else {
+                // Handle the 400 Bad Request response data here
+                console.log('Error in request:', data.msg);
+                // You can display an error message to the user if needed
+                Swal.fire({
+                    icon : 'error',
+                    text :'Sorrt,but your comment was not appropriate!',
+                    title : 'Comment BLOCKED',
+                    footer : ''}
+                  );
+                  setDescription('');
+              }         
         })
         .catch(err => console.log('create comment' + err))
         } else {       
