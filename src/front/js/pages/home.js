@@ -252,7 +252,7 @@ export const Home = () => {
 			<div className="container-fluid">
 				<DinamicText  phrase={"inspire you"} phrase2={"save your time"}  phrase3={"solve your planning problems"} phrase4={" support people's opinions"} phrase1={"provide value"}/>
 			</div>
-			<div className="container-fluid mt-5">
+			<div className="container-fluid mt-2">
 				<div id="imageContainerNearme">
 					<h1 id="titleTrips">Reviews near me</h1>
     			</div>

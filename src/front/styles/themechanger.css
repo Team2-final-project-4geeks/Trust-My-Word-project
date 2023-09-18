@@ -13,7 +13,7 @@
 .dark-theme #trip-quote{
     color: #ffc600 !important;
 }
-.dark-theme #trip-board, .dark-theme #activity-board , .dark-theme #product-board, .dark-theme #carouselBodyReview, .dark-theme #containerSingle, .dark-theme #cardProduct, .dark-theme #carouselBody {
+.dark-theme #trip-board, .dark-theme #activity-board , .dark-theme #product-board, .dark-theme #carouselBodyReview, .dark-theme #containerSingle, .dark-theme #singleTripContainer, .dark-theme #cardProduct, .dark-theme #carouselBody {
     background-color: #444 ; 
     color: #fff; 
 }

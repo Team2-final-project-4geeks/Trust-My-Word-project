@@ -52,13 +52,9 @@ const SingleTrip = () =>{
 
     useEffect(() => {
         getWeather()
-        showMap()
     },[city])
 
-    const showMap = () =>{
-         setMap(`https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=300x300&key=${process.env.API_KEY}`) 
-    }
-
+    
     const get_single_trip = () =>{
         const token = localStorage.getItem('jwt-token');
         if(token) {
@@ -185,54 +181,38 @@ const SingleTrip = () =>{
 
     <div className="container-fluid mt-5 mb-5" >
 			{ singleTrip ? (
-           <div className="card m-0 border-0 mx-auto p-0"   id="containerSingle">                    
-           <div className="row g-0 h-100 w-100">
-               <div className="col-sm-12 col-md-3 bg-danger" id="imageContainertrip">
-                   <img id="singleTripPicture"src={singleTrip.image} className="rounded-start " alt="picture chosen by the user"/>
-               </div>
-               <div className="col-sm-12 col-md-6" id="singleReviewInfo">
-                   <div className="card h-100 border-0 px-3" id="cardTrip">
-                       <h4 className="card-title fs-3 ms-3 mt-4 mb-4 text-center">{singleTrip.title}</h4>                                
-                           <div className="d-flex flex-row mt-2 justify-content-center" id="singleRow1">
+                <div className="container-fluid col-11" id="singleTripContainer">
+                    <div className="row">
+                        <div className="col-md-3 col-sm-12" id="singleTripImageContainer">
+                                <img src={singleTrip.image} alt="tripImage"/>
+                        </div>
+                        <div className="col-md-6 col-sm-12" id="singleReviewTrip">
+                            <h4 className="card-title fs-3 ms-3 mt-5 mb-4 text-center">{singleTrip.title}</h4>  
+                            <div className="d-flex flex-row mt-2 justify-content-center">
                                <p className="col-sm-3 card-text ms-2"><i class="fas fa-heart fa-xs me-2"></i>{singleTrip.reviewOwner}</p>
-                               <p className="col-sm-4 card-text text-center ms-2"><i class="fas fa-info-circle fa-sm me-2"></i>{singleTrip.type} activity</p>
-                               <p className="col-sm-4 card-text text-center ms-2"><i class="fas fa-calendar-alt fa-sm me-2"></i>{singleTrip.publishing_date}</p>   
-                           </div>
-                       <div className="row">
-                           <p className="col-sm-12 card-text ms-2 my-2"><i>" {singleTrip.description} " </i></p>
-                       </div>
-                           <div className="d-flex flex-row mt-3 justify-content-center" id="singleRow2">                                        
-                               <p className="col-sm-3 card-text ms-2"><i class="fas fa-money-bill-wave me-2"></i>{singleTrip.price}</p>
-                               <p className="col-sm-4 card-text ms-2 text-center"><i class="fas fa-thermometer-half fa-sm me-2"></i>{weather}</p>
-                               <p className="col-sm-4 card-text ms-2 text-center"><i class="fas fa-map-marker-alt fa-sm me-2"></i>{singleTrip.location}</p> 
-                           </div>                                             
-                       <div className="card-text mt-1 bottom-0 pb-5" id="activityRow">
-                           <div className="row">
-                               {/* <div className="col-sm-12">
-                                   <a
-                                   href={singleTrip.link}
-                                   target="_blank"
-                                   rel="noopener noreferrer"
-                                   className="card-link ms-2 me-3 pb-3 d-flex justify-content-center"
-                                   >
-                                       <small className="text-center w-100">{activity.link}</small>
-                                   </a>
-                               </div> */}
+                                <p className="col-sm-4 card-text text-center ms-2"><i class="fas fa-info-circle fa-sm me-2"></i>{singleTrip.type} activity</p>
+                                <p className="col-sm-4 card-text text-center ms-2"><i class="fas fa-calendar-alt fa-sm me-2"></i>{singleTrip.publishing_date}</p>   
+                            </div> 
+                            <div className="row">
+                                <p className="col-sm-12 card-text ms-2 my-2"><i>" {singleTrip.description} " </i></p>
+                            </div>
+                            <div className="d-flex flex-row mt-3 justify-content-center" id="singleRow2">                                        
+                                <p className="col-sm-3 card-text ms-2"><i class="fas fa-money-bill-wave me-2"></i>{singleTrip.price}</p>
+                                <p className="col-sm-4 card-text ms-2 text-center"><i class="fas fa-thermometer-half fa-sm me-2"></i>{weather}</p>
+                                <p className="col-sm-4 card-text ms-2 text-center"><i class="fas fa-map-marker-alt fa-sm me-2"></i>{singleTrip.location}</p> 
+                           </div>  
+                           <div className="col-sm-12">
+                                <ShareComponent />
+                           </div>                            
 
-                               <div className="col-sm-12">
-                                   <ShareComponent />
-                               </div>
-                           </div>
-                       </div>                                                            
-                   </div>
-               </div>
-               <div className="col-sm-12 col-md-3 border-0">
-                   <div id="mapTrip">
-                       <img className="img-fluid rounded-start"  src={map}/>
-                   </div>
-               </div>                        
-           </div>                    
-       </div>  
+
+                        </div>
+                        <div className="col-md-3 col-sm-12" id="mapSingleTrip">
+                                <img src={`https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=300x300&key=${process.env.API_KEY}`} alt="" />
+                        </div>
+                    </div>
+
+                </div> 
             ):(
                 <div className="spinner-border" role="status">
                     <span className="visually-hidden">Loading...</span>
