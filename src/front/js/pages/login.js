@@ -30,6 +30,19 @@ const Login = () =>{
         setShowLogin(false);
     };
 
+    const handleEmailBlur = (e) => {
+        const newEmail = e.target.value;
+        setEmail(newEmail);
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(newEmail)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'oppss...',
+                text: 'Please, insert a valid E-mail'            
+            });
+          }
+        };
+
     const create_user = () =>{
         if(email === '') {
             alert(' Email is Empty!')
@@ -188,7 +201,8 @@ const Login = () =>{
                                                 placeholder="Email" 
                                                 name="email"
                                                 value={email}
-                                                onChange={(e)=>{setEmail(e.target.value)}}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                                onBlur={handleEmailBlur}
                                                 /><br/><br/>
                                         </div>
                                         <div className="input-board mt-3">

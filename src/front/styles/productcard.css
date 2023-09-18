@@ -1,14 +1,14 @@
-#imageBoard{
+#imageBoardProduct{
   height: 250px;
   width: auto;
   position: relative;
 }
-#imageBoard img{ 
+#imageBoardProduct img{ 
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-#imageBoard:hover img {
+#imageBoardProduct:hover img {
   filter: brightness(80%);
 }
 #productCardViewMore{
@@ -54,7 +54,7 @@ color: #404040;
 text-decoration: underline;
 }
 
-#imageOverlay { 
+#imageOverlayProduct { 
   position: absolute;
   top: 0;
   right: 0;
@@ -64,10 +64,10 @@ text-decoration: underline;
   opacity: 0;
   transition: opacity 0.3s;
 }
-#imageBoard:hover #imageOverlay { 
+#imageBoardProduct:hover #imageOverlayProduct { 
   opacity: 1;
 } 
-#infoBoard{ 
+#infoBoardProduct{ 
   height: 330px;
 }
 #img-container{ 
