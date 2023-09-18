@@ -118,7 +118,7 @@ export const Navbar = () => {
                               Logout
                             </a>
                           </div>
-                          <div className="btn-group dropdown" id="favourites">
+                          <div className="btn-group dropdown d-flex flex-wrap" id="favourites">
                             <button type="button" className="btn-navbar dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="dropdownMenuClickableInside" aria-expanded="false">
                                 Favourites <span className="p-1 text-center text-warning">{(store.favourite && store.favourite!=null && store.favourite!=undefined)? store.favourite.length:"0"}</span>
                             </button>
@@ -133,12 +133,12 @@ export const Navbar = () => {
                                                     {fav.title}
                                                 </a>
                                                 <i
-                                                        className="fas fa-trash" id="delete-favourite"
-                                                        onClick={() => {
-                                                            actions.deleteFavourite(fav);
-                                                            actions.addUserFavourites(localUserId);
-                                                        }}
-                                                    ></i>
+                                                  className="fas fa-trash" id="delete-favourite"
+                                                  onClick={() => {
+                                                      actions.deleteFavourite(fav);
+                                                      actions.addUserFavourites(localUserId);
+                                                  }}
+                                                ></i>
                                             </li>
                                         );
                                     })}
