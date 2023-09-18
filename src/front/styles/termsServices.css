@@ -17,3 +17,17 @@
 h1, h2{
     margin: 1%;
 }
+
+@media (max-width: 800px){
+    .termsServices{
+        font-size: 0,75rem;
+    }
+    .btn-terms{
+        background-color: black;
+        border-radius: 15px;
+        font-size: 20px;
+        padding: 8px;
+        margin-bottom: 5%;
+        margin-top: 2%;
+    }
+}
