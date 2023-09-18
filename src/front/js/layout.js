@@ -20,6 +20,7 @@ import Activities from "./pages/activities";
 import Trips from "./pages/trips.js";
 import UserPage from "./pages/userPage";
 import ModifyReview from "./pages/modifyReview";
+import CompanyPage from "./pages/companypage.js";
 
 //create your first component
 const Layout = () => {
@@ -49,6 +50,7 @@ const Layout = () => {
                         <Route element={<TermsServices/>} path="/termsServices" />
                         <Route element={<h1>Not found!</h1>} path="*"/>
                         <Route element={<UserPage />} path="user-page" />
+                        <Route element={<CompanyPage />} path="business"/>
                         <Route element={<ModifyReview />} path="modify-review/:id" />
                     </Routes>
                     <Footer />

@@ -170,7 +170,17 @@ const SingleTrip = () =>{
     const showComments = () =>{
         return allDescriptions.map((comment, index) => {
             return(
-                <CarouselCard key={index} id={comment.id} description={comment.description} author={comment.author} image={comment.testImage} fetchComments={fetchComments} date={comment.date}/>                      
+                <CarouselCard  
+                key={index} 
+                id={comment.id} 
+                description={comment.description} 
+                author={comment.author} 
+                image={comment.testImage} 
+                fetchComments={fetchComments} 
+                date={comment.date}
+                userLogged={user_id}
+                authorId={comment.user_id} 
+                />                      
             )
         }			
     )}

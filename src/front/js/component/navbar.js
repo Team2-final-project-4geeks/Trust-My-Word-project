@@ -100,7 +100,10 @@ export const Navbar = () => {
                         </li>
                       </ul>
                   </li>
-                  <li class="nav-item" id="userNavbar">
+                  <li className="nav-item">
+                      <button className="btn btn-warning" onClick={()=>{navigate("/business")}}> Bussinees</button>
+                  </li>
+                  <li className="nav-item" id="userNavbar">
                     {token ? ( 
                         <div className="token">
                           <div className="nav-item">

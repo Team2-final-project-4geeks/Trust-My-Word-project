@@ -7,21 +7,21 @@ export const Footer = () => {
 	const navigate =  useNavigate()
 	
 	return (
-		<div class="footer bg-black d-flex flex-column">
-			<footer class="mt-auto">
-				<ul class="nav justify-content-center border-bottom">
-					<li class="nav-item px-3">
-						<a class="nav-link text-warning" href="#" onClick={() => navigate("/")}>Home </a>
+		<div className="footer bg-black d-flex flex-column">
+			<footer className="mt-auto">
+				<ul className="nav justify-content-center border-bottom">
+					<li className="nav-item px-3">
+						<a className="nav-link text-warning" href="#" onClick={() => navigate("/")}>Home </a>
 					</li>
-					<li class="nav-item px-3">
-						<a class="nav-link text-warning" href="#" onClick={() => navigate("/privacy-policy")}>Privacy Policy </a>	
+					<li className="nav-item px-3">
+						<a className="nav-link text-warning" href="#" onClick={() => navigate("/privacy-policy")}>Privacy Policy </a>	
 					</li>
-					<li class="nav-item px-3">
-						<a class="nav-link text-warning" href="#" onClick={() => navigate("/termsServices")}>Terms & Services </a>
+					<li className="nav-item px-3">
+						<a className="nav-link text-warning" href="#" onClick={() => navigate("/termsServices")}>Terms & Services </a>
 					</li>
 				</ul>
-				<div class="b-example-divider my-1"></div>
-					<p class="text-center text-warning">&copy; 2023 4Geeks Academy</p>		
+				<div className="b-example-divider my-1"></div>
+					<p className="text-center text-warning">&copy; 2023 4Geeks Academy</p>		
 			</footer>
 		</div>
 	)
