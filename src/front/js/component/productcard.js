@@ -17,16 +17,13 @@ export const ProductCard = (props) => {
     const [isTranslated, setIsTranslated] = useState(false)
     const [currentLanguage, setCurrentLanguage] = useState(null)
 
-    const handleReviewClick = (productId) => {
-        actions.addToCounter(productId)
-	  };
-    
     const handleFavoriteClick = () => {
         setShowHeart(true);
         setTimeout(() => {
           setShowHeart(false);
         }, 2000);
       };
+      
 
     const translator = (language) => {
     fetch(`https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=${language}`, {
