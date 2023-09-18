@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
 from math import radians, sin, cos, sqrt, atan2
-from sqlalchemy import not_  # Importar la función not_ de SQLAlchemy
+from sqlalchemy import not_ 
 
 from api.models import db, User,Review,Comment, InappropriateComment
 from api.utils import generate_sitemap, APIException
@@ -201,7 +201,7 @@ def create_review():
     new_review= Review(title = data["title"], category=data["category"], type=data["type"], location=data["location"],link=data["link"],description=data["description"], publishing_date=data["publishing_date"], price=data["price"], user_id=data["user"], image=data["imageCloud"], rating=data["rating"], latitude =data["latitude"], longitude=data["longitude"])
     db.session.add(new_review)
     db.session.commit()   
-    serialized_review = new_review.serialize()  # Serialize the object
+    serialized_review = new_review.serialize() 
 
     return jsonify(serialized_review), 200
 

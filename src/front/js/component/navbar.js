@@ -56,7 +56,20 @@ export const Navbar = () => {
               <GiHamburgerMenu className="reactIcon" size="30px" />
               </span>
             </button>
-            <a className="navbar-brand" href="/"><img src="https://i.ibb.co/8m2mpN3/0d3b546942f94de196812ac8af0bf4d9-fotor-bg-remover-20230809143940.png" alt="0d3b546942f94de196812ac8af0bf4d9" border="0" id="imageBrand" /></a>
+            <a className="navbar-brand" href="/"> 
+            {isHome ? (
+              <img
+                src="https://i.ibb.co/8m2mpN3/0d3b546942f94de196812ac8af0bf4d9-fotor-bg-remover-20230809143940.png"
+                alt="0d3b546942f94de196812ac8af0bf4d9"
+                id="imageBrand"
+              />
+            ) : (
+              <img
+                src="https://i.ibb.co/vjqHkfd/black-navbar-1.png" 
+                alt="black-navbar-1"
+                id="imageBrandBNavbar"
+              />)}
+            </a>
             <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul className="navbar-nav me-auto mt-0 mb-2 mb-lg-0" id="navbarContent">
                   <li className="nav-item">

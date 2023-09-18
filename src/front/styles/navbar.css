@@ -25,6 +25,9 @@
 #imageBrand{
   width: 78px;
 }
+#imageBrandBNavbar{
+  width: 78px;
+}
 #scroll-down{
   width:70px;
   border-color: #ffc600;
@@ -61,7 +64,7 @@
   outline: none;
 }
 .dropdown-menu {
-  max-height: 200px;
+  max-height: 500px;
   overflow-y: auto;
   z-index:2;
   left: 0;
@@ -76,6 +79,7 @@
 #delete-favourite:hover {
   color: #ffc600;
   background-color: rgba(0, 0, 0, 0.5);
+  font-size: 1.3em;
 }
 #dropdown-favourites{
   background-color: rgba(0, 0, 0, 0.651);
@@ -124,7 +128,14 @@
     justify-content: end;
     position:relative;
   }
-
+ 
+  .nav-item.dropdown .dropdown-menu {
+    left: -30px !important;
+    margin-top: 45px;
+    width: 150px !important;
+    overflow: visible;
+    border: none !important;
+  }
   #navbarItems{
     justify-content: end;
     font-size: 1.5rem;
@@ -137,17 +148,16 @@
     display: inline-block;
     position: relative;
   }
-
   #category{
     background-color: transparent;
     font-size: 20px;
     margin-right: 5px;
-    margin-left: -15px;
+    
   }
-  #category-dropdown{
-    display: flex;
-    flex-direction: column;
+  #scroll-down li {
+    margin-bottom: 10px;
   }
+ 
   #category:hover, .nav-link:hover, .mx-4:hover, #scroll-down2:hover{
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
@@ -160,27 +170,39 @@
     display:flex;
     flex-direction: row;
   }
-  #favouritesDropdown{
-    height: 200px;
-    max-width: 300px;
-    background-color: transparent;
-    border: none;
-    z-index:1;
+  .btn-group.dropdown .dropdown-menu {
+    margin-top: 45px;
+    left:-100px !important;
+    margin-right: 10px !important;
+    
+    overflow: visible;
   }
-  #scroll-down{
-    background-color: transparent;
-    font-size: 20px;
-    text-align: center;
-    border-radius: 10px;
-    margin-left: -40px;
-    max-height: 200px;
-    max-width: 150px;
-    border: none;
+  #dropdown-favourites{
+    background-color: rgba(0, 0, 0, 0.651) !important;
+    margin-top: 5px;
+    width: 130px !important;
+    padding-bottom: 5px !important;
+    border-radius: 10px 0 0 10px;
     z-index:1;
-    overflow-x: visible;
+    display: flex;
+    justify-content: start;
+    position: relative;
+    color: white;
+  }
+  #delete-favourite{
+    background-color: rgba(0, 0, 0, 0.651);
+    margin-top: 5px;
+    border-radius: 0 10px 10px 0;
+    padding-top: 10px;
+    width: 20px !important;
+    padding-inline: 5px;
+    z-index: 2;
+    display: flex;
+    justify-content: end !important;
+    position: relative;
   }
   #scroll-down2{
-    background-color: rgba(0, 0, 0, 0.651);
+    background-color: rgba(12, 11, 11, 0.651);
     margin-top: 5px;
     border-radius: 10px;
     width: 150px;
@@ -207,48 +229,7 @@
     border-color: rgba(0, 0, 0, 0.5);
     color: white;
   }
-  #dropdown-favourites{
-    background-color: rgba(0, 0, 0, 0.651) !important;
-    margin-top: 5px !important;
-    border-radius: 10px 0 0 10px !important;
-    overflow-x: visible !important;
-    padding-right: 5px !important;
-    flex-direction: row !important;
-    justify-content: center !important;
-    color: white !important;
-    margin-left: -50px! important;
-    width: 100%;
-  }
-  #delete-favourite{
-    background-color: rgba(0, 0, 0, 0.651);
-    margin-top: 5px;
-    margin-right: 50px;
-    border-radius: 0 10px 10px 0;
-    padding-top: 10px;
-    padding-inline: 5px;
-    z-index:1;
-    display: flex;
-    color:white;
-    justify-content: center;
-    position: relative;
-    width: 10px;
-  }
-  #dropdown-favourites:hover, #delete-favourite:hover{
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #ffc600;
-    font-size: 1.2em;
-  }
   .text-warning{
     color: white !important;;
-  }
-  #favourites-list{
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width:250px;
-    margin-left: -100px;
-    padding-right: 2px;
-    margin-right: 10px;
-    position:relative;
   }
 }
