@@ -34,6 +34,7 @@ export const SingleProduct = () => {
     const {store,actions} = useContext(Context)
     const [allDescriptions, setAllDescriptions] = useState([]);
     const image= localStorage.getItem("image")
+    const [date,setDate]= useState("");
     const author=localStorage.getItem("username")
     const [description, setDescription] = useState("");
     const [oneProduct, setOneProduct]= useState();

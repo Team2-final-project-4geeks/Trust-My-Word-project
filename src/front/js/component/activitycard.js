@@ -61,7 +61,7 @@ const ActivityCard = (props)=>{
         <div className="card-body mt-5 mb-4" id="activityBody">
             <div id="imageBoard">
                 <img src={props.img} className="card-img-top" alt="image chosen by the user"/>
-                <div id="imageOverlay" className="d-flex justify-content-end align-items-start p-2">
+                <div id="imageOverlayProduct" className="d-flex justify-content-end align-items-start p-2">
                         <i
                         className="fas fa-heart text-danger fa-2x"
                         onClick={() => {

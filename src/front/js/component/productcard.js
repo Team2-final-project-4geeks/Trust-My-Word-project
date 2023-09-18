@@ -59,7 +59,7 @@ export const ProductCard = (props) => {
     return (
 
         <div className="card-body mt-5 mb-4" id="ProductBody">
-            <div id="imageBoard">
+            <div id="imageBoardProduct">
                 <img src={props.product.image} className="card-img-top" alt="image chosen by the user"/>
                     <div id="imageOverlay" className="d-flex justify-content-end align-items-start p-2">
                         <i
@@ -82,20 +82,20 @@ export const ProductCard = (props) => {
                     </div>
             </div>
 
-            <div id="infoBoard" className="mt-3">
+            <div id="infoBoardProduct" className="mt-3">
             <div className="d-flex flex-column">
                 <div className=" col-12">
                     <div className="d-flex flex-row" id="productInfoBoard">
                         <div id="img-container" className="col-3">
                             <img src={props.profile} alt="image chosen by the user"/>
                         </div>
-                        <div className="d-flex justify-content-between col-10 ms-3">
+                        <div className="d-flex justify-content-around col-10 ms-3">
                             <div className="d-flex flex-column mx-3">
                                     <p className="card-text mb-0"><small className="text-muted username">{props.product.reviewOwner}</small></p>
                                     <hr className="mb-1 mt-1"/>
                                     <p className="card-text"><small className="text-muted publishing-date">{props.product.publishing_date}</small></p>
                             </div>
-                            <div className="d-flex justify-content-end" id="visitBoard">
+                            <div className="d-flex flex-row" id="visitBoardProduct">
                                     <p className="text-muted mb-0"> <small>Visited {props.product.counter} <i class="fa-solid fa-eye"></i></small></p>
                             </div>     
                         </div>     
