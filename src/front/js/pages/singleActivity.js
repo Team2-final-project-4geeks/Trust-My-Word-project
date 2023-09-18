@@ -23,7 +23,6 @@ const SingleActivity = () => {
     const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
     const responsive = {        
         superLargeDesktop: {
-            // the naming can be any, depends on you.
             breakpoint: { max: 4000, min: 1025 },
             items: 4
           },
