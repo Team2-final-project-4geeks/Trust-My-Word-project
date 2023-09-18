@@ -13,4 +13,18 @@
     margin-bottom: 5%;
     margin-top: 2%;
 }
+@media (max-width: 800px) {
+
+    .privacy_policy{  
+        font-size: 0.75rem;
+    }
+    .btn-privacy{
+        background-color: black;
+        border-radius: 15px;
+        font-size: 20px;
+        padding: 8px;
+        margin-bottom: 5%;
+        margin-top: 2%;
+    }
+}
 

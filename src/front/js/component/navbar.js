@@ -56,7 +56,20 @@ export const Navbar = () => {
               <GiHamburgerMenu className="reactIcon" size="30px" />
               </span>
             </button>
-            <a className="navbar-brand" href="/"><img src="https://i.ibb.co/8m2mpN3/0d3b546942f94de196812ac8af0bf4d9-fotor-bg-remover-20230809143940.png" alt="0d3b546942f94de196812ac8af0bf4d9" border="0" id="imageBrand" /></a>
+            <a className="navbar-brand" href="/"> 
+            {isHome ? (
+              <img
+                src="https://i.ibb.co/8m2mpN3/0d3b546942f94de196812ac8af0bf4d9-fotor-bg-remover-20230809143940.png"
+                alt="0d3b546942f94de196812ac8af0bf4d9"
+                id="imageBrand"
+              />
+            ) : (
+              <img
+                src="https://i.ibb.co/vjqHkfd/black-navbar-1.png" 
+                alt="black-navbar-1"
+                id="imageBrandBNavbar"
+              />)}
+            </a>
             <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul className="navbar-nav me-auto mt-0 mb-2 mb-lg-0" id="navbarContent">
                   <li className="nav-item">
@@ -105,7 +118,7 @@ export const Navbar = () => {
                               Logout
                             </a>
                           </div>
-                          <div className="btn-group dropdown" id="favourites">
+                          <div className="btn-group dropdown d-flex flex-wrap" id="favourites">
                             <button type="button" className="btn-navbar dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="dropdownMenuClickableInside" aria-expanded="false">
                                 Favourites <span className="p-1 text-center text-warning">{(store.favourite && store.favourite!=null && store.favourite!=undefined)? store.favourite.length:"0"}</span>
                             </button>
@@ -120,12 +133,12 @@ export const Navbar = () => {
                                                     {fav.title}
                                                 </a>
                                                 <i
-                                                        className="fas fa-trash" id="delete-favourite"
-                                                        onClick={() => {
-                                                            actions.deleteFavourite(fav);
-                                                            actions.addUserFavourites(localUserId);
-                                                        }}
-                                                    ></i>
+                                                  className="fas fa-trash" id="delete-favourite"
+                                                  onClick={() => {
+                                                      actions.deleteFavourite(fav);
+                                                      actions.addUserFavourites(localUserId);
+                                                  }}
+                                                ></i>
                                             </li>
                                         );
                                     })}

@@ -25,6 +25,9 @@
 #imageBrand{
   width: 78px;
 }
+#imageBrandBNavbar{
+  width: 78px;
+}
 #scroll-down{
   width:70px;
   border-color: #ffc600;
@@ -32,17 +35,14 @@
   padding:5px;
   margin-left: -5px;
 }
-
 #navbarContent{
   border-radius: 10px;
-  width: 200px;
+  width: 300px;
   padding: 10px;
   z-index: 2;
   overflow-y: visible;
   background-color: black;
-  color:#ffc600;
 }
-
 .btn-navbar {
   background-color: transparent;
   border: 1px solid white;
@@ -60,32 +60,31 @@
   margin-left: -10px;
   outline: none;
 }
-.dropdown-menu {
-  max-height: 200px;
-  overflow-y: auto;
-  z-index:2;
-  left: 0;
-  background-color: transparent;
+
+.btn-group.dropdown .dropdown-menu {
+  margin-right: 20px;
+  max-height: 500px;
+  overflow: auto;
+  width: 100% !important;
+  background-color: black;
   border: none;
 }
-#dropdown-favourites:hover {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #ffc600;
-  font-size: 1.2em;
+#dropdown-favourites:hover{
+  color: #ffc600 !important;
 }
-#delete-favourite:hover {
-  color: #ffc600;
-  background-color: rgba(0, 0, 0, 0.5);
+#delete-favourite:hover{
+  color: #ffc600 !important;
 }
 #dropdown-favourites{
   background-color: rgba(0, 0, 0, 0.651);
   margin-top: 5px;
-  width: 150px;
+  padding-left:0px;
+  margin-left: -5px;
+  width: 180px;
   border-radius: 10px 0 0 10px;
   z-index:1;
   display: flex;
-  justify-content: space-between;
-  position: relative;
+  justify-content: start;
   color: white;
 }
 #delete-favourite{
@@ -93,18 +92,31 @@
   margin-top: 5px;
   border-radius: 0 10px 10px 0;
   padding-top: 10px;
-  padding-inline: 5px;
+  width: 20%;
   z-index: 2;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   position: relative;
+  color: white;
 }
-
+#dropdown-favourites:hover{
+  color: #ffc600 !important;
+}
+#delete-favourite:hover{
+  color: #ffc600 !important;
+}
 #favourites-list{
   display:flex;
-  flex-direction: row;
-  width: 145px;
+  width: 100% !important;
+  z-index: 2;
   justify-content: center;
+  overflow: visible;
+}
+
+#favourites-list li:hover{
+  color:#ffc600 !important;
+  justify-content: flex-start;
+  z-index:2 !important;
 }
 .navbar-toggler {
   color:#ffc600;
@@ -124,7 +136,15 @@
     justify-content: end;
     position:relative;
   }
-
+  .nav-item.dropdown .dropdown-menu {
+    left: -30px !important;
+    margin-top: 45px;
+    width: 150px !important;
+    overflow: visible;
+    border: none !important;
+    border-radius: 20px;
+    background-color: black;
+  }
   #navbarItems{
     justify-content: end;
     font-size: 1.5rem;
@@ -137,22 +157,25 @@
     display: inline-block;
     position: relative;
   }
-
   #category{
     background-color: transparent;
     font-size: 20px;
     margin-right: 5px;
-    margin-left: -15px;
   }
-  #category-dropdown{
-    display: flex;
-    flex-direction: column;
+  #scroll-down li {
+    margin-bottom: 10px;
   }
-  #category:hover, .nav-link:hover, .mx-4:hover, #scroll-down2:hover{
-    background-color: rgba(0, 0, 0, 0.5);
+  #scroll-down2:hover{
+    margin-bottom: 10px;
+    color:#ffc600 !important;
+  }
+
+  #category:hover, .nav-link:hover, .mx-4:hover{
+    background-color: rgba(3, 3, 3, 0.5);
     color: white;
     border-radius: 10px;
   }
+
   #nav-link, .mx-4{
     border-radius: 10px;
   }
@@ -160,27 +183,53 @@
     display:flex;
     flex-direction: row;
   }
-  #favouritesDropdown{
-    height: 200px;
-    max-width: 300px;
-    background-color: transparent;
-    border: none;
-    z-index:1;
+  .btn-group.dropdown .dropdown-menu {
+    margin-top: 50px;
+    left:-140px !important;
+    right: 0 !important;
+    margin-right: 20px;
+    overflow: visible;
+    width: 300px !important;
   }
-  #scroll-down{
-    background-color: transparent;
-    font-size: 20px;
-    text-align: center;
-    border-radius: 10px;
-    margin-left: -40px;
-    max-height: 200px;
-    max-width: 150px;
-    border: none;
-    z-index:1;
-    overflow-x: visible;
+  #favourites-list{
+    color: white;
+    width: 95% !important;
+    z-index:2 !important;
+    margin-left: 10px;
+  }
+  #favourites-list li:hover{
+    color:#ffc600;
+    justify-content: flex-start;
+    z-index:2 !important;
+  }
+  #dropdown-favourites{
+    background-color: rgba(0, 0, 0, 0.651) !important;
+    margin-top: 5px;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    height: 35px;
+    margin-right: 0px !important;
+    width: 100% !important;
+    border-radius: 10px 0 0 10px;
+    display: flex;
+    justify-content: start !important;
+    color: white;
+  }
+  #delete-favourite{
+    background-color: rgba(0, 0, 0, 0.651);
+    margin-top: 5px;
+    margin-left: 0px;
+    padding-left:1;
+    border-radius: 0 10px 10px 0;
+    padding-top: 10px;
+    padding-inline: 5px;
+    z-index: 2;
+    display: flex;
+    justify-content: end;
+    color: white;
   }
   #scroll-down2{
-    background-color: rgba(0, 0, 0, 0.651);
+    background-color: rgba(12, 11, 11, 0.651);
     margin-top: 5px;
     border-radius: 10px;
     width: 150px;
@@ -188,7 +237,6 @@
     text-align: center;
     position: relative;
   }
-
   #item-home{
     z-index: 0;
     position:relative;
@@ -207,48 +255,7 @@
     border-color: rgba(0, 0, 0, 0.5);
     color: white;
   }
-  #dropdown-favourites{
-    background-color: rgba(0, 0, 0, 0.651) !important;
-    margin-top: 5px !important;
-    border-radius: 10px 0 0 10px !important;
-    overflow-x: visible !important;
-    padding-right: 5px !important;
-    flex-direction: row !important;
-    justify-content: center !important;
-    color: white !important;
-    margin-left: -50px! important;
-    width: 100%;
-  }
-  #delete-favourite{
-    background-color: rgba(0, 0, 0, 0.651);
-    margin-top: 5px;
-    margin-right: 50px;
-    border-radius: 0 10px 10px 0;
-    padding-top: 10px;
-    padding-inline: 5px;
-    z-index:1;
-    display: flex;
-    color:white;
-    justify-content: center;
-    position: relative;
-    width: 10px;
-  }
-  #dropdown-favourites:hover, #delete-favourite:hover{
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #ffc600;
-    font-size: 1.2em;
-  }
   .text-warning{
     color: white !important;;
-  }
-  #favourites-list{
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width:250px;
-    margin-left: -100px;
-    padding-right: 2px;
-    margin-right: 10px;
-    position:relative;
   }
 }
