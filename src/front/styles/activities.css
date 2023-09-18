@@ -1,15 +1,18 @@
 #quoteActivity{
-    width: 37.45vw;
+    width: auto;
     height:21.48vh;
     margin: auto;   
 }
+.rowActivities{
+    width: 100%;
+}
 #quote{
-    font-size: 1.7vw;
+    font-size: 25px;
     font-style: italic;
 }
 
 #author{
-    font-size: 1.2vw;
+    font-size: 20px;
 }
 .blockquote-footer{
     color: #ffc600;

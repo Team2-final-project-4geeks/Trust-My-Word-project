@@ -11,6 +11,8 @@ const Activities = (props) =>{
     const [activities, setActivities] = useState([]);
     const { store, actions } = useContext(Context);
     const navigate= useNavigate();
+    const [dataLoaded, setDataLoaded] = useState(false);
+
     useEffect(() => {
         getActivities();
     }, []);
@@ -36,13 +38,19 @@ const Activities = (props) =>{
     const filteredActivities = activities.filter((activity)=> activity.location.toLowerCase().includes(store.query) &&
     (store.selectedType === "" || activity.type === store.selectedType))
 
+    useEffect(() => {
+        if (filteredActivities.length > 0) {
+          setDataLoaded(true);
+        }
+      }, [filteredActivities]);
+
     return (
         <div className="container-fluid mt-2">
             <FilterBarActivities/>
 
-            <div className="card mt-4 mb-5 border-0" id="quoteActivity">                    
+            <div className="card mt-4 mb-5 border-0 text-center" id="quoteActivity">                    
                 <div className="card-body d-flex">
-                    <div className="row">
+                    <div className="rowActivities">
                         <blockquote className="blockquote mb-0">
                             <p className=" col-sm-12 text-center mt-4" id="quote">"Activity equals results. If you want to increase your success, increase your activity."</p>
                             <footer className="col-sm-12 blockquote-footer text-center mt-4 mb-4" id="author">Brian Tracy</footer>
@@ -51,31 +59,46 @@ const Activities = (props) =>{
                 </div>
             </div>
 
-            <div className="container-fluid" >                
-                <div className="row row-cols-1 row-cols-md-3 g-4">
-                    {(activities.length !== 0 || store.query !== "") ? (filteredActivities.map((activity, index) =>{            
-                        return(
-                            <div key={index} className="col-md-4 col-ms-12">
-                                <ActivityCard
-                                    key={index} 
-                                    item={activity}
-                                    activity={activity}
-                                    userImage={activity.userImage}
-                                    img={activity.image}
-                                    author={activity.reviewOwner}
-                                    rating={activity.rating}                                        
-                                />
-                            </div>
-                        )
-                        }
-                        )) : (
-                        <div className="spinner-border" role="status">
-                            <span className="visually-hidden">Loading...</span>
+            <div className="container-fluid" >
+            {dataLoaded ? (
+                filteredActivities.length === 0 ? (
+                    <div className="container text-center border-0">
+                        <h4 className="mb-5">We are very sorry, but there are either no reviews from the requested location or no reviews for that category</h4>
+                        <img
+                            className="justify-content-center mt-1 mb-5 border-0"
+                            src="https://i2-prod.mirror.co.uk/incoming/article25609261.ece/ALTERNATES/s615b/0_PUSS-IN-BOOTS.jpg"
+                            alt="No Reviews"
+                        />
+                    </div>
+                    ) : (                
+                        <div className="row row-cols-1 row-cols-md-3 g-4">
+                            {filteredActivities.map((activity, index) => {
+                                return (
+                                    <div key={index} className="col-md-4 col-ms-12">
+                                        <ActivityCard
+                                            key={index}
+                                            item={activity}
+                                            activity={activity}
+                                            userImage={activity.userImage}
+                                            img={activity.image}
+                                            author={activity.reviewOwner}
+                                            rating={activity.rating}
+                                        />
+                                    </div>
+                                );
+                            })}
                         </div>
+                    )
+                ) : (
+                    <div className="container text-center border-0" >
+                        <div className="spinner-border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
                     )}
                 </div>
-            </div>
         </div>
-    )
-}
+    );
+};
+
 export default Activities
