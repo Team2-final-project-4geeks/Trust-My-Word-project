@@ -50,9 +50,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const deleteConfirmed = confirm("Are you sure that you want to delete this Favourite?")
 				if (deleteConfirmed === true) {
 				setStore({favourite: store.favourite.filter((fav) => fav !== favToDelete)})
-					Swal.fire(
-						'Favourite succesfully deleted',
-						'success')
+					Swal.fire({
+						icon: 'success',
+						text: 'You have deleted a Review'
+						})
 				} else {
 					Swal.fire(
 						'Delete Cancelled'
