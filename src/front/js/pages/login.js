@@ -60,9 +60,15 @@ const Login = () =>{
         })
         .then((res) => res.json())
         .then((result) => {
-            console.log(result);
-        }).catch((err) => {
-            console.log(err);
+            if (result.redirect) {
+                // Redirect the user to the specified URL
+                navigate(result.redirect);
+            } else {
+                console.log(result);
+            }
+        })
+        .catch((err) => {
+        console.log(err);
         })
         }
     }
