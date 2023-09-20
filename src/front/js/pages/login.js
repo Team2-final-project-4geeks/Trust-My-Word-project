@@ -128,7 +128,7 @@ const Login = () =>{
     }
     return(
             <div className="general-container">
-            <div className="row">
+            <div className="row" id="loginCard">
                 <div className={showLogin ? "col-md-6" : "col-md-6 order-md-2"}>
                     {showLogin ? (
                         <div className="half-content">
@@ -254,7 +254,6 @@ const Login = () =>{
                     </div>
                 </div>
             </div>
-            <div className="emptySpace"></div>
         </div>
     )
 }
