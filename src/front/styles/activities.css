@@ -17,3 +17,10 @@
 .blockquote-footer{
     color: #ffc600;
 }
+.mb-5{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}

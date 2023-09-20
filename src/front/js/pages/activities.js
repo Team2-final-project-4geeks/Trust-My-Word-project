@@ -59,7 +59,7 @@ const Activities = (props) =>{
                 </div>
             </div>
 
-            <div className="container-fluid" >
+            <div className="noReviews d-flex flex-column"  >
             {dataLoaded ? (
                 filteredActivities.length === 0 ? (
                     <div className="container text-center border-0">
