@@ -74,15 +74,15 @@ export const Navbar = () => {
                 <ul className="navbar-nav me-auto mt-0 mb-2 mb-lg-0" id="navbarContent">
                   <li className="nav-item">
                     <a className="nav-link active text-warning" aria-current="page" href="/">Home</a>
-                  </li>
-                  <li className="nav-item text-warning mx-4 p-1">
+                  </li> 
+                  <li className="nav-item text-warning" id="theme">
                     <ThemeSwitcher/>
                   </li>
                   <li className="nav-item dropdown" id="category-dropdown">
                     <button className="btn dropdown text-warning toggle" id="category" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Category
                     </button>
-                      <ul className="dropdown-menu" id="scroll-down">
+                      <ul className="dropdown-menu bg-dark" id="scroll-down">
                         <li>
                           <a className="nav-link text-warning" id="scroll-down2" href="#" onClick={() => navigate("/activities")}>
                           Activities

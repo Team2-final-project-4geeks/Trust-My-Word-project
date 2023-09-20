@@ -59,7 +59,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						'Delete Cancelled'
 					  )
 				}
-			},			
+			},
+						
 			addType: (type) => {
 				const store = getStore();
 				setStore({storeTypes: type})			
