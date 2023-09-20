@@ -283,7 +283,7 @@ const SingleActivity = () => {
                     <div className="container-fluid d-flex justify-content-center">
                         <button 
                             type="button"                            
-                            className="confetti-button btn btn-dark mt-5" 
+                            className="btn btn-dark mt-5" 
                             onClick={createComment}
                             id="sumbitButtonSingle"> Send 
                         </button>
