@@ -2,7 +2,7 @@
     object-fit: cover;    
 }
 #containerSingleProduct{
-    height:450px;
+    min-height:450px;
     display:flex;
     box-shadow: rgb(218, 165, 32) -2px -2px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 4px;
 }

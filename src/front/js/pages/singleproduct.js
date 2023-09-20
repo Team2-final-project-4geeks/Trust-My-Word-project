@@ -12,13 +12,9 @@ import "../../styles/singleproduct.css";
 
 export const SingleProduct = () => {
     const responsive = {  
-        superLargeDesktop: {
-            breakpoint: { max: 4000, min: 1025 },
-            items: 5
-          },      
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
-          items: 4
+          items: 3
         },
         tablet: {
           breakpoint: { max: 1024, min: 464 },
@@ -199,7 +195,7 @@ export const SingleProduct = () => {
                         <div className="col-11 card border-0" id="containerSingleProduct">
                             <div className="row g-0 h-100" >
                                 <div className="col-sm-12 col-md-4">
-                                    <img id="singleProductPicture"src={oneProduct.image} className="img-fluid rounded-start h-100" alt="..."/>
+                                    <img id="singleProductPicture"src={oneProduct.image} className="rounded-start h-100 w-100 col-sm-12" alt="..."/>
                                 </div>
                                 <div className="col-sm-12 col-md-8">
                                     <div className="card h-100 border-0 px-3" id="cardProduct">
