@@ -18,3 +18,11 @@
 .iconsPointer button{
     width:103px;
 }
+
+@media (max-width: 470px){
+
+   .reactIcon{
+    font-size: 15px;
+    padding: 0 !important;
+   }
+}

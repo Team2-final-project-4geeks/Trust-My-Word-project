@@ -61,7 +61,7 @@ const ActivityCard = (props)=>{
         <div className="card-body mt-5 mb-4" id="activityBody">
             <div id="imageBoard">
                 <img src={props.img} className="card-img-top" alt="image chosen by the user"/>
-                <div id="imageOverlayProduct" className="d-flex justify-content-end align-items-start p-2">
+                <div id="imageOverlayActivity" className="d-flex justify-content-end align-items-start p-2">
                         <i
                         className="fas fa-heart text-danger fa-2x"
                         onClick={() => {
@@ -163,7 +163,7 @@ const ActivityCard = (props)=>{
                     </div>
                     
                     <div>
-                        {showHeart && <div className="floating-heart">&hearts;</div>}
+                        {showHeart && <div className="floatingHeartActivity">&hearts;</div>}
                     </div>
                  </div>
             </div>

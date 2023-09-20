@@ -21,7 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ favourite: [...store.favourite, {id: favId, title: favTitle, category: favCategory}] });
 					console.log("adicionado")
 				} else {
-					alert("Favourite already exists!!");
+					Swal.fire("Favourite already exists!!")
 				}
 			},
 			
@@ -30,7 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 if (!store.activities.includes(activity)) {
                     setStore({...store, activities: activity});
                 } else {
-                    alert("Activity already exists!!");
+                    Swal.fire("Activity already exists!!");
                 }
             },
 			addProducts: (product) => {
@@ -38,7 +38,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 if (!store.product.includes(product)) {
                     setStore({...store, products: product});
                 } else {
-                    alert("Product already exists!!");
+                    Swal.fire("Product already exists!!");
                 }
             },
 			addQuery: (city) => {

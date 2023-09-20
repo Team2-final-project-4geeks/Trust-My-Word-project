@@ -81,13 +81,23 @@ text-decoration: underline;
     object-fit: cover;
 }
 
-#floating-heart { 
+#floatingHeartProduct{ 
   position: absolute;
   top: 10px;
   right: 10px;
   font-size: 24px;
   color: red;
   animation: floatHeart 2s ease-out;
+}
+@keyframes floatHeart {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
 }
 .dropdown-item {
   width: 25px;
@@ -111,18 +121,6 @@ text-decoration: underline;
 ul.dropdown-menu.show{
   inset: 0px -90px auto auto !important
 }
-
-@keyframes floatHeart {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-50px);
-    opacity: 0;
-  }
-}
-
 .publishing-date{ 
   font-size: 11px;
 }

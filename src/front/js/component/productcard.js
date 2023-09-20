@@ -12,7 +12,7 @@ export const ProductCard = (props) => {
     const navigate = useNavigate ()
     const {store, actions} = useContext(Context)
     const token = localStorage.getItem("jwt-token")
-    const [showHeart, setShowHeart] = useState(false)
+    const [showHeart, setShowHeart] = useState(false);
     const [translatedDescription, setTranslatedDescription] = useState(props.product.description)
     const [isTranslated, setIsTranslated] = useState(false)
     const [currentLanguage, setCurrentLanguage] = useState(null)
@@ -61,7 +61,7 @@ export const ProductCard = (props) => {
         <div className="card-body mt-5 mb-4" id="ProductBody">
             <div id="imageBoardProduct">
                 <img src={props.product.image} className="card-img-top" alt="image chosen by the user"/>
-                    <div id="imageOverlay" className="d-flex justify-content-end align-items-start p-2">
+                    <div id="imageOverlayProduct" className="d-flex justify-content-end align-items-start p-2">
                         <i
                         className="fas fa-heart text-danger fa-2x"
                         onClick={() => {
@@ -148,7 +148,7 @@ export const ProductCard = (props) => {
                         <ViewMoreProduct item={props.product.id}/>
                     </div>
                     <div>
-                        {showHeart && <div id="floating-heart">&hearts;</div>}
+                    {showHeart && <div id="floatingHeartProduct">&hearts;</div>}
                     </div>
                 </div>
             </div>
