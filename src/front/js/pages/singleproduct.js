@@ -211,7 +211,7 @@ export const SingleProduct = () => {
                                         <div className="singleProductBottom d-flex flex-column">
                                             <div className="d-flex flex-row flex-wrap justify-content-center" id="productRow2">
                                                 <p className="card-text text-center"><i class="fas fa-money-bill-wave me-2"></i>{oneProduct.price}€</p>
-                                                <Link to={oneProduct.link} className="card-text ms-3 mb-3 ">{oneProduct.link}</Link>
+                                                <Link to={oneProduct.link} className="card-text ms-3 mb-3" id="productLink">{oneProduct.link}</Link>
                                             </div>
                                             <div className="col-sm-12" id="shareProduct">
                                                 <ShareComponent />
