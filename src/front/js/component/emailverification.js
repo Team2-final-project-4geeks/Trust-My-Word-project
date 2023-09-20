@@ -33,7 +33,8 @@ const EmailVerification = () => {
   
   return (
     <div className='container border-0 my-5'>
-      <h2 className='text-center mt-5'>Your email is being checked. Please be patient</h2>
+      <h2 className='text-center mt-5'>Your email is being checked...</h2>
+      <p className='text-center mt-5'>Please be patient, this should not take long.</p>
       <img className='text-center mt-5' id="checking"src="https://cdn.pixabay.com/photo/2017/11/07/08/05/turn-on-2925962_1280.jpg"></img>
     </div>
   );
