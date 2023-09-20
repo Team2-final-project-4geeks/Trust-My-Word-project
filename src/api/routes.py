@@ -129,9 +129,8 @@ def delete_user(id):
 # LOGIN PART
 @api.route('/login', methods=['POST'])
 def user_login():
-
-    email = request.json.get("loginEmail",None)
-    password = request.json.get("loginPassword",None)
+    email = request.json.get("loginEmail", None)
+    password = request.json.get("loginPassword", None)
 
     if email is None or password is None:
         response_body = {
@@ -147,17 +146,21 @@ def user_login():
         return jsonify(response_body), 404
 
     if user and user.password == password:
-        
-        logged = "Succesfully logged"
-        access_token = create_access_token(identity=user.id)
+        if user.email_verified:  # Check if the email is verified
+            logged = "Successfully logged"
+            access_token = create_access_token(identity=user.id)
 
-        return jsonify({"loginOK" : logged, "token": access_token, "user_id": user.id, "username": user.username, "email": user.email, "image": user.image})
+            return jsonify({"loginOK": logged, "token": access_token, "user_id": user.id, "username": user.username, "email": user.email, "image": user.image, "email_verified": user.email_verified})
+        else:
+            response_body = {
+                "msg": "Email not verified. Please verify your email before logging in."
+            }
+            return jsonify(response_body), 403  # Return a 403 Forbidden status for unverified email
     else:
         response_body = {
             "msg": "Incorrect password"
         }
-        return jsonify(response_body),400
-
+        return jsonify(response_body), 400
 # FOR REVIEWS 
 
 @api.route('/review', methods=['GET'])

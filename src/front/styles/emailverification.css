@@ -1,4 +1,8 @@
 #checking{
-    width:400px;
-    height:400px;
+    width:500px;
+    height:500px;    
+    margin: auto;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
 }
