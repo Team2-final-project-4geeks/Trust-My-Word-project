@@ -1,18 +1,18 @@
-#imageBoard{ /* checked */
+#imageBoard{ 
   height: 250px;
   width: auto;
   position: relative;
 }
-#imageBoard img{ /* checked */
+#imageBoard img{ 
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-#imageBoard:hover img { /* checked */
+#imageBoard:hover img {
   filter: brightness(80%);
 }
 
-#activityCardViewMore{  /* checked */
+#activityCardViewMore{ 
   position: absolute;
   bottom: 10px;
   width: 100%;
@@ -20,12 +20,12 @@
   justify-content: center;
 }  
 
-#activityBody{ /* checked */
+#activityBody{ 
   position: relative;
   min-height: 36vh;
 }
 
-#activity-board{ /* checked */
+#activity-board{ 
   background-color: #f9f9f9;
   padding: 10px;
   border-radius: 5px;
@@ -33,7 +33,7 @@
   width: 300px;
 }
 
-#card-description-activity { /* checked */
+#card-description-activity { 
   font-size: clamp(14px, 1rem, 18px); 
   overflow: hidden;
   display: -webkit-box;
@@ -43,7 +43,7 @@
   text-overflow: ellipsis; 
 }
 
-#activityCardViewMore{ /* checked */
+#activityCardViewMore{ 
 background-color: transparent;
 border: none;
 color: black;
@@ -52,13 +52,13 @@ cursor: pointer;
 transition: color 0.3s, transform 0.3s;
 }
 
-#activityCardViewMore:hover { /* checked */
+#activityCardViewMore:hover {
 transform: scale(1.15);
 color: #404040;
 text-decoration: underline;
 }
 
-#imageOverlayActivity { /* checked */
+#imageOverlayActivity { 
   position: absolute;
   top: 0;
   right: 0;
@@ -69,26 +69,26 @@ text-decoration: underline;
   transition: opacity 0.3s;
 }
 
-#imageBoard:hover #imageOverlayActivity { /* checked */
+#imageBoard:hover #imageOverlayActivity { 
   opacity: 1;
 } 
-#infoBoard{ /* checked */
+#infoBoard{ 
   height: 330px;
 }
 
-#img-container{ /* checked */
+#img-container{ 
   width: 50px;
   height: 50px;
 }
 
-#img-container img { /* checked */
+#img-container img { 
     width: 100%;
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.floatingHeartActivity { /* checked */
+.floatingHeartActivity { 
   position: absolute;
   top: 10px;
   right: 10px;
@@ -119,7 +119,7 @@ ul.dropdown-menu.show{
   inset: 0px -90px auto auto !important
 }
 
-@keyframes floatHeart { /* checked */
+@keyframes floatHeart { 
   0% {
     transform: translateY(0);
     opacity: 1;
@@ -130,7 +130,7 @@ ul.dropdown-menu.show{
   }
 }
 
-.publishing-date{ /* checked */
+.publishing-date{ 
   font-size: 11px;
 }
 
