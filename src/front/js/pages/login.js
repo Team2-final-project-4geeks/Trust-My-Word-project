@@ -154,7 +154,7 @@ const Login = () =>{
                                     user_login()
                                 }}>Login</button>
                                 <div className="d-flex flex-row mt-3">
-                                    <a href="/" className="me-5 text-muted"><small>Forgot password?</small></a>
+                                    <a href="/" className="me-5 text-muted" onClick={()=>{navigate("/forgot-password")}} ><small>Forgot password?</small></a>
                                     <a onClick={handleCreateClick} id="createAcount" className="me-5 text-muted"><small>Create Account</small></a>
                                 </div>
                                 <br/>
