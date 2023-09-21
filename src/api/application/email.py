@@ -16,7 +16,7 @@ def send_verification_email(to_email, verification_token):
     message['To'] = to_email
     message['Subject'] = subject
 
-    body = f'Click the following link to verify your account: ' \
+    body = f'Welcome to Trust My Word! Click the following link to verify your account: ' \
            f'https://{FE_URL}/verify/{verification_token}'
     message.attach(MIMEText(body, 'plain'))
 
