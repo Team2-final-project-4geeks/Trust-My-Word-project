@@ -35,6 +35,7 @@
 <p align="left"> ☑️ Google Static Map API </h3>
 <p align="left"> ☑️ OpenStreet Map API for more precise positions and suggestions </h3>
 <p align="left"> ☑️ Cloudinary to save photos </h3>
+<p align="left"> ☑️ Microsoft API </h3>
 <p align="left"> ☑️ Weather API </h3>
 <p align="left"> ☑️ we built our own API  </h3>
 
@@ -42,6 +43,7 @@
 <p align="left"> 👍 email confirmation thanks to GMAIL and APP KEY </h3>
 <p align="left"> 👍 our page is totally responsive </h3>
 <p align="left"> 👍 double filter bar based on location and category  </h3>
+<p align="left"> 👍 translation of text thanks to Microsoft Translate </h3>
 <p align="left"> 👍 carousel for user comments and reviews in User Page </h3>
 <p align="left"> 👍 suggestions for our users </h3>
 <p align="left"> 👍 JWT Token </h3>
