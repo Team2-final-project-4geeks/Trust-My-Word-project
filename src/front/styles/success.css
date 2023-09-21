@@ -1,0 +1,15 @@
+#sucessText{
+    font-size: 25px;
+}
+
+#imageSuccess{
+    width: 400px;
+    height: 400px;
+}
+
+#pictBtn{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    object-fit: cover;
+}

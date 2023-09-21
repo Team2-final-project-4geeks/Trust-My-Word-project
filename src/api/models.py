@@ -22,6 +22,8 @@ class User(db.Model):
     favourites= db.Column(db.ARRAY(db.String(120)))
     password = db.Column(db.String(80), unique=False, nullable=False)
     image = db.Column(db.String(200), nullable=True)
+    verification_token = db.Column(db.String(120), unique=True, nullable=True)
+    email_verified = db.Column(db.Boolean, default=False)
 
     # 1 - N with Reviews
     reviews = db.relationship("Review", back_populates="users")
@@ -42,7 +44,9 @@ class User(db.Model):
             "favourites": self.favourites,
             "reviews": [review.serialize() for review in self.reviews],  # serialize each review
             "comments": [comment.serialize() for comment in self.comments], # serialize each comment
-            "image": self.image
+            "image": self.image,
+            "verification_token" : self.verification_token,
+            "email_verified": self.email_verified
         }        
       
 class Review(db.Model):

@@ -2,6 +2,10 @@
     margin: 0;
     padding: 0;
 }
+#loginCard{
+    margin-top: 18vh;
+    margin-bottom: 18vh;
+}
 .half-content{
     position: relative;
     display: inline-block;
@@ -21,9 +25,7 @@ input{
     width: 220px;
     border: none;
     border-left: 1px solid black;
-    
 }
-
 a{
     text-decoration: none;
 }
@@ -51,10 +53,12 @@ a{
 #login{
     width: 500px;
 }
-.emptySpace{
-    height: 160px;
-}
+
 @media (max-width: 470px){
+}
+
+.general-container{
+    max-width:100%;
 }
 
 

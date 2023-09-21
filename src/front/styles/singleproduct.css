@@ -2,7 +2,7 @@
     object-fit: cover;    
 }
 #containerSingleProduct{
-    height:450px;
+    height:auto;
     display:flex;
     box-shadow: rgb(218, 165, 32) -2px -2px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 4px;
 }
@@ -42,6 +42,9 @@
 .my-5{
     font-size:50px;
 }
+#shareProduct{
+    margin-bottom: 20px;
+}
 
 @media (max-width: 800px) {
     #containerSingleProduct {
@@ -53,6 +56,9 @@
     }
     #cardArea{
         padding-left: 0;
+    }
+    #productLink{
+        overflow-x: hidden;
     }
     #shareProduct{
         margin-bottom: 20px;

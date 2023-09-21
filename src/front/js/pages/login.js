@@ -30,29 +30,52 @@ const Login = () =>{
         setShowLogin(false);
     };
 
-    const create_user = () =>{
-        if(email === '') {
-            alert(' Email is Empty!')
-        } else if(password === ''){
-            alert('Password is empty!')
-        } else if ( username === " "){
-            alert("Username empty")
-        } else {
-            fetch(process.env.BACKEND_URL + 'api/create-user', { 
-            method: "POST", 
-            headers: { 
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, password, username, image }) 
-        })
-        .then((res) => res.json())
-        .then((result) => {
-            console.log(result);
-        }).catch((err) => {
+    const handleEmailBlur = (e) => {
+        const newEmail = e.target.value;
+        setEmail(newEmail);
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(newEmail)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'oppss...',
+                text: 'Please, insert a valid E-mail'            
+            });
+          }
+        };
+
+        const create_user = () =>{
+            if(email === '') {
+                alert(' Email is Empty!')
+            } else if(password === ''){
+                alert('Password is empty!')
+            } else if ( username === " "){
+                alert("Username empty")
+            } else {
+                fetch(process.env.BACKEND_URL + 'api/create-user', { 
+                method: "POST", 
+                headers: { 
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, password, username, image }) 
+            })
+            .then((res) => res.json())
+                Swal.fire({
+                    title: 'Check your email for confirmation',
+                    text: 'You have been redirected to the Log In page.',
+                    icon: 'info'
+                })
+            .then((result) => {                
+                if (result.redirect) {                    
+                    navigate(result.redirect);                   
+                } else {
+                    console.log(result);
+                }
+            })
+            .catch((err) => {
             console.log(err);
-        })
+            })
+            }
         }
-    }
 
     const user_login = () =>{
 			if(loginEmail ==='') {
@@ -69,33 +92,43 @@ const Login = () =>{
 			})
 			.then((res) => res.json())
 			.then((result) => {
-                if(result.msg){
+                if (result.msg) {
                     Swal.fire({
                         icon: 'error',
-                        title: 'oppss...',
-                        text: result.msg            
-                    })
-                    
-                }else{
-                    Swal.fire({
-                        icon: 'success',
-                        text: result.loginOK           
-                    })
-                    localStorage.setItem("jwt-token", result.token);
-                    localStorage.setItem("userId",result.user_id)
-                    actions.addUsername(result.username)
-                    localStorage.setItem("username",result.username)
-                    actions.getUser(localStorage.getItem("userId"))
-                    navigate("/")
+                        title: 'Oops...',
+                        text: result.msg,
+                    });
+                } else {
+                    if (result.email_verified == true) {
+                        // Email is verified, proceed with login
+                        Swal.fire({
+                            icon: 'success',
+                            text: result.loginOK,
+                        });
+                        localStorage.setItem('jwt-token', result.token);
+                        localStorage.setItem('userId', result.user_id);
+                        actions.addUsername(result.username);
+                        localStorage.setItem('username', result.username);
+                        actions.getUser(localStorage.getItem('userId'));
+                        navigate('/');
+                    } else {
+                        // Email is not verified, show an error message or take appropriate action
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Email Not Verified',
+                            text: 'Please verify your email before logging in.',
+                        });                        
+                    }
                 }
-			}).catch((err) => {
-				console.log(err);
-			})
-		}
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        };
     }
     return(
             <div className="general-container">
-            <div className="row">
+            <div className="row" id="loginCard">
                 <div className={showLogin ? "col-md-6" : "col-md-6 order-md-2"}>
                     {showLogin ? (
                         <div className="half-content">
@@ -188,7 +221,8 @@ const Login = () =>{
                                                 placeholder="Email" 
                                                 name="email"
                                                 value={email}
-                                                onChange={(e)=>{setEmail(e.target.value)}}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                                onBlur={handleEmailBlur}
                                                 /><br/><br/>
                                         </div>
                                         <div className="input-board mt-3">
@@ -220,7 +254,6 @@ const Login = () =>{
                     </div>
                 </div>
             </div>
-            <div className="emptySpace"></div>
         </div>
     )
 }

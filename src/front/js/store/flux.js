@@ -21,7 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ favourite: [...store.favourite, {id: favId, title: favTitle, category: favCategory}] });
 					console.log("adicionado")
 				} else {
-					alert("Favourite already exists!!");
+					Swal.fire("Favourite already exists!!")
 				}
 			},
 			
@@ -30,7 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 if (!store.activities.includes(activity)) {
                     setStore({...store, activities: activity});
                 } else {
-                    alert("Activity already exists!!");
+                    Swal.fire("Activity already exists!!");
                 }
             },
 			addProducts: (product) => {
@@ -38,7 +38,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 if (!store.product.includes(product)) {
                     setStore({...store, products: product});
                 } else {
-                    alert("Product already exists!!");
+                    Swal.fire("Product already exists!!");
                 }
             },
 			addQuery: (city) => {
@@ -50,15 +50,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const deleteConfirmed = confirm("Are you sure that you want to delete this Favourite?")
 				if (deleteConfirmed === true) {
 				setStore({favourite: store.favourite.filter((fav) => fav !== favToDelete)})
-					Swal.fire(
-						'Favourite succesfully deleted',
-						'success')
+					Swal.fire({
+						icon: 'success',
+						text: 'You have deleted a Review'
+						})
 				} else {
 					Swal.fire(
 						'Delete Cancelled'
 					  )
 				}
-			},			
+			},
+						
 			addType: (type) => {
 				const store = getStore();
 				setStore({storeTypes: type})			

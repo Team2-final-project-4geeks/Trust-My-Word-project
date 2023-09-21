@@ -43,6 +43,9 @@
   overflow-y: visible;
   background-color: black;
 }
+#theme{
+  margin-left: 0px !important;
+}
 .btn-navbar {
   background-color: transparent;
   border: 1px solid white;
@@ -57,7 +60,7 @@
   color: white;
 }
 #category{
-  margin-left: -10px;
+  margin-left: -12px;
   outline: none;
 }
 
@@ -157,26 +160,31 @@
     display: inline-block;
     position: relative;
   }
+  #theme{
+    margin-left: 10px !important;
+    margin-right: 12px !important;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+  }
   #category{
     background-color: transparent;
     font-size: 20px;
-    margin-right: 5px;
+    box-shadow: none;
   }
-  #scroll-down li {
+  #scroll-down li{
     margin-bottom: 10px;
   }
   #scroll-down2:hover{
     margin-bottom: 10px;
     color:#ffc600 !important;
   }
-
-  #category:hover, .nav-link:hover, .mx-4:hover{
+  #category:hover, .nav-link:hover, #theme:hover{
     background-color: rgba(3, 3, 3, 0.5);
     color: white;
     border-radius: 10px;
   }
-
-  #nav-link, .mx-4{
+  #nav-link, #theme{
     border-radius: 10px;
   }
   .token{
@@ -190,12 +198,14 @@
     margin-right: 20px;
     overflow: visible;
     width: 300px !important;
+    border-radius: 10px;
   }
   #favourites-list{
     color: white;
     width: 95% !important;
     z-index:2 !important;
     margin-left: 10px;
+    padding-left: 5px;
   }
   #favourites-list li:hover{
     color:#ffc600;

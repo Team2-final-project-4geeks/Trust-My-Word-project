@@ -18,6 +18,10 @@
     #dinamicBoard h4#text {
         font-size: 6vw;
         text-align: center;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
     }
     #dinamicBoard{
         display: flex;

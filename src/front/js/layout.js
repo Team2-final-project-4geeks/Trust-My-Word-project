@@ -5,7 +5,9 @@ import { BackendURL } from "./component/backendURL";
 
 
 import { Home } from "./pages/home.js";
+import Success from "./component/success"
 import Login from "./pages/login.js";
+import EmailVerification from "./component/emailverification";
 import injectContext from "./store/appContext";
 import SingleTrip from "./pages/singleTrip.js";
 import { SingleProduct } from "./pages/singleproduct.js";
@@ -39,6 +41,8 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Login />} path="/login" />
+                        <Route element={<EmailVerification />} path="/verify/:token" />
+                        <Route element={<Success/>} path="/success"/>
                         {/*<Route element={<ModifyUser/>} path="/modify-user/:id" />*/}
                         <Route element={<Trips/>} path="/trips"/>                 
                         <Route element={<SingleTrip />} path="/trip/:id" />                        

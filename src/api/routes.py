@@ -1,7 +1,7 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-from flask import Flask, request, jsonify, url_for, Blueprint
+from flask import Flask, request, jsonify, url_for, Blueprint, redirect, url_for
 from math import radians, sin, cos, sqrt, atan2
 from sqlalchemy import not_ 
 
@@ -13,7 +13,10 @@ from flask_jwt_extended import (
     get_jwt_identity
 )
 from api.application.ai_message_validator import AIMessageValidator
+from api.application.verification_token import generate_verification_token
+from api.application.email import send_verification_email
 import os
+
 
 api = Blueprint('api', __name__)
 @api.route('/hello', methods=['POST', 'GET'])
@@ -57,12 +60,27 @@ def create_user():
        }
         return jsonify(response_body),400
     
-   
-   new_user= User(email = data["email"], password= data["password"], username=data["username"], image=data["image"])
-   db.session.add(new_user)
-   db.session.commit() 
+   verification_token = generate_verification_token()
+
+   new_user= User(email = data["email"], password= data["password"], username=data["username"], image=data["image"], verification_token= verification_token, email_verified=False)
+   db.session.add(new_user)   
+   db.session.commit()
+
+   send_verification_email(new_user.email, new_user.verification_token) 
 
    return jsonify({"msg": "user has been added"}),200
+
+@api.route('/verify/<token>', methods=['GET'])
+def verify_email(token):
+    print('Received token:', token)    
+    user = User.query.filter_by(verification_token=token).first()
+
+    if user:        
+        user.email_verified = True
+        db.session.commit()
+        return jsonify({"redirect": "/success"}), 200
+    else:
+        return jsonify({"msg": "Invalid or expired verification token"}), 400
 
 @api.route('/users',methods=['GET'])
 def get_all_users():
@@ -111,9 +129,8 @@ def delete_user(id):
 # LOGIN PART
 @api.route('/login', methods=['POST'])
 def user_login():
-
-    email = request.json.get("loginEmail",None)
-    password = request.json.get("loginPassword",None)
+    email = request.json.get("loginEmail", None)
+    password = request.json.get("loginPassword", None)
 
     if email is None or password is None:
         response_body = {
@@ -129,17 +146,21 @@ def user_login():
         return jsonify(response_body), 404
 
     if user and user.password == password:
-        
-        logged = "Succesfully logged"
-        access_token = create_access_token(identity=user.id)
+        if user.email_verified:  # Check if the email is verified
+            logged = "Successfully logged"
+            access_token = create_access_token(identity=user.id)
 
-        return jsonify({"loginOK" : logged, "token": access_token, "user_id": user.id, "username": user.username, "email": user.email, "image": user.image})
+            return jsonify({"loginOK": logged, "token": access_token, "user_id": user.id, "username": user.username, "email": user.email, "image": user.image, "email_verified": user.email_verified})
+        else:
+            response_body = {
+                "msg": "Email not verified. Please verify your email before logging in."
+            }
+            return jsonify(response_body), 403  # Return a 403 Forbidden status for unverified email
     else:
         response_body = {
             "msg": "Incorrect password"
         }
-        return jsonify(response_body),400
-
+        return jsonify(response_body), 400
 # FOR REVIEWS 
 
 @api.route('/review', methods=['GET'])

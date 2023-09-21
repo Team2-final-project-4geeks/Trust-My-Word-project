@@ -23,7 +23,6 @@ const SingleActivity = () => {
     const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
     const responsive = {        
         superLargeDesktop: {
-            // the naming can be any, depends on you.
             breakpoint: { max: 4000, min: 1025 },
             items: 4
           },
@@ -216,7 +215,7 @@ const SingleActivity = () => {
                                         <p className="col-sm-12 card-text ms-2 my-2"><i>" {activity.description} " </i></p>
                                     </div>
                                         <div className="d-flex flex-row mt-3 justify-content-center" id="singleRow2">                                        
-                                            <p className="col-sm-3 card-text ms-2"><i class="fas fa-money-bill-wave me-2"></i>{activity.price}</p>
+                                            <p className="col-sm-3 card-text ms-2"><i class="fas fa-money-bill-wave me-2"></i>{activity.price}€</p>
                                             <p className="col-sm-4 card-text ms-2 text-center"><i class="fas fa-thermometer-half fa-sm me-2"></i>{weather}</p>
                                             <p className="col-sm-4 card-text ms-2 text-center"><i class="fas fa-map-marker-alt fa-sm me-2"></i>{activity.location}</p> 
                                         </div>                                             
@@ -284,7 +283,7 @@ const SingleActivity = () => {
                     <div className="container-fluid d-flex justify-content-center">
                         <button 
                             type="button"                            
-                            className="confetti-button btn btn-dark mt-5" 
+                            className="btn btn-dark mt-5" 
                             onClick={createComment}
                             id="sumbitButtonSingle"> Send 
                         </button>
