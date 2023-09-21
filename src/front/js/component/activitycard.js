@@ -165,7 +165,7 @@ const ActivityCard = (props)=>{
                     <div>
                         {showHeart && <div className="floatingHeartActivity">&hearts;</div>}
                     </div>
-                 </div>
+                </div>
             </div>
         </div>
         </div>

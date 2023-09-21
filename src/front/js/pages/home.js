@@ -112,8 +112,8 @@ export const Home = () => {
 			));
 			} else {
 				return (
-				<div className="spinner-border" role="status">
-					<span className="visually-hidden">Loading...</span>
+				<div className="border text-center mb-3" role="status">
+					<span>There are no reviews near you at the momment</span>
 				</div>
 				)
 		}
