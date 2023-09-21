@@ -17,10 +17,25 @@
 .blockquote-footer{
     color: #ffc600;
 }
-.mb-5{
+
+#cat{
     display: flex;
     flex-direction: column;
     width: 60%;
     margin-left: auto;
     margin-right: auto;
+}
+
+@media (max-width: 470px){
+    #cat-container{
+        height:300px ;
+        width: 350px;
+        margin-bottom: 300px;
+    }
+    #cat-container img{
+        height:100% ;
+        width: 100%;
+        object-fit: cover;
+        overflow:hidden;
+    }
 }

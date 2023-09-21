@@ -6,6 +6,9 @@
     margin-top: 18vh;
     margin-bottom: 18vh;
 }
+.general-container{
+    max-width: 100%;
+}
 .half-content{
     position: relative;
     display: inline-block;
