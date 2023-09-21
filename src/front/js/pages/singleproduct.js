@@ -194,7 +194,7 @@ export const SingleProduct = () => {
             {oneProduct ? (
                         <div className="col-11 card border-0" id="containerSingleProduct">
                             <div className="row g-0 h-100" >
-                                <div className="col-sm-12 col-md-4">
+                                <div className="col-sm-12 col-md-4" id="singleProductImage">
                                     <img id="singleProductPicture"src={oneProduct.image} className="rounded-start h-100 w-100 col-sm-12" alt="..."/>
                                 </div>
                                 <div className="col-sm-12 col-md-8">
