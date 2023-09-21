@@ -51,7 +51,7 @@ const Activities = (props) =>{
             <div className="card mt-4 mb-5 border-0 text-center" id="quoteActivity">                    
                 <div className="card-body d-flex">
                     <div className="rowActivities">
-                        <blockquote className="blockquote mb-0">
+                        <blockquote className="blockquote mb-0 mt-4">
                             <p className=" col-sm-12 text-center mt-4" id="quote">"Activity equals results. If you want to increase your success, increase your activity."</p>
                             <footer className="col-sm-12 blockquote-footer text-center mt-4 mb-4" id="author">Brian Tracy</footer>
                         </blockquote>
