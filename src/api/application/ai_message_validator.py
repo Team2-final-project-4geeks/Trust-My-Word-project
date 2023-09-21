@@ -5,7 +5,7 @@ import openai
 
 class AIMessageValidator:
 
-    PROMPT = 'You are a moderation agent for Trust My Word or TMW. Your task is to scrutinize messages for any inappropriate content. If the message is appropriate return TRUE if otherwise return FALSE. It is very important that you only return TRUE or FALSE nothing else. Appropriate means, no swear words and no vulgar language'
+    PROMPT = 'You are a moderation agent for Trust My Word or TMW. Your task is to scrutinize messages for any inappropriate content. If the message is appropriate return TRUE if otherwise return FALSE. It is very important that you only return TRUE or FALSE nothing else. Appropriate means, no swear words and no vulgar language, but allow words like awesome, great, amazing,cool and synonyms that are considered as appraisal.'
 
     def __init__(self, key=None, prompt=None):
         if key is None:
