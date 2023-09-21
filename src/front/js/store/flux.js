@@ -47,18 +47,26 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 			deleteFavourite: (favToDelete) => {
 				const store = getStore();
-				const deleteConfirmed = confirm("Are you sure that you want to delete this Favourite?")
-				if (deleteConfirmed === true) {
-				setStore({favourite: store.favourite.filter((fav) => fav !== favToDelete)})
-					Swal.fire({
-						icon: 'success',
-						text: 'You have deleted a Review'
-						})
-				} else {
-					Swal.fire(
-						'Delete Cancelled'
+
+				const updatedFavourites = store.favourite.filter((fav) => fav !== favToDelete);
+
+				Swal.fire({
+					title: "Are you sure that you want to delete this Favourite?",
+					showCancelButton: true,
+					confirmButtonText: 'Yes',
+					cancelButtonText: `Don't delete`,
+					icon: 'warning'
+				}).then((result) => {
+					if (result.isConfirmed) {
+					  Swal.fire(
+						'Deleted!',
+						'Your file has been deleted.',
+						'success'
 					  )
-				}
+					  setStore({ favourite: updatedFavourites });
+					}
+				  })
+				  setStore({ favourite: updatedFavourites });
 			},
 						
 			addType: (type) => {
