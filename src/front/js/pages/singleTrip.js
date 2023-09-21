@@ -190,14 +190,14 @@ const SingleTrip = () =>{
                             <h4 className="card-title fs-3 ms-3 mt-5 mb-4 text-center">{singleTrip.title}</h4>  
                             <div className="d-flex flex-row mt-2 justify-content-center">
                                <p className="col-sm-3 card-text ms-2"><i class="fas fa-heart fa-xs me-2"></i>{singleTrip.reviewOwner}</p>
-                                <p className="col-sm-4 card-text text-center ms-2"><i class="fas fa-info-circle fa-sm me-2"></i>{singleTrip.type} activity</p>
+                                <p className="col-sm-4 card-text text-center ms-2"><i class="fas fa-info-circle fa-sm me-2"></i>{singleTrip.type}</p>
                                 <p className="col-sm-4 card-text text-center ms-2"><i class="fas fa-calendar-alt fa-sm me-2"></i>{singleTrip.publishing_date}</p>   
                             </div> 
                             <div className="row">
                                 <p className="col-sm-12 card-text ms-2 my-2"><i>" {singleTrip.description} " </i></p>
                             </div>
                             <div className="d-flex flex-row mt-3 justify-content-center" id="singleRow2">                                        
-                                <p className="col-sm-3 card-text ms-2"><i class="fas fa-money-bill-wave me-2"></i>{singleTrip.price}</p>
+                                <p className="col-sm-3 card-text ms-2"><i class="fas fa-money-bill-wave me-2"></i>{singleTrip.price}€</p>
                                 <p className="col-sm-4 card-text ms-2 text-center"><i class="fas fa-thermometer-half fa-sm me-2"></i>{weather}</p>
                                 <p className="col-sm-4 card-text ms-2 text-center"><i class="fas fa-map-marker-alt fa-sm me-2"></i>{singleTrip.location}</p> 
                            </div>  
