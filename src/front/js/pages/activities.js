@@ -59,10 +59,10 @@ const Activities = (props) =>{
                 </div>
             </div>
 
-            <div className="noReviews d-flex flex-column"  >
+            <div className="noReviews d-flex flex-column mt-5"  >
             {dataLoaded ? (
                 filteredActivities.length === 0 ? (
-                    <div className="container text-center border-0">
+                    <div className="container text-center border-0 mt-5">
                         <h4 className="mb-5">We are very sorry, but there are either no reviews from the requested location or no reviews for that category</h4>
                         <img
                             className="justify-content-center mt-1 mb-5 border-0"

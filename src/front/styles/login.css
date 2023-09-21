@@ -57,5 +57,9 @@ a{
 @media (max-width: 470px){
 }
 
+.general-container{
+    max-width:100%;
+}
+
 
 
