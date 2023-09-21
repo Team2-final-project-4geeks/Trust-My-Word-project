@@ -6,7 +6,7 @@
     box-shadow: rgb(218, 165, 32) -2px -2px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 4px;  
 }
 #singleTripImageContainer{
-    height: 450px;
+    min-height: 450px;
     margin: 0;
     padding: 0;
 }

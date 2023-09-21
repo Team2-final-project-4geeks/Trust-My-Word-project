@@ -215,7 +215,7 @@ const SingleActivity = () => {
                                         <p className="col-sm-12 card-text ms-2 my-2"><i>" {activity.description} " </i></p>
                                     </div>
                                         <div className="d-flex flex-row mt-3 justify-content-center" id="singleRow2">                                        
-                                            <p className="col-sm-3 card-text ms-2"><i class="fas fa-money-bill-wave me-2"></i>{activity.price}</p>
+                                            <p className="col-sm-3 card-text ms-2"><i class="fas fa-money-bill-wave me-2"></i>{activity.price}€</p>
                                             <p className="col-sm-4 card-text ms-2 text-center"><i class="fas fa-thermometer-half fa-sm me-2"></i>{weather}</p>
                                             <p className="col-sm-4 card-text ms-2 text-center"><i class="fas fa-map-marker-alt fa-sm me-2"></i>{activity.location}</p> 
                                         </div>                                             
