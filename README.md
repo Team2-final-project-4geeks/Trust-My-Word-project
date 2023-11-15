@@ -3,7 +3,7 @@
 <h1 align="center">Hi 👋, welcome to our repository!</h1>
 
 
-<h3 align="center" > 🔭 We are currently working on TRUST MY WORD team project </h3>
+<h3 align="center" > 🔭 We proudly present you TRUST MY WORD </h3>
 
 
 <h3 align="left"> 📫 How to reach us:</h3>
